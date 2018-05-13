@@ -1,0 +1,5 @@
+{% extends 'AppUserBundle::layout-email.html.twig' %}
+{% block body_html %}
+{% set vars = {'email':email,'username': username, 'confirmationUrl': confirmationUrl} %}
+{% include 'email/enable_physicians.html.twig' with vars  %}
+{% endblock %}

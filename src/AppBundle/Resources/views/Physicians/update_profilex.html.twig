@@ -1,0 +1,234 @@
+{% extends '::base_edit_profile.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title" id="horz-layout-basic">Configurar perfíl</h4>
+                    <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                    <div class="heading-elements">
+
+                    </div>
+                </div>
+                <div class="card-body collapse in">
+                    <div class="card-block">
+                        <div class="row" style="height:90%; ">        
+                            <div class="col-xs-12 col-md-12 col-lg-12 pacientesRight">
+                                <div class="docHomeIntScroll mCustomScrollbar">
+                                    <div class="pacientesRightEspacio">
+
+                                        <div class="configurarCuenta dos" style="margin-top:-3%;">
+                                            {{ form_start(form,{'attr': {'class': 'form configurarCuentaFormulario','id': 'registerPhysician'}}) }}
+                                            <div class="form-body">
+
+                                                {% set messages = [] %}
+                                                {% for child in form.children %}
+                                                    {% for error in child.vars.errors %}
+                                                        {% set messages = messages|merge([child.vars.label  ~ ': ' ~ error.message]) %}
+                                                    {% endfor %}
+                                                {% endfor %}
+
+                                                <div class="row rowError" {% if messages|length %}style="display: block"{% else %}style="display: none"{% endif %}>
+                                                    <div class="alert bg-warning alert-icon-right alert-arrow-right alert-dismissible fade in" role="alert">
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                        {% for message in messages %}                                                    
+                                                            <strong> {{ message }}<br></strong> 
+                                                            {% endfor %}
+                                                    </div>
+                                                </div><!--row-->
+                                                <!--<div class="row ">
+                                                    <div class="confgCuentFormCampo">
+                                                        <label for="foto">Actualizar foto de perfíl <sup>*</sup></label>
+                                                        <div class="photoFront photoFrontLeft">
+                                                {{ form_widget(form.photo) }}
+                                                        </div>
+                                                    </div>
+                                                </div>confgCuentFormCampo-->
+                                                <div class="row" style="height:100%;">
+
+                                                    <div class="col-xs-12 col-md-6 col-lg-6 mt-1">
+                                                        <h4 class="form-section"><i class="icon-head"></i> Personal Info</h4>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-12 mb-2">
+                                                                <label for="projectinput1">Nombre*</label>
+                                                                {{ form_widget(form.user.name, {'attr': {'class': 'form-control'}}) }}
+                                                            </div>
+                                                            
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="form-group col-md-12 mb-2">
+                                                                <label for="projectinput1">Titulo Actual*</label>
+                                                                {{ form_widget(form.jobtitle, {'attr': {'class': 'form-control'}}) }}
+                                                            </div>
+                                                        </div><!--confgCuentFormCampo-->
+
+                                                        <div class="row">
+                                                            <div class="form-group col-md-6 mb-2">
+                                                                <label for="projectinput1">Especialidad*</label>
+                                                                {{ form_widget(form.specialty, {'attr': {'class': 'form-control'}}) }}
+                                                            </div>
+                                                            <div class="form-group col-md-6 mb-2">
+                                                                <label for="projectinput1">Sub-Especialidad*</label>
+                                                                {{ form_widget(form.subspecialty, {'attr': {'class': 'form-control'}}) }}
+                                                            </div>
+                                                        </div><!--confgCuentFormCampo-->
+                                                        {% if entity.user.facebookId=='' %} 
+                                                            <div class="row">
+                                                                <div class="form-group col-md-12 mb-2">
+                                                                    <label for="projectinput1">Correo*</label>
+                                                                    {{ form_widget(form.user.email, {'attr': {'class': 'form-control'}}) }}
+                                                                </div>
+                                                            </div><!--confgCuentFormCampo-->   
+                                                        {% endif %}
+
+                                                        {% if entity.user.facebookId=='' %} 
+                                                            <div class="row">
+                                                                <div class="form-group col-md-12 mb-2"> 
+                                                                    <label for="projectinput1">Contraseña*</label>
+                                                                    {{ form_widget(form.user.plainPassword.first, {'attr': {'class': 'form-control', 'pattern':"(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}",'title':"La contraseña debe contener al menos 6 caracteres, incluyendo MAYUSCULA/minúscula y números"} }) }}
+                                                                    {% for errorItem in form.user.plainPassword.first.vars.errors %}
+                                                                        <label class="control-label has-error" for="{{ form.user.plainPassword.vars.id }}">{{ errorItem.message }}</label>
+                                                                    {% endfor %}
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-12 mb-2">     
+                                                                    <label class="">Repita la contraseña*:</label>                                    
+                                                                    <div>
+                                                                        {{ form_widget(form.user.plainPassword.second, {'attr': {'class': 'form-control', 'pattern':"(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}",'title':"La contraseña debe contener al menos 6 caracteres, incluyendo MAYUSCULA/minúscula y números"} }) }}
+                                                                    </div>
+                                                                </div><!--confgCuentFormCampo-->
+                                                            </div>
+                                                        {% else %}
+                                                            <div class="row">
+                                                                <div class="form-group col-md-12 mb-2"> 
+                                                                    {{ form_row(form.user.email, {'attr': {'class': 'form-control'}}) }}
+                                                                </div>
+                                                            </div><!--confgCuentFormCampo-->   
+                                                        {% endif %}
+
+                                                    </div><!--col-xs-12 col-md-4 col-lg-4-->
+
+                                                    <div class="col-xs-12 col-md-6 col-lg-6 mt-1">
+                                                        <h4 class="form-section"><i class="icon-mail6"></i> Contact Info </h4>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-12 mb-2"> 
+                                                                <label for="projectinput1">Teléfono*</label>
+                                                                {{ form_widget(form.phone, {'attr': {'class': 'form-control'}}) }}
+                                                            </div>
+                                                        </div><!--confgCuentFormCampo-->
+                                                        <div class="row">
+                                                            <div class="form-group col-md-6 mb-2">
+                                                                <label for="projectinput1">Universidades y Hospitales*</label>
+                                                                {{ form_widget(form.university, {'attr': {'class': 'form-control'}}) }}
+                                                            </div><!--confgCuentFormCampo-->
+
+                                                            <div class="form-group col-md-6 mb-2">
+                                                                <label for="projectinput1">Idiomas</label>
+                                                                {{ form_widget(form.languages, {'attr': {'class': 'form-control'}}) }}
+                                                            </div><!--confgCuentFormCampo-->
+                                                        </div>
+                                                   
+                                                        <div class="row">
+                                                            <div class="form-group col-md-12 mb-2">
+                                                                <label for="projectinput1">Educacion*</label>
+                                                                {{ form_widget(form.education, {'attr': {'class': 'form-control'}}) }}
+                                                            </div><!--dobleLeft-->
+                                                            <div class="form-group col-md-12 mb-2">
+                                                                <label for="projectinput1">Interes de Investigacion*</label>
+                                                                {{ form_widget(form.research, {'attr': {'class': 'form-control'}}) }}
+                                                            </div><!--dobleRight-->
+                                                        </div><!--confgCuentFormCampoDoble-->
+                                                        <div class="row">
+                                                            <div class="form-group col-md-6 mb-2">
+                                                                <label for="projectinput1">Código Postal*</label>
+                                                                {{ form_widget(form.postalcode, {'attr': {'class': 'form-control'}}) }}
+                                                            </div><!--dobleLeft-->
+                                                            <div class="form-group col-md-6 mb-2">
+                                                                <label for="projectinput1">Zona Horaria*</label>
+                                                                {{ form_widget(form.timezone, {'attr': {'class': 'form-control'}}) }}
+                                                            </div><!--dobleRight-->
+                                                        </div><!--confgCuentFormCampoDoble-->
+                                                        <div class="row">
+                                                            <div class="form-group col-md-12 mb-2"> 
+                                                                <label for="projectinput1">Certificaciones (ABMS)*</label>
+                                                                {{ form_widget(form.abms, {'attr': {'class': 'form-control'}}) }}
+                                                            </div> 
+                                                        </div><!--confgCuentFormCampo-->
+                                                        
+                                                    </div><!--col-xs-12 col-md-4 col-lg-4-->
+                                                </div><!--row--> 
+                                                <span class="docError dos">Todos los campos con el asterisco ('*') son obligatorios.</span><!--docError-->
+                                            </div>
+
+                                                            
+                                            <div class="form-actions right">
+                                                <a  href="#" class="btn btn-warning mr-1">
+                                                    <i class="icon-cross2"></i> Cancelar
+                                                </a>
+                                                <button type="submit" id="btnEditar" class="btn btn-primary">
+                                                    <i class="icon-check2"></i> Guardar
+                                                </button>
+                                            </div>
+
+                                            {{ form_end(form) }}<!--configurarCuentaFormulario-->                        
+                                        </div><!--configurarCuenta-->
+                                    </div><!--pacientesRightEspacio-->
+                                </div><!--docHomeIntScroll mCustomScrollbar-->
+                            </div><!--pacientesRight-->
+                        </div><!--row-->   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#appbundle_patients_edit_user").parent().find("label").remove();
+
+            var form = document.getElementById('editprofilePatient');
+
+            form.addEventListener('submit', function (event) {
+
+                if ($("#appbundle_patients_edit_user_plainPassword_first").val() !== $("#appbundle_patients_edit_user_plainPassword_second").val()) {
+                    $("#appbundle_patients_edit_user_plainPassword_second").focus();
+                    document.getElementById("appbundle_patients_edit_user_plainPassword_second").setCustomValidity("Por favor, introduzca la misma contraseña.");
+                    event.preventDefault();
+                    return;
+                } else {
+                    document.getElementById("appbundle_patients_edit_user_plainPassword_second").setCustomValidity("");
+                }
+
+            }, false);
+
+            document.getElementById("btnEditar").addEventListener("click", function () {
+                var p1 = document.getElementById('appbundle_patients_edit_user_plainPassword_first');
+                var p2 = document.getElementById('appbundle_patients_edit_user_plainPassword_second');
+                if (p1.nodeValue === null && p2.nodeValue === null) {
+                    p1.removeAttribute("required");
+                    p2.removeAttribute("required");
+                } else {
+                    p1.setAttribute("required", "required");
+                    p2.setAttribute("required", "required");
+                }
+
+            });
+        });
+    </script>
+
+
+
+{% endblock %}
+

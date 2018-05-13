@@ -1,0 +1,89 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    {%
+set qP = app.request.query.all
+    %}
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title" id="horz-layout-basic"> Compartir historial </h4>
+                    
+                </div>
+                <div class="card-body collapse in">
+                    <div class="card-block ">
+                        <form>    
+                        <div class="form-body">
+                            {% if (qP.new is defined and qP.new !='') %}
+
+                                <div class="alert alert-icon-right alert-success alert-dismissible fade in mb-2" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <strong> Su historial médico ha sido compartido con éxito</strong> 
+                                </div>
+
+                            {%endif%}
+
+
+                            <div class="col-md-12 col-sm-12 p-1">
+
+                                <fieldset class="form-group position-relative has-icon-left mb-1">
+                                    <label for="inputName1" class="col-sm-3 form-control-label">Nombre</label>
+                                    <div class="col-sm-9">
+                                        {{ entity.name }}
+                                        
+                                    </div>
+                                </fieldset>
+                                <fieldset class="form-group position-relative has-icon-left mb-1">
+                                    <label for="inputEmail1" class="col-sm-3 form-control-label">Correo</label>
+                                    <div class="col-sm-9">
+                                        {{ entity.email }}
+                                        
+                                    </div>
+                                </fieldset>
+                                <fieldset class="form-group position-relative has-icon-left mb-1">
+                                    <label for="inputMessage1" class="col-sm-3 form-control-label">Mensaje</label>
+                                    <div class="col-sm-9">
+                                        {{ entity.message }}
+                                        
+                                    </div>
+                                </fieldset>
+                                <fieldset class="form-group position-relative has-icon-left mb-1">
+                                    <label for="inputMessage1" class="col-sm-3 form-control-label">Días disponibles</label>
+                                    <div class="col-sm-9">
+                                        {{ entity.available }}
+                                        
+                                    </div>
+                                </fieldset>  
+                                        
+                                <div class="form-actions right  mb-1">
+                                    <a  href="{{ path('patientssharemedicalhistory') }}" class="btn btn-warning mr-1">
+                                        <i class="icon-cross2"></i> Cancelar
+                                    </a>
+                                    <a  href="{{ path('patientssharemedicalhistory_edit', { 'id': entity.id }) }}" class="btn btn-primary mr-1">
+                                        <i class="icon-cross2"></i> Editar
+                                    </a>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+</form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

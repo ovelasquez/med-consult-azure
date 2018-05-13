@@ -1,0 +1,50 @@
+{% extends 'baseadm.html.twig' %}
+
+{% block body %}
+                <h5>Consultas</h5>
+                <form class="formularioConsultas">
+                    <div class="row" style="height:100%;">
+                        <div class="col-xs-12 col-md-3 col-lg-3">
+                            <div class="formConsltCampo">
+                                <select class="first myselect myselect1">
+                                    <option value="fecha">Fecha</option>
+                                    <option value="fecha">10/10/2015</option>
+                                    <option value="fecha">10/10/2015</option>
+                                </select>
+                            </div><!--formConsltCampo"--></div><!--col-xs-12 col-md-3 col-lg-3-->
+                        <div class="col-xs-12 col-md-3 col-lg-3">
+                            <div class="formConsltCampo">
+                                <select class="myselect myselect1">
+                                    <option value="fecha">Tipo de consulta</option>
+                                    <option value="fecha">Pregunta concisa</option>
+                                    <option value="fecha">Pregunta concisa</option>
+                                </select>
+                            </div><!--formConsltCampo"-->
+                        </div><!--col-xs-12 col-md-3 col-lg-3-->
+                        <div class="col-xs-12 col-md-3 col-lg-3">
+                            <div class="formConsltCampo">
+                                <select class="myselect myselect1">
+                                    <option value="fecha">Nombre del paciente</option>
+                                    <option value="fecha">Gabriela Sanz</option>
+                                    <option value="fecha">Gabriela Sanz</option>
+                                </select>
+                            </div><!--formConsltCampo"-->
+                        </div><!--col-xs-12 col-md-3 col-lg-3-->
+                        <div class="col-xs-12 col-md-3 col-lg-3">
+                            <div class="formConsltCampo">
+                                <select class="myselect myselect1 last">
+                                    <option value="fecha">Status</option>
+                                    <option value="fecha">Consulta sin terminar</option>
+                                    <option value="fecha">Consulta completada</option>
+                                </select>
+                                <input type="submit" value="descargar" class="descarga">
+                            </div><!--formConsltCampo"-->
+                        </div><!--col-xs-12 col-md-3 col-lg-3-->
+                    </div><!--row-->
+                </form><!--formularioConsultas-->   
+                    </div><!--doctoresHomeRight-->
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

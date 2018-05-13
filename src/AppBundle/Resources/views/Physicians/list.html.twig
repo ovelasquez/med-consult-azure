@@ -1,0 +1,90 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <div class="row" style="height:80%; ">
+        <div class="col-xs-7 col-lg-8 modbg_izq" >
+            <div class="docHomeIntScroll listPh mCustomScrollbar"><div class="doctores">
+
+                    <h5>Conoce a nuestros<br><span>Doctores</span></h5>                
+                    <ul class="tablillaDoctores">
+
+                        {% for key,entity in entities %}
+                            {% if entity.user.enabled and (app.user.id is defined or  key<4)%}
+                                <li style="margin: 0 5% 3% 0;">    
+                                    <a href="#" rel="med_{{key}}" data-fc-href="{{ path('physicians_show_public', { 'id': entity.id }) }}" class="med">
+                                        <div class="col-lg-6 col-md-6"><img style="width:100%; display: block; position:relative;" src="{{ asset('uploads/documents/' ~ entity.photo) }}" width="100px" /></div><!--imagenDoctor-->
+                                        <div class="col-lg-6 col-md-6" style="padding:10px!important;">
+                                            <div class="tablillaDoctoresTxt"><p>{{entity.user.name}}<br><span>({{entity.jobtitle}})</span></p></div><!--tablillaDoctoresTxt-->
+                                            <div style="clear:both; "></div>
+                                            <input type="submit" value="ver" class="submit lila">
+                                            <br/>
+                                        </div><!--doctorNombre-->
+                                    </a>    
+                                </li>
+                            {% endif %} 
+                        {% endfor %}               
+                    </ul><!--tablillaDoctores-->
+
+                    {% if app.user.id is not defined %}
+                        <a href="{{ url('patients_register') }}" class="submit lilaOscuro">Regístrate para ver nuestro listado completo de doctores</a>
+                    {% endif %} 
+
+                </div><!--doctores--></div>
+        </div><!--modbg_izq-->
+
+        {% for key,entity in entities %}
+            {% if entity.user.enabled and (app.user.id is defined or  key<4) %}
+                <div class="col-xs-5 col-lg-4 modpq_der modpq_acercade medCont" id="med_{{key}}">
+                    <div class="mCustomScrollbar">
+                        <div class="doctorDetalle">
+                            <div class="imagenDoctorDetalle"><img src="{{ asset('uploads/documents/' ~ entity.photo) }}" /></div><!--imagenDoctorDetalle-->
+                            <h5 class="colorLila">{{entity.user.name}}<br><span>{{entity.jobtitle}}</span></h5>
+                            <p>Especialidad: {{entity.specialty.name}}</p>
+                            <p>Sub-Especialidad: {{entity.subspecialty}}</p>
+                            <p>Areas de Especialidad:{{entity.research}}</p>     
+                            <p>Certificación: {{entity.abms}}</p>
+                            <!-- Your share button code -->
+                            <div class="fb-share-button" 
+                                 data-href="{{ path('physicians_show_public', { 'id': entity.id }) }}" 
+                                 data-layout="button">
+                            </div>
+                            {% if is_granted('ROLE_PATIENT') %}
+                                <a href="{{ path('consultations_list_patient', { 'physician': entity.id }) }}" class="submit lilaOscuro">Solicitar consulta</a>
+                            {% else %}
+                                <a href="{{ url('patients_register') }}" class="submit lilaOscuro">Solicitar consulta</a>
+                            {% endif %}
+                            <br />
+                            <br />
+
+
+                        </div><!--doctorDetalle-->
+                    </div>        
+                </div><!--modpq_der modpq_acercade-->
+            {% endif %} 
+        {% endfor %}  
+    </div>   
+    {{submenu.body|raw}}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            //CONTROL DE MENU
+            $(".med").click(function () {
+                $(".medCont").addClass("hidden");
+                $("#" + $(this).attr("rel")).removeClass("hidden");
+                //$("#" + $(this).attr("rel")+" .doctorDetalle").append('<div class="fb-share-button" data-href="'+ $(this).attr("data-fc-href")+'" </div>')
+                //$(".barramenuform li").removeClass("current");
+                //$(this).parent().addClass("current");
+                return false;
+            });
+
+            $(".barraf_acercade a").each(function () {
+                if ($(this).attr("rel") == '{{subtag}}') {
+                    $(this).parents("li").addClass("current");
+                }
+            });
+        });
+
+    </script>
+{% endblock %}

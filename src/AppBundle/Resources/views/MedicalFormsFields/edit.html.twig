@@ -1,0 +1,60 @@
+{% extends '::baseadm.html.twig' %}
+
+{% block body -%}
+    <h5>Medical Forms Fields Edit</h5>
+    <div class="formAmd " style="margin: 0 0 1.5% 0;" ><label>Field:  <br /></label><span ><span style="text-transform: uppercase">{{entity.name}}</span> of type <span style="text-transform: uppercase">{{entity.field}}</span></span></div>
+    {{ form_start(edit_form,{ 'attr': {'class': 'formAmd'} }) }}
+    <div>{{ form_errors(edit_form) }}</div>    
+
+    <div>{{ form_row(edit_form.label) }}</div>
+    <div class="formfieldTa descinput">{{ form_row(edit_form.description) }}</div>
+    <div class="formfieldTa helpinput">{{ form_row(edit_form.help) }}</div>
+
+    <div class="{% if config.showData is defined and config.showData!=1%} hidden {% endif %} datainput formfieldTa">
+
+        <div class="label-data">
+            {{ form_label(edit_form.data) }}
+            <p class="help-data">
+                Escriba un valor por línea, en el formato clave|etiqueta. La clave es el valor guardado. La etiqueta será usada en los valores mostrados y en formularios de edición. La etiqueta es opcional: si una línea contiene un solo texto, se usará como clave y etiqueta.
+            </p>
+        </div>
+        <div class="input-data">{{ form_widget(edit_form.data) }}</div>
+
+    </div>
+    <div>{{ form_row(edit_form.orderid) }}</div>
+    <div>{{ form_row(edit_form.showlabel) }}</div>
+    <div>{{ form_row(edit_form.required) }}</div>
+        
+
+    {% if config.extra is defined %}
+        {{ config.extra | raw }}
+    {% endif %}
+    {% if config.required is defined %}
+        {{ config.required | raw }}
+    {% endif %}
+    {% if config.showlabel is defined %}
+        {{ config.showlabel | raw }}
+    {% endif %}
+
+    <div class="submit-btn">{{ form_row(edit_form.submit, { 'label': 'Update','attr': {'class': 'submit btnAdm rojoFuerte'}}) }}</div>
+
+    {{ form_end(edit_form) }}
+
+    <ul class="record_actions supe">
+        <li>
+            <a href="{{ path('medicalformsfields_list_set',{ 'ids': entity.medicalformsfieldset.id }) }}" class="submit btnAdm lilaOscuro">
+                Back 
+            </a>
+        </li>
+        <li>{{ form(delete_form) }}</li>
+    </ul>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            if ($("#cardinality_val").val()!==""){
+                $("#field_conf_cardinality").val($("#cardinality_val").val());
+            }           
+        });
+    </script>
+{% endblock %}

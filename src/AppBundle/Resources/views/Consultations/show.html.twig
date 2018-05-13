@@ -1,0 +1,217 @@
+
+
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/md-assets/css/plugins/forms/extended/form-extended.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/md-assets/css/plugins/calendars/clndr.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/md-assets/vendors/css/forms/selects/select2.min.css') }}">
+
+{% endblock %}
+
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title" id="horz-layout-basic">{{ entity.modalityConsultation.name }}</h4>
+                    <div class="heading-elements">
+                        {% if entity.status==2%}<span class="float-xs-right tag tag-success">Completada</span>{%else%}<span class="float-xs-right tag tag-warning">Pendiente</span>{% endif %}
+                    </div>
+
+                </div>
+                <div class="card-body collapse in">
+                    <div class="card-block">
+
+                        <form>
+                            <div class="form-body">
+
+                                <!-- Recent Orders -->
+                                <div class="row">
+                                    <div class="col-xl-4 col-lg-12">
+                                        <div class="card card-inverse card-primary ">
+                                            <div class="card-body">
+                                                <div class="card-block pt-2">
+                                                    <img src="{{ asset('uploads/documents/' ~ entity.physician.photo) }}" alt="element 01" width="140" class="float-xs-left mr-1">
+
+                                                    <h4 class="card-title mt-0 font-medium-2">{{ entity.physician.user.name }}</h4>
+                                                    <span id="job" class="font-small-2">{{ entity.physician.jobtitle }}</span>
+                                                    <p id="sub" class="card-text mb-0 mt-1 clear"><strong>Sub-Especialidad:</strong> {{ entity.physician.subspecialty }}</p>
+                                                    <p id="cer" class="card-text mb-0"><strong>Certificación:</strong> {{ entity.physician.abms }}</p>
+                                                    <p id="idi" class="card-text mb-0"><strong>Idiomas:</strong> {{ entity.physician.abms }}</p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {% if (entity.modalityConsultation.tag=='inlive' and url_meeting!='') or (entity.modalityConsultation.tag=='electronic' or entity.modalityConsultation.tag=='inlive') %}
+
+                                            {% if entity.modalityConsultation.tag=='inlive' and url_meeting!='' %}
+
+                                                <div class="card bg-primary">
+                                                    <div class="card-body">
+                                                        <div class="card-block">
+                                                            <div class="media">
+                                                                <div class="media-left media-middle">
+                                                                    <i class="fa fa-video-camera white font-large-2 float-xs-left"></i>
+                                                                </div>
+                                                                <div class="media-body white text-xs-right">
+                                                                    <h3>Videoconferencia</h3>
+                                                                    <span><a style="color:#fff; " href="{{ url_meeting }}" target="_blank">Acceder <i class="fa fa-external-link fa-1x fa-fw margin-bottom"></i></a></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            {% endif%}
+                                            {% if entity.modalityConsultation.tag=='electronic' or entity.modalityConsultation.tag=='inlive' %}
+
+                                                <div class="card bg-primary">
+                                                    <div class="card-body">
+                                                        <div class="card-block">
+                                                            <div class="media">
+                                                                <div class="media-left media-middle">
+                                                                    <i class="fa fa-envelope-o white font-large-2 float-xs-left"></i>
+                                                                </div>
+                                                                <div class="media-body white text-xs-right">
+                                                                    <h3>Contacto</h3>
+                                                                    <span><a style="color:#fff; " href="{{ path('messages_new',{'usr': entity.physician.user.id,'id':entity.id}) }}" target="_blank">Ir a mensajes <i class="fa fa-external-link fa-1x fa-fw margin-bottom"></i></a></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!--formComplCampo-->
+                                            {% endif %}
+
+
+                                        {% endif %}         
+
+
+
+                                    </div>
+
+
+                                    <div class="col-xl-8 col-lg-12">
+                                        {% if entity.status==2 or entity.modalityConsultation.tag=='consice' %}
+                                            <div class="card">
+
+                                                {% if entity.modalityConsultation.tag=='consice' %}
+
+                                                    <div class="card-header">
+                                                        <h4 class="card-title">Pregunta</h4>
+                                                        <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                                                        <div class="heading-elements">
+                                                            <span class="tag tag-default tag-info">{{ entity.creationDate|date('d-m-Y') }}</span>
+                                                        </div>
+                                                    </div>
+                                                {% endif%}
+
+                                                <div class="card-body">
+
+                                                    {% if entity.status==2 %}
+                                                        {% if entity.modalityConsultation.tag=='electronic' or entity.modalityConsultation.tag=='inlive' %}
+
+                                                            <div class="card-block">
+                                                                <p><span class="float-xs-right"><a href="{{  path('consultation_pdf', {'id': entity.id}) }}" target="_blank">Descargar como PDF  <i class="icon-arrow-right2"></i></a></span></p>
+                                                            </div>
+
+                                                        {% endif%}
+                                                    {% endif%}
+                                                    
+                                                    {% if entity.modalityConsultation.tag=='consice' %}
+
+                                                        <div class="card-block">
+                                                            {{ entity.question }}
+                                                        </div>
+                                                    {% endif%}
+
+                                                </div>
+
+                                            </div>
+                                        {% endif%}
+
+                                        {% if entity.modalityConsultation.tag=='electronic' or entity.modalityConsultation.tag=='inlive' %}
+                                            
+                                            <div class="card">
+
+                                                <div class="card-header">
+                                                    <h4 class="card-title"> Resumen del Caso</h4>                                                    
+                                                </div>
+                                                <div class="card-body">
+                                                    
+                                                    <div class="card-block">
+                                                        {{ entity.resume|raw }}
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                            {% endif%}
+                                            
+                                            
+                                        <div class="card">
+
+                                            <div class="card-header">
+                                                <h4 class="card-title">
+                                                    {% if entity.modalityConsultation.tag=='consice' %}
+                                                        Respuesta {% elseif entity.modalityConsultation.tag=='electronic' %}
+                                                        Recomendaciones Diagnosticas y Terapéuticas
+                                                    {% elseif entity.modalityConsultation.tag=='inlive' %}
+                                                        Recomendaciones Diagnosticas y Terapéuticas
+                                                    {% endif%}</h4>
+                                                <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                                                <div class="heading-elements">
+                                                    <span class="tag tag-success">{{ entity.updateDate|date('d-m-Y') }}</span>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="card-body">                                               
+                                            
+                                                <div class="card-block">
+                                                    {{ entity.answer|raw }}
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--/ Recent Orders -->
+
+
+                            </div>
+
+                            <div class="form-actions right">
+                                <a  href="{{ path('consultations_list_patient') }}" class="btn btn-warning mr-1">
+                                    <i class="icon-cross2"></i> Volver
+                                </a>
+
+                            </div>
+
+                        </form>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+
+{% endblock %}
+
+
+

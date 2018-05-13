@@ -1,0 +1,126 @@
+{% extends '::baseadm.html.twig' %}
+
+{% block body -%}
+    <h5>MedicalFormsFields creation</h5>
+
+    {{ form_start(form,{ 'attr': {'class': 'formAmd'} }) }}
+    <div>{{ form_errors(form) }}</div>   
+
+    <div>{{ form_row(form.medicalFormsFieldset) }}</div>
+
+    <div>{{ form_row(form.field) }}</div>
+
+    <div>{{ form_row(form.label) }}</div>
+    <div class="formfieldTa descinput">{{ form_row(form.description) }}</div>
+    <div class="formfieldTa helpinput">{{ form_row(form.help) }}</div>
+
+    <div class="hidden datainput formfieldTa">
+
+        <div class="label-data">
+            {{ form_label(form.data) }}
+            <p class="help-data">
+                Escriba un valor por línea, en el formato clave|etiqueta. La clave es el valor guardado. La etiqueta será usada en los valores mostrados y en formularios de edición. La etiqueta es opcional: si una línea contiene un solo texto, se usará como clave y etiqueta.
+            </p>
+        </div>
+        <div class="input-data">{{ form_widget(form.data) }}</div>
+
+    </div>
+
+    <div>{{ form_row(form.subgroup) }}</div>
+    
+    <div>{{ form_row(form.showlabel) }}</div>
+    <div>{{ form_row(form.required) }}</div>
+
+    <div class="submit-btn">{{ form_row(form.submit, { 'label': 'Save','attr': {'class': 'submit btnAdm rojoFuerte'}}) }}</div>
+
+    {{ form_end(form) }}
+
+    <ul class="record_actions supe">
+        <li>
+            <a href="{{ path('medicalformsfields_list_set',{ 'ids': ids }) }}" class="submit btnAdm lilaOscuro">
+                Volver 
+            </a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        function changeVal(val) {
+            if ($("#field_name").is(":disabled")) {
+                var result = val.replace(/[^A-Za-z0-9;]/g, "_").toLowerCase();
+                if (result.length > 20) {
+                    result = result.substr(0, 20);
+                }
+                $("#field_name").val(result);
+            }
+        }
+        $(document).ready(function () {
+            
+            $(".formAmd").prepend('<div><div><label for="field_name">Nombre de sistema</label><input type="text" id="field_name" maxlength="20" disabled="disabled"><input type="button" value="Edit" id="field_name_edit" class="lilaOscuro" ></div></div>');
+            $("#appbundle_medicalformsfields_label").keyup(function () {
+                var valF = $(this).val();
+                changeVal(valF);
+            });
+            $("#appbundle_medicalformsfields_label").change(function () {
+                var valF = $(this).val();
+                changeVal(valF);
+            });
+            $("#field_name").keyup(function () {
+                var valF = $(this).val();                
+                result = valF.replace(/[^A-Za-z0-9;]/g, "_").toLowerCase();
+                if (result.length > 20) {
+                    result = result.substr(0, 20);
+                }
+                $(this).val(result);
+            });
+            $("#field_name").change(function () {
+                var valF = $(this).val();                
+                result = valF.replace(/[^A-Za-z0-9;]/g, "_").toLowerCase();
+                if (result.length > 20) {
+                    result = result.substr(0, 20);
+                }
+                $(this).val(result);
+            });
+            $("#field_name_edit").click(function () {
+                $("#field_name").removeAttr("disabled");
+                $("#field_name_edit").attr("disabled","disabled").removeClass("lilaOscuro").addClass("gris");
+            });
+            $(".formAmd").submit(function(){
+                $("#appbundle_medicalformsfields_name").val($("#field_name").val());
+            });
+            if ($("#appbundle_medicalformsfields_name").val()!==""){
+                $("#field_name").val($("#appbundle_medicalformsfields_name").val());
+                $("#field_name").removeAttr("disabled");
+                $("#field_name_edit").attr("disabled","disabled").removeClass("lilaOscuro").addClass("gris");
+            }
+        
+        /********SELECT ***********************/
+        
+            $('#appbundle_medicalformsfields_field').change(function () {
+                $("._conf").remove();
+                $(".help-data-info").remove();
+                $(".datainput textarea").val("");
+                $(".datainput").addClass("hidden");
+
+                var path = '{{ path("medical_forms_fields_loadsettings", {'field': '_f', 'name': '_n'}) }}';
+                path = path.replace("_f", $(this).val());
+                path = path.replace("_n", 'name');
+                $("#appbundle_medicalformsfields_submit").attr("disabled", "disabled");
+                $.getJSON(path, function (data) {
+                    if (data.showData === 1) {
+                        $(".datainput").removeClass("hidden");
+                    }
+                    if (data.helpData !== undefined) {
+                        $(".datainput").before(data.helpData);
+                    }
+                    $(".submit-btn").before(data.extra).before(data.required).before(data.showlabel);
+                    $("#appbundle_medicalformsfields_submit").removeAttr("disabled");
+                });
+
+
+            });
+        });
+
+    </script>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends '::baseadm.html.twig' %}
+
+{% block body -%}
+    <h5>Médicos pre-registrados</h5>
+
+    <table cellpadding="0" cellspacing="0" border="0" width="90%" class="table-striped tablaAdm ">
+        <thead>
+            <tr>
+                <th>Nombre</th>                             
+                <th>Email</th>               
+                <th>Fecha Pre-Registro</th>
+                <th>Estatus de pre-registro</th>
+                <th  class=" col-lg-1 col-md-1 col-sm-1" colspan="2">OPERACIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td><a href="{{ path('prephysicians_show', { 'id': entity.id }) }}">{{ entity.firtsName }} {{ entity.middleName }} {{ entity.lastName }}</a></td>
+                    <td>{{ entity.email }}</td>
+                    <td>{% if entity.dateTime is defined %}{{ entity.dateTime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if entity.physician.id is defined %}Registrado{% else %}En espera de registro{% endif %}</td>
+                    <td>
+                        <a href="{{ path('prephysicians_show', { 'id': entity.id }) }}">ver</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('prephysicians_edit', { 'id': entity.id }) }}">editar</a>
+
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <ul class="pagination">
+        <li><a href="{{ path('prephysicians_pag', {'p': 1}) }}">&laquo;</a></li>
+            {% for i in 1..(pCount) %}
+            <li {%if p==i%}class="active"{%endif%}><a href="{{ path('prephysicians_pag', {'p': i}) }}">{{ i }}</a></li> 
+            {% endfor %}
+        <li><a href="{{ path('prephysicians_pag', {'p': pCount}) }}">&raquo;</a></li>
+    </ul>
+  
+
+{% endblock %}

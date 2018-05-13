@@ -1,0 +1,188 @@
+{% extends '::baseadmcms.html.twig' %}
+
+{% block body -%}
+    {{ form_start(form,{ 'attr': {'class': 'formAmd','id':'createview'} }) }}
+    <h5>FORM: {{ entityf.name }} </h5>
+    <div>{{ form_row(form.name)}}</div>
+    <div>{{ form_row(form.specialty)}}</div>
+    <table cellpadding="0" cellspacing="0" border="0" width="90%" class="table-striped tablaAdm table-createView">
+        <thead>
+            <tr>
+                <th class=" col-lg-10 col-md-10 col-sm-10">Campos</th>                
+                <th class=" col-lg-1 col-md-1 col-sm-1">SELECCIONAR</th>
+                <th class=" col-lg-1 col-md-1 col-sm-1">REQUERIDO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--+-->{% set grOp = [] %} 
+            <!--+-->{% set grT = 1 %} 
+            <!--+-->{% set gr = '' %} 
+            {% for entitypage in entities %}
+                {% if entitypage['field'].type=="page" %}
+                    <tr class="trPage">
+                        <td  class="td-page"><a class="page-label masBtn" rel="page_{{entitypage['field'].id}}" href="#"></a>{{entitypage['field'].label}}</td>
+                        <td class="text-center">
+                            <input type="checkbox" class="pageField fieldselect" name="fieldsets[]" value="{{entitypage['field'].id}}" id="page_{{entitypage['field'].id}}" />
+                        </td> 
+                        <td class="text-center">
+                                
+                            </td>
+                    </tr>    
+                {% endif%}
+                {% for  keyf,entityfieldset in entitypage %} 
+                    {% if keyf!='field' %}
+                        <tr>
+                            <td  class="td-fieldset">{{ entityfieldset.fieldset.label }}</td>
+                            <td class="text-center">
+                                <input type="checkbox" class="fieldselect page_{{entitypage['field'].id}}" name="fieldsets[]" value="{{entityfieldset.fieldset.id}}" id="page_{{entitypage['field'].id}}-fieldset_{{entityfieldset.fieldset.id}}"   />
+                            </td> 
+                            <td class="text-center">
+                                
+                            </td>
+                        </tr>
+
+                        {% set indT=0 %}
+                        {% set ant=0 %}
+                        {% set antG=0 %}
+                        {% set grOp = [] %} 
+                        {% for field in entityfieldset.fields %}  
+                            {% if field.field=='group' or field.field=='grid'%}                    
+                                {% set grOp = grOp|merge([field.id]) %}                     
+                            {% endif %}
+                            {% set indT=grOp|length %}  
+                            <tr >     
+                                <td class=" {% if field.field=='group'  %}td-subgroup level_{{indT}} td-group td-group-{{indT-1}}{% elseif field.field=='grid' %}td-group td-subgroup level_{{indT}} td-group-{{indT-1}}{% else %}td-field level_{{indT}} td-field-{{indT}}{% endif %}"><a href="{{ path('medicalformsfields_show', { 'id': field.id }) }}">{{ field.label |slice(0, 30)}}{%if field.label |length>30%}...{%endif%}</a></td>
+                                       
+                                <td class="text-center">
+                                    {% if field.field=='group'%}
+
+                                        <input type="checkbox" data-group="{{field.id}}"  class="fieldselect page_{{entitypage['field'].id}} fieldset_{{entityfieldset.fieldset.id}} {% if field.subgroup.id is defined%}group_{{field.subgroup.id}}{% endif %} group" id="page_{{entitypage['field'].id}}-fieldset_{{entityfieldset.fieldset.id}}-group{%if (grOp|join('_')!='')%}-{{ grOp|join('-') }}{%endif%}-{{ field.id }}" name="fields[]" value="{{field.name}}" />
+                                                 
+                                    {% else %}                              
+
+                                        <input type="checkbox"  data-idsubfields="group_{{field.id}}"  class="fieldselect page_{{entitypage['field'].id}} fieldset_{{entityfieldset.fieldset.id}} group_{{gr}}" name="fields[]" value="{{field.name}}" id="page_{{entitypage['field'].id}}-fieldset_{{entityfieldset.fieldset.id}}-group-{{ grOp|join('-') }}-{{ field.id }}"  />
+                                            
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">
+                                    {% if field.field!='group' and field.field!='grid' %}
+
+                                        <input type="checkbox" class="requeselect" name="reque[]" {% if field.required==1%}checked="checked"{% endif%} value="{{field.name}}" />
+                                            
+                                    {% endif %}
+                                    
+                                </td>
+                            </tr>
+                            {% if loop.index < entityfieldset.fields|length  %}
+                                {% set bk=0 %}
+                                {% set indS=loop.index %}
+                                {% for grO in grOp|reverse %}                                      
+                                    {% if ( bk==0 and (entityfieldset.fields[indS].subgroup is null or entityfieldset.fields[indS].subgroup.id!=grO) )   %}                                                                          
+                                        {% set grOp=grOp|slice(0, (grOp|length) -1)  %}
+                                    {% elseif(bk==0 and  entityfieldset.fields[indS].subgroup.id==grO) %}
+                                        {% set antG=grO %}                            
+                                        {% set bk=1 %}
+                                    {% endif %}                                    
+                                {% endfor %}                        
+                            {% endif %} 
+                            
+
+                        {% endfor %}
+
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <ul class="record_actions">
+        <li>
+            <input type="submit" value="Guardar" class="submit btnAdm lilaOscuro" />
+        </li>  
+    </ul>
+    {{ form_end(form) }}
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            /*$(':checkbox').change(function () {
+             $('.' + $(this).attr("id")).prop("checked", $(this).is(':checked'));
+             if ($(this).is(':checked')) {
+             var className = $(this).attr('class');
+             className = className.split(' ');
+             for (var i = 0; i < className.length; i++) {
+             $('#' + className[i]).prop("checked", $(this).is(':checked'));
+             }
+             }
+             $('.' + $(this).attr("data-idsubfields")).prop("checked", $(this).is(':checked'));
+             });*/
+
+            //$(':checkbox').prop("disabled", true);
+            //$('.pageField').prop('disabled',false);
+
+
+            $(".page-label").click(function () {
+                $('.' + $(this).attr("rel")).parents('tr').toggle('display');
+                $(this).toggleClass('opened');
+                return false;
+            });
+
+            $(".fieldselect:checkbox").click(function () {
+                $('input:checkbox[id^=' + $(this).prop("id") + ']').prop("checked", $(this).is(":checked")).prop('disabled', false).change();
+
+            });
+
+            $(".fieldselect:checkbox").change(function () {
+                if ($(this).is(":checked")) {
+                    var bc = $(this).prop("id");
+                    var r = bc.split("-");
+                    var rAux = '';
+                    for (i = 0; i < r.length; i++) {
+                        if (rAux !== '')
+                            rAux = rAux + "-" + r[i];
+                        else
+                            rAux = r[i];
+                        if (!$('#' + rAux).is(":checked"))
+                            $('#' + rAux).prop("checked", true);
+                    }
+                }
+
+            });
+
+            var form = document.getElementById('createview');
+            form.addEventListener('submit', function (event) {
+                $('.fieldselect:checkbox').removeAttr('disabled');
+            });
+
+        {% if entity.fieldsets is defined and entity.fieldsets!=''%}
+                var fieldsets = new Array({{entity.fieldsets|raw}});
+                $('.fieldselect:checkbox').each(function () {
+                    //alert($.inArray($(this).val(), fieldsets)+" "+$(this).val());
+                    if ($.inArray($(this).val(), fieldsets) !== -1) {
+                        $(this).prop("checked", true).change();
+                    }
+                });
+        {% endif %}
+            {% if entity.fields is defined and entity.fields!=''%}                
+                var fields = new Array({{entity.fields|raw}});
+                $('.fieldselect:checkbox').each(function () {
+                    if ($.inArray($(this).val(), fields) !== -1) {
+                        $(this).prop("checked", true).change();
+                    }
+                });
+            {% endif %}
+            {% if entity.required is defined and (entity.required|length)>2%}                
+            var fields = new Array({{entity.required|raw}});
+            $('.requeselect:checkbox').prop("checked", false).change();
+            $('.requeselect:checkbox').each(function () {
+                if ($.inArray($(this).val(), fields) !== -1) {
+                    $(this).prop("checked", true).change();
+                }
+            });
+            {% endif %}
+
+                });
+
+        </script>
+        {% endblock %}

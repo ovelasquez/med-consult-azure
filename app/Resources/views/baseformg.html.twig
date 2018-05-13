@@ -1,0 +1,111 @@
+{# empty Twig template #}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}MEDECONSULT{% endblock %}</title>
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
+        <!-- Bootstrap -->
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/plugins/datepicker/css/datepicker.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/plugins/bootstrapformhelpers/css/bootstrap-formhelpers.css') }}"/>
+        <link href="{{ asset('css/styles_exterior.css') }}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/slick.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/slick-theme.css') }}"/>        
+        <link rel="stylesheet" href="{{ asset('css/jquery.mCustomScrollbar.css') }}">
+    {% block stylesheets %}{% endblock %}        
+    <script type="text/javascript" src="{{ asset('js/vendor/jquery-1.11.3.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/slick.js') }}"></script>    
+</head>
+<body class="baseadm">
+    <div class="container-fluid" style="height:100%;">
+        <div class="row" style="height:15%">
+            <div class="col-xs-12 cuestionarioTop">
+                <div class="cuestionarioLogoHeader">
+                    <div class="row" style="height:100%;">
+                        <div class="col-xs-2 doctoresLogoPrincipal">
+                            {% set homeurl = path('homepage')%}
+                            {% if is_granted('ROLE_ADMIN') %}
+                                {% set homeurl = path('admin_page')%}                            
+                            {% endif %}
+                            {% include "logo.html.twig" %}
+                        </div><!--doctoresLogoPrincipal-->
+                        <div class="col-xs-10 doctoresConfgUser ">
+                            {% if app.user %}
+                                <div class="docConfgContent">
+                                    <ul>
+                                        {% if is_granted('ROLE_PATIENT') %}
+                                            {% set homeconf = path('patient_edit_profile')%}                            
+                                            <li class="configuracion"><a href="{{homeconf}}"><div class="imagenConfg"></div><div class="confgTxt">{{'menu.item_config'|trans({}, 'AppBundle')}}</div></a></li><!--configuracion-->                      
+                                                    {% endif %}
+
+                                        {% set homeurl = path('homepage')%}
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            {% set homeurl = path('admin_page')%}  
+                                        {% endif %}
+                                        {% set homeconf = path('homepage')%}
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            {% set homeconf = path('admin_page')%}    
+                                        {%elseif is_granted('ROLE_PATIENT') %}
+                                            {% set homeconf = path('patient_view_front')%}                            
+                                        {%elseif is_granted('ROLE_PHYSICIANS') %}
+                                            {% set homeconf = path('physicians_view_front', {'id': app.user.id})%}                            
+                                        {% endif %}
+
+                                        <li class="bienvenido "><i class="fa fa-home fa-1x textGray fa-fw margin-bottom"></i><a href="{{homeconf}}" class="userTxt"><!--div class="fotoUsuario"></div-->Hola  {{ 'layout.logged_in_as'|trans({'%username%': app.user.name}, 'FOSUserBundle') }}</a></li>
+                                        <li  class=" last"><i class="fa fa-sign-out fa-1x textGray fa-fw margin-bottom"></i><a href="{{ path('fos_user_security_logout') }}" class="userTxt">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
+                                    </ul>
+                                </div><!--docConfgContent doctoresConfgUser-->                            
+                            {% endif %}
+                        </div><!--doctoresConfgUser-->
+                    </div><!--row-->
+                </div><!--cuestionarioLogoHeader-->
+                <div class="cuestionarioEncabezado lila"><h3>{{entity.name}}</h3></div><!--cueationarioEncabezado-->
+            </div><!--cuestionarioTop-->
+        </div><!--row-->
+        <div class="row" style="height:85%">
+            <!--body-->{% block body %}{% endblock %}
+
+
+        </div><!--row-->
+    </div><!--container-fluid-->        
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>  
+    <script src="{{ asset('js/jquery.mCustomScrollbar.js') }}"></script>
+    <script src='{{ asset('js/jquery.customSelect.min.js') }}'></script>
+    <script type="text/javascript" src="{{ asset('bundles/app/plugins/datepicker/js/datepicker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/app/plugins/bootstrapformhelpers/js/bootstrap-formhelpers.js') }}"></script>        
+
+    <script src="{{ asset('js/script.js') }}"></script>        
+    <script type="text/javascript">
+        var current = 1;
+        $(document).ready(function () {
+            $('.your-class').slick({
+                dots: true,
+                arrows: true
+            });
+        });
+    </script>
+    <script>
+        (function ($) {
+            $(window).load(function () {
+                $(".scroll").mCustomScrollbar();
+            });
+        })(jQuery);
+    </script>
+    <script>
+        $(document).ready(function () {
+            //$('.placeHolderClass').placeholder();
+            $('.myselect1,.myselect2').customSelect();
+        });
+    </script>
+{% block javascripts %}{% endblock %}
+</body>
+</html>

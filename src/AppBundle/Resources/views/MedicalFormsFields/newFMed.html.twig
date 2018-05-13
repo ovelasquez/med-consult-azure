@@ -1,0 +1,212 @@
+{% extends '::basemedphysicians.html.twig' %}
+
+{% block body -%}
+
+
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-block" style="">
+                    Para crear su formulario use la estructura base que ofrece la heramienta seleccionando campos ya creados o creando los campos que necesite en la opción crear campo. 
+                    Adicionalmente puede indicar si el campo es requerido o no.
+                </div> 
+            </div>               
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title" id="horz-layout-basic">Crear Campo </h4>
+
+            </div>
+            <div class="card-body">
+                <div class="card-block" style="padding: 3.4rem;">
+                    <div class="row">
+
+                        {{ form_start(form,{'attr': {'class': 'formAmd','id': ''}}) }}
+                        <div class="form-body">
+                            {% if messages is not defined  %}
+                                {% set messages = [] %}
+                            {%endif %}
+                            
+
+
+                            <div class="row rowError" {% if messages|length %}style="display: block"{% else %}style="display: none"{% endif %}>
+                                <div class="col-xs-12" >
+                                    <div class="alert alert-icon-right alert-warning alert-dismissible fade in mb-2" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        {% for message in messages %}                                                    
+                                            <strong> {{ message }}<br></strong> 
+                                            {% endfor %}
+
+                                    </div>
+                                </div><!--col-xs-12-->
+                            </div><!--row-->
+
+                            <div class="p-1">
+                                <div class="row row-f">
+                                    
+                                    {{ form_widget(form.medicalFormsFieldset,{'attr': {'class': 'form-control', 'placeholder':"Tipo de Campo"} } ) }}
+
+                                    <fieldset class="form-group position-relative  mb-1">
+                                        <label for="inputName1" class="col-sm-3 form-control-label">Tipo de Campo</label>
+                                        <div class="col-sm-9">{{ form_widget(form.field,{'attr': {'class': 'form-control', 'placeholder':"Tipo de Campo"} } ) }}</div>
+                                    </fieldset>
+
+                                    <fieldset class="form-group position-relative  mb-1">
+                                        <label for="inputName1" class="col-sm-3 form-control-label">Etiqueta</label>
+                                        <div class="col-sm-9">{{ form_widget(form.label,{'attr': {'class': 'form-control', 'placeholder':"Etiqueta"} } ) }}</div>
+                                    </fieldset>
+
+                                    <fieldset class="form-group position-relative  mb-1">
+                                        <label for="inputName1" class="col-sm-3 form-control-label">Descripción</label>
+                                        <div class="col-sm-9">{{ form_widget(form.description,{'attr': {'class': 'form-control', 'placeholder':"Descripción"} } ) }}</div>
+                                    </fieldset>
+
+                                    <fieldset class="form-group position-relative  mb-1">
+                                        <label for="inputName1" class="col-sm-3 form-control-label">Mensaje de ayuda</label>
+                                        <div class="col-sm-9">{{ form_widget(form.help,{'attr': {'class': 'form-control', 'placeholder':"Mensaje de ayuda"} } ) }}</div>
+                                    </fieldset>
+
+                                    <fieldset class="form-group position-relative  mb-1 hidden datainput formfieldTa">
+
+                                        <div class="label-data">
+                                            <label for="inputName1" class="col-sm-3 form-control-label">{{ form_label(form.data) }}</label>
+                                            <div class="col-sm-9"><p class="help-data">
+                                                    Escriba un valor por línea, en el formato clave|etiqueta. La clave es el valor guardado. La etiqueta será usada en los valores mostrados y en formularios de edición. La etiqueta es opcional: si una línea contiene un solo texto, se usará como clave y etiqueta.
+                                                </p>
+                                            <div class="input-data">{{ form_widget(form.data,{'attr': {'class': 'form-control', 'placeholder':"clave|etiqueta"} } ) }}</div>
+                                            </div>
+                                        </div>
+                                        
+
+                                    </fieldset>
+
+                                    <fieldset class="form-group position-relative  mb-1">
+                                        <label for="inputName1" class="col-sm-3 form-control-label">Grupo </label>
+                                        <div class="col-sm-9">{{ form_widget(form.subgroup,{'attr': {'class': 'form-control', 'placeholder':"Grupo o Rejilla"} } ) }}</div>
+                                    </fieldset>
+                                    
+                                    <fieldset class="form-group position-relative  mb-1">
+                                        <label for="inputName1" class="col-sm-3 form-control-label">Mostrar Etiqueta</label>
+                                        <div class="col-sm-9">{{ form_widget(form.showlabel,{'attr': {'class': 'form-control', 'style':'width: auto', 'placeholder':"Mostrar Etiqueta"} } ) }}</div>
+                                    </fieldset>
+                                    
+                                    <fieldset class="form-group position-relative  mb-1">
+                                        <label for="inputName1" class="col-sm-3 form-control-label">Requerido</label>
+                                        <div class="col-sm-9">{{ form_widget(form.required,{'attr': {'class': 'form-control', 'style':'width: auto', 'placeholder':"Requerido"} } ) }}</div>
+                                    </fieldset>
+                                    <fieldset class="form-group position-relative  mb-1">
+                                        <label for="inputName1" class="col-sm-3 form-control-label">Después de</label>
+                                        <div class="col-sm-9">{{ form_widget(form.orderid,{'attr': {'class': 'form-control', 'placeholder':"Requerido"} } ) }}</div>
+                                    </fieldset>
+
+                                </div>
+                            </div>
+
+                            <div class="form-actions right">
+                                <a  href="{{ path('medical_forms_views_edit_med',{'id':idfv}) }}" class="btn btn-warning mr-1">
+                                    <i class="icon-cross2"></i> Cancelar
+                                </a>
+                                <button type="submit" class="btn btn-primary"><i class="icon-check2"></i> Crear</button>
+                            </div>
+
+                        </div><!--formbody-->       
+                        {{ form_end(form) }}<!--configurarCuentaFormulario--> 
+
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        function changeVal(val) {
+            /*if ($("#field_name").is(":disabled")) {
+                
+            }*/
+        
+            var result = val.replace(/[^A-Za-z0-9;]/g, "_").toLowerCase();
+                if (result.length > 20) {
+                    result = result.substr(0, 20);
+                }
+                $("#field_name").val(result);
+        }
+        $(document).ready(function () {
+
+            $(".formAmd .row-f").prepend('<input type="hidden" id="field_name" maxlength="20">');
+            $("#appbundle_medicalformsfields_label").keyup(function () {
+                var valF = $(this).val();
+                changeVal(valF);
+            });
+            $("#appbundle_medicalformsfields_label").change(function () {
+                var valF = $(this).val();
+                changeVal(valF);
+            });
+            $("#field_name").keyup(function () {
+                var valF = $(this).val();
+                result = valF.replace(/[^A-Za-z0-9;]/g, "_").toLowerCase();
+                if (result.length > 20) {
+                    result = result.substr(0, 20);
+                }
+                $(this).val(result);
+            });
+            $("#field_name").change(function () {
+                var valF = $(this).val();
+                result = valF.replace(/[^A-Za-z0-9;]/g, "_").toLowerCase();
+                if (result.length > 20) {
+                    result = result.substr(0, 20);
+                }
+                $(this).val(result);
+            });
+            $("#field_name_edit").click(function () {
+                $("#field_name").removeAttr("disabled");
+                $("#field_name_edit").attr("disabled", "disabled").removeClass("lilaOscuro").addClass("gris");
+            });
+            $(".formAmd").submit(function () {
+                $("#appbundle_medicalformsfields_name").val($("#field_name").val());
+            });
+            if ($("#appbundle_medicalformsfields_name").val() !== "") {
+                $("#field_name").val($("#appbundle_medicalformsfields_name").val());
+                $("#field_name").removeAttr("disabled");
+                $("#field_name_edit").attr("disabled", "disabled").removeClass("lilaOscuro").addClass("gris");
+            }
+
+            /********SELECT ***********************/
+
+            $('#appbundle_medicalformsfields_field').change(function () {
+                $("._conf").remove();
+                $(".help-data-info").remove();
+                $(".datainput textarea").val("");
+                $(".datainput").addClass("hidden");
+
+                var path = '{{ path("medical_forms_fields_loadsettings", {'field': '_f', 'name': '_n'}) }}';
+                path = path.replace("_f", $(this).val());
+                path = path.replace("_n", 'name');
+                $("#appbundle_medicalformsfields_submit").attr("disabled", "disabled");
+                $.getJSON(path, function (data) {
+                    if (data.showData === 1) {
+                        $(".datainput").removeClass("hidden");
+                    }
+                    if (data.helpData !== undefined) {
+                        $(".datainput").before(data.helpData);
+                    }
+                    $(".submit-btn").before(data.extra).before(data.required).before(data.showlabel);
+                    $("#appbundle_medicalformsfields_submit").removeAttr("disabled");
+                });
+
+
+            });
+        });
+
+    </script>
+{% endblock %}

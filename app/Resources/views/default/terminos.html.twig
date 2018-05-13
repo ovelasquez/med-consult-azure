@@ -1,0 +1,11 @@
+{% extends 'basesinmenu.html.twig' %}
+{% block title_content %}
+    {% if content is defined%}
+        {{content.title | raw }}
+    {% endif %}    
+{% endblock %}
+{% block body %}
+    {% if content is defined%}
+        {{content.body | raw }}
+    {% endif %}    
+{% endblock %}

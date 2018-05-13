@@ -1,0 +1,235 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if content%}
+        <div class="row" style="height:80%; ">
+            <div class="col-xs-7 col-lg-8 modbg_izq" >
+                <div class="imagenAcercaNosotros2"></div><!--imagenAcercaNosotros-->
+            </div><!--modbg_izq-->
+            <div class="col-xs-5 col-lg-4 modpq_der modpq_acercade" style="height:100%; " >
+                <div class="docHomeIntScroll mCustomScrollbar">
+                    
+                    <div class="aplicacion">
+                        <h5 class="colorLila">MedEconsult Doctors:</h5>
+                        <p>Si eres doctor acreditado en los Estados Unidos (board certified) como nosotros, y quieres unirte a nuestro equipo para ayudar a mejorar la salud en toda Latinoamérica y otras regiones de habla hispana, a la vez que fortaleces tu presencia internacional, Regístrate aquí.</p>
+                        <a href="#" class="submit lilaOscuro aplicar_prep" data-toggle="modal" data-target="#myModal2">Aplicar</a>
+                        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <div class="encabezado">
+                                            <div class="carpeta"></div><!--carpeta-->
+                                            <h5> Inicia tu aplicación</h5>
+                                        </div><!--encabezado-->
+                                    </div><!--modal-header-->
+                                    <div class="modal-body">
+                                        <div class="formularioProfesionalesSalud">
+                                            <form method="POST" id="ajaxForm_prep" class="ajaxForm_prep" action="{{path('prephysicians_create')}}" >
+                                                <div class="form_error_prep"></div>
+                                                <div id="form_carg_prep">
+                                                    <p class="carg"><i class="fa fa-refresh fa-spin fa-3x fa-fw margin-bottom"></i></p>
+                                                </div>
+                                                <div id="form_body_prep">{% include 'AppBundle:PrePhysicians:new.html.twig' with {'form': form_prep} %}  </div>
+                                                <div id="form_res_prep">
+                                                    <div class="regMedTop">
+                                                        <div class="imagenCarpetaRegMed"></div><!--imagenCarpetaRegMed-->
+                                                    </div><!--regMedTop-->
+                                                    <div class="regMedMiddle">
+                                                        <div class="regMedMiddleSup">
+                                                            <h5 class="colorLilaOscuro">Hola, <span class="name_prep"></span></h5>
+                                                            <p>Hemos recibido tu solicitud, uno de nuestros asociados se estará contactando en las próximas 48 hrs.</p>
+                                                        </div><!--regMedMiddleSup-->
+                                                        <p class="colorLilaOscuro claseDos">Gracias por considerar unirse a nuestro equipo de trabajo. Esperamos que juntos podamos llevar el regalo de la salud a más y más personas.</p>
+                                                    </div><!--regMedMiddle-->
+                                                    <div class="regMedBottom">
+                                                        <p>ATENTAMENTE EL EQUIPO DE MEDECONSULT</p>
+                                                    </div><!--regMedBottom-->
+
+                                                </div>
+
+                                                <!--input type="submit" class="submitProfesionales lilaOscuro" value="Guardar"-->
+                                            </form>
+                                        </div><!--formularioProfesionalesSalud-->
+                                    </div><!--modal-body-->
+                                </div><!--modal-content-->
+                            </div><!--modal-dialog-->
+                        </div><!--modal-->             
+                    </div><!--aplicacion-->
+                    <div class="aplicacion">
+                        <h5 class="colorLila">MedEconsult Partners:</h5>
+                        <p>MedEConsult abre sus puertas a alianzas con empresas aseguradoras, corporaciones y centros de salud, creando así un convenio para la atención personalizada a los  clientes o integrantes de dichas empresas. Si estás interesado, contáctanos aquí.</p>
+                        <a href="#" class="submit lilaOscuro aplicar" data-toggle="modal" data-target="#myModal">Aplicar</a>
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <div class="encabezado">
+                                            <div class="carpeta"></div><!--carpeta-->
+                                            <h5>Contáctanos</h5>
+                                        </div><!--encabezado-->
+                                    </div><!--modal-header-->
+                                    <div class="modal-body">
+                                        <div class="formularioProfesionalesSalud">
+                                            <form method="POST" id="ajaxForm" class="ajaxForm" action="{{path('formpartners_create')}}" >
+                                                <div class="form_error"></div>
+                                                <div id="form_carg">
+                                                    <p class="carg"><i class="fa fa-refresh fa-spin fa-3x fa-fw margin-bottom"></i></p>
+                                                </div>
+                                                <div id="form_body">{% include 'AppBundle:FormPartners:new.html.twig' with {'form': form} %}  </div>
+                                                <div id="form_res">
+                                                    <div class="regMedTop">
+                                                        <div class="imagenResContcat"></div><!--imagenCarpetaRegMed-->
+                                                    </div><!--regMedTop-->
+                                                    <div class="regMedMiddle">
+                                                        <div class="regMedMiddleSup">
+                                                            <h5 class="colorLilaOscuro">Hemos recibido tu solicitud</h5>
+                                                            <p>Uno de nuestros asociados se estará contactando en las próximas 48 hrs.</p>
+                                                        </div><!--regMedMiddleSup-->
+                                                        <p class="colorLilaOscuro claseDos">Gracias por considerar unirse a nuestro equipo de trabajo. Esperamos que juntos podamos llevar el regalo de la salud a más y más personas.</p>
+                                                    </div><!--regMedMiddle-->
+                                                    <div class="regMedBottom">
+                                                        <p>ATENTAMENTE EL EQUIPO DE MEDECONSULT</p>
+                                                    </div><!--regMedBottom-->
+
+                                                </div>
+
+                                                <!--input type="submit" class="submitProfesionales lilaOscuro" value="Guardar"-->
+                                            </form>
+                                        </div><!--formularioProfesionalesSalud-->
+                                    </div><!--modal-body-->
+                                </div><!--modal-content-->
+                            </div><!--modal-dialog-->
+                        </div><!--modal-->
+
+                    </div><!--aplicacion-->
+                    <div class="aplicacion"><div class="loginMed">
+                            {% if app.user.id is not defined %}
+                                <h5 class="colorLila">Si ya eres parte de nuestro equipo:</h5>
+                                <p>Ingresa tus datos aquí.</p>
+                                {% set iniPsalud = true %}
+                                <div class="formularioInicial">
+                                    {% render url('fos_user_security_login', { 'layout' : 'simple' })  %}
+                                </div><!--formularioinicial--> 
+                            {% endif %}
+                        </div></div><!--aplicacion-->
+                </div>
+            </div><!--modpq_der modpq_acercade-->
+        </div>
+        {{submenu.body|raw}}
+        {{content.body | raw }}
+    {% endif %}    
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+
+        $(document).ready(function () {
+            initAjaxForm();
+            initAjaxPrePhysiciansForm();
+            $(".loginMed .loginFac").remove();
+            $(".loginMed .loginReg").remove();
+            $(".aplicar").click(function () {
+                document.getElementById("ajaxForm").reset();
+                $('#form_res').hide();
+                $('#form_body').show();
+
+
+            });
+            $(".aplicar_prep").click(function () {
+                $('#form_res_prep').hide();
+                document.getElementById("ajaxForm_prep").reset();
+                $('#form_body_prep').show();                
+
+            });
+        });
+
+
+        function initAjaxForm()
+        {
+            $('#form_res').hide();
+            $('#form_carg').hide();
+            
+            $('body').on('submit', '.ajaxForm', function (e) {
+                
+                e.preventDefault();
+                $('#form_body').hide();
+                $('#form_carg').show();
+               
+                $.ajax({
+                    type: $(this).attr('method'),
+                    url: $(this).attr('action'),
+                    data: $(this).serialize()
+                })
+                        .done(function (data) {
+                            if (typeof data.message !== 'undefined') {
+                                $('#form_carg').hide();
+                                document.getElementById("ajaxForm").reset();
+                                $('#form_res').show();
+                            }
+                        })
+                        .fail(function (jqXHR, textStatus, errorThrown) {
+                            if (typeof jqXHR.responseJSON !== 'undefined') {
+                                if (jqXHR.responseJSON.hasOwnProperty('form')) {
+                                    $('#form_body').html(jqXHR.responseJSON.form);
+                                }
+
+                                $('.form_error').html(jqXHR.responseJSON.message);
+
+                            } else {
+                                alert(errorThrown);
+                            }
+
+                        });
+            });
+        }
+
+        function initAjaxPrePhysiciansForm()
+        {
+            $('#form_res_prep').hide();
+            $('#form_carg_prep').hide();
+            
+            $('body').on('submit', '.ajaxForm_prep', function (e) {
+                $('#form_carg_prep').show();
+                $('#form_body_prep').hide();
+                
+                e.preventDefault();
+
+                $.ajax({
+                    type: $(this).attr('method'),
+                    url: $(this).attr('action'),
+                    data: $(this).serialize()
+                })
+                        .done(function (data) {
+                            if (typeof data.message !== 'undefined') {
+                                $('#form_carg_prep').hide();
+                                document.getElementById("ajaxForm_prep").reset();
+                                $('#form_res_prep').show();
+                                $('.name_prep').text(data.message);
+                            }
+                        })
+                        .fail(function (jqXHR, textStatus, errorThrown) {
+                            if (typeof jqXHR.responseJSON !== 'undefined') {
+                                if (jqXHR.responseJSON.hasOwnProperty('form')) {
+                                    $('#form_body_prep').html(jqXHR.responseJSON.form);
+                                }
+
+                                $('.form_error_prep').html(jqXHR.responseJSON.message);
+
+                            } else {
+                                alert(errorThrown);
+                            }
+
+                        });
+            });
+        }
+
+        $(".barraf_acercade a").each(function () {
+            if ($(this).attr("rel") == '{{subtag}}') {
+                $(this).parents("li").addClass("current");
+            }
+        });
+    </script>
+
+{% endblock %}

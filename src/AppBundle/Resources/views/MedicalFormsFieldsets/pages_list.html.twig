@@ -1,0 +1,6 @@
+
+{% for entity in entities %}
+    <a class="dropdown-item" href="{{  path('medicalforms_view', {'id': formname,'page': entity.id}) }}">
+        {{entity.label}}
+    </a>
+{% endfor %}

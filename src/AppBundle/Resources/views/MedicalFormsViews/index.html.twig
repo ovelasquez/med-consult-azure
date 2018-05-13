@@ -1,0 +1,50 @@
+{% extends '::baseadm.html.twig' %}
+
+{% block body -%}
+    <h5>{% if entityE is defined %}{{entityE.name}}: {%endif%}Medical Forms Views list</h5>
+
+    <table cellpadding="0" cellspacing="0" border="0" width="90%" class="table-striped tablaAdm ">
+        <thead>
+            <tr>
+                <th>Name</th>  
+                <th>Specialty</th> 
+                <th>Form</th> 
+                <th class=" col-lg-1 col-md-1 col-sm-1" colspan="2">OPERACIONES</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td>{{ entity.name }}</td>                
+                    <td>{{ entity.specialty.name }}</td>   
+                    <td>{{ entity.medicalForm.name }}</td>   
+                    <td>
+                        <a href="{{ path('medical_forms_views_edit', { 'id': entity.id }) }}" >editar</a>
+                    </td>                    
+                    <td>
+                        <a target="_blank" href="{{ path('medicalforms_fill', { 'id': entity.medicalForm.formName,'ms': 0,'filter': entity.id }) }}" >public-view</a>
+                    </td>
+
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <ul  class="record_actions">
+        {% if entityE is defined %}
+            <li >
+                <a href="{{ path('specialties') }}" class="submit btnAdm lilaOscuro">
+                    Volver 
+                </a>
+            </li>
+        {%endif%}
+        <li>
+            <a href="{{ path('medicalformsview_new', { 'id': 38}) }}" class="submit btnAdm lilaOscuro">
+                Crear 
+            </a>
+        </li>
+
+    </ul>
+{% endblock %}

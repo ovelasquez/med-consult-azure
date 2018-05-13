@@ -1,0 +1,94 @@
+{% extends '::base.html.twig' %}
+{% block body -%}
+
+
+    <!-- Recent Orders -->
+    <div class="row">
+        <div class="col-xl-12 col-lg-12">
+            <div class="col-xl-4 col-lg-12">
+                <div class="card card-inverse card-primary text-xs-center">
+                    <div class="card-body">
+                        <div class="card-block pt-3">
+                            <i class="fa fa-commenting-o white font-large-2 "></i>
+                            <h4 class="card-title mt-3">PREGUNTA CONCISA </h4>
+                            <p class="card-text">Realice una pregunta breve de su caso específico o condición general. Una respuesta corta estará disponible. </p>
+                            <button onclick="location.href = '{{  path('consultations_new_type', {'type': 'consice'}) }}';" class="btn btn-primary btn-darken-3">CONSULTAR AHORA <i class="icon-share2 m-0"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-12">
+                <div class="card card-inverse md-bg-blue-sky text-xs-center">
+                    <div class="card-body">
+                        <div class="card-block pt-3">
+                            <i class="icon-wpforms white font-large-2 "></i>
+                            <h4 class="card-title mt-3">CONSULTA ELECTRÓNICA </h4>
+                            <p class="card-text">Solicite una revisión, a fondo. Luego de proveer información específica sobre su salud, puede adjuntar resultados de laboratorio.</p>
+                            <button onclick="location.href = '{{  path('consultations_new_type', {'type': 'electronic'}) }}';" class="btn btn-primary btn-darken-3">CONSULTAR AHORA <i class="icon-share2 m-0"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-12">
+                <div class="card card-inverse md-bg-red  text-xs-center">
+                    <div class="card-body">
+                        <div class="card-block pt-3">
+                            <i class="fa fa-video-camera white font-large-2 "></i>
+                            <h4 class="card-title mt-3">CONSULTA EN VIVO</h4>
+                            <p class="card-text">Hable en una video conferencia. Antes de la cita, podrá adjuntar información específica sobre su salud.</p>
+                            <button onclick="location.href = '{{  path('consultations_new_type', {'type': 'inlive'}) }}';" class="btn btn-primary btn-darken-3">CONSULTAR AHORA <i class="icon-share2 m-0"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12 col-lg-12">
+            <div class="card m-15">
+                <div class="card-header">
+                    <h4 class="card-title">Consultas recientes</h4>
+                    <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                    <div class="heading-elements">
+                        <ul class="list-inline mb-0">
+                            <li><a data-action="icon-new-tab" href="{{ path('consultations_list_patient') }}"><i class="icon-new-tab"></i></a></li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <div class="table-responsive">
+                        <table id="recent-orders" class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Consulta</th>
+                                    <th>Médico</th>
+                                    <th>Estatus</th>
+                                    <th>Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {% for entity in entities %} 
+                                    {% if entity.con.status>=0%}
+                                        <tr>
+                                            <td class="text-truncate"><a href="{{  path('consultations_show', {'id': entity.con.id}) }}">{{entity.con.modalityConsultation.name}}</a></td>
+                                            <td class="text-truncate">{{entity.con.physician.user.name}}</td>
+                                            <td class="text-truncate"><span class="tag tag-default tag-{% if entity.con.status==2%}success{%else%}warning{% endif %}">{% if entity.con.status==2%}Completada{%else%}Pendiente{% endif %}</span></td>
+                                            <td class="text-truncate">{% if entity.cal.datetimePatient is defined%}{{entity.cal.datetimePatient|date('d-m-Y H:i')}}{% else %}{{entity.con.creationDate|date('d-m-Y H:i')}}{% endif %}</td>
+                                        </tr>
+                                    {% endif%}
+                                {% endfor%}
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ Recent Orders -->                                  
+
+
+
+
+{% endblock %}

@@ -1,0 +1,45 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username_email
+
+    firewalls:
+        main:
+            pattern: ^/
+            form_login:
+                check_path: /login_check
+                provider: fos_userbundle
+                success_handler: authentication.handler.login_success_handler
+                csrf_provider: security.csrf.token_manager
+                use_referer: true
+        
+            anonymous: ~
+            logout: true
+            oauth:
+                resource_owners:
+                    facebook: "/auth/login/ckeck-facebook"
+                login_path: /login
+#                failure_path: /auth/login        
+                failure_path: /login
+                oauth_user_provider:
+                    #this is my custom user provider, created from FOSUBUserProvider - will manage the
+                    #automatic user registration on your site, with data from the provider (facebook. google, etc.)
+                    service: medeconsult_user_provider
+                success_handler: authentication.handler.login_success_handler
+                    
+        
+        
+    access_control:
+        - { path: ^/auth/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }        
+        - { path: ^/admin/, role: ROLE_ADMIN }

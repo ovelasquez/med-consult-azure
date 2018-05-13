@@ -1,0 +1,285 @@
+{% extends '::baseformg.html.twig' %}
+
+{% block body -%}
+    
+    <div  class="row-after-form">
+        <div class="col-xs-2 barramenu dos barramenuform">
+            {% set classes=["azulOscuro blancoColor", "celeste", "rojo", "gris", "lila", "celeste", "rojoFuerte", "azulNormal"] %}
+            <ul class="menuform">
+                {% set indT=0 %}
+                {% for  key, entitypage in entities %} 
+                    {% if entitypage['field'].type=="page" %}
+                <li class="{%if classes[indT] is defined%}{{classes[indT]}}{% endif%} {% if key==0%}current{% endif%}"><a href="#" rel="_page{{key}}" class="page">{{entitypage['field'].label}}<div class="hover"></div></a></li>                        
+                    {% endif%}
+                    
+                    {% if (indT < classes|length)%}
+                        {% set indT=indT+1 %} 
+                        {% else%}
+                        {% set indT=0 %} 
+                    {% endif%} 
+                    
+                {% endfor %}
+            </ul>
+        </div><!--barramenu dos-->
+        
+        {% for  key, entitypage in entities %}                          
+        <div id="_page{{key}}" class="pageCont col-xs-10 cuestionarioContent {% if key!=0%}hidden{% endif%}">
+            <div class="cuestionario viewForm">
+                
+                <div class="docHomeIntScroll mCustomScrollbar">                    
+                    
+            {% for  keyf, entityfieldset in entitypage %}                             
+                {% if keyf!='field' %}
+            <h1 class='{% if entityfieldset.fieldset.classname is defined %}{{entityfieldset.fieldset.classname}}{% endif%}'>{{entityfieldset.fieldset.label}}</h1>
+            <div class="cuestionarioDivision">
+             
+                {% set gr='' %}
+                {% set tb='' %}
+                {% set indT=0 %}
+                {% for keyfs, field in entityfieldset.fields %}  
+                    
+                    {% if field.field=='grid'%}
+                        
+                        {% if (gr!='')%}
+                            </div><!--CERRANDO G_{{gr}}-->   
+                            {% set gr='' %}
+                        {% endif %}
+
+                        {% if (tb!='')%}
+                            <td>&nbsp;</td></tr>
+                    </table></div><!--CERRANDO T_{{tb}}-->   
+                            {% set tb='' %}
+                        {% endif %}
+                        
+                    <!--ABRIENDO T_{{field.id}}-->                                
+                    <div class="cuesationarioCampo"><table  class="{% if field.configjson.class is defined and field.configjson.class!='' %}{{field.configjson.class}}{% else%}cuestionarioTabla{% endif%} grid" data-name-field="{{field.name}}" data-cardinality="{% if field.configjson.cardinality>1 %}{{field.configjson.cardinality}}{% endif%}"  border="0" cellpadding="0" cellspacing="0" width="90%">
+                        {% set tb=field.id %}    
+                        {{field.input|raw}} 
+                    {% elseif field.field=='group'%}
+                        
+                        {% if (gr!='')%}
+                            </div><!--CERRANDO G_{{gr}}-->   
+                            {% set gr='' %}
+                        {% endif %}
+
+                        {% if (tb!='')%}
+                            <td>&nbsp;</td></tr>
+                    </table></div><!--CERRANDO T_{{tb}}-->   
+                            {% set tb='' %}
+                        {% endif %}
+                        
+                    <!--ABRIENDO G_{{field.id}}-->
+                    <div class="cuesationarioCampo groupInputs">
+                        {% set gr=field.id %}     
+                    {% else %}
+
+                        {% if (gr=='' and tb=='')%}
+                        <div class="cuesationarioCampo">
+                            {% if field.showlabel is defined and field.showlabel==1 %}
+                            <label for="" class="etiquetaCuestionario">{% if field.required==1%}*{% else%}&nbsp;{% endif%}{{field.label}}:</label>
+                            {% endif%}                        
+                            {% if field.description is defined and field.description!='' %}
+                            <p class="">{{field.description}}</p>
+                            {% endif%}
+                            {% if field.configjson.cardinality is defined and field.configjson.cardinality!=1 and (field.field!='grid' ) %}
+                            <div ><a class="a-mas azulOscuro" href="#" rel="{{field.configjson.cardinality}}">Añadir más</a></div>
+                            <div class="f-mas" >{{field.valuehtml|raw}}</div>
+                            {% else%}
+                                {{field.valuehtml|raw}}
+                            {% endif%}
+                            {% if field.help is defined and field.help!='' %}
+                            <p class="small">{{field.help}}</p>
+                            {% endif%}
+                         </div>    
+                        {% elseif (tb!='')%}
+                            {{field.input|raw}} 
+                        {% else %}
+                            {% if field.showlabel is defined and field.showlabel==1 %}
+                        <br /><label for="" class="etiquetaCuestionario">{% if field.required==1%}*{% else%}&nbsp;{% endif%}{{field.label}}:</label>
+                            {% endif%}  
+                            {{field.valuehtml|raw}}                            
+                        {% endif %}
+                        
+                        {% if (gr!='')%}
+                            {% if ( entityfieldset.fields[loop.index] is defined and (entityfieldset.fields[loop.index].subgroup.id is defined and entityfieldset.fields[loop.index].subgroup.id!=gr) or (entityfieldset.fields[loop.index].subgroup.id is not defined))
+                                    or entityfieldset.fields[loop.index] is not defined %}                                
+                   </div><!--CERRANDO G_{{gr}}-->   
+                                {% set gr='' %}
+                            {% endif %}
+                        {% endif %}
+
+                        {% if (tb!='')%}
+                            {% if ( entityfieldset.fields[loop.index] is defined and (entityfieldset.fields[loop.index].subgroup.id is defined and entityfieldset.fields[loop.index].subgroup.id!=tb) or (entityfieldset.fields[loop.index].subgroup.id is not defined))
+                                    or entityfieldset.fields[loop.index] is not defined %}                                
+                        <td>&nbsp;</td></tr>
+                    </table></div><!--CERRANDO T_{{tb}}-->   
+                                {% set tb='' %}
+                            {% endif %}
+                        {% endif %}
+
+                    {% endif %}
+
+                    
+                {% endfor %}
+            </div>
+            <div class='clearFix'></div>
+                {% endif %}
+            {% endfor %}
+                </div><!--docHomeIntScroll-->
+            </div><!--cuestionario-->
+        </div><!--pageCont-->
+
+        {% endfor %}
+
+                    
+
+
+                        <div class="botoneraBottomCuestionario">
+                            <div><a href="{{  path('medicalforms_fill', {'id': entity.formName}) }}" class="submitSiguiente rojoFuerte">Editar</a></div><div><input type="button" value="Siguiente" class="btn-siguiente submitSiguiente azulOscuro"></div>
+                        </div>
+                    </div>
+                    
+
+                    {% endblock %}
+{% block javascripts %}
+    <script>
+        {% if patient.stored is defined and patient.stored is not null %}
+        var _51={{patient.stored}};
+        {% else %}
+        var _51=0;
+        {% endif %}
+        var _52={{patient.storageplan.space-patient.stored}};
+        
+        $(document).ready(function () {
+            $(".form-input").prop('disabled', true);
+            //CONTROL DE MENU
+            $(".page").click(function () {
+                
+                $(".pageCont").addClass("hidden");
+                $("#" + $(this).attr("rel")).removeClass("hidden");
+                //$("#" + $(this).attr("rel")).find(".form-input").prop('disabled', false);
+                $(".barramenuform li").removeClass("current");
+                $(this).parent().addClass("current");
+                return false;
+            });
+            $(".page:first").click();
+            
+            //CONTROL DE AGREGAR MAS
+            $(".a-mas").remove();
+            $(".a-mas-f").remove();
+            
+            
+            //REESCRIBIR GRID
+            $(".grid").each(function () {                
+                id = "#tr_" + $(this).attr("data-name-field");
+                numInp = $(id+" td").first().children(".inp").length-1;
+                numCol = $(id).children("td").length;
+                
+                if (numInp+1 >1){    
+                      
+                    for (var i = 1; i <= numInp; i++) {
+                        var row = document.createElement('tr');
+                        row.className = 'groupInputs';
+                        for (var j = 0; j < numCol; j++) {                            
+                            inp = $(id).children("td").eq(j).children(".inp").eq(i);
+                            var cell = row.insertCell(j);                            
+                            cell.className = 'colorTablaUno borderBlanco';
+                            $(cell).append( inp.clone());
+                            
+                        }
+                        $(row).children("td").last().html("<a class='elim a-mas-el' href='#' rel='tr'>x</a>"); 
+                        
+                        $(this).append( row);                        
+                        $(".elim").click(function () {
+                            $(this).parents($(this).attr("rel")).remove();
+                            return false;
+                        });
+                        
+                        $(row).find('.form-file').bind('change',{}, sizeFiles);
+                        $(row).find(':input').on( "change", validGroup ).change();
+                    } 
+                    
+                  
+                    for (var j = 0; j < numCol; j++) { 
+                        while($(id).children("td").eq(j).children().length>1){
+                            inp = $(id).children("td").eq(j).children().last();
+                            inp.remove();     
+                        }
+                    }
+                    
+                                      
+                } /* */              
+                
+            });
+            
+            //ACTIVAR ELIM 
+            $(".elim").remove();
+            
+            $(".btn-siguiente").click(function(){
+                if ($(".menuform .current").next().is("li")){
+                    $(".menuform .current").next().children("a").click();
+                }else{
+                    $(".menuform li:first").children("a").click();
+                }
+            });
+            
+            
+            
+
+        });
+        
+        function validGroup(event) {   
+            //alert('Change '+$(this).val())
+            /*grp = $(event.currentTarget).parents('.groupInputs');
+            
+            if ($(this).val()!==''){
+                grp.find(':input').attr("required","required");      
+            }else{
+                var cl = false;
+                grp.find(':input').each(function(){
+                    if ($(this).val()!==''){
+                        cl=true;
+                    }
+                });
+                
+                if (cl===false){
+                    grp.find(':input').removeAttr("required","required");    
+                }else{
+                    grp.find(':input').attr("required","required");      
+                }
+            }
+            
+            grp.find(':hidden').removeAttr("required","required"); */
+        }
+        
+        function sizeFiles(event) {                
+            var size = 0;
+            files = event.target.files;
+            $('.errorFile').remove();
+            $('.form-file').each(function(){
+                if ($.isEmptyObject(this.files[0])===false){                    
+                    if(window.File && window.FileReader && window.FileList && window.Blob){
+                        size += this.files[0].size;            
+                    }else{
+                    // IE
+                        var Fs = new ActiveXObject("Scripting.FileSystemObject");
+                        var ruta = document.upload.file.value;
+                        var archivo = Fs.getFile(ruta);
+                        size += archivo.size;               
+                    }
+                }
+                       
+            });
+            
+            size  = _52 - size;
+            
+            if (size<0){
+                $(event.currentTarget).val("");
+                $(event.currentTarget).after("<p class='cuadro uno errorFile'>El archivo sobrepasa su espacio disponible: "+$(".stD").html()+" MB, <a href='#' class='closeBtn' onclick='$(this).parent().remove();return false;'>x<a> <a href='#' >actualice su plan de almacenamiento aquí</a></p>").focus();
+            }else{
+                $(".stD").html(Math.round(size/1048576,2));                
+            }
+        }
+
+    </script>
+{% endblock %}

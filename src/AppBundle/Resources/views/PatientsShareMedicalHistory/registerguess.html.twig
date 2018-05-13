@@ -1,0 +1,30 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <div class="row" style="height:90%; ">
+        {% render url('fos_user_registration_register', { 'layout' : 'simple','guess' : 'act','tkG' : tkG ,'token' : token,'tokenSh' : tokenSh  })  %}
+        
+    </div><!--row-->  
+{% endblock %}
+{% block javascripts %}
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+            $('.submit').click(function () {
+                if ($("#fos_user_registration_form_plainPassword_first").val() !== $("#fos_user_registration_form_plainPassword_second").val()) {
+                    $("#fos_user_registration_form_plainPassword_second").focus();
+                    document.getElementById("fos_user_registration_form_plainPassword_second").setCustomValidity("Por favor, introduzca la misma contraseña.");
+                } else {
+                    document.getElementById("fos_user_registration_form_plainPassword_second").setCustomValidity("");
+                }
+            });
+
+
+        });
+    </script>
+
+    
+
+{% endblock %}

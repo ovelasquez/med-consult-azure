@@ -1,0 +1,36 @@
+{% extends '::baseadm.html.twig' %}
+
+{% block body -%}
+    <h5>Médicos registrados</h5>
+
+    <table cellpadding="0" cellspacing="0" border="0" width="90%" class="table-striped tablaAdm ">
+        <thead>
+            <tr>
+                <th >Médico</th>
+                <th >Estado</th>
+                <th class=" col-lg-1 col-md-1 col-sm-1" colspan="1">OPERACIONES</th>
+            </tr>
+        </thead>
+        <tbody>            
+            {% for entity in entities %}
+                <tr>
+                    <td ><a href="{{ path('physicians_show', { 'id': entity.id }) }}" >{{entity.user.name}} {{entity.user.lastname}}</a></td>
+                    <td >{% if (entity.user.enabled) %}Activo{%else%}Inactivo{%endif%}</td>
+                    <td >
+                        <a href="{{ path('physicians_show', { 'id': entity.id }) }}">ver</a>
+                    </td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <ul class="pagination">
+        <li><a href="{{ path('physicians_pag', {'p': 1}) }}">&laquo;</a></li>
+            {% for i in 1..(pCount) %}
+            <li {%if p==i%}class="active"{%endif%}><a href="{{ path('physicians_pag', {'p': i}) }}">{{ i }}</a></li> 
+            {% endfor %}
+        <li><a href="{{ path('physicians_pag', {'p': pCount}) }}">&raquo;</a></li>
+    </ul>
+
+{% endblock %}

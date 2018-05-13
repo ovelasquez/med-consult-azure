@@ -1,0 +1,216 @@
+{% extends '::base_shared.html.twig' %}
+
+{% block body -%}
+
+
+    <section id="vertical-tabs">
+        <div class="row">
+            <div class="col-xs-12">
+
+                <div class="pacientesDoctorResumen card ">                                              
+                    <div class="card-header">
+                        <h4 class="card-title">Paciente</h4>
+                        <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                        <div class="heading-elements bg-white">
+                            <ul class="list-inline mb-0">
+                                <li><div class="btn-menu-shared" >
+                                        {% if token is null %}
+                                            <a  href="{{  path('medicalforms_view_shared', {'id': form_hs,'pat': patient.id}) }}" class="btn mr-1 btn-outline-primary btn-sm "><i class="icon-paper"></i>Historial de salud</a>
+                                            <a  href="{{ path('patients_view_shared_form', { 'form': form_hm,'id': patient.id }) }}" class="btn mr-1 btn-outline-primary btn-sm "><i class="icon-paper-stack"></i>Archivo médico</a>
+                                            <a  href="{{ path('consultations_list_shared_patient',{'id': patient.id}) }}" class="btn mr-1 btn-outline-primary btn-sm"><i class="icon-speech-bubble"></i>Consultas</a>
+                                        {% else %}
+                                            <a  href="{{  path('medicalforms_view_shared', {'id': form_hs,'pat': token}) }}"  class="btn mr-1 btn-outline-primary btn-sm "><i class="icon-paper"></i>Historial de salud</a>
+                                            <a  href="{{ path('patients_view_shared_form', { 'form': form_hm,'id': token }) }}" class="btn mr-1 btn-outline-primary btn-sm  "><i class="icon-paper-stack"></i>Archivo médico</a>
+                                            <a  href="{{ path('consultations_list_shared_patient',{'id': token}) }}" class="btn mr-1 btn-outline-primary btn-sm active"><i class="icon-speech-bubble"></i>Consultas</a>
+                                        {% endif%}
+                                    </div></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="card-block p-2">
+                            <div class="col-xs-12 col-md-8 col-lg-8 text-left mb-1">
+                                <h4 class=" " id="name">{{patient.user.name}} {{patient.user.lastname}}</h4>
+                                <p id="spe"  class="card-text mb-0"><span>Edad:</span>{% if patient.yearsold is defined %}{{ patient.yearsold }}{% endif %}</p>
+                                <p id="spe"  class="card-text mb-0"><span>Genero:</span> {% if patient.gender is defined and patient.gender=='female' %}Femenino{%else%}Masculino{% endif %}</p>                        
+                            </div>
+                            <div class="col-xs-12 col-md-4 col-lg-4 text-xs-center">
+
+                                {% if patient.photo is defined and patient.photo!='' %}
+                                    <img width='100px' src="{{ asset('uploads/documents/' ~ patient.photo) }}" />
+                                {%endif%}                                             
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pacientesDoctorResumen card ">
+                    <div class="card-header no-border-bottom">
+                        <h4 class="card-title">Detalle de Consulta</h4>
+
+                    </div>
+                    <div class="card-body collapse in">
+                        <div class="card-block">
+
+                            <form>
+                                <div class="form-body">
+
+                                    <!-- Recent Orders -->
+                                    <div class="row">
+                                        <div class="col-xl-4 col-lg-12">
+                                            <div class="card card-inverse card-primary ">
+                                                <div class="card-body">
+                                                    <div class="card-block pt-2">
+                                                        <img src="{{ asset('uploads/documents/' ~ entity.physician.photo) }}" alt="element 01" width="140" class="float-xs-left mr-1">
+
+                                                        <h4 class="card-title mt-0 font-medium-2">{{ entity.physician.user.name }}</h4>
+                                                        <span id="job" class="font-small-2">{{ entity.physician.jobtitle }}</span>
+                                                        <p id="sub" class="card-text mb-0 mt-1 clear"><strong>Sub-Especialidad:</strong> {{ entity.physician.subspecialty }}</p>
+                                                        <p id="cer" class="card-text mb-0"><strong>Certificación:</strong> {{ entity.physician.abms }}</p>
+                                                        <p id="idi" class="card-text mb-0"><strong>Idiomas:</strong> {{ entity.physician.abms }}</p>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                        </div>
+
+
+                                        <div class="col-xl-8 col-lg-12">
+                                            {% if entity.status==2 or entity.modalityConsultation.tag=='consice' %}
+                                                <div class="card">
+
+                                                    {% if entity.modalityConsultation.tag=='consice' %}
+
+                                                        <div class="card-header">
+                                                            <h4 class="card-title">Pregunta</h4>
+                                                            <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                                                            <div class="heading-elements">
+                                                                <span class="tag tag-default tag-info">{{ entity.creationDate|date('d-m-Y') }}</span>
+                                                            </div>
+                                                        </div>
+                                                    {% endif%}
+
+                                                    <div class="card-body">
+
+                                                        {% if entity.status==2 %}
+                                                            {% if entity.modalityConsultation.tag=='electronic' or entity.modalityConsultation.tag=='inlive' %}
+
+                                                                <div class="card-block">
+                                                                    <p><span class="float-xs-right"><a href="{{  path('consultation_pdf', {'id': entity.id}) }}" target="_blank">Descargar como PDF  <i class="icon-arrow-right2"></i></a></span></p>
+                                                                </div>
+
+                                                            {% endif%}
+                                                        {% endif%}
+
+                                                        
+                                                        
+                                                        {% if entity.modalityConsultation.tag=='consice' %}
+
+                                                            <div class="card-block">
+                                                                {{ entity.question }}
+                                                            </div>
+                                                        {% endif%}
+
+                                                    </div>
+
+                                                </div>
+                                            {% endif%}
+
+                                            {% if entity.modalityConsultation.tag=='electronic' or entity.modalityConsultation.tag=='inlive' %}
+                                            
+                                            <div class="card">
+
+                                                <div class="card-header">
+                                                    <h4 class="card-title"> Resumen del Caso</h4>                                                    
+                                                </div>
+                                                <div class="card-body">
+                                                    
+                                                    <div class="card-block">
+                                                        {{ entity.resume|raw }}
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                            {% endif%}
+                                            
+                                            
+                                            
+                                            <div class="card">
+
+                                                <div class="card-header">
+                                                    <h4 class="card-title">
+                                                        {% if entity.modalityConsultation.tag=='consice' %}
+                                                            Respuesta {% elseif entity.modalityConsultation.tag=='electronic' %}
+                                                            Recomendaciones Diagnosticas y Terapéuticas
+                                                        {% elseif entity.modalityConsultation.tag=='inlive' %}
+                                                            Recomendaciones Diagnosticas y Terapéuticas
+                                                        {% endif%}</h4>
+                                                    <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                                                    <div class="heading-elements">
+                                                        <span class="tag tag-success">{{ entity.updateDate|date('d-m-Y') }}</span>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="card-body">
+                                                    
+                                                    <div class="card-block">
+                                                        {{ entity.answer|raw }}
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!--/ Recent Orders -->
+
+
+                                </div>
+
+
+                            </form>
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('js/placeholders.jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/select2.full.js') }}"></script>
+    <script src="{{ asset('js/underscore-min.js') }}"></script>
+    <script src="{{ asset('js/moment.min.js') }}"></script>
+    <script src="{{ asset('js/clndr.js') }}"></script>
+    <script type="text/javascript">
+        var optionsHours = [];
+        var mCalendar;
+        var daySelected;
+        $(document).ready(function () {
+
+        });
+
+
+    </script>
+
+
+{% endblock %}
+

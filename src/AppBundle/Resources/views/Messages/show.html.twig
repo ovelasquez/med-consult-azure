@@ -1,0 +1,91 @@
+{% extends app.user == entity.consultation.physician.user
+? '::basemedphysicians.html.twig'
+: '::base.html.twig' %}
+
+
+{% block body %}
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title" id="horz-layout-basic">Mensajes</h4>
+
+                </div>
+                <div class="card-body collapse in">
+                    <div class="card-block">
+
+                        <div class="">
+
+                            {% if dias is not empty and dias > 14 %}
+                                <div class="alert bg-success alert-dismissible fade in mb-2" role="alert">
+                                    Esta <strong>Mensajeria</strong> esta cerrada </div>
+                            {% endif %}    
+                            
+
+                            <ul class="list-group list">
+                                {% for msg in mensaje %}
+                                    <li class="list-group-item">
+                                        <div class="media">
+                                            <div class="media-left"><span class="avatar avatar-sm avatar-online rounded-circle">
+                                                    {% if msg.frommsg == msg.consultation.physician.user  %}
+                                                        {% if file_exists(web_path~('uploads/documents/' ~ msg.consultation.physician.photo)) %}
+                                                            <img  src="{{ asset('uploads/documents/' ~ msg.consultation.physician.photo) }}" />
+                                                        {% else %}
+                                                            <img  src="{{ asset('images/contacto.png') }}" />
+                                                        {% endif %}
+                                                    {% elseif msg.frommsg == msg.consultation.patient.user  %}
+                                                        {% if file_exists(web_path~('uploads/documents/' ~ msg.consultation.patient.photo)) %}
+                                                            <img  src="{{ asset('uploads/documents/' ~ msg.consultation.patient.photo) }}" />
+                                                        {% else %}
+                                                            <img  src="{{ asset('images/contacto.png') }}" />
+                                                        {% endif %}
+                                                    {% endif %}
+                                                    <i></i></span></div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading">{{ msg.frommsg }}</h6>
+                                                <p class="notification-text font-small-3 text-muted">{{ msg.message }}</p><small>
+                                                    <time datetime="2015-06-11T18:29:20+08:00" class="media-meta text-muted">{{msg.createdate | date("d/m/Y")}}</time></small>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+
+                        <div class="form-actions right border-top-grey">                         
+                            <a  class="btn btn-warning mr-1" href="{{  path('consultations_show_admin', {'id': entity.consultation.id}) }}" ><i class="icon-cross2"></i>Volver</a>                                    
+                            
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script type="text/javascript">
+
+
+        $("#appbundle_messages_message").prop("maxlength", "200");
+
+
+    </script>
+
+
+{% endblock %}

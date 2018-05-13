@@ -1,0 +1,70 @@
+
+
+<div class="col-lg-12">
+
+    <div class="card" style=" border: 0px; box-shadow: none;">
+
+        <div class="card-header" style="   border: 0px; padding: 1rem;">
+            <h4 class="card-title" id="horz-layout-basic">Categoría </h4>
+        </div>
+        <div class="card-body">
+            <div class="card-block" style="padding: 1rem;">
+                <div class="row">
+
+                    {{ form_start(form,{'attr': {'class': 'formAmd ajaxForm','id': ''}}) }}
+                    <div class="form-body">
+                        {% if messages is not defined  %}
+                            {% set messages = [] %}
+                        {%endif %}
+                        {% for child in form.children %}
+                            {% for error in child.vars.errors %}
+                                {% set messages = messages|merge([child.vars.label  ~ ' ' ~ error.message]) %}
+                            {% endfor %}
+                        {% endfor %}
+
+
+                        <div class="row rowError" {% if messages|length %}style="display: block"{% else %}style="display: none"{% endif %}>
+                            <div class="col-xs-12" >
+                                <div class="alert alert-icon-right alert-warning alert-dismissible fade in mb-2" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    {% for message in messages %}                                                    
+                                        <strong> {{ message }}<br></strong> 
+                                        {% endfor %}
+                                </div>
+                            </div><!--col-xs-12-->
+                        </div><!--row-->
+
+                        <div class="p-1">
+                            <div class="row">
+                                <fieldset class="form-group position-relative mb-1">
+                                    <label for="inputName1" class="col-sm-3 form-control-label">Nombre</label>
+                                    <div class="col-sm-9">
+                                        {{ form_widget(form.label,{'attr': {'class': 'form-control', 'placeholder':"Nombre"} } ) }}
+
+                                    </div>
+                                </fieldset>
+
+                                {{ form_widget(form.position,{'attr': {'class': 'form-control', 'placeholder':"Nombre"} } ) }}
+                            </div>
+                        </div>
+
+                        <div class="form-actions right">
+                            <a  href="#" class="btn mr-1  btn-warning btn-sm cancelar">
+                                <i class="icon-cross2"></i> Cancelar
+                            </a>
+                            <button type="submit" class="btn mr-1 btn-secondary btn-sm btn-submit-field" style=" width: auto!important;"><i class="icon-check2"></i> Guardar</button>
+                        </div>
+
+                    </div><!--formbody-->       
+                    {{ form_end(form) }}<!--configurarCuentaFormulario--> 
+
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

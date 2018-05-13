@@ -1,0 +1,90 @@
+<pdf>
+    <dynamic-page>        
+
+        <placeholders>
+            <header>                
+                <table border.type="none" height="52px" width="100%"> 
+                    <tr border.type="none"> 
+                        <td border.type="none"  width="200px"><img style=" margin: 5px 41px; " src="{{ pdf_image('AppBundle:logoPrincipalDos.png') }}" /></td> 
+                        <td border.type="none"  color="gray" style=" padding: 5px 10px; " background.color="#C6E4EC"><p style=" margin: 0px 0px;text-align:right;"><strong>{{ entity.modalityConsultation.name|upper }}</strong> | <span>{{'Especialidad'|upper}}:</span> <span >{{ entity.specialty.name }}</span> </p></td> 
+                    </tr>      
+                </table>
+            </header>
+
+            <footer>
+                <table border.type="none" height="60px" width="100%" color="#ffffff" background.color="#485B83"> 
+                    <tr border.type="none"> 
+                        <td border.type="none" text-align="left" width="70%">
+                            <p  style=" margin: 0px 10px;">{{ entity.modalityConsultation.name }} de {{ entity.patient.user.name}} {{ entity.patient.user.lastname}} realizada el {{ entity.creationDate|date('d-m-Y') }} </p>
+                        </td> 
+                        <td border.type="none" text-align="right" width="30%">
+                            <p  style=" margin: 0px 10px;">http://www.medeconsult.com</p>
+                        </td> 
+                    </tr>  
+                    <tr border.type="none"> 
+                        <td  border.type="none" colspan="2" text-align="center">
+                    <page-info format="Página %s de %s" />
+                    </td> 
+                    </tr>  
+                </table>
+            </footer>
+        </placeholders>
+        <div width="100%" height="100%">
+           
+            <table border.type="none"> 
+                <tr border.type="none"> 
+                    <td border.type="none" ><p  style=" margin: 20px 0px 0px 0px; color: #485B83; font-size: 20px;"><span style="color:#9A9898;">PACIENTE:</span> {{ entity.patient.user.name|upper}} {{ entity.patient.user.lastname|upper}}</p></td> 
+                </tr>             
+                <tr border.type="none"> 
+                    <td border.type="none" style=" color: #9A9898; font-size: 11px; ">{{'Fecha de nacimiento'|upper}}:  <span style="color:#485B83;">{% if entity.patient.birthdate %}{{ entity.patient.birthdate|date('d-m-Y') }}{% endif %}</span></td> 
+                </tr> 
+                <tr border.type="none"> 
+                    <td border.type="none"><p style="color: #9A9898; font-size: 11px; "><span>{{'Fecha de la consulta'|upper}}:</span> <span style="color:#485B83;">{{ entity.creationDate|date('d-m-Y H:i a') }}</span></p></td> 
+
+                </tr> 
+                
+                <tr border.type="none"> 
+                    <td border.type="none" >
+                        <p  style=" margin: 20px 0 5px 0; color: #000000;">
+                            <strong>{{'Resumen del caso'|upper}}</strong>
+                        </p>
+                        <div width="650px" style=" margin: 0px 0 5px 20px; color: #333333; text-align: justify;">
+                          {{ entity.resume|raw }}
+                        </div>
+                    </td> 
+                </tr> 
+              
+                <tr border.type="none"> 
+                    <td border.type="none" >
+                        <p width="100%" style=" margin: 20px 0 5px 0; color: #000000;">
+                            <strong>
+                                {% if entity.modalityConsultation.tag=='consice' %}
+                                    {{'Respuesta'|upper}}
+                                {% elseif entity.modalityConsultation.tag=='electronic' %}
+                                    {{'Recomendaciones Diagnosticas y Terapéuticas'|upper}}
+                                {% elseif entity.modalityConsultation.tag=='inlive' %}
+                                    {{'Recomendaciones Diagnosticas y Terapéuticas'|upper}}
+                                {% endif%}    </strong>
+                        </p>
+                        <div width="650px" style=" margin: 0px 0 5px 20px; color: #333333; text-align: justify;">                        
+                            {{ entity.answer|raw }}   
+                        </div>
+                    </td> 
+                </tr>  
+                <tr border.type="none">                 
+                    <td border.type="none"  text-align="center"><p  style=" margin: 20px 0 10px 0; color: #333333;">Especialista<br /><br />{{ entity.physician.user.name|upper }}<br /><br />{{ entity.specialty.name|upper }}</p></td> 
+                </tr> 
+                <tr border.type="none"> 
+                    <td border.type="none">
+                        <p  style=" margin: 5px 0 10px 0; text-align: justify; font-size: 10px; color:gray;">
+                            Este reporte se ha hecho a petición del paciente arriba descrito con fines únicamente informativos. Este reporte no reemplaza o toma el lugar de una evaluación medica hecha directamente (cara a cara) con un medico calificado, y las recomendaciones arriba expresadas no deben usarse como instrucciones u ordenes diagnosticas o terapéuticas. Estas recomendaciones y opiniones pertenecen exclusivamente al medico firmante, y no constituyen opiniones o criterio de MedEconsult. 
+
+                        </p>
+                    </td> 
+                </tr> 
+
+
+            </table>
+        </div>
+    </dynamic-page>
+</pdf>

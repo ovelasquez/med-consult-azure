@@ -1,0 +1,4445 @@
+/* CSS Document */
+
+
+@font-face {
+    font-family: 'dosisbold';
+    src: url('../fonts/dosis-bold-webfont.eot');
+    src: url('../fonts/dosis-bold-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/dosis-bold-webfont.woff2') format('woff2'),
+        url('../fonts/dosis-bold-webfont.woff') format('woff'),
+        url('../fonts/dosis-bold-webfont.ttf') format('truetype'),
+        url('../fonts/dosis-bold-webfont.svg#dosisbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'dosisextrabold';
+    src: url('../fonts/dosis-extrabold-webfont.eot');
+    src: url('../fonts/dosis-extrabold-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/dosis-extrabold-webfont.woff2') format('woff2'),
+        url('../fonts/dosis-extrabold-webfont.woff') format('woff'),
+        url('../fonts/dosis-extrabold-webfont.ttf') format('truetype'),
+        url('../fonts/dosis-extrabold-webfont.svg#dosisextrabold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'dosisextralight';
+    src: url('../fonts/dosis-extralight-webfont.eot');
+    src: url('../fonts/dosis-extralight-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/dosis-extralight-webfont.woff2') format('woff2'),
+        url('../fonts/dosis-extralight-webfont.woff') format('woff'),
+        url('../fonts/dosis-extralight-webfont.ttf') format('truetype'),
+        url('../fonts/dosis-extralight-webfont.svg#dosisextralight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'dosislight';
+    src: url('../fonts/dosis-light-webfont.eot');
+    src: url('../fonts/dosis-light-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/dosis-light-webfont.woff2') format('woff2'),
+        url('../fonts/dosis-light-webfont.woff') format('woff'),
+        url('../fonts/dosis-light-webfont.ttf') format('truetype'),
+        url('../fonts/dosis-light-webfont.svg#dosislight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'dosismedium';
+    src: url('../fonts/dosis-medium-webfont.eot');
+    src: url('../fonts/dosis-medium-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/dosis-medium-webfont.woff2') format('woff2'),
+        url('../fonts/dosis-medium-webfont.woff') format('woff'),
+        url('../fonts/dosis-medium-webfont.ttf') format('truetype'),
+        url('../fonts/dosis-medium-webfont.svg#dosismedium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'dosisregular';
+    src: url('../fonts/dosis-regular-webfont.eot');
+    src: url('../fonts/dosis-regular-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/dosis-regular-webfont.woff2') format('woff2'),
+        url('../fonts/dosis-regular-webfont.woff') format('woff'),
+        url('../fonts/dosis-regular-webfont.ttf') format('truetype'),
+        url('../fonts/dosis-regular-webfont.svg#dosisregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'dosissemibold';
+    src: url('../fonts/dosis-semibold-webfont.eot');
+    src: url('../fonts/dosis-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/dosis-semibold-webfont.woff2') format('woff2'),
+        url('../fonts/dosis-semibold-webfont.woff') format('woff'),
+        url('../fonts/dosis-semibold-webfont.ttf') format('truetype'),
+        url('../fonts/dosis-semibold-webfont.svg#dosissemibold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+/* general --------------------------------------- */
+*, body {margin:0px; padding:0px; border:0px; }
+body { background:#fff; width:100%;}
+.uppercase {
+    text-transform:uppercase;
+}
+
+html, body {height:100%; min-height:100%;}
+ol, ul {list-style: none;}
+a, object { color:#333; outline:0; text-decoration:none;  }
+a:hover {
+    text-decoration:none;
+    color:#a5a5a5;
+}
+textArea {
+    resize: none;
+
+}
+textarea:focus {
+    background-color:#fcfcfc;
+    box-shadow: inset 0 2px 3px #c9c9c9;
+}
+
+.row, .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+    padding:0!important; overflow:hidden;
+}
+
+
+/*  Estructura -------------------------------------------*/
+.barrainfo {background:#fff; height:100%; }
+
+/*  base tope -------------------------------------------*/
+.barratope { background:#c6e4ec; color:#000;  width:100%; height: 100%;  display: block;}
+/*  base footer -------------------------------------------*/
+.barrafooter { width:110%; height:inherit; display:block; position:absolute; bottom:0; overflow:visible; padding:0;}
+.barrafooter ul {
+    margin:0 0 0 5%;
+    height:100%;
+    overflow:visible;
+}
+.barrafooter ul li {
+    float:left;
+    overflow:visible;
+    margin:0 5% 0 0;
+    height:100%;
+    position:relative;
+}
+.barrafooter ul li a {
+    text-transform:uppercase;
+    font-family: 'dosislight';
+    font-size:1.1em;
+    color:#fff;
+    display:block;
+    margin-top:20px;
+    letter-spacing:0.04em;
+}
+.barrafooter ul li a:hover {
+    color:#cccccc;
+}
+.barrafooter ul li.current a {
+    color:#cccccc;
+}
+.barrafooter ul li:hover .arrow {
+    display:block!important;
+}
+.barrafooter ul li.current .arrow {
+    display:block!important;
+}
+.barraf_comofunciona { background:#5d7d83; color:#fff; }
+.barraf_comofunciona ul li a {
+    color:#fff;
+}
+.barraf_registro { background:#bb1f39; color:#fff; }
+.barraf_acercade, .barraf_acercade2 { background:#485b83; color:#fff; }
+
+/*  estructura info  -------------------------------------------*/
+.modbg_inicio {padding:0; height: 100%; display:block; position:relative; overflow:hidden; }
+
+.modbg_izq {padding:0; height: 100%; display:block; position:relative; float:left; }
+.modbg_izq img { width:100%; height: auto;  display: block; vertical-align: bottom; position:absolute; right:0;  overflow:hidden;  }
+.modbg_izq img.imgestruct_02 {width:auto; height: 100%; left:0; right:none;  }
+
+
+.modpq_der {padding:30px 40px 0 30px!important;  height: 100%; display: block; position:relative; float:left;}
+.modpq_der h3 {
+    font-family: 'dosisregular';
+    font-size:2.7em;
+    margin:0 0 5% 0;
+}
+.modpq_der.pacientesHomeDerecho h3 {
+    text-transform:uppercase;
+}
+.modpq_der.pacientesHomeDerecho {
+    padding-top:5%!important;
+}
+.modpq_der p {
+    font-family: 'dosisregular';
+    font-size:1em;
+    line-height:1.35em;
+    margin:0 0 5% 0;
+}
+
+.modpq_der_ext {padding:30px 40px 0 30px!important;  height: 100%; display: block; position:relative}
+.modpq_der_ext h3 {
+    font-family: 'dosisregular';
+    font-size:2.7em;
+    margin:0 0 5% 0;
+}
+.modpq_der_ext.pacientesHomeDerecho h3 {
+    text-transform:uppercase;
+}
+.modpq_der_ext.pacientesHomeDerecho {
+    padding-top:5%!important;
+}
+.modpq_der_ext p {
+    font-family: 'dosisregular';
+    font-size:1em;
+    line-height:1.35em;
+    margin:10px;
+}
+.modpq_der_ext .submit {
+    padding: 20px;
+    margin: 10px;
+}
+.modpq_der_ext .row {
+    padding: 10px;
+    margin: 10px;
+}
+.modpq_der_ext  .imagenDoctorDetalle {
+    width: 150px;
+    margin: 10px;
+    height: auto;
+}
+.modpq_comofunciona {background:#c6e4ec; color:#84afb6;   }
+.modpq_registro {background:#ed253c; color:#fff;   }
+.modpq_acercade {background:#88a7d7; color:#fff;   }
+.modpq_consultas {background:#d6d6d7; color:#666;   }
+.modpq_consultas h3 {
+    font-size:2.2em;
+}
+
+
+
+/*************container-fluid**************/
+
+.container-fluid {
+    margin:0;
+    height:100%;
+}
+
+/*************barramenu**************/
+
+.barramenu {
+    margin:0;
+    padding:0;
+    background:#848986;
+    height:100%;
+}
+.logoPrincipal {
+    margin:0;
+    background:#fff;
+    padding:18% 0 0 0;
+    height:20%;
+}
+.logoPrincipal h1 {
+    margin:0;
+    width:3.933em;
+    height:1.400em;
+    margin:0 auto;
+}
+.logoPrincipal a.logoImg {
+    display:block;
+    text-indent:-5000px;
+    background:url(../images/logoPrincipalDos.png) center top no-repeat;
+    width:100%;
+    height:100%;
+    background-size:cover;
+}
+.logoPrincipal ul.menurrss{
+    text-align: center;
+    width: 100%;
+    height: 30px;
+}
+.logoPrincipal ul.menurrss li {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    
+}
+.logoPrincipal ul.menurrss li img{
+    width: 30px;
+    height: 30px;
+}
+.barramenu ul {
+    margin:0;
+    padding:0 1.3% 0 0;
+    height:80%;
+}
+.barramenu ul li {
+    margin:0;
+    height:20%;
+    position:relative;
+    overflow:visible;
+}
+.barramenu ul li a {
+    display:block;
+    text-align:center;
+    font-family: 'dosisregular';
+    text-transform:uppercase;
+    font-size:1em;
+}
+.espacioSuperior {
+    padding:20% 0 0 0;
+}
+.espacioSuperior.dos {
+    padding:10% 0 0 0;
+}
+.espacioSuperior.tres {
+    padding:15% 0 0 0;
+}
+.celeste {
+    background-color:#c6e4ec;
+}
+.rojo {
+    background-color:#ed253b;
+}
+.tablaTablilla tr td.rojo {
+    color:#fff!important;
+}
+.rojoTxt {
+    color:#ed253b;
+}
+.rojoFuerte {
+    background:#bc1f39;
+}
+.gris {
+    background-color:#e7e7e8;
+}
+.grisOscuro {
+    background:#878c89;
+}
+.lila {
+    background-color:#aebfe3;
+}
+.lilaOscuro {
+    background:#485b83;
+}
+.colorLila {
+    color:#aebfe3;
+}
+.colorLilaOscuro {
+    color:#485b83;
+}
+.verdeGris {
+    background:#5d7d83;
+}
+.azulOscuro, .pacientesAzulOscuro {
+    background-color:#556789;
+}
+.azulNormal {
+    background-color:#7aa8da;
+}
+.pacientesUno {
+    padding-top:8%!important;
+}
+.blancoColor a, .pacientesUno a {
+    color:#fff;
+}
+
+.pacienteDos {
+    padding:7%;
+}
+.pacientesTres {
+    padding:3%;
+}
+.pacientesCuatro {
+    padding:12%;
+}
+.pacientesCuatro.rojoFuerte a {
+    color:#fff;
+}
+.pacientesCuatro.azulNormal a {
+    color:#fff;
+}
+.hover {
+    opacity:0.5!important;
+    width:101.3%!important;
+    height:100%;
+    position:absolute;
+    top:0;
+    left:0;
+}
+.celeste .hover {
+    background-color:#c6e4ec; 
+}
+.rojo .hover {
+    background-color:#ed253b;
+}
+.rojoFuerte .hover {
+    background-color:#bc1f39;
+}
+.azulNormal  .hover {
+    background-color:#7aa8da;
+}
+.gris .hover {
+    background-color:#e7e7e8;
+}
+.lila .hover {
+    background-color:#aebfe3;
+}
+.azulOscuro .hover {
+    background-color:#556789;
+}
+.userTxt, .textGray, td.today , .celeste a {
+    color:#666;
+}
+.rojo a {
+    color:#fff;
+}
+.gris a {
+    color:#666;
+}
+.azulNormal a,.rojoFuerte a,.lila a {
+    color:#fff!important;
+}
+.barramenu ul li:hover .hover  {
+    display:none;
+}
+.barramenu ul li:hover {
+    box-shadow: inset 0 30px 30px -30px #000000;
+}
+.barramenu ul.menurrss li:hover {
+    box-shadow:none;
+}
+.barramenu ul li.current .hover  {
+    display:none;
+}
+.barramenu ul li.current {
+    box-shadow: inset 0 30px 30px -30px #000000;
+}
+.barramenu.dos ul li.current .hover  {
+    display:none;
+}
+.barramenu.dos ul li.current {
+    box-shadow: inset 0 30px 30px -30px #000000;
+}
+
+
+/*************barratope**************/
+
+
+.barratope {
+    margin:0;
+    padding:2% 2% 0 0!important;
+}
+.formularioInicial {
+    float:right;
+    height:100%;
+}
+.formularioInicial form {
+    margin:0;
+    /*    overflow:hidden;*/
+    height:100%;
+}
+.formularioInicial form .campo {
+    float:left;
+    margin:0 10px 0 0;
+    height:100%;
+}
+.formularioInicial form .campo.last {
+    margin:0;
+}
+.formularioRestablecer p,.formularioInicial form p {
+    font-family: 'dosisregular';
+    font-size:0.9em;
+    text-transform:uppercase;
+    float:right;
+    margin:2px 0 0 0;
+    color:#878c89;
+}
+.formularioRestablecer p,.loginNaccount{float:none;}
+.formularioRestablecer p a,.formularioInicial form p a {
+    font-family: 'dosisbold';
+    color:#535b57;
+}
+.formularioRestablecer p a:hover,.formularioInicial form p a:hover {
+    text-decoration:underline;
+}
+.formularioInicial form .campo label {
+    text-transform:uppercase;
+    font-family: 'dosisbold';
+    font-size:0.9em;
+    color:#535b57;
+    margin:0;
+    display:block;
+    float:left;
+    margin:2px 10px 0 0;
+}
+.formularioInicial form .campo input {
+    height:45%;
+    display:block;
+    width:150px;
+    border:none;
+    outline:none;
+    padding:0 2.3%;
+    font-family: 'dosisregular';
+    font-size:0.9em;
+    float:left;
+}
+.formularioInicial form .campo input[type="password"]:focus,.formularioInicial form .campo input[type="text"]:focus,.formularioInicial form .campo select:focus {
+    background-color:#fcfcfc;
+    box-shadow: inset 0 2px 3px #c9c9c9;
+}
+.modbg_inicio {
+    margin:0;
+}
+.carousel {
+    margin:0;
+    position:relative;
+    height:100%;
+}
+.slider_index {
+    height:100%!important;
+    width:100%;
+}
+.your-class {
+    height:100%!important;
+    width:100%;
+}
+.carouselUno {
+    background:url(../images/carrouselUno.jpg) left top no-repeat;
+    height:100%;
+    background-size:cover;
+    width:100%;
+}
+.carouselDos {
+    background:url(../images/carouselDos.jpg) left top no-repeat;
+    height:100%;
+    background-size:cover;
+    width:100%;
+}
+.carouselTres {
+    background:url(../images/carouselTres.jpg) left top no-repeat;
+    height:100%;
+    background-size:cover;
+    width:100%;
+}
+.cuadros {
+    position:absolute;
+    bottom:14%;
+    right:0;
+    width:44%;
+    z-index:999;
+}
+.cuadro {
+    margin:0;
+    width:100%;
+    color:#fff;
+    text-align:right;
+    padding:0 0 2% 0;
+}
+.cuadro p {
+    font-family: 'dosisregular';
+    font-size:1.7em;
+    text-transform:uppercase;
+    margin:0 0 0.9em 0;
+    padding:2% 5% 0 0;
+}
+.cuadro a {
+    color:#fff;
+    text-decoration:none;
+    text-transform:uppercase;
+    font-family: 'dosisregular';
+    font-size:1.1em;
+    padding:1.3% 5% 1.3% 0;
+    display:block;
+}
+.cuadro a:hover {
+    color:#a5a5a5;
+}
+.cuadro .descBnn a{ 
+    padding:0px 5px;
+    display:inline-block;
+}
+.menos {
+    margin:-5% 0 0 0;
+}
+.cuadro.uno {
+    background:red;
+    opacity:0.8;
+}
+.cuadro.uno a {
+    background:#5b0002;
+}
+.cuadro.uno .descBnn a {
+    background:#5b0002;
+}
+.cuadro.dos {
+    background:#383b3c;
+    opacity:0.8;
+}
+.cuadro.dos a {
+    padding-bottom:0!important;
+    padding-top:0!important;
+}
+.video {
+    margin:0;
+    height:100%;
+    background:url(../images/videoImagen.jpg) center top no-repeat;
+    background-size:cover;
+    position:relative;
+}
+.btnPlay {
+    display:block;
+    background:url(../images/botonPlay.png) left top no-repeat;
+    width:14.2%;
+    height:23.6%;
+    position:absolute;
+    left:0;
+    right:0;
+    top:28%;
+    margin-left:auto;
+    margin-right:auto;
+    background-size:100%, contain;
+}
+.interrogacion {
+    margin:0;
+    overflow:hidden;
+}
+.imgenInterrogacion {
+    background:url(../images/interrogacionDos.png) left top no-repeat;
+    width:4.3em;
+    height:4.4em;
+    background-size:100%, contain;
+    float:left;
+    margin:0 1% 0 0;
+}
+.interrogacion a {
+    color:#fff;
+    font-size:0.9em!important;
+    font-family: 'dosisregular';
+    line-height:0.9em;
+}
+.txtInterrogacion {
+    width:80%;
+    float:left;
+    overflow:hidden;
+    height:100%;
+}
+.interrogacion a:hover .txtInt {
+    background:#455c60;
+}
+.txtInt {
+    background:#5d7d83;
+    padding:1.8% 3% 2.5% 3%;
+    margin:12.5% 0 0 0;
+}
+.arrow {
+    position:absolute;
+    left:0;
+    right:0;
+    top:-14%;
+    margin-left:auto;
+    margin-right:auto;
+    z-index:999;
+}
+.arrow.comoFunciona {
+    background:url(../images/arrowComoFuncionaDos.png) left top no-repeat;
+    display:none;
+    width:25px;
+    height:25px;
+    background-size:100%, contain;
+}
+.arrow.registro {
+    background:url(../images/arrowRegistroDos.png) left top no-repeat;
+    display:none;
+    width:25px;
+    height:25px;
+    background-size:100%, contain;
+}
+.arrow.acercaNosotros {
+    background:url(../images/arrowAcercaNosotrosDos.png) left top no-repeat;
+    display:none;
+    width:25px;
+    height:25px;
+    background-size:cover;
+}
+.imagenRegistro {
+    margin:0;
+    height:100%;
+    background:url(../images/registroImagen.jpg) center top no-repeat;
+    background-size:cover;
+    position:relative;
+}
+registroFormulario p {
+    float:none;
+}
+.registroFormulario {
+    margin:0;
+}
+.registroFormulario.tres form {
+    margin:-15px 0 0 0;
+}
+.registroFormulario form {
+    margin:0;
+}
+.registroFormulario h3 {
+    font-size:2.2em;
+}
+.registroCampo {
+    margin:0 0 2% 0;
+}
+.registroCampo.doble {
+    margin:0 0 2% 0;
+    overflow:hidden;
+}
+.registroCampo.corto {
+    width:65%;
+    overflow:hidden;
+}
+.campoRight {
+    float:left;
+    width:45%;
+    margin:0 5% 0 0;
+}
+.campoLeft {
+    float:left;
+    width:50%;
+}
+.campoRight.dos {
+    float:left;
+    width:48%;
+    margin:0 3% 0 0;
+}
+.campoLeft.dos {
+    float:left;
+    width:49%;
+}
+.campoRight.tres {
+    float:left;
+    width:47%;
+    margin:0 6% 0 0;
+}
+.campoLeft.tres {
+    float:left;
+    width:47%;
+}
+.campoEspecial {
+    overflow:hidden;
+}
+.campoIzquierdo {
+    float:left;
+    width:70%;
+    margin:0 5% 0 0;
+}
+.campoDerecho {
+    float:right;
+    width:25%
+}
+.registroCampo.last {
+    margin:0 0 5% 0;
+}
+.registroCampo label {
+    display:block;
+    font-family: 'dosisextralight';
+    font-size:0.8em;
+    margin:0 0 0.5% 0;
+}
+.registroCampo.corto input {
+    width:62%;
+    float:left;
+    margin:0 4% 0 0;
+}
+.registroCampo input {
+    width:100%;
+    height:20px;
+    padding:0 2.5%;
+    font-family: 'dosislight';
+    font-size:0.9em;
+    color:#000;
+    border:none;
+    outline:none;
+}
+.registroError {
+    background-color:#ef9da7;
+    box-shadow: inset 0 2px 3px #575656;
+}
+.medicoError {
+    background-color:#dfecff;
+    box-shadow: inset 0 2px 3px #aaa; 
+}
+.registroCampo input[type="password"]:focus,.registroCampo input[type="text"]:focus, select:focus {
+    background-color:#fbfbfb;
+    box-shadow: inset 0 2px 3px #aaa;
+}
+.letraPequena {
+    font-family: 'dosisregular'!important;
+    font-size:0.7em!important;
+    margin:0 0 2% 0!important;
+    clear:both;
+}
+.letraMediana {
+    font-family: 'dosisbold'!important;
+    font-size:0.7em!important;
+    margin:0 0 5% 0!important;
+    text-transform:uppercase;
+}
+.aceptoTerminos {
+    font-family: 'dosisregular'!important;
+    font-size:0.9em!important;
+    margin:3% 0 2% 0!important;
+    float:left;
+}
+.aceptoTerminosP {
+    font-family: 'dosisregular'!important;
+    font-size:0.9em!important;
+}
+.submit {
+    text-transform:uppercase;
+    padding:1.7% 5.3%;
+    font-family: 'dosisregular';
+    font-size:0.9em;
+    margin:0 2% 0 0;
+    color:#fff;
+}
+.submit.dos {
+    margin:-10px 0 0 0;
+}
+.submit.rojoFuerte:hover {
+    background:#821729;
+}
+.submit.verdeGris:hover {
+    background:#4d666b;
+}
+.submit.lilaOscuro:hover {
+    background:#384664;
+}
+.submit.lila:hover {
+    background:#95a4c2;
+}
+.facebook {
+    width:65%;
+}
+.facebookBtn {
+    display:block;
+    text-indent:-5000px;
+    overflow:hidden;
+    background:url(../images/registroFacebook.png) left top no-repeat;
+    background-size:100%, contain;
+    width:100%;
+    height:37px;
+}
+.calendario {
+    margin:0;
+    width:1.8em;
+    height:1.5em;
+    float:left;
+}
+.calendario a {
+    display:block;
+    background:url(../images/calendario.png) left top no-repeat;
+    width:100%;
+    height:100%;
+    background-size:cover;
+
+}
+.checker {
+    display:block;
+    width:25px!important;
+    height:25px!important;
+    float:left!important;
+    border:none;
+    outline:none;
+}
+.imagenConsultas {
+    background:url(../images/imagenConsultas.jpg) center top no-repeat;
+    width:100%;
+    height:100%;
+    background-size:cover;
+}
+.imagenConsultas.dos {
+    background:url(../images/seccionCinco.jpg) center top no-repeat;
+    width:100%;
+    height:100%;
+    background-size:100% 100%, cover;
+}
+.secciontope {
+    width:100%;
+    height:50%;
+}
+.seccionbottom {
+    width:100%;
+    height:50%;
+}
+.seccion {
+    width:50%;
+    height:100%;
+    float:left;
+    position:relative;
+}
+.seccion.uno .opacidad {
+    background:#6f7f86;
+    width:100%;
+    height:100%;
+    opacity:0.6;
+    z-index:200;
+}
+.seccion.dos .opacidad {
+    background:#87898b;
+    width:100%;
+    height:100%;
+    opacity:0.6;
+    z-index:200;
+}
+.seccion.tres .opacidad {
+    background:#545658;
+    width:100%;
+    height:100%;
+    opacity:0.6;
+    z-index:200;
+}
+.seccion.cuatro .opacidad {
+    background:#717173;
+    width:100%;
+    height:100%;
+    opacity:0.6;
+    z-index:200;
+}
+.seccion.cinco .opacidad {
+    background:#4e8ca1;
+    width:100%;
+    height:100%;
+    opacity:0.5;
+    z-index:200;
+}
+.seccion.seis .opacidad {
+    background:#8c8c90;
+    width:100%;
+    height:100%;
+    opacity:0.5;
+    z-index:200;
+}
+.secciontexto {
+    position:absolute;
+    z-index:999;
+    top:30%;
+    left:0;
+    right:0;
+    margin:0 auto;
+}
+.secciontexto.cinco {
+    top:15%;
+    left:15%;
+}
+.secciontexto.seis {
+    top:15%;
+    left:15%;
+}
+.seccion a {
+    text-transform:uppercase;
+    color:#fff;
+    font-size:2.5em;
+    font-family: 'dosisregular';
+}
+.seccion.uno:hover .opacidad  {
+    background:#92a7b0;
+    opacity:0.6;
+    z-index:200;
+}
+.seccion.dos:hover .opacidad  {
+    background:#9fa2a6;
+    opacity:0.6;
+    z-index:200;
+}
+.seccion.tres:hover .opacidad  {
+    background:#2f3031;
+    opacity:0.6;
+    z-index:200;
+}
+.seccion.cuatro:hover .opacidad  {
+    background:#9a9999;
+    opacity:0.6;
+    z-index:200;
+}
+.seccion.cinco:hover .opacidad  {
+    background:#83a1ab;
+    opacity:0.6;
+    z-index:200;
+}
+.seccion.seis:hover .opacidad  {
+    background:#939395;
+    opacity:0.6;
+    z-index:200;
+}
+.secciontexto.uno {
+    width:45%;
+}
+.secciontexto.dos {
+    width:55%;
+}
+.secciontexto.tres {
+    width:75%;
+}
+.secciontexto.cuatro {
+    width:70%;
+}
+/*.seccion.uno .secciontexto{
+    left:35%;
+}
+.seccion.dos .secciontexto{
+    left:22%;
+}
+.seccion.tres .secciontexto{
+    left:17%;
+}
+.seccion.cuatro .secciontexto{
+    left:15%;
+}*/
+ul.listaConsulta {
+    list-style:disc;
+    list-style-position: inside;
+    margin:0 0 8% 0;
+    font-size:1em;
+    line-height:1.1em;
+    font-family: 'dosisregular';
+}
+ul.listaConsulta li {
+    margin:0 0 3% 3%;
+}
+ul.listaConsulta li ul li{
+    margin:0 0 3% 6%;
+}
+ol.listaConsulta {
+    list-style: decimal;   
+    margin:0 0 8% 0;
+    font-size:1em;
+    line-height:1.1em;
+    font-family: 'dosisregular';
+}
+ol.listaConsulta li {
+    margin:0 0 3% 3%;
+}
+.modpq_consultas a:hover {
+    background:#767a78; 
+}
+.imagenAcercaNosotros {
+    background:url(../images/imagenNosotros.jpg) center top no-repeat;
+    height:100%;
+    background-size:cover;
+}
+.imagenAcercaNosotros2 {
+    background:url(../images/imagenNosotros2.jpg) center top no-repeat;
+    height:100%;
+    background-size:cover;
+}
+.aplicacion {
+    margin:0 0 10% 0;
+}
+.aplicacion h5 {
+    font-family: 'dosisregular';
+    font-size:1.6em;
+    margin:0;
+}
+.submit.lilaOscuro:hover {
+    color:#fff;
+    text-decoration:none;
+    outline:none;
+    border:none;
+}
+.modal-content {
+    background:#7aa7d9;
+    border-radius:0!important;
+}
+.encabezado {
+    margin:0;
+    overflow:hidden;
+}
+.carpeta {
+    background:url(../images/carpetaAplicacion.png) left top no-repeat;
+    width:64px;
+    height:89px;
+    background:cover;
+    float:left;
+    margin:0 5% 0 9%;
+}
+.encabezado h5 {
+    font-family: 'dosisregular';
+    font-size:2.2em;
+    text-transform:uppercase;
+    margin:2% 0 0 0;
+}
+.formularioProfesionalesSalud {
+    margin:0;
+}
+.formularioProfesionalesSalud form {
+    margin:0;
+}
+.campoProfesionales {
+    overflow:hidden;
+    margin:0 0 2% 0;
+}
+.formularioProfesionalesSalud form label {
+    display:block;
+    font-family: 'dosisextralight';
+    font-size:1em;
+    margin:0 0 0.5% 0;
+    color:#fff;
+}
+.formularioProfesionalesSalud form input,.formularioProfesionalesSalud form select{
+    width:100%;
+    height:20px;
+    padding:0 2.5%;
+    font-family: 'dosislight';
+    font-size:1em;
+    color:#000!important;
+    border:none;
+    outline:none;
+}
+.formularioProfesionalesSalud form input[type="password"],.formularioProfesionalesSalud form input[type="text"]:focus,.formularioProfesionalesSalud form select:focus {
+    background-color:#fcfcfc;
+    box-shadow: inset 0 2px 3px #c9c9c9;
+}
+.formularioProfesionalesSalud form textarea {
+    width:100%;
+    height:100%;
+    padding:2.5%;
+    font-family: 'dosislight';
+    font-size:1em;
+    color:#000;
+    border:none;
+    outline:none;
+}
+.formularioProfesionalesSalud form textarea {
+    width:100%;
+    height:100%;
+    padding:2.5%;
+    font-family: 'dosislight';
+    font-size:1em;
+    color:#000;
+    border:none;
+    outline:none;
+}
+
+.submitProfesionales {
+    color:#fff!important;
+    text-transform:uppercase;
+    font-family: 'dosisregular';
+    font-size:1em!important;
+    display:block;
+    width:15%!important;
+    text-align:center;
+    margin:0 auto;
+}
+
+.formularioProfesionalesSalud form input[type="submit"],
+.formularioProfesionalesSalud form input[type="button"]{
+    color:#fff!important;
+}
+.formularioProfesionalesSalud form input[type="submit"]:focus,
+.formularioProfesionalesSalud form input[type="button"]:focus{
+    background-color: inherit;
+    box-shadow:none;
+}
+
+.imagenContacto {
+    margin:0;
+    height:100%;
+    background:url(../images/contactImagen.jpg) center top no-repeat;
+    background-size:cover;
+}
+.campoContacto {
+    margin:0 0 2% 0;
+    overflow:hidden;
+}
+.campoContacto label {
+    display:block;
+    font-family: 'dosisextralight';
+    font-size:1em;
+    margin:0 0 0.5% 0;
+}
+.campoContacto input {
+    width:100%;
+    height:20px;
+    padding:0 2.5%;
+    font-family: 'dosisextralight';
+    font-size:1em;
+    color:#000;
+    border:none;
+    outline:none;
+}
+.contactoError {
+    background-color:#e8faff;
+    box-shadow: inset 0 2px 3px #c9c9c9;
+}
+.campoContacto input[type="password"]:focus,.campoContacto input[type="text"]:focus {
+    background-color:#fcfcfc;
+    box-shadow: inset 0 2px 3px #c9c9c9;
+}
+.campoContacto textArea {
+    width:100%;
+    height:50%;
+    padding:2.5%;
+    font-family: 'dosislight';
+    font-size:1em;
+    color:#000;
+    border:none;
+    outline:none;
+}
+.doctores {
+    padding:5% 0 0 8%;
+}
+.doctores h5 {
+    font-family: 'dosisregular';
+    font-size:2.2em;
+    color:#aebfe3;
+}
+.doctores h5 span {
+    font-size:1.5em!important;
+}
+.tablillaDoctores {
+    margin:0 0 3% 0;
+    overflow:hidden;
+    height:100%;
+}
+.tablillaDoctores li {
+    float:left;
+    margin:0 5% 3% 0;
+    width:40%;
+    position:relative;
+    height:100%;
+    overflow:hidden;
+}
+.tablillaDoctores li a {
+    font-family: 'dosisregular';
+    font-size:1.1em;
+    color:#646464;
+}
+.tablillaDoctores li a span {
+    font-size:0.8em;
+    color:#646464;
+}
+.imagenDoctor {
+    width:36%;
+    height:100px;
+    background-size:cover;
+}
+.imagenDoctor.uno {
+    background:url(../images/doctorPresentacion.jpg) center top no-repeat;
+}
+.doctorNombre {
+    position:absolute;
+    right:0;
+    top:0;
+    width:50%;    
+}
+.doctorDetalle {
+    height:100%;
+}
+.imagenDoctorDetalle {
+/*    background:url(../images/doctorDetalle.jpg) left top no-repeat;*/
+    width:40%;
+    height:26%;
+    background-size:cover;
+    margin:-9% auto 0;
+}
+.doctorDetalle h5 {
+    font-family: 'dosisregular';
+    font-size:2.2em;
+    line-height:1em;
+}
+.doctorDetalle h5 span {
+    font-family: 'dosisregular';
+    font-size:0.8em;
+}
+.imagenRegistroMedico {
+    margin:0;
+    height:100%;
+    background:url(../images/videoImagen.jpg) center top no-repeat;
+    background-size:cover;
+}
+.fotoCuenta a {
+    background:url(../images/fotoCuenta.jpg) left top no-repeat;
+    width:5em;
+    height:4.3em;
+    background-size:cover;
+    display:block;
+}
+.regMedTop {
+    margin:0 auto 7%;
+    padding:0 0 7% 0;
+    border-bottom:solid 1px #fff;
+}
+.imagenCarpetaRegMed {
+    background:url(../images/carpetaRegistroMedico.png) left top no-repeat;
+    width:98px;
+    height:119px;
+    background-size:cover;
+    margin:0 auto;
+}
+.regMedMiddle {
+    margin:0;
+}
+.regMedMiddleSup {
+    margin:0 0 7% 0;
+    padding:0 0 7% 0;
+    border-bottom:solid 1px #fff;
+}
+.regMedMiddleSup h5 {
+    font-family: 'dosisbold';
+    font-size:1.1em;
+    text-transform:uppercase;
+    text-align:center;
+    margin:0 0 4% 0;
+}
+.regMedMiddleSup p {
+    font-family: 'dosisregular';
+    font-size:1.25em;
+    text-transform:uppercase;
+    text-align:center;
+    margin:0;
+}
+.claseDos {
+    font-family: 'dosisregular';
+    font-size:1em!important;
+    text-transform:uppercase;
+    text-align:center;
+    margin:0 0 4% 0;
+}
+.regMedBottom {
+    border-top:solid 1px #fff;
+    border-bottom:solid 1px #fff;
+    padding:1% 0 1.5% 0;
+}
+.regMedBottom p {
+    font-family: 'dosisregular';
+    font-size:1.1em;
+    text-transform:uppercase;
+    text-align:center;
+    color:#fff;
+    margin:0;
+}
+
+
+/***************************DOCTORES*************************/
+
+.barratopeDoctores {
+    height:10%;
+}
+.doctoresContent {
+    height:90%;
+    position:relative;
+    overflow:visible;
+}
+.doctoresHomeLeft {
+    height:100%;
+    padding:15% 3% 0!important;
+    position:relative;
+    background-color:#688ac6;
+}
+.doctoresHomeRight {
+    height:100%;
+    background-color:#88a7d7;
+    padding:30px 40px 0 30px!important;
+}
+.doctoresHomeIntLeft {
+    height:100%;
+    position:relative;
+    background-color:#88a7d7;
+    padding:2%!important;
+}
+.doctoresHomeIntRight {
+    height:100%;
+    background-color:#f9f8f8;
+    padding:2%!important;
+    overflow:visible;
+}
+.guessHomeInt {
+    padding:2% 4%!important;
+    background-color: #fff;
+}
+.doctoresHomeIntLeft h5 {
+    font-family: 'dosisregular';
+    font-size:1.8em;
+    color:#fff;
+    margin:0 0 10% 0;
+}
+.doctoresHomeRight h5 {
+    font-family: 'dosisregular';
+    font-size:2.5em;
+    color:#aebfe3;
+    margin:0 0 10% 0;
+}
+.doctoresHomeIntRight h5 {
+    font-family: 'dosisregular';
+    font-size:2.2em;
+    color:#485b83;
+    margin:0 0 5% 0;
+    text-transform:uppercase;
+}
+.doctoresHomeRight p {
+    font-family: 'dosisregular';
+    font-size:1.1em;
+    color:#fff;
+    margin:0 0 10% 0;
+}
+.doctoresHomeRight h5 span {
+    font-size:0.8em;
+}
+.doctoresLogoPrincipal {
+    height:100%;
+    background:#fff;
+}
+.doctoresLogoPrincipal h1 {
+    margin:0;
+    height:100%/*100%*/;
+    width:100%;
+    padding:5% 0 0 0;
+}
+.doctoresLogoPrincipal h1 a {
+    display:block;
+    text-indent:-5000px;
+    background:url(../images/doctoresLogoPrincipal.png) left top no-repeat;
+    width:3.667em;
+    height:1.333em;
+    background-size:cover;
+    margin:0 auto;
+}
+.doctoresConfgUser {
+    height:100%/*100%*/;
+    padding:0 3% 0 0!important;
+}
+.docConfgContent {
+    height:100%;
+    float:right;
+    padding:2% 0 0 0!important;
+}
+.doctoresConfgUser ul {
+    float:right;
+    height:100%;
+    width:100%;
+    font-family: 'dosislight';
+    font-size:1em;
+    text-transform:uppercase;
+
+}
+.doctoresConfgUser ul li {
+    float:left;
+    margin:0 53px 0 0;
+}
+.doctoresConfgUser ul li.last {
+    margin:0;
+}
+.configuracion a {
+    color:#87bdcb;
+}
+.configuracion a:hover {
+    color:#6e99a4;
+}
+.bienvenido {
+    color:#9a9898!important;
+    font-family: 'dosisbold';
+}
+.fotoUsuario {
+    background:url(../images/fotoUsuario.jpg) left top no-repeat;
+    width:2.5em;
+    height:2.5em;
+    background-size:cover;
+    float:left;
+    margin:-2% 5px 0 0;
+}
+.imagenConfg {
+    background:url(../images/doctoresConf.png) left top no-repeat;
+    width:2.192em;
+    height:1.538em;
+    background-size:cover;
+    float:left;
+    margin:0 5px 0 0;
+}
+.confgTxt {
+    float:left;
+}
+.doctoresHomeLeft ul {
+    margin:0 0 2% 0;
+    text-align:center;
+    font-family: 'dosisregular';
+    text-transform:uppercase;
+    font-size:1.4em;
+}
+.doctoresHomeLeft  ul li {
+    display:inline-block;
+    margin:0 1.5% 2% 0;
+}
+.doctoresHomeLeft  ul li.last {
+    margin:0;
+}
+.doctoresHomeLeft  ul li {
+    color:#fff;
+}
+.doctoresHomeLeft  ul li a {
+    color:#fff;
+    display:block;
+    margin:0;
+}
+.doctoresHomeLeft  ul li a:hover {
+    color:#cdc9c9;
+}
+.doctoresHomeLeft  ul li sup {
+    height: 22px;
+    width: 22px;
+    display: block;
+    text-align: center;
+    font-size:14px;
+    vertical-align: middle;
+    border-radius: 50%;
+    background-color:#a2bae0;        
+    margin: 0 auto;
+    top: 0em;
+    line-height: 1.5em;
+}
+.doctoresHomeLeft  ul li a sup {
+    height: 22px;
+    width: 22px;
+    display: block;
+    text-align: center;
+    font-size:14px;
+    vertical-align: middle;
+    border-radius: 50%;
+    background-color:#a2bae0;        
+    margin: 0 auto;
+    top: 0em;
+    line-height: 1.5em;
+}
+.sup {
+    width: 50px!important;
+    height: 50px!important;
+    font-size:36px!important;
+}
+.consultasPend {
+    font-size:2em;
+}
+.docHomeBottom {
+    position:absolute;
+    right:2%;
+    bottom:8%;
+    width:100%;
+    overflow:hidden;
+}
+.docHomeMensaje {
+    overflow:hidden;
+    margin:0 0 1% 0;
+    float:right;
+}
+.docHomeMesgImg {
+    background:url(../images/docMensajesImg.png) left top no-repeat;
+    width:4em;
+    height:4em;
+    background-size:cover;
+    float:left;
+    margin:0 0.6em 0 0;
+}
+.docHomeMesTxt {
+    float:left;
+    background-color:#485b83;
+    color:#fff;
+    font-family: 'dosisregular';
+    font-size:0.7em;
+    padding:2% 4%;
+    margin:6% 0 0 0;
+}
+.terminosCondiciones {
+    clear:both;
+    float:right;
+    margin:0 5em 0 0;
+}
+.terminosCondiciones a {
+    color:#fff;
+    font-family: 'dosisregular';
+    font-size:0.9em;
+    text-transform:uppercase;
+    margin:0 0% 0 0;
+}
+.terminosCondiciones a:hover {
+    color:#cdc9c9;
+}
+.footerPrincipal {
+    color:#fff;
+    font-family: 'dosisregular';
+    font-size:0.6em;
+    position:absolute;
+    right:2%;
+    bottom:0.5%;
+}
+.footerPrincipal.pacientes {
+    bottom:9%!important;
+}
+.docHomeImagen {
+    /*    background:url(../images/doctorHomeDetalle.jpg) left top no-repeat;*/
+    width:11.250em;
+    height:10.438em;
+    margin:0 auto 7%;
+    background-size:cover;
+}
+.configurarCuenta {
+    background:#688ac6;
+    height:100%;
+    padding:5%;
+}
+.configurarCuenta.dos {
+    background:none;
+}
+.configurarCuenta.dos label {
+    color:#45587e;
+}
+.configurarCuenta.dos input,.configurarCuenta.dos textarea {
+    background:#45587e;
+}
+.configurarCuenta.dos input[type="password"]:focus,.configurarCuenta.dos input[type="text"]:focus,.configurarCuenta.dos textarea:focus {
+    box-shadow: inset 0 2px 3px #0f3d70;
+}
+.docError.dos {
+    color:#45587e;
+    margin:0 0 0 -2%!important;
+}
+.submitGuardar.cinco {
+    background:#bc1f39!important;
+    color:#fff;
+}
+.configurarCuenta h5 {
+    font-family: 'dosisregular';
+    font-size:2.0em;
+    color:#fff;
+    margin:0 0 3% 0;
+    text-transform:uppercase;
+}
+.docHomeIntScroll {
+    height:91%!important;
+    overflow:auto;
+}
+.docHomeIntScroll.dos, .docHomeIntScroll.listPh {
+    height:100%!important;
+}
+.mCustomScrollbar {
+    height:100%;
+}
+.formularioConsultas {
+    padding:0 0.7%;
+    height:100%!important;
+}
+.formularioConsultas.diferente {
+    width:100%;
+}
+.formularioConsultas.dos {
+    height:25%!important;
+    padding:0 0 0 1%;
+    margin:0 0 5% 0;
+}
+.formularioConsultas .formConsltCampo {
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+.formularioConsultas .tablaTablilla .formConsltCampo {
+     height:35px!important;
+}
+
+.formularioConsultas .formConsltCampo select.myselect {
+    width:65%;
+    background-color:#485b83!important;
+    color:#fff;
+    height:100%;
+    -webkit-appearance: none!important;  /*Removes default chrome and safari style*/
+    -moz-appearance: none!important;  /*Removes default style Firefox*/
+    border-radius:0;
+    padding:2% 4%;
+    height:100%;
+    background:url(../images/flechaSelect.png) 97% 45% no-repeat;
+    outline:none;
+    font-family: 'dosislight'!important;
+    font-size:1.1em;
+
+}
+.formularioConsultas .formConsltCampo select.first {
+    padding:2% 2% 2% 7%;
+}
+.descarga {
+    display:block;
+    text-indent:-5000px;
+    background:url(../images/descargar.png) left top no-repeat;
+    width:2.5em;
+    height:2.5em;
+    background-size:cover;
+    float:right;
+    margin:0 5% 0 0!important;
+    outline:none;
+}
+.docHomeIntLeftImg {
+/*    background:url(../images/doctorDetalle.jpg) left top no-repeat;*/
+    width:7.385em;
+    height:7.654em;
+    background-size:cover;
+    margin:0 auto 10%;
+}
+.docSeccion {
+    margin:0;
+}
+.docSecciones {
+    display:block;
+    color:#fff;
+    text-transform:uppercase;
+    padding:3% 5%;
+    font-family: 'dosismedium';
+    font-size:1.2em;
+    background:#485b83;
+    margin:0 0 4% 0;
+}
+.docSecciones:hover {
+    background:#c6e4ec;
+    color:#485b83;
+}
+.docSecciones.current {
+    background:#c6e4ec;
+    color:#485b83;
+}
+.docHomeIntMensaje {
+    width:35%;
+    overflow:hidden;
+    position:absolute;
+    right:2%;
+    bottom:2%;
+}
+.docHomeIntMensaje.pacientes {
+    width:75%;
+    overflow:hidden;
+    position:absolute;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    bottom:12%;
+}
+.docHomeIntMensaje.pacientes .docHomeIntMensajeImg {
+    background:url(../images/mensajePacientes.png) left top no-repeat;
+    width:3em;
+    height:3em;
+    background-size:cover;
+    float:left;
+    margin:0 0.2em 0 0;
+}
+.docHomeIntMensajeImg {
+    background:url(../images/informacionRojoImagen.png) left top no-repeat;
+    width:3em;
+    height:3em;
+    background-size:cover;
+    float:left;
+    margin:0 10px 0 0;
+}
+.docHomeIntMensaje.pacientes .docHomeIntMensajeTxt {
+    color:#fff;
+    background-color:#bb1f39;
+    padding:1.5% 4%;
+    float:left;
+    width:79%;
+    margin:2% 0 0 0;
+}
+.docHomeIntMensajeTxt {
+    color:#fff;
+    background-color:#ed253b;
+    padding:1.5% 4%;
+    float:left;
+    width:79%;
+}
+.docHomeIntMensajeTxt p {
+    font-family: 'dosisregular';
+    font-size:0.7em;
+    margin:0;
+    text-transform:uppercase;
+}
+.docHomeIntMensajeTxt p span {
+    font-family: 'dosisbold';
+}
+.calendarioDoctores {
+    padding:0 2%!important;
+}
+.docCalendario {
+    width:90%;
+}
+.docCalendario.dos {
+    width:75%;
+}
+.tablaCalendario {
+    font-family: 'dosismedium';
+    color:#fff;
+    font-size:1.3em;
+    text-transform:uppercase;
+    width:100%;
+    background-color:#88a7d7;
+    margin:0 0 2.5% 0;
+}
+.tablaCalendario.dos {
+    font-size:0.7em;
+}
+.tablaCalendario tr td {
+    vertical-align:middle;
+    padding:0.5% 1%;
+}
+.tablaCalendario tr td p {
+    margin:0;
+}
+.sencillo {
+    font-family: 'dosisregular';
+    font-size:0.9em;
+}
+.noPadding {
+    padding:0!important;
+}
+.espacio {
+    height:0.3em;
+}
+.disponible {
+    background-color:#485b83;
+}
+.noDisponible {
+    background-color:#88a7d7;
+}
+.curso {
+    background-color:#cde1ff;
+}
+.curso p {
+    color:#485b83!important;
+}
+.consulta {
+    background-color:#d14553;
+}
+.colorAzulClaro {
+    background-color:#88a7d7;
+    overflow:hidden;
+}
+.colorAzulOscuro {
+    color:#485b83!important;
+} 
+.listaCalendarioFechas {
+    width:100%;
+    margin:0;
+    padding:0;
+    list-style:none;
+    overflow:hidden;
+}
+.listaDiasSup {
+    background-color:#88a7d7!important;
+    overflow:hidden;
+    font-family: 'dosisbold';;
+    text-transform:uppercase;
+    font-size:1em;
+    color:#fff;
+}
+.listaFechasInf {
+    font-family: 'dosisbold';;
+    text-transform:uppercase;
+    font-size:1em;
+    color:#fff;
+}
+.listaCalendarioFechas li {
+    width:13.86%;
+    float:left;
+    padding:0 1%;
+    text-align:justify;
+    margin:0 0.5% 0 0!important;
+    background-color:#88a7d7;
+}
+.listaCalendarioFechas li p {
+    padding:5% 9%;
+}
+.listaCalendarioFechas li.last {
+    margin:0!important;
+}
+.fullWidth {
+    width:100%;
+}
+.cuadrosDisponibles {
+    text-align:center;
+    clear:both;
+    margin-top:5%;
+}
+.cuadrosDisponibles li {
+    display:inline-block;
+    margin:0 3% 0 0;
+    color:#fff;
+    padding:2% 0;
+    text-align:center;
+    width:21.5%;
+    font-family: 'dosisregular';
+    font-size:0.9em;
+}
+.cuadrosDisponibles li.last  {
+    margin:0!important;
+}
+.colorFuente {
+    color:#485b83!important;
+}
+.calendarioEncabezado {
+    color:#fff;
+    font-size:1.2em;
+    text-transform:uppercase;
+    font-family: 'dosisbold';
+    text-align:center;
+    padding:1% 0;
+    background-color:#485b83;
+}
+.calendarioEncabezado.dos {
+    font-size:0.8em;
+}
+.calendarioEncabezado p {
+    margin:0;
+}
+.mesAno {
+    color:#485b83;
+    font-size:1.2em;
+    text-transform:uppercase;
+    font-family: 'dosisbold';
+    text-align:center;
+    padding:1% 0;
+    background-color:#cde1ff;
+}
+.mesAno.dos {
+    font-size:0.8em;
+}
+.mesAno p {
+    margin:0;
+}
+.comentarios {
+    height:100%!important;
+}
+.comentariosContent {
+    width:100%;
+    height:100%!important;
+}
+.comentarios p {
+    color:#fff;
+    font-size:1.2em;
+    text-transform:uppercase;
+    font-family: 'dosisbold';
+    text-align:center;
+    padding:1% 0;
+    background-color:#485b83;
+    margin:0;
+}
+.comentarios textarea {
+    height:100%;
+    width:100%;
+    padding:5%;
+    border:solid 2px #485b83;
+    outline:none;
+    font-family: 'dosisregular';
+    font-size:1em;
+}
+.comentariosDos {
+    height:20em!important;
+    width:48%;
+    overflow:visible;
+}
+
+.hourTab{
+    height:4em;
+    font-family: 'dosisregular';
+    font-size:1em;
+    color:#3c5b86;
+    text-transform:uppercase;
+    overflow:visible;
+    text-align:right;
+    padding-right:2%;           
+    position: relative;
+}
+.hourTab span{
+    position: absolute;
+    top:-0.4em;
+    right: 1em;
+}
+.txtTab,.actionTab{
+    height:4em;
+    font-family: 'dosisregular';
+    font-size:1em;
+    margin-top:1em;
+    vertical-align: middle!important;
+    padding-left:2%;
+    overflow:visible;
+    color:#FFF;
+    text-align: center;
+    text-transform:uppercase;
+    border-top: 1px solid #858886;
+    border-bottom: 1px solid #858886;
+ }
+ .txtTaba a,.actionTab a{
+    color:#FFF;
+ }
+
+.tableHours{ width: 100%}
+
+.tablaComUno {
+    width:10%;
+    float:left;
+    overflow:visible;
+    position:relative;
+}
+.tablaComUno tr td {
+    height:4em;
+    font-family: 'dosisregular';
+    font-size:1em;
+    color:#3c5b86;
+    text-transform:uppercase;
+    overflow:visible;
+    text-align:right;
+    padding-right:10%;   
+    
+    border-bottom:solid 1px #858886;
+}
+
+
+.tablaComDos {
+    width:90%;
+    float:left;
+    margin-top:5px;
+    overflow:visible;
+    font-family: 'dosisregular';
+    font-size:1em!important;
+    line-height: 1em!important;
+    color:#3c5b86;
+    text-transform:uppercase;
+    text-align:center;
+}
+
+.tablaComDos   tr  td  {
+    border:0px none;
+}/**/
+.tablaComTres {
+    width:100%;
+    overflow:hidden;
+    border: 0px none;
+}
+.tablaComTres tr td {
+    border-top:0px none;
+    margin-top:1em;
+    vertical-align: middle!important;
+    padding-left:2%;
+    overflow:visible;
+    position:relative;
+    height:4em;
+    border-top:solid 1px #858886;
+}
+.tablaComTres tr td a {
+    margin:0;
+    font-family: 'dosisregular'; 
+    font-size:1em;
+    color:#fff;
+    display:block;
+    overflow:visible;
+}
+.aparicion {
+    background:url(../images/aparicion.png) left top no-repeat;
+    width:15em;
+    height:11em;
+    position:absolute;
+    left:0;
+    top:4em;
+    display:none;
+    z-index:666;
+    overflow:visible;
+    padding:0.5em;
+    background_size:100%, cover;
+}
+.aparicion.dos {
+    left:-6.8em!important;
+    background:url(../images/aparicionDos.png) left top no-repeat;
+    z-index:666;
+}
+.aparicion p {
+    font-family: 'dosissemibold'; 
+    font-size:1em;
+    color:#fff;
+    border-bottom:solid 1px #fff;
+    padding:0.5em 0;
+    margin:0;
+}
+.disponibleDos {
+    padding:5px;
+    overflow:hidden;
+/*    background:#fff;*/
+    width:85%;
+    display:none;
+    position:absolute;
+    left:10em;
+    top:0;
+    z-index:999;
+}
+.disponibleDos.espaciante {
+    left:0em;
+}
+.disponibleDos p {
+    float:left;
+    font-family: 'dosissemibold'; 
+    font-size:0.9em;
+    color:#45587e;
+}
+.dispSup {
+    border-bottom:solid 1px #45587e;
+    overflow:hidden;
+    margin:0 0 10px 0;
+}
+.dispInf {
+    overflow:hidden;
+}
+.recuadroUno {
+    width:13px;
+    height:13px;
+    background-color:#b0bddf;
+    float:left;
+    margin:0 5px 0 0;
+}
+.recuadroDos {
+    width:13px;
+    height:13px;
+    background-color:#cc2c3c;
+    float:left;
+    margin:0 5px 0 0;
+}
+.tablaComTres tr td a:hover .aparicion {
+    display:block!important;
+}
+.tablaComTres tr td a:hover .disponibleDos {
+    display:block!important;
+}
+.celdaUno {
+    background-color:#b0bddf;
+    color:#fff;
+/*    border-left:solid 4px #7182b3*/
+
+}
+.celdaTres {
+    background-color:#485B83;
+    color:#fff;
+/*    border-left:solid 4px #7182b3*/
+
+}
+.celdaDos {
+    background-color:#cc2c3c;
+    color:#fff;
+/*    border-left:solid 4px #9f243a*/
+
+}
+
+
+
+.comentariosContentDos {
+    width:100%;
+    height:100%!important;
+}
+.noMargin {
+    margin:0!important;
+}
+.fechaConsulta {
+    margin:0 0 2% 0;
+    color:#485b83;
+    font-family: 'dosisbold';
+    font-size:2.5em;
+}
+.consltVivoTabla {
+    margin:0 0 0 3%;
+}
+.consltVivoTabla tr td {
+    vertical-align:middle;
+    padding:2% 0;
+    color:#485b83;
+    font-family: 'dosisregular';
+    font-size:1em;
+}
+.consltVivoTabla tr td a:hover .videoLlamadaTxt {
+    color:#6a81a4;
+}
+.skype {
+    background:url(../images/skype.png) left top no-repeat;
+    width:2em;
+    height:2em;
+    background-size:cover;
+    float:left;
+    margin:0 1.5% 0 0;
+}
+.videoLlamadaTxt {
+    float:left;
+    color:#88a7d7;
+    font-family: 'dosisbold';
+    line-height:1em;
+    text-transform:uppercase;
+}
+.consultaVivoExplicacion {
+    width:75%;
+    height:150%;
+}
+.descriptivo {
+    font-family: 'dosisregular';
+    line-height:0.8em;
+    color:#485b83;
+    line-height:1.3em;
+}
+.descriptivo.primero {
+    border-top:solid 1px #45577a;
+    margin-top:5%;
+    padding-top:5%;
+}
+.configurarCuentaFormulario {
+    padding:0 0 0 1.2%;
+}
+.confgCuentFormCampo {
+    overflow:hidden;
+    margin:0 0 2% 0;
+    width:88%;
+}
+.confgCuentFormCampo.dos {
+    margin:0 0 1% 0;
+}
+.confgCuentFormCampo label {
+    display:block;
+    font-family: 'dosislight';
+    color:#fff;
+    font-size:0.9em;
+    margin:0 0 0.5% 0;
+}
+.confgCuentFormCampo select, .confgCuentFormCampo input, .confgCuentFormCampo textarea  {
+    height:20px;
+    padding:0 2.5%;
+    font-family: 'dosislight';
+    font-size:0.9em;
+    color:#fff;
+    border:none;
+    outline:none;
+    width:100%;
+    background-color:#79a7d9;
+}
+.confgCuentFormCampo textarea  {height:50px;}
+.confgCuentFormCampo select:focus, .confgCuentFormCampo input[type="text"]:focus , .confgCuentFormCampo input[type="password"]:focus {
+    box-shadow: inset 0 2px 3px #738eac; 
+}
+.confgError {
+    background-color:#9fb9d5!important;
+    box-shadow: inset 0 2px 3px #738eac;
+}
+.foto a {
+    background:url(../images/foto.jpg) left top no-repeat;
+    width:7em;
+    height:7.4em;
+    background-size:cover;
+    display:block;
+}
+.confgCuentFormCampoDoble {
+    margin:0 0 2% 0;
+    overflow:hidden;
+    width:88%;
+}
+.confgCuentFormCampoDoble label {
+    display:block;
+    font-family: 'dosislight';
+    color:#fff;
+    font-size:0.9em;
+    margin: 0px 0px 1% 0px;
+}
+.confgCuentFormCampoDoble select, .confgCuentFormCampoDoble input {
+    height:20px;
+    padding:0 2.5%;
+    font-family: 'dosislight';
+    font-size:0.9em;
+    color:#fff;
+    border:none;
+    outline:none;
+    width:100%;
+    background-color:#79a7d9;
+}
+.confgCuentFormCampoDoble select:focus, .confgCuentFormCampoDoble input[type="text"]:focus, .confgCuentFormCampoDoble input[type="password"]:focus{
+    box-shadow: inset 0 2px 3px #738eac; 
+}
+.confgError {
+    background-color:#9fb9d5!important;
+    box-shadow: inset 0 2px 3px #738eac;
+}
+.dobleLeft {
+    width:47%;
+    float:left;
+}
+.dobleRight {
+    width:47%;
+    float:right;
+}
+.submitGuardar {
+    padding:0!important;
+    text-align:center;
+    font-family: 'dosislight';
+    text-transform:uppercase;
+    margin-top:5%;
+    display:block;
+    background-color:#fff!important;
+    color:#79a7d9!important;
+    height:30px!important;
+}
+.submitGuardar:hover {
+    background:#dfdddd!important;
+}
+.submitGuardarDiez {
+    padding:0!important;
+    text-align:center;
+    font-family: 'dosislight';
+    text-transform:uppercase;
+    margin-top:9%;
+    display:block;
+    background:#bb1f37!important;
+    color:#fff!important;
+    height:30px!important;
+}
+.docError {
+    color:#fff;
+    margin:0;
+    font-family: 'dosislight';
+    font-size:0.8em;
+    margin:0 0 0 -1%!important;
+}
+.formularioCompletacion {
+    background-color:#88a7d7;
+    padding:1% 2% 1% 2%;
+/*    height:25%;*/
+    margin:0 0 5% 0;
+}
+.formularioCompletacion.dos  {
+/*    height:15%!important;*/
+    padding:0!important;
+    background:none;
+}
+.formularioCompletacion h5 {
+    color:#fff!important;
+    font-family: 'dosisregular'!important;
+    text-transform:uppercase;
+    font-size:1.5em;
+    margin: 10% auto;
+    text-align: center;
+    
+}
+.contenedor {
+    padding:0 1%!important;
+    border-right:solid 2px #fff;
+    height:100%!important;
+}
+.noborder {
+    border-right:none; 
+}
+.formComplDoble.left {
+    width:48%;
+    float:left;
+    height:100%;
+}
+.formComplDoble.right {
+    width:48%;
+    float:right;
+    height:100%;
+}
+.formComplCampo {
+    margin:0 0 2% 0;
+}
+.formComplCampo label {
+    display:block;
+    font-family: 'dosisregular';
+    color:#fff;
+    font-size:1.1em;
+    margin:0 0 0.5% 0;
+}
+.formComplCampo.dos label {
+    display:block;
+    font-family: 'dosisregular';
+    color:#000;
+    font-size:1.1em;
+    margin:0 0 0.5% 0;
+}
+.formComplCampo input,.formComplCampo .textDesc {
+    width:100%;
+    background:none;
+    color:#fff;
+    font-family: 'dosislight';
+    font-size:0.9em;
+    border:none;
+    outline:none;
+}
+.cuestionarioTabla input::-webkit-input-placeholder,
+.formComplCampo .textDesc::-webkit-input-placeholder, .formComplCampo .textDescformComplCampo input::-webkit-input-placeholder {
+    color:#dcdcdc;
+}
+
+.cuestionarioTabla input::-moz-placeholder,
+.formComplCampo .textDesc:-moz-placeholder, .formComplCampo input:-moz-placeholder { /* Firefox 18- */
+    color:#dcdcdc;   
+}
+
+.cuestionarioTabla input::-moz-placeholder,
+.formComplCampo .textDesc::-moz-placeholder, .formComplCampo input::-moz-placeholder {  /* Firefox 19+ */
+    color:#dcdcdc;  
+}
+
+.cuestionarioTabla input::-ms-input-placeholder,
+.formComplCampo .textDesc:-ms-input-placeholder , .formComplCampo input:-ms-input-placeholder {  
+    color:#dcdcdc;  
+}
+.contenedor p {
+    font-family: 'dosissemibold';
+    font-size:1em;
+    color:#384664;
+    margin-top:15%;
+}
+.formComplCampo.dos .descr,.formComplCampo.dos textarea {
+    height:5em;
+    width:100%;
+    background-color:#e2e4e8;
+    padding:1%;
+    font-family: 'dosisregular';
+    font-size:1em;
+    outline:none;
+}
+.formComplCampo.dos .descr{
+    height:auto;
+}
+.videoSkype .modal-header {
+    border-bottom:none!important;
+}
+.videoSkype .modal-content {
+    background-color:#fff!important;
+}
+.videoSkype iframe {
+    width:100%;
+    max-width:780px;
+    height:400px;
+    margin:0 auto;
+}
+.abrirModalPrincipal {
+    position:absolute;
+    left:5%;
+    bottom:3%;
+}
+.abrirModalPrincipal a {
+    color:#fff;
+    font-family: 'dosisregular';
+    font-size:1em;
+    text-transform:uppercase;
+}
+.modalPrincipal .modal-header {
+    border-bottom:none!important;
+}
+.modalPrincipal .modal-dialog {
+    width:85%!important;
+    padding:0!important;
+    height:100%;
+}
+.modalPrincipal .modal-body {
+    padding:0 0 0 2%!important;
+    height:100%;
+}
+.modalPrincipal .modal-content {
+    background:#fff!important;
+    width:100%!important;
+    height:100%;
+}
+.modalPrincipalLeft {
+    border:solid 1.5em #adbee2;
+    height:100%;
+    position:relative;
+}
+.modalPrincipalLeftBody {
+    background-color:#45587e;
+    padding:5%;
+    height:100%;
+}
+.modalPrincipalLeftBody h4 {
+    font-family: 'dosisregular';
+    color:#fff;
+    font-size:1.1em;
+    text-transform:uppercase;
+    text-align:center;
+    padding-bottom:3%;
+    border-bottom:solid 1px #fff;
+    margin:0 0 3% 0;
+}
+.modalPrincipalRight {
+    border:solid 1.5em #45587e;
+    height:90%;
+    margin:0 0 0 0;
+    background:#e5e6e7;
+    padding:2% 0 0 0!important;
+}
+.modalPrincipalRightBody {
+    padding:0 3%!important;
+}
+.modalPrincipalRight h4 {
+    font-family: 'dosisregular';
+    font-size:0.9em;
+    text-transform:uppercase;
+    text-align:center;
+    color:#45587e;
+    padding:0 0 3% 0;
+    margin:0 0 3% 0;
+    border-bottom:solid 1px #45587e;
+}
+.fechaPacStatus {
+    margin:0;
+    height:10%;
+}
+.fechaPacStatus ul {
+    text-align:center;
+    height:100%;
+    margin:0;
+}
+.fechaPacStatus ul li {
+    display:inline-block;
+    width:18%;
+    margin:0 3% 0 0;
+
+}
+.fechaPacStatus ul li.last {
+    margin:0!important;
+}
+.fechaPacStatus .myselect {
+    width:100%;
+    background-color:#fff!important;
+    color:#000;
+    height:100%;
+    text-align:center!important;
+    -webkit-appearance: none!important;  /*Removes default chrome and safari style*/
+    -moz-appearance: none!important;  /*Removes default style Firefox*/
+    appearance:none!important;
+    border-radius:0;
+    outline:none;
+    font-family: 'dosislight'!important;
+    font-size:0.7em;
+    text-transform:uppercase;
+    display:block;
+    display:block;
+    padding:2% 5%;
+}
+.formularioCompletacion.popup {
+    padding:2% 5%;
+    height:20%!important;
+    margin:0 0 5% 0!important;
+}
+.formularioCompletacion.popup .contenedor h5 {
+    font-size:1em;
+    margin:12% 0 0 0;
+}
+.formularioCompletacion.popup .formComplCampo label {
+    font-size:0.7em;
+    margin:0!important;
+}
+.formularioCompletacion.popup .formComplCampo input {
+    font-size:0.7em;
+}
+.formularioCompletacion.popup .contenedor p {
+    font-size:0.7em!important;
+}
+.formComplCampo.dos.pop label {
+    color:#fff;
+    font-size:0.9em;
+}
+.formComplCampo.dos.pop textArea:focus {
+    background-color:#fafafa!important;
+    box-shadow: inset 0 3px 3px #c9c9c9!important;
+}
+.botoneraBottom {
+    position:absolute;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    bottom:2%;
+}
+.botoneraBottom ul {
+    text-align:center;
+}
+.botoneraBottom ul li {
+    display:inline-block;
+    width:20%;
+    margin:0 3% 0 0;
+}
+.botoneraBottom ul li input,.botoneraBottom ul li a {
+    display:block;
+    text-align:center;
+    font-family: 'dosislight';
+    font-size:0.9em;
+    color:#45587e;
+    padding:0 5%;
+    background-color:#adbee2;
+    text-transform: uppercase;
+}
+.botoneraBottom ul li input:hover,.botoneraBottom ul li a:hover {
+    color:#fff;
+    background-color:#6c82b1;
+}
+.formularioPopup {
+    margin:0;
+    font-family: 'dosislight';
+    font-size:0.8em;
+    color:#45587e;
+}
+.formularioPopupCampo {
+    margin:0 0 0.5% 0;
+}
+.formularioPopupCampo input {
+    outline:none;
+    background:#e5e6e7;
+    border:solid 1px #fff;
+    padding:0 2%;
+}
+.formularioPopupCampo input[type="password"]:focus,.formularioPopupCampo input[type="text"]:focus {
+    box-shadow: inset 0 2px 3px #c9c9c9!important;
+}
+.inputPrincipalCorto {
+    width:10%;
+}
+.inputPrincipalMediano {
+    width:25%;
+}
+.inputPrincipalLasrgo {
+    width:40%;
+}
+.separador {
+    padding-bottom:2%;
+    margin-bottom:2%;
+    border-bottom:solid 1px #fff;
+}
+.formularioPopup textarea:focus {
+    box-shadow: inset 0 2px 3px #c9c9c9!important;
+    background:#e5e6e7;
+}
+.textAreaLargo {
+    width:100%;
+    height:10%;
+    padding:2%;
+    background:#e5e6e7;
+    border:solid 1px #fff;
+    outline:none;
+}
+
+/****************pacientes*************/
+
+.pacientesHomeImg {
+    background:url(../images/pacientesHome.jpg) center top no-repeat;
+    width:100%;
+    height:100%;
+    background-size:cover;
+    position:relative;
+}
+.pacientesHomeImgTop {
+    height:50%;
+    background-color:#5e0c1a;
+    opacity:0.5;
+}
+.pacientesHomeImgTop:hover {
+    opacity:0.4!important;
+}
+.pacientesHomeImgBottom {
+    height:50%;
+    background-color:#84070a;
+    opacity:0.5;
+}
+.pacientesHomeImgBottom:hover {
+    opacity:0.4!important;
+}
+.pacientesHomeTop {
+    position:absolute;
+    left:15%;
+    top:20%;
+}
+.pacientesHomeMiddle {
+    position:absolute;
+    left:15%;
+    top:40%;
+}
+.pacientesHomeBottom {
+    position:absolute;
+    left:15%;
+    bottom:22%;
+}
+.pacientesHomeImg h5 {
+    font-family: 'dosisregular';
+    font-size:1.8em;
+    color:#fff;
+    text-transform:uppercase;
+    margin:0 0 2% 0;
+}
+.pacientesHomeImg ul {
+    margin:0;
+    width:100%;
+}
+.pacientesHomeImg ul li {
+    display:inline-block;
+    margin:0 1em 0 0;
+}
+.pacientesHomeImg ul li a {
+    font-family: 'dosisregular';
+    font-size:1em;
+    color:#fff;
+    text-transform:uppercase;
+}
+.pacientesHomeImg ul li a:hover {
+    color:#aaa;
+}
+.pacientesHomeImg ul li a:hover .pacientesHomeImgTop {
+    opacity:0.4!important;
+}
+.pacientesHomeImg ul li a:hover .pacientesHomeImgBottom {
+    opacity:0.4!important;
+}
+.pacientesHomeDerecho {
+    background-color:#ed253c;
+    color:#fff;
+}
+.pacientesLeftAzul {
+    height:100%;
+    padding:3%!important;
+    background:#88a7d7;
+    color:#fff;
+}
+.barramenu .pacientesLeftAzul {
+    padding:10%!important;
+}
+.pacientesLeftAzul p {
+    font-family: 'dosisregular';
+    font-size:1em;
+    margin:0 0 2% 0;
+}
+.pacientesLeftAzul h5 {
+    font-family: 'dosisregular';
+    font-size:2em;
+    margin:0 0 10% 0;
+}
+.pacientesUsuarioImg {
+    /*    background:url(../images/fotoUsuarioPacientesLeft.jpg) left top no-repeat;*/
+    width:7em;
+    height:7em;
+    background-size:cover;
+    margin:0 0 10% 0;
+}
+.pacientesLeftAzul p span {
+    font-family: 'dosisbold';
+    margin:0 0 2% 0;
+}
+.pacientesRight {
+    height:100%!important;
+    padding:3%!important;
+}
+.pacientesRightEspacio {
+    padding:0 2% 0 0;
+    height:100%!important;
+}
+.pacientesRight h5 {
+    color:#485b83;
+    font-family: 'dosisregular';
+    font-size:2.3em;
+    text-transform:uppercase;
+    /*    margin:0 0 5% 0;*/
+}
+.tablilla {
+    margin:0 0 5% 0;
+}
+.tablilla h5 {
+    font-size:1.5em;
+    margin:0 0 1% 0;
+}
+.tablaTablilla {
+    width:80%;
+}
+.tablilla.dos {
+    width:127%!important;
+    margin:0 0 10% 0;
+}
+.tablaTablilla tr td,.tablaTablilla tr th {
+    height:1.8em;
+    vertical-align:middle;
+    font-size:0.9em;
+    color:#485b83!important;
+    font-family: 'dosisregular';
+    padding:0 0 0 1%;
+    font-weight: normal;
+}
+.masAlto {
+    height:5em!important;
+}
+.tablilla.dos .anchoUno {
+    width:25%!important;
+}
+.tablilla.dos .anchoDos {
+    width:10%!important;
+}
+.tablilla.dos .anchoTres {
+    width:65%!important;
+}
+.tablillaEncabezado {
+    font-family: 'dosisbold'!important;
+}
+.linkCompletar {
+    color:#485b83;
+    font-family: 'dosisbold';
+}
+.linkCompletar:hover {
+    color:#485b83;
+    text-decoration:underline;
+}
+.pacientesHistoriaSeccionImagen {
+    float:left;
+}
+.pacientesHistoriaSeccion {
+    margin:0 0 2% 0;
+}
+.pacientesHistoriaSeccionImagen.laboratorio {
+    background:url(../images/pacientesLaboratorio.png) left top no-repeat;
+    background-size:cover;
+    width:2.8em;
+    height:2.1em;
+    margin:0 2% 0 0;
+}
+.pacientesHistoriaSeccionImagen.rayos {
+    background:url(../images/pacientesRayosX.png) left top no-repeat;
+    background-size:cover;
+    width:2.3em;
+    height:3.2em;
+    margin:-2% 2.6% 0 1%;
+}
+.pacientesHistoriaSeccionImagen.visitasMedicas {
+    background:url(../images/pacientesReporte.png) left top no-repeat;
+    background-size:cover;
+    width:2em;
+    height:2.5em;
+    margin:0 3% 0 1.5%;
+}
+.pacientesHistoriaSeccion p {
+    font-family: 'dosissemibold';
+    font-size:1.4em;
+    color:#485b83;
+    margin:0 0 2% 0;
+}
+.pacientesHistoriaSeccion .submit {
+    padding:1%;
+    font-size:0.8em;
+}
+.formularioConsultasVivoPacientes {
+    height:100%!important;
+}
+.formConsltVivoPacLeft {
+    height:100%!important;
+    margin:0;
+}
+.formConsltVivoPacRight {
+    height:100%!important;
+}
+.formCnVvPcCampo {
+    margin:0 0 5% 10%;
+/*    padding:0 0 0 17%;*/
+    overflow:hidden;
+    height:2.5em;
+}
+.ladoRight .formCnVvPcCampo {
+    padding:0!important;
+}
+.formCnVvPcCampo .myselect {
+    width:100%;
+    background-color:#485b83!important;
+    color:#fff;
+    height:100%;
+    -webkit-appearance: none!important;  /*Removes default chrome and safari style*/
+    -moz-appearance: none!important;  /*Removes default style Firefox*/
+    appearance:none!important;
+    border-radius:0;
+    padding:2% 4%;
+    height:100%;
+    background:url(../images/flechaSelect.png) 97% 45% no-repeat;
+    outline:none;
+    font-family: 'dosislight'!important;
+    font-size:0.7em;
+    text-transform:uppercase;
+}
+.formCnVvPcCampoSelect {
+    color:#485b83;
+    background:#fff;
+    text-align:center;
+    font-family: 'dosislight'!important;
+    font-size:0.7em!important;
+    text-transform: uppercase;;
+
+    height:100%;
+    display:block;
+    padding:2% 0;
+    height:100%;
+}
+.formCnVvPcCampo input,.formCnVvPcCampo textarea {
+    width:70%;
+    height:2em;
+    background:#485b83;
+    color:#fff;
+    font-size:0.7em!important;
+    padding:0 3%;
+    font-family: 'dosisregular';
+    height:100%;
+    outline:none;
+}
+.formCnVvPcCampo textarea:focus,.formCnVvPcCampo input:focus {
+    background:#88a7d7;
+}
+.formCnVvPcCampo textarea::-webkit-input-placeholder, .formCnVvPcCampo input::-webkit-input-placeholder {
+    color: #fff;
+}
+.formCnVvPcCampo textarea::-moz-placeholder,.formCnVvPcCampo input:-moz-placeholder { /* Firefox 18- */
+    color: #fff;  
+}
+.formCnVvPcCampo textarea::-moz-placeholder,.formCnVvPcCampo input::-moz-placeholder {  /* Firefox 19+ */
+    color: #fff;  
+}
+.formCnVvPcCampo textarea::-ms-input-placeholder,.formCnVvPcCampo input:-ms-input-placeholder {  
+    color: #fff;  
+}
+.flotador {
+    float:left;
+    margin:0 2% 0 0;
+}
+.imagenLupa {
+    float:left;
+    margin:3% 0 0 0!important;
+}
+.imagenLupa a {
+    background:url(../images/lupaPacientes.png) left top no-repeat;
+    width:1.37em;
+    height:1.37em;
+    background-size:cover;
+    display:block;
+}
+.respondePreguntas {
+    margin:0 0 5% 10%;
+    width: 90%;
+}
+.respondePreguntas a {
+    display:block;
+    background:#485b83;
+    color:#fff;
+    font-size:0.7em!important;
+    font-family: 'dosisregular';
+    text-transform:uppercase;
+    text-align:center;
+    padding:3% 0;
+    width:100%;
+}
+.respondePreguntas p {
+    display:block;
+    background:#485b83;
+    color:#fff;
+    font-size:0.7em!important;
+    font-family: 'dosisregular';
+    text-transform:uppercase;
+    text-align:center;
+    padding:3% 0;
+    width:100%;
+}
+.respondePreguntas a:hover {
+    background:#88a7d7;
+}
+.pacientesBotoneraBottom {
+    float:right; 
+    width:100%;
+}
+.pacientesBotoneraBottom input {
+    float:right!important;
+    display:block;
+    font-size:0.8em;
+    padding:2% 3%;
+}
+.pacientesBotoneraBottom.dos a, .pacientesBotoneraBottom.dos input {
+    float:right!important;
+    display:block;
+    font-size:0.8em;
+    padding:1%;
+}
+.pacientesCalendario .tablaCalendario {
+    font-size:0.7em!important;
+    background:#88a7d7;
+}
+.tablaCalendario tr td.lilaOscuro {
+    cursor: pointer;
+}
+.tablaCalendario tr td.inactive {
+    cursor: default;
+}
+.pacientesCalendario .tablaCalendario tr td.lilaOscuro:hover {
+    background:#cde1ff!important;
+    
+}
+.pacientesCalendario .tablaCalendario tr td.lilaOscuro:hover p {
+    color:#45587e;
+}
+.pacientesCalendario {
+    width:90%;
+    margin: 0px 0px 5% 10%;
+}
+.pacientesCalendario .calendarioEncabezado {
+    font-size:0.8em!important;
+}
+.pacientesCalendario .mesAno {
+    font-size:0.8em!important;
+}
+.horario {
+    width:50%;
+    display: inline-block;
+    margin:0 0 0 0;
+}
+.horario .myselect {
+    width:100%;
+    background-color:#cde1ff!important;
+    color:#485b83;
+    height:100%;
+    -webkit-appearance: none!important;  /*Removes default chrome and safari style*/
+    -moz-appearance: none!important;  /*Removes default style Firefox*/
+    appearance:none!important;
+    border-radius:0;
+    padding:3% 4%;
+    height:100%;
+    background:url(../images/flechaSelect.png) 97% 45% no-repeat;
+    outline:none;
+    font-family: 'dosisregular'!important;
+    font-size:0.7em;
+    text-transform:uppercase;
+}
+.resumenTextoExplicativo {
+    background:#485b83;
+    color:#fff;
+    font-size:0.7em!important;
+    font-family: 'dosisregular';
+    text-transform:uppercase;
+    padding:3% 15% 3% 3%;
+    width:100%;
+    margin:0 0 5% 10%;
+}
+.pacientesSeccionTexto {
+    width:100%;
+    margin:0 0 5% 10%;/**/
+padding-right: 1%;
+    height:6em;
+    display: block;
+}
+.pacientesSeccionTexto textarea {
+    background:#485b83;
+    color:#fff;
+    font-size:1em!important;
+    font-family: 'dosisregular';
+    text-transform:uppercase;
+    padding: 1%;
+    border: 1px solid #485b83; 
+    width: 90%;
+    height: 80px;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    /*margin:0;
+    height:100%;
+    outline:none;*/
+}
+.pacientesSeccionTexto textarea:focus {
+    box-shadow:none;
+    background:#88a7d7;
+}
+.pacientesError {
+    font-family: 'dosisregular';
+    font-size:0.7em;
+    color:#485b83;
+    margin:0px;
+}
+.submit.especial {
+    font-size:0.7em!important;
+}
+.pacientesDoctorImg {
+    background:url(../images/pacientesDoctor.png) left top no-repeat;
+    width:6.938em;
+    height:7.188em;
+    background-size:cover;
+    float:right;
+    margin:0 10% 0 0;
+}
+.pacientesDoctorResumen h5 {
+    clear:both;
+    font-family: 'dosisregular';
+    font-size:2em;
+    color:#aebfe3;
+}
+.pacientesDoctorResumen h5 span {
+    font-size:0.8em;
+}
+.pacientesDoctorResumen p {
+    clear:both;
+    font-family: 'dosisregular';
+    font-size:1em;
+    color:#45587e;
+}
+.formularioPago {
+    margin:0;
+    width:75%;
+}
+.formularioPagoCampo {
+    margin:0 0 4% 0;
+    overflow:hidden;
+}
+.formularioPagoCampo label {
+    font-size:0.9em;
+    color:#485b83!important;
+    font-family: 'dosisregular';
+    display:block;
+    margin:0 0 1% 0;
+}
+.formularioPagoCampo input, .formularioPagoCampo select,.inputBT {
+    background:#45587e;
+    height:2em;
+    width:90%;
+    color:#fff;
+    outline:none;
+    font-family: 'dosisregular';
+    font-size:0.8em;
+    padding:0 2%;
+    border-radius: 0px;
+}
+.inputBT {
+   background: #9fb9d5;
+   box-shadow: inset 0 2px 3px #738eac;
+}
+.inputBT.inputBTCard {
+   width:70%;
+}
+.formularioPagoCampo input::-webkit-input-placeholder {
+    color:#fff;
+}
+.formularioPagoCampo input:-moz-placeholder { /* Firefox 18- */
+    color:#fff;   
+}
+.formularioPagoCampo input::-moz-placeholder {  /* Firefox 19+ */
+    color:#fff;  
+}
+.formularioPagoCampo input:-ms-input-placeholder {  
+    color:#fff;  
+}
+.formularioPagoCampo .myselect {
+    width:90%;
+    background-color:#485b83!important;
+    color:#fff;
+    height:1.9em!important;
+    -webkit-appearance: none!important;  /*Removes default chrome and safari style*/
+    -moz-appearance: none!important;  /*Removes default style Firefox*/
+    appearance:none!important;
+    border-radius:0;
+    padding:0 5%;
+    height:100%;
+    background:url(../images/flechaSelect.png) 97% 45% no-repeat;
+    outline:none;
+    font-family: 'dosislight'!important;
+    font-size:0.7em;
+    margin:-1.2% 0 0 0;
+}
+.pagoImg {
+    float:left;
+    margin:0 2% 0 0;
+}
+.pagoImg a {
+    display:block;
+}
+.master a {
+    background:url(../images/master.jpg) left top no-repeat;
+    width:2.125em;
+    height:1.313em;
+    background-size:cover;
+}
+.visa a {
+    background:url(../images/visa.jpg) left top no-repeat;
+    width:2.125em;
+    height:1.313em;
+    background-size:cover;
+}
+.american a {
+    background:url(../images/american.jpg) left top no-repeat;
+    width:2.125em;
+    height:1.313em;
+    background-size:cover;
+}
+.paypal a {
+    background:url(../images/paypal.jpg) left top no-repeat;
+    width:2.3em;
+    height:1.313em;
+    background-size:cover;
+}
+.confirmacionPagoTxt {
+    font-family: 'dosismedium';;
+    font-size:1em;
+    color:#45587e;
+    margin:0 0 5% 0;
+}
+.confirmacionPagoAccion {
+    overflow:hidden;
+    margin:0 0 5% 0;
+}
+.confirmacionPagoAccion a {
+    display:block;
+}
+.confrPagoImagen {
+    float:left;
+    margin:0 2% 0 0;
+}
+.confrPagoImagen.descargar {
+    background:url(../images/pacientesDescarga.png) left top no-repeat;
+    width:2.55em;
+    height:2.5em;
+    background-size:cover;
+}
+.confrPagoImagen.agregarCalendario {
+    background:url(../images/pacientesDatePicker.png) left top no-repeat;
+    width:2.55em;
+    height:2.5em;
+    background-size:cover;
+}
+.confrPagoImagen.mail {
+    background:url(../images/pacientesSobre.png) left top no-repeat;
+    width:2.55em;
+    height:2.5em;
+    background-size:cover;
+}
+.confrPagoTxt {
+    font-family: 'dosismedium';;
+    font-size:1em;
+    color:#45587e;
+    padding:1% 0 0 0!important;
+}
+.confrPagoTxt.dos {
+    padding:0.5% 0 0 0!important;
+}
+.submit.pago {
+    padding:1% 2%!important;
+}
+.confirmacionPagoAccion a:hover .confrPagoTxt {
+    color:#aaa;
+}
+.ladoRight {
+    height:100%;
+}
+.ladoLeft {
+    height:100%;
+}
+.cuestionarioTop {
+    height:100%;
+    background:#fff
+}
+.cuestionarioLogoHeader {
+    margin:0;
+    height:70%;
+    border:solid 1px #fff;
+}
+.cuestionarioLogoHeader h1 {
+    margin:0;
+}
+.cuestionarioLogoHeader h1 a {
+    display:block;
+    text-indent:-5000px;
+    overflow:hidden;
+    background:url(../images/logoPrincipalDos.png) left top no-repeat;
+    margin:0.5% auto 0;
+    background-size:cover;
+    width:4.538em;
+    height:1.615em;
+}
+.cuestionarioEncabezado {
+    background-color:#aebfe3!important;
+    height:30%;
+}
+.cuestionarioEncabezado h3 {
+    font-family: 'dosislight';
+    font-size:1.5em;
+    color:#fff;
+/*    margin:0.2% 0 0 0;*/
+    text-transform:uppercase;
+    text-align:center;
+}
+.cuestionarioContent {
+    height:100%;
+}
+.cuestionario {
+    height:100%;
+}
+.cuestionarioBottom {
+    height:10%;
+}
+.barramenu.dos {
+    height:100%!important;
+}
+.barramenu.dos ul li {
+    height:15.6%!important;
+}
+.panel-group {
+    padding:0 0 0 3%;
+}
+.panel-heading {
+    padding:0!important;
+    height:auto!important;
+}
+.panel-title {
+    background:#485b83;
+    height:auto!important;
+    padding:0!important;
+    margin:0!important;
+}
+.panel-title a {
+    color:#fff;
+    display:block;
+    padding:2%;
+    font-family: 'dosisbold';
+    font-size:1em;
+    background:url(../images/flechaSelect.png) 95% 50% no-repeat;
+}
+.panel-title a:hover {
+    text-decoration:none;
+}
+.panel-title a span {
+    font-family: 'dosisregular';
+}
+.panel-body {
+    box-shadow:none!important;
+    background:#fff;
+    border-color:#fff!important;
+    border-radius:0!important;
+    border:none!important;
+    padding:2%!important;
+    color:#485b83;
+}
+.panel-body p {
+    font-family: 'dosisregular';
+    font-size:1em;
+}
+.panel-body p span {
+    font-family: 'dosisbold';
+}
+.acordion {
+    display:block;
+    width:45%;
+    text-align:center;
+    margin:0 auto;
+}
+.cuestionario {
+    padding:5%;
+    position:relative;
+}
+.cuestionario h1 {
+    margin:0 0 2% 0;
+    font-family: 'dosisregular';
+    font-size:1.3em;
+    color:#717173;
+}
+.cuestionario h2 {
+    margin:0 0 2% 0;
+    font-family: 'dosisregular';
+    font-size:1.1em;
+    color:#717173;
+}
+.cuestionario h3 {
+    margin:0;
+    font-family: 'dosisregular';
+    font-size:1.1em;
+    color:#717173;
+}
+.cuestionarioDivision {
+    margin:0 0 5% 0;
+}
+.cuesationarioCampo {
+    margin:0 0 1.5% 0;
+    height:100%;
+}
+.etiquetaCuestionario {
+    font-family: 'dosislight';
+    font-size:1em;
+    color:#717173 !important;
+
+}
+.cuesationarioCampo label {
+    font-family: 'dosislight';
+    font-size:1em;
+    color:#7aa8da;display: inline-block;
+}
+.cuestionario span {
+    font-family: 'dosislight';
+    font-size:1em;
+    color:#717173 !important;
+}
+.cuesationarioCampo select, .cuesationarioCampo input {
+    outline:none;
+    border:solid 1px #7aa8da;
+    height:1.7em;
+    padding:0 1%;
+    font-family: 'dosislight';
+    font-size:1em;
+    color:#7aa8da;
+    margin: 4px 4px 0px;
+    display: inline-block;
+}
+.cuesationarioCampo select, .cuesationarioCampo input[type="text"] {
+    width: 200px;
+}
+.formularioPopup .cuesationarioCampo select, .formularioPopup  .cuesationarioCampo input[type="text"] {
+    width: auto;
+}
+.cuesationarioCampo .col-lg-3 select,
+.cuesationarioCampo .col-md-3 select,
+.cuesationarioCampo .col-lg-3 input[type="text"],
+.cuesationarioCampo .col-md-3 input[type="text"] {
+    width: 150px;
+}
+.cuesationarioCampo select:focus,.cuesationarioCampo input[type="text"]:focus ,.cuesationarioCampo input[type="password"]:focus {
+    background-color:#fcfcfc!important;
+    box-shadow: inset 0 2px 3px #c9c9c9!important;
+}
+.cuesationarioCampo input[type="checkbox"]
+{
+    height:1em;
+}
+.chequeador {
+    border-color:#7aa8da!important;
+}
+.cuestionarioInputCorto {
+    width:8%;
+}
+.cuestionarioInputMedio {
+    width:28%;
+}
+.cuestionarioInputLargo {
+    width:75%;
+}
+.cuestionarioBoton {
+    float:right;
+    margin:0 18.5% 0 0;
+}
+.cuestionarioBoton.dos {
+    float:none!important;
+    margin:0 auto!important;
+    width:5%;
+}
+.cuestionarioBoton.tres {
+    float:none!important;
+    margin:0;
+    width:5%;
+}
+.arriba {
+    display:block!important;
+}
+.submitCuestionario {
+    color:#fff!important;
+    height:2em!important;
+    font-family: 'dosisregular';
+    font-size:0.8em!important;
+    text-transform:uppercase;
+    border:none!important;
+    outline:none;
+    text-align:center;
+    display:block!important;
+    padding:0 3%!important;
+    width:150%;
+}
+.submitCuestionario:hover {
+    background-color:#36445f;
+}
+.botoneraBottomCuestionario {
+    position:absolute;
+    right:10%;
+    bottom:12%;
+    background-color:#ffffff;
+}
+.submitSiguiente {
+    font-family: 'dosisregular';
+    font-size:0.8em!important;
+    color:#fff;
+    text-transform:uppercase;
+    padding:0.8em 2em;
+}
+.submitSiguiente:hover {
+    background-color:#791223;
+}
+.cuestionario textarea, .cuestionarioTextArea {
+    width:100%;
+    height:5em;
+    border:solid 1px #7aa8da!important;
+    color:#7aa8da;
+    font-family: 'dosisregular';
+    font-size:1em!important;
+    outline:none;
+    padding:1%;
+}
+.completado {
+    width:100%;
+    padding:0.5% 0 0% 0;
+    color:#fff;
+    position:absolute;
+    left:0;
+    bottom:0;
+    display:block;
+    margin:0;
+    text-align:center;
+    text-transform:uppercase;
+    font-family: 'dosisregular';
+    font-size:1em!important;
+    background:#556789
+}
+.completado:hover {
+    background-color:#323f57;
+    display:block;
+    text-align:center;
+}
+.cuestionario p {
+    font-family: 'dosislight';
+    font-size:1em;
+    color:#717173 !important;
+}
+.cuestionarioError {
+    font-size:0.7em!important;
+}
+.cuestEncbTabl {
+    text-align:center;
+    font-family: 'dosisregular';
+    font-size:1em!important;
+    text-transform:uppercase;
+    padding:1% 0;
+}
+.cuestEncbTabl.uno {
+    background:#45597e;
+    color:#fff;
+    border-right:solid 2px #fff;
+    vertical-align:middle;
+}
+.cuestEncbTabl.dos {
+    background:#cbdfe6;
+    color:#7aa8da;
+    border-right:solid 2px #fff;
+}
+.cuestEncbTabl.tres {
+    background:#e5e5e7;
+    color:#7aa8da;
+}
+.cuestEncbTabl.cuatro {
+    color:#fff;
+}
+
+.formularioPopup .cuestEncbTabl.cuatro,.formularioPopup .cuestEncbTabl.tres,.formularioPopup .cuestEncbTabl.dos,.formularioPopup .cuestEncbTabl.uno{
+    background:#45597e!important;
+     color:#fff;
+}
+.cuestionario  .cuestionarioTabla input {
+    width:100%;
+    height:2.5em;
+    padding:0 2%;
+    font-family: 'dosisregular';
+    font-size:1em!important;
+    color:#fff;
+    background-color:transparent;
+    outline:none;
+    border: none;
+}
+.colorTablaUno {
+    background-color:#7aa8da;
+}
+.colorTablaDos {
+    background-color:#89afd9;
+}
+.colorTablaTres {
+    background-color:#9ebcdc;
+}
+.colorTablaCuatro {
+    background-color:#a8c1dc;
+}
+.colorTablaCinco {
+    background-color:#b9cadd;
+}
+.colorTablaSeis {
+    background-color:#c3d0de;
+}
+.colorTablaSiete {
+    background-color:#c9d3dd;
+}
+.colorTablaOcho {
+    background-color:#d2d8de;
+}
+.borderBlanco {
+    border-right:solid 2px #fff;
+    border-top:solid 1px #d6d6d7;
+}
+.tablaErrorCuestionario {
+    color:#45597e;
+    font-family: 'dosisregular';
+    font-size:1em!important;
+}
+.placeholder {
+    color:#fff;
+}
+
+/****************footer*************/
+
+.footer {
+    position:absolute;
+    top:88%;
+    left:0;
+    z-index:999;
+    width:100%;
+    height:8%;
+    overflow:hidden;
+}
+.footer p {
+    background:url(../images/footer.jpg) left top no-repeat;
+    height:100%;
+    width:100%;
+    background-size:100%, contain;
+    display:block;
+    margin:0;
+    text-indent:-5000px;
+}
+.footerDos {
+    position:absolute;
+    left:0;
+    right:0;
+    top:97%;
+    margin-left:auto;
+    margin-right:auto;
+}
+.txtInferior {
+    margin:0;
+}
+.txtInferior p {
+    font-size:0.8em;
+    font-family: 'dosisregular';
+    color:#fff;
+    text-align:center;
+}
+
+.guardar {
+    float:right;
+    margin:0 2% 0 0;
+}
+.guardar input {
+    padding:3%!important;
+    display:block;
+    width:150%;
+    height:2em;
+}
+.guardar input:hover {
+    background:#313f59;
+}
+.consultasResultados {
+    margin-top:5%;
+}
+.consultasResultados p {
+    color:#45597e;
+    font-family: 'dosisregular';
+    font-size:1em!important;
+}
+.consltFlotante {
+    float:left;
+    overflow:hidden;
+    border:solid 1px #000;
+}
+.poco {
+    font-size:2em!important;
+}
+
+
+.terminosCondicionesContent {
+    padding:5%!important;
+    height:100%!important;
+}
+.terminosCondicionesContent ol {
+    font-family: 'dosisregular';
+    font-size:1em;
+    margin-bottom:2%;
+}
+.terminosCondicionesContent ol li {
+    margin-bottom:1%;
+}
+.terminosCondicionesContent h3 {
+    font-family: 'dosisbold';
+    font-size:2em;
+    text-transform:uppercase;
+    margin-bottom:2.5%;
+}
+
+
+
+/***********CUSTOM*****************/
+
+.submitAdm {padding: 1% 3% ;}
+/*.tablaAdmList tr td:last-child ul{width: 80px;}
+.tablaAdm .tablillaEncabezado{width: 20%;}*/
+.submitAdmAct{ width: 100%; padding: 2% 0px; display: block; text-align: center;}
+.btnAdm {  padding: 6px 12px;display: block;text-align: center;  }
+.formAmd > div > div {    margin:0 0 1.5% 0;    height:100%;}
+.formAmd label {    font-family: 'dosislight';    font-size:1em;    color:#717173 !important;width: 15%;}
+.formAmd span {    font-family: 'dosislight';    font-size:1em;    color:#717173 !important;}
+.formAmd .tinymce, .formAmd input[type="text"], .formAmd input[type="password"], .formAmd input[type="email"], .formAmd select  {outline:none;border:solid 1px #7aa8da;height:1.7em;padding:0 1%;font-family: 'dosislight'; font-size:1em; color:#7aa8da; width: 250px;}
+.formAmd .files { display:  inline-block;}
+.formAmd .tinymce {    min-height: 150px !important;resize: both;}
+.formAmd .tinymce:focus, .formAmd input[type="text"]:focus,.formAmd input[type="password"]:focus, .formAmd select:focus {  background-color:#fcfcfc!important; box-shadow: inset 0 2px 3px #c9c9c9!important;}
+.formAmd input[type="button"]:focus {  background-color:#485b83!important; box-shadow:none!important;}
+.formAmd input[type="checkbox"]{ height:1em; width:auto;}
+.formAmd .enviarAdm{ position: absolute; bottom: 0; right: 0px}
+.record_actions.supe {margin-top: -44px; margin-left: 90px;}
+.record_actions li {display: inline-block; vertical-align: top;}
+/*.formAmd .submit{float: right; margin-right: 57%;}*/
+.admFieldBody{ width: 100%; margin: 0 auto; height: 400px; overflow:scroll; position: relative}
+.campo-logout {   float:right;  margin:0 10px 0 0;   height:100%;}
+.campo-logout label { text-transform:uppercase; font-family: 'dosisbold'; font-size:0.9em; color:#535b57; margin:0; display:block;float:left; margin:2px 10px 0 0;}
+.campo-logout input { height:45%;display:block;width:150px;border:none;outline:none;padding:0 2.3%; font-family: 'dosisregular'; font-size:0.9em;  float:left;}
+.campo-logout input[type="text"]:focus,.campo-logout input[type="password"]:focus { background-color:#fcfcfc;  box-shadow: inset 0 2px 3px #c9c9c9;}
+.campo .submit{ width: 60px!important;}
+.campo-logout li{ display: inline-block; margin-right: 5px;}
+.campo-logout .submit{ width: 80px!important; text-align: center; display: block;}
+.campo-logout  p {   font-family: "dosisbold";color: #535B57;font-size:0.9em; display: inline-block;text-transform:uppercase; margin:2px 0 0 0;}
+.tablaAdm { margin-bottom: 20px; font-size:1em; }
+.tablaAdm a:hover{ color: #BC1F39; }
+.registerFront{ position: relative;}
+.registerFront .registroCampo input,.registerFront .registroCampo select{ width: 100%; background-color: #EF9DA7; box-shadow: 0px 2px 3px #575656 inset; color: #333;}
+.registerFront .registroCampo input[type="text"]:focus, .registerFront .registroCampo input[type="password"]:focus,.registerFront .registroCampo select:focus { background-color:#fbfbfb; box-shadow: inset 0 2px 3px #aaa;}
+.formularioInicial .submit:focus {background-color: #485b83; box-shadow:none;}
+#appbundle_patients_birthdate,#appbundle_patients_act_birthdate{ width: 100%;border-radius: 0px;}
+.slick-slide img{height: auto;width: 100%;}
+.input-country{ width: 100%}
+.input-calendario{ float: left;width: 62%;}
+.calendario { margin: 15px 10px;}
+.registerFrontM .registroCampo input,.registerFrontM .registroCampo select{ background-color: #DFECFF;box-shadow: 0px 2px 3px #AAA inset;}
+.registerFrontM .registroCampo input[type="text"]:focus,.registerFrontM .registroCampo input[type="password"]:focus,.registerFrontM .registroCampo select:focus { background-color:#fbfbfb; box-shadow: inset 0 2px 3px #aaa;}
+.pass > div:first-child{ float: left; width: 48%;  margin: 0px 3% 0px 0px;}
+.pass > div:last-child{ float: left; width: 49%;}
+#form_name,#field_name{ width: 200px}
+#form_name_edit,#field_name_edit{ width: 50px}
+.formAmd .formAmd ul:first-child{ margin-bottom: 10px; color: #FFF;background-color: #ED253B;padding: 1.5% 4%; font-family: "dosisregular"; font-size: 0.7em;  text-transform: uppercase;  }
+.baseadm .doctoresHomeIntRight h5 {  margin: 0px 0px 2%; }
+.formfieldTa * { vertical-align: top;}
+.baseadm  textArea {    background-color:#fcfcfc;    box-shadow: inset 0 2px 3px #c9c9c9;}
+.help-data{ margin:1% ; width: 98%; font-size: 10px; float: left}
+.label-data{ width: 15%; float: left}
+.label-data label{ width: 100%}
+.input-data{ width: 85%; float: left}
+.baseadm h5 {font-size: 1.5em;}
+.baseadm h5 a:hover {color: #BC1F39}
+.baseadm h5 span{text-transform: none;}
+.td-group a{ color:#485B83;text-transform: uppercase; }
+.baseadm .tablaTablilla tr td {padding: 0px 0px 0px 5px;}
+.tablaTablilla tr td a{color:#485B83;}
+.tablaTablilla tr td a:hover{color:#aebfe3;}
+.td-field { padding-left: 30px!important}
+.td-fieldset { padding-left: 20px!important;font-family: "dosissemibold";}
+.td-subgroup { padding-left: 40px!important;}
+.td-page { padding-left: 10px!important; text-transform: uppercase;}
+.descinput .tinymce,.helpinput .tinymce{ min-height: 50px !important;}
+.help-data-info{ margin-left: 15%; width: 250px; font-size: 12px; color: #FFF; background-color: #ED253B; padding: 1%;}
+table.tablaAdm {    width: 100%;    font-size: 1.1em;    margin: 0 0 20px;    border: 1px solid #485B83;    color: #485B83 !important;    font-family: "dosisregular";}
+table.tablaAdm td, table.tablaAdm th { padding: 8px 10px; vertical-align: middle;}
+.table-striped > tbody > tr:nth-child(2n+1) {        background: #E9E9E9;}
+table.tablaAdm th {    text-transform: uppercase;    background: #88A7D7;    font-weight: normal;    border-width: 1px;    border-style: solid;    border-color: #485B83 ;    color: #FFF;}
+table.tablaAdm th.col-sm-8, table.tablaAdm th.col-md-8, table.tablaAdm th.col-lg-8{   padding: 3px 10px!important;}
+table.tablaAdm th.col-sm-3, table.tablaAdm th.col-md-3, table.tablaAdm th.col-lg-3{   padding: 3px 10px!important;}
+table.tablaAdm th.col-sm-1, table.tablaAdm th.col-md-1, table.tablaAdm th.col-lg-1{   padding: 3px 10px!important;}
+table.tableShow th {    width: 15%; }
+.barramenu.dos.barramenuform { height: 88%!important}
+.barramenuform li{position: relative}
+.barramenuform li a{margin: 0;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    margin-right: -50%;
+                    transform: translate(-50%, -50%); width: 90%}
+.a-mas,.a-mas-f,.a-mas-el { margin: 0px auto;  color: #FFF !important;    height: 2em !important;    font-family: "dosisregular";    font-size: 0.8em !important;    text-transform: uppercase;    border: medium none !important;    outline: medium none;    text-align: center;    padding: 0px 3% !important; }
+.datepicker{border-radius: 0px;}
+input:required,select:required {
+    box-shadow:none;
+}
+.cuestionario .cuestionarioTabla input {
+    width: 96%;
+    padding: 0px 2%;    
+    margin: 2%;    
+}
+.cuestionario .cuesationarioCampo .cuestionarioTabla select:focus, .cuestionario  .cuesationarioCampo .cuestionarioTabla input[type="text"]:focus, .cuestionario  .cuesationarioCampo .cuestionarioTabla input[type="password"]:focus {
+    background-color:transparent !important;
+    box-shadow: none !important;
+}
+
+.cuestionarioTabla tr:nth-child(3) td {
+    background-color:#7aa8da;
+}
+.cuestionarioTabla tr:nth-child(4) td {
+    background-color:#89afd9;
+}
+.cuestionarioTabla tr:nth-child(5) td {
+    background-color:#9ebcdc;
+}
+.cuestionarioTabla tr:nth-child(6) td {
+    background-color:#a8c1dc;
+}
+.cuestionarioTabla tr:nth-child(7) td {
+    background-color:#b9cadd;
+}
+.cuestionarioTabla tr:nth-child(8) td {
+    background-color:#c3d0de;
+}
+.cuestionarioTabla tr:nth-child(9) td {
+    background-color:#c9d3dd;
+}
+.cuestionarioTabla tr:nth-child(n+9) td {
+    background-color:#d2d8de;
+}
+.tdelim{ width: 20px;}
+.cuestionarioTabla tr td:last-child{ text-align: center}
+input[type="file"] {
+    padding: 0px;
+    margin-bottom: 10px;
+}
+.groupInputs input[type="file"] {
+    margin-bottom: 0px;
+}
+.cuestionarioForm,.row-after-form{ height: 100%!important}
+.row-after-form{ }
+.botoneraBottomCuestionario div{ display: inline-table; margin-right: 10px;}
+.ContOlvContr{ position: relative;}
+.olvContr{ position: absolute; top: 25px; right: 0px;}
+.formularioInicial form .campo input.btnLogin,.formularioInicial form .campo input.btnLoginF{ width:auto!important; float: none; }
+.formularioInicial form .campo input.btnLoginF{ background:url(../images/icon-facebook.png) #485B83 left top no-repeat; padding-left: 15px; }
+.UlBtnLogin li{display: inline-block;}
+.formularioInicial form .campo input[type="button"],.formularioInicial form .campo input[type="submit"] {    padding: 0px 10px;}
+
+.tituloAzulado {
+    font-family: 'dosisregular';
+    font-size:2em;
+    color:#45587e;
+    text-transform:uppercase;
+    padding:0 0 0 5%;
+}
+.tablaRecuperarCuenta {
+    width:100%;
+    padding:0;
+    margin:5% 0 0 5%;
+}
+.azulalado {
+    font-family: 'dosisregular';
+    font-size:1em;
+    color:#45587e;
+}
+.sobreAzulado {
+    background:url(../images/sobreAzulado.png) left top no-repeat;
+    width:2.7em;
+    height:2.1em;
+}
+.azulalado input {
+    border:none;
+    outline:none;
+    background:#b0bddf;
+    padding:0 3%;
+    font-family: 'dosisregular';
+    font-size:1em;
+    color:#fff;
+    width:95%;
+    height:2em;
+}
+.botonesEnvio input,.botonesEnvio a {
+    width:90%;
+    height:2em;
+    font-family: 'dosisregular';
+    font-size:1em;
+    color:#fff;
+    text-transform:uppercase;
+    border:none;
+    outline:none;
+}
+.botonesEnvio a {
+    text-align: center;
+    display: block;
+    line-height: 2em;
+}
+.azulazo {
+    background:#45587e!important;
+}
+.rojazo {
+    background:#9f243a!important;
+}
+.formularioRestablecer {
+    margin:5% 0 0 5%;
+}
+.formularioRestablecer .campo {
+    margin:0 0 2% 0;
+}
+.formularioRestablecer label {
+    font-family: 'dosisregular';
+    font-size:1em;
+    color:#45587e;
+}
+.formularioRestablecer input {
+    width:30%;
+    background:#b0bddf;
+    height:2em;
+    padding:0 1.5%;
+    font-family: 'dosisregular';
+    font-size:1em;
+    display:block;
+    border:none;
+    outline:none;
+    color:#fff;
+}
+.formularioRestablecer input[type="button"],.formularioRestablecer input[type="submit"]{
+    background:#485B83 none repeat scroll 0% 0%;
+}
+.campoEspacial {
+    width:30%;
+}
+.campo.alineadoDerecha {
+    float:right;
+    margin:0;
+    width:50%;
+}
+.alineadoDerecha input,.alineadoDerecha a {
+    width:45%;
+    display:inline-block;
+    margin:0 0 0 3%;
+}
+.cuadroError{ text-align: left; padding: 1% 1% 1% 5%;margin: 2% 0px;}
+.cuadroError p {  padding: 0px 0px 0px 5%;  font-family: "dosisregular";    font-size: 1em;    text-transform: uppercase;    margin: 0px;    padding: 0px;}
+.imagenDoctor { overflow: hidden;}
+.imagenDoctor img{ width:100px; height: auto; left: 0px;}
+.imagenDoctorDetalle{ width: 150px; margin: 10px auto;height: auto; }
+.imagenDoctorDetalle img{ width:100%; height: auto;}
+.aplicacion { margin: 0px 0px 5%;}
+.aplicacion .loginMed .campo{ float: none;display: block;height: 40px;}
+.aplicacion .loginMed label{ width: 30%; font-weight: normal; }
+.aplicacion .loginMed form .campo input[type="text"],.aplicacion .loginMed form .campo input[type="password"]{ width: 60%; color: #000; }
+.ContOlvContr {    display: block; text-align: right;}
+.ContOlvContr p{
+    text-align: right;
+}
+.ContOlvContr p a{
+    font-size: 1em;
+    line-height: 1.35em;
+    text-transform: none; 
+}
+.aplicacion .loginMed form .campo .UlBtnLogin{ text-align: right}
+.aplicacion .loginMed .formularioInicial { float: none;}
+.ContOlvContrInLine .olvContr {
+    position:relative;
+    top: 0px;
+    left: 0px;
+}
+.ContOlvContrInLine p {
+    text-align: left;
+}
+.ContOlvContrInLine p a:hover{
+    color:#9f243a;
+}
+.imagenResContcat {
+    background:url(../images/resultContact.png) left top no-repeat;
+    width:104px;
+    height:82px;
+    background-size:cover;
+    margin:0 auto;
+}
+textarea:focus{
+    box-shadow: inset 0 2px 3px #c9c9c9!important;
+}
+textarea:required{
+    box-shadow: none;
+}
+.submit.btnRecCont{ width: 150px!important}
+#fos_user_resetting_form > div{margin: 0px 0px 2%;}
+#fos_user_resetting_form > div label{}
+.menuAdm .docSecciones {   
+    font-size: 12px;
+}
+.subDocSecciones{ 
+    margin-left: 10px;
+    display: block;
+    color: #485B83;
+    text-transform: uppercase;
+    padding: 3% 5% 3% 7%;
+    font-family: "dosismedium";
+    font-size: 12px;    
+    margin: 0px 0px 4%;
+    border-bottom: 1px solid #485B83;
+}
+.subDocSecciones.last{     
+    border-bottom: none;
+}
+.modpq_acercade select{ color: #000;font-family: "dosislight";font-size: 0.9em;}
+.clearFix{ clear: both}
+.errors {margin: 10px 0px;}
+.photoFront{ text-align: center; margin: 2% auto; width: 120px;position: relative;}
+.photoFrontLeft{margin: -20px 0px 0px;}
+.select-image-button i{display: none }
+.select-image-button{text-transform: uppercase;font-family: "dosisregular";color: #aebfe3;background-color: #485b83;border-color: #485b83;border-radius: 0px;}
+.select-image-button:hover{text-transform: uppercase;font-family: "dosisregular";color: #fff;background-color: #aebfe3;border-color: #aebfe3;}
+.rightCol{padding-right: 2% ! important;}
+.registerFrontM .registroCampo select{ width: 100%}
+.image_edit_button{width: 50%;    left: 25%;    top: 30%; margin: 0px!important;}
+#image_upload_modal .modal-header h3{font-family: "dosisregular";font-size: 2.2em;margin: 0px 0px 5%; color: #fff;}
+#image_upload_tabs,#image_upload_file_container .fileinput-button i{display: none}
+#image_upload_file_container .fileinput-button{text-transform: uppercase;font-family: "dosisregular";color: #aebfe3;background-color: #485b83;border-color: #485b83;border-radius: 0px;}
+#image_upload_modal .modal-footer .btn{text-transform: uppercase;font-family: "dosisregular";color: #aebfe3;background-color: #485b83;border-color: #485b83;border-radius: 0px;}
+#image_upload_modal .modal-footer #image_crop_go_now{text-transform: uppercase;font-family: "dosisregular";color: #aebfe3;background-color: #485b83;border-color: #485b83;border-radius: 0px;}
+#image_upload_modal .modal-footer #image_crop_cancel{text-transform: uppercase;font-family: "dosisregular";color: #aebfe3;background-color: #485b83;border-color: #485b83;border-radius: 0px;}
+#image_upload_file_container  #image_upload_file{display: none}
+#image_upload_file_container{ margin-bottom: 10px}
+.barratope {    margin: 0px;    padding: 2% 2% 2% 4% !important;}
+.barratope .docConfgContent {padding: 0px 5px 0px!important;}
+.control-label.has-error{ color: #BB1F37!important;}
+.tablilla h6{ font-family: "dosisregular"; font-size: 1.2em; color: #485B83;  margin: 0px 0px 2%;}
+.dataOld, .tablillaDy .tablillaEncabezado {
+    min-height: 1.8em;
+    vertical-align: middle;
+    font-size: 0.9em;
+    color: #485B83 !important;    
+    padding: 0px 0px 0px 10px;
+
+}
+
+.tablillaDy .tablillaContent{
+    min-height: 1.8em;
+    vertical-align: middle;
+    font-size: 0.9em;
+    color: #485B83 !important;
+    font-family: "dosisregular";
+    padding: 0px 0px 0px 10px;
+
+}
+
+.tablillaDy li{ display:inline-block}
+.files-pat{color: #aebfe3; display: block;} .files-pat:hover{color: #485b83}
+.dataOld{min-height: 1.8em;
+         vertical-align: middle;
+         font-size: 0.9em;
+         color: #485B83 !important;  margin: 10px 0px ; }
+
+.pacientesHistoriaSeccionImagen {
+    float:left;
+}
+.pacientesHistoriaSeccion {
+    margin:0 0 2% 0;
+}
+h6.reportesLabFieldSet,h1.reportesLabFieldSet{
+    background:url(../images/pacientesLaboratorio.png) left top no-repeat;    
+    width:100%;
+    height:2.1em;   
+    font-family: "dosissemibold";
+    font-size: 1.4em;
+    color: #485B83;
+    margin: 0px;
+    padding: 0px 0px 0px 2em;
+}
+
+h6.reportesImgFieldSet,h1.reportesImgFieldSet {
+    background:url(../images/pacientesRayosX.png) left top no-repeat;
+    width:100%;
+    height:2.1em;   
+    font-family: "dosissemibold";
+    font-size: 1.4em;
+    color: #485B83;
+    margin: 0px;
+    padding: 0px 0px 0px 2em;
+}
+h6.reportesVmFieldSet,h1.reportesVmFieldSet {
+    background:url(../images/pacientesReporte.png) left top no-repeat;
+    width:100%;
+    height:2.1em;   
+    font-family: "dosissemibold";
+    font-size: 1.4em;
+    color: #485B83;
+    margin: 0px;
+    padding: 0px 0px 0px 2em;
+}
+
+.reporteVm .tr-a-mas-f td,.reporteImg .tr-a-mas-f td,.reporteLab .tr-a-mas-f td{ text-align: right; padding: 0px 0px 20px 0px;}
+.reporteVm .tr-a-mas-f td a ,.reporteImg .tr-a-mas-f td a , .reporteLab .tr-a-mas-f td a{
+    padding: 0.5em!important;
+    font-size: 0.8em!important;
+    background: #485B83 none repeat scroll 0%;      
+}
+.reporteLab .elim,.reporteImg .elim,.reporteVm .elim{
+    padding: 0.5em!important;
+    font-size: 0.8em!important;
+    background: #485B83 none repeat scroll 0%;      
+}
+.pacientesHistoriaSeccion p {
+    font-family: 'dosissemibold';
+    font-size:1.4em;
+    color:#485b83;
+    margin:0 0 2% 0;
+}
+.pacientesHistoriaSeccion .submit {
+    padding:1%;
+    font-size:0.8em;
+}
+
+.reporteVm .cuestEncbTabl,.reporteImg .cuestEncbTabl,.reporteLab .cuestEncbTabl {
+    text-align: left;
+    height: 1.8em;
+    vertical-align: middle;
+    font-size: 0.9em!important;
+    color: #485B83 !important;
+    padding: 0px 0px 0px 1%;
+    font-family: "dosisbold" !important;
+    text-transform:none;
+}
+
+.reporteLab .cuestEncbTabl.uno,.reporteImg .cuestEncbTabl.uno,.reporteVm .cuestEncbTabl.uno,
+.reporteLab .cuestEncbTabl.dos,.reporteImg .cuestEncbTabl.dos,.reporteVm .cuestEncbTabl.dos,
+.reporteLab .cuestEncbTabl.tres,.reporteImg .cuestEncbTabl.tres,.reporteVm .cuestEncbTabl.tres{
+    background:none!important;
+}
+.reporteLab .colorTablaUno,.reporteImg .colorTablaUno,.reporteVm .colorTablaUno{
+    background: none!important;
+}
+
+.reporteLab .borderBlanco,.reporteImg .borderBlanco,.reporteVm .borderBlanco {
+    border:none!important;
+}
+
+.pacientesHistoriaSeccionImagen.listForms {
+    background:url(../images/pacientesForm.png) left top no-repeat;
+    background-size:cover;
+    width:23px;
+    height:28px;
+    margin:0 2% 0 0;
+}
+.docHomeImagen img{ height: 100%}
+
+.medicalHistoryPublic h1 {
+    color: #485B83;
+    font-family: "dosisregular";
+    font-size: 2.3em;
+    text-transform: uppercase;
+    margin: 0px 0px 5%;
+}
+
+.medicalHistoryPublic h2 {    
+    color: #485B83;
+    font-family: "dosisregular";
+    font-size: 1.5em;
+    margin: 2% 0px;
+    text-transform: uppercase;
+
+}
+.medicalHistoryPublic h2 a {
+    height: 22px;
+    width: 22px;
+    display: inline-block;
+    text-align: center;
+    font-size:14px;
+    vertical-align: top;
+    border-radius: 50%;
+    background-color:#a2bae0;        
+    margin: 0 auto;    
+    line-height: 1.8em;
+    margin-left: 10px;
+}
+
+.medicalHistoryPublic .pacientesHistoriaSeccion p {
+    height: 1.8em;
+    vertical-align: middle;
+    font-size: 0.9em;
+    color: #485B83 !important;
+    font-family: "dosisregular";
+    padding: 0px 0px 0px 1%;
+}
+.medicalHistoryPublic h3 {
+    font-family: "dosissemibold";
+    font-size: 1.6em;
+    color: #485B83;
+    margin: 0px 0px 2%;
+}
+.medicalHistoryPublic h4 {
+    font-family: "dosisregular";
+    font-size: 1.4em;
+
+}
+.medicalHistoryPublic  .tablilla {
+    margin: 0px 0px 2%;
+}
+
+.carouselItem {
+    height:100%;
+    width:100%;
+    position: relative;
+}
+.textItem{ position: absolute; bottom: 14%;right: 0px;width: 44%;z-index: 999;}
+#_submit_f {
+    padding: 0px 10px 0px 15px;
+}
+.disponibleDos.planAlm {
+    display: initial;   
+    width: 50%;
+    right: 5%;
+    left: auto;
+    text-align: right;
+}
+
+.planAlm .dispInf,.planAlm .dispSup {
+    display: inline-block;
+    margin:10px 10px 0px 0px;
+    border-bottom:none;
+}
+.cuestionario p.cuadro.uno.errorFile{ color: white!important; text-align: center; position: relative; }
+.cuestionario p.cuadro.uno.errorFile a{ padding: 0px; }
+.cuadro.uno.errorFile .closeBtn{
+    text-decoration: none;
+    text-transform: none;
+    font-family: "dosisregular";
+    font-size: 0.8em;
+    display: block;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top:0;
+    right: 0px;
+}
+
+.cuadro.errorFile {
+    margin: 0px 0px 10px;
+    width: 100%;
+    color: #FFF;
+    text-align: right;
+    padding: 0px 0px 10px;
+}
+.storagePlans .tablaTablilla tr td a, 
+.storagePlans .tablaTablilla tr th a,
+.storagePlans .tablaTablilla tr td a, 
+.storagePlans .tablaTablilla tr th a{ color: #fff;}
+.viewForm .cuesationarioCampo p{ display: inline-block; padding: 0px 0px 0px 10px;}
+.viewForm input,.viewForm textarea,.viewForm select{background-color: white;border: medium none;width: 100%;}
+.masBtn {
+    width:15px;
+    height:15px;
+    background: url(../images/flecha.png) #485B83 center bottom no-repeat;
+    margin:0 5px 0 0;
+    display: inline-block;
+}
+.masBtn.opened {
+    background: url(../images/flecha.png) #485B83 center top no-repeat;
+}
+.table-striped > tbody > tr.trPage{ background:#DFE8F4!important;}
+table.table-createView td{
+    border-right: 1px solid #485B83;    
+}
+.bColor{ background-color: #EF9DA7;}
+.select2-container--default .select2-selection--single {
+    background-color: #485B83 !important;
+    color: #FFF;
+    border: 0px;
+    border-radius: 0px;
+   
+    height: 100%;
+}
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+    color: #FFF;
+    outline: medium none;
+    font-family: "dosislight" !important;
+    font-size: 0.7em;
+    text-transform: uppercase;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    border-color: #fff transparent transparent;
+    border-width: 8px 8px 0px;
+    margin-left: -18px;
+       
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #FFF;
+    line-height: 28px;
+    font-family: "dosislight" !important;
+    text-transform: uppercase;
+}
+.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+    border-color: transparent transparent #fff;
+    border-width: 0px 8px 8px;
+}
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 0px;
+}
+.select2-container--default .select2-results > .select2-results__options {
+    background-color: #485B83 !important;
+}
+.select2-results__option {
+    padding: 6px;
+    font-family: "dosislight" !important;
+    text-transform: uppercase;
+    color:#fff;
+}
+.errorMsg{color: #ED253B; }
+.errorMsg ul{ margin-left: 2%}
+.pacientesDoctorImg img{ width: 100%;}
+.botoneraBottomCuestionario.expanded {
+    bottom: 12%;
+}
+
+#calendarCons .clndr-controls .clndr-previous-button {
+  cursor: pointer;
+  -webkit-user-select: none;
+  /* Chrome/Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+ */
+  float: left;
+  margin-left: 10px;
+}
+#calendarCons .clndr-controls .clndr-previous-button:hover {
+  background: #ddd;
+}
+#calendarCons .clndr-controls .clndr-previous-button.inactive {
+  opacity: 0.5;
+}
+#calendarCons .clndr-controls .clndr-previous-button.inactive:hover {
+  background: none;
+  cursor: default;
+}
+
+#calendarCons .clndr-controls .clndr-next-button {
+  cursor: pointer;
+  -webkit-user-select: none;
+  /* Chrome/Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+ */
+  float: right;
+  margin-right: 10px;
+}
+#calendarCons .clndr-controls .clndr-next-button:hover {
+  background: #ddd;
+}
+#calendarCons .clndr-controls .clndr-next-button.inactive {
+  opacity: 0.5;
+}
+#calendarCons .clndr-controls .clndr-next-button.inactive:hover {
+  background: none;
+  cursor: default;
+}
+td.inactive,td.event{
+    background-color: #88A7D7;
+}
+
+.calPhy td.event{
+    background-color: #D14553;
+     cursor:pointer;
+}
+
+.pacientesCalendario .tablaCalendario tr td.inactive:hover ,.pacientesCalendario .tablaCalendario tr td.event:hover {
+    background-color: #88A7D7!important;
+}
+.pacientesCalendario .tablaCalendario tr td.inactive:hover p,.pacientesCalendario .tablaCalendario tr td.event:hover p{
+    color: #fff!important;
+}
+td.today.inactive{ background-color:#CDE1FF; }
+td.today.inactive a {
+    color:#666;
+}
+.pacientesCalendario .tablaCalendario tr td.today.inactive:hover{ background-color:#c6e4ec!important;}
+.pacientesCalendario .tablaCalendario tr td.today.inactive:hover p{ color:#666!important;}
+.modal-header p {
+    font-family: 'dosisregular';
+    font-size:1.25em;
+    text-transform:uppercase;
+    color: #fff;
+}
+.modal-body p.carg {
+    text-align: center;
+    display: block;
+     color: #fff;
+}
+td.today {
+    background-color:#CDE1FF;
+}
+.formCnVvPcCampo textarea{ padding: 10px;}
+.userTxt {
+    font-family: 'dosisbold';
+}
+#form_carg_prep, #form_carg{ padding: 40px;}
+.smallText{ font-size: 0.9em!important;}
+.subText{ text-transform:uppercase; font-weight: bold;}
+.tablaComDos tr.wb td{
+    border-top:0px transparent !important;
+   
+}
+h4.daySel {text-align: center; font-family: "dosisregular"; font-size: 1.2em; color: rgb(72, 91, 131); margin: 0px 0px 5%; text-transform: uppercase;}
+.formGuessReg{ padding-left: 30px!important}
+.btn-xs, .btn-group-xs>.btn,.btn-lg, .btn-group-lg>.btn,.btn-sm, .btn-group-sm>.btn {
+    border-radius: 0px;
+}
+.submit.rojoFuerte{border:none!important;color: #ffffff;}
+.fos_user_registration_register.formAmd label {
+   width: 50%;
+}
+.tdc-img{background:url(../images/tdc.png) left top no-repeat; display: inline-block; margin: -2px 5px; width: 44px; height: 28px; position: absolute; bottom:15%; right: 20%;}
+.tdc-img.visa{ background-position: center top; }
+.tdc-img.master-card{ background-position: right top; }
+.tdc-img.american-express{ background-position: left bottom; }
+.tdc-img.diners-club{ background-position: center bottom; }
+.tdc-img.jcb{ background-position: right bottom; }
+label:has(+ div#appbundle_physicians_edit_user){
+    display:none;
+}
+
+.pagination > li > a, .pagination > li > span {
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #485B83;
+}
+
+.pagination > li.active > a,.pagination > li > a:hover, .pagination > li > span:hover {
+    background:#c6e4ec;
+    color:#485b83;
+    border: 1px solid #485B83;
+}
+.pagination > li:last-child > a, .pagination > li:last-child > span {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+.pagination > li:first-child > a, .pagination > li:first-child > span {
+    margin-left: 0;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+.marginTab_1{margin-left: 10px;}
+.marginTab_2{margin-left: 20px;}
+.marginTab_3{margin-left: 30px;}
+.marginTab_4{margin-left: 40px;}
+.td-field-0 { padding-left: 30px!important }
+.td-group-0 { padding-left: 30px!important }
+.td-group-1 { padding-left: 60px!important }
+.td-field-1 { padding-left: 60px!important}
+.td-field-2 { padding-left: 90px!important}
+.td-group-2 { padding-left: 90px!important }
+.td-field-3 { padding-left: 120px!important}
+.td-group-3 { padding-left: 120px!important }
+.td-field-4 { padding-left: 150px!important}
+.td-group-4 { padding-left: 150px!important }
+.td-field-5 { padding-left: 160px!important}
+.td-group-5 { padding-left: 160px!important }
+.td-field-6 { padding-left: 190px!important}
+.td-group-6 { padding-left: 190px!important }
+.td-field-7 { padding-left: 210px!important}
+.td-group-7 { padding-left: 210px!important}
+
+.groupCheck{display: inline-block;}
+.field-inline{display: inline-block;}
+.field-float-left{float: left;}
+.field-inline-break::after { content: '\A'; }
+
+.descr ol  {list-style:decimal !important ; margin-left: 20px;}
+.descr ul {list-style: circle !important; margin-left: 20px;}
+
+.colorTablaUno input::-webkit-input-placeholder { color: white;  }
+.colorTablaUno input:-moz-placeholder { color: white;  }
+.colorTablaUno input::-moz-placeholder { color: white; }
+.colorTablaUno input:-ms-input-placeholder { color: white;  }

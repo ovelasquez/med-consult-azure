@@ -1,0 +1,49 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{{ form_start(form,{'attr': {'class': 'fos_user_registration_register registerFront','id': 'registerPatient','action':path('fos_user_registration_register')}}) }}
+<!--<form id="registerPatient" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register registerFront">-->
+    <div class="registroFormulario dos register-user">
+        <h3>Registro de usuario</h3>
+        <div class="registroCampo">
+            <label for="facebook" class="uppercase">INICIAR SESIÓN CON FACEBOOK APP</label>
+            <div class="facebook">
+                <a href="#" class="facebookBtn">Connect with facebook</a><!--facebookBtn-->
+            </div><!--facebook-->
+        </div><!--registroCampo-->
+             
+        <div class="registroCampo">
+            {{ form_errors(form) }}
+        </div>
+        <div class="registroCampo">
+            {{ form_row(form.name,{'attr': {'class': 'fieldini'}}) }}
+        </div>
+        <div class="registroCampo">
+            {{ form_row(form.email,{'attr': {'class': 'fieldini'}}) }}
+        </div>
+        <div class="registroCampo">
+            {{ form_row(form.username,{'attr': {'class': 'fieldini'}}) }}
+        </div>
+        <div class="registroCampo last">
+            {{ form_row(form.plainPassword) }}            
+        </div>        
+        <p class="letraPequena">Todos los campos con el asterisco ('*') son obligatorios.</p><!--letraPequena-->
+        <p class="letraMediana">POR FAVOR LLENA LOS CAMPOS OBLIGATORIOS</p><!--letraMediana-->        
+        <input type="submit" value="Continuar" id="continuar-reg"  class="submit rojoFuerte">        
+        
+        
+    </div><!--registroFormulario dos-->    
+   
+    <div class="registroFormulario tres register-profile">
+        <h3>Perfil de usuario APP</h3>
+        <div class="registroCampo fieldsPatient">
+            <fieldset id="fieldsPatient">
+            {{ render(controller(
+                'AppBundle:Patients:newfront'        
+            )) }}
+            </fieldset>
+        </div>
+        <input type="button" value="Volver" class="submit dos rojoFuerte back">
+        <input type="submit" value="{{ 'registration.submit'|trans }}" class="submit rojoFuerte"/>
+    </div><!--registroFormulario dos-->  
+ {{ form_end(form) }}
+        
+

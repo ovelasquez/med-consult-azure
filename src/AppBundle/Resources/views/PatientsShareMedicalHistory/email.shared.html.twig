@@ -1,0 +1,5 @@
+{% extends 'AppUserBundle::layout-email.html.twig' %}
+{% block body_html %}
+{% set vars = {'email':email,'name': name,'username': username,'token':token,'sharedUrl':sharedUrl} %}
+{% include 'email/shared_medical_history.html.twig' with vars  %}
+{% endblock %}

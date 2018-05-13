@@ -1,0 +1,184 @@
+consultation_pdf:
+    path: /showpdf/{id}
+    defaults:
+        { _controller: AppBundle:Consultations:showpdf}
+
+consultation_pdf_medico:
+    path: /showpdfmedico/{id}/{paciente}
+    defaults:
+        { _controller: AppBundle:Consultations:showpdfmedico}
+
+consultation_invoice_pdf:
+    path: /showinvoicepdf/{id}
+    defaults:
+        { _controller: AppBundle:Consultations:showInvoicepdf}
+        
+consultation_webjobs:
+    path: /webjobs/consultation
+    defaults:
+        { _controller: AppBundle:Consultations:webjobs}
+          
+patients_verify:
+    path: /verify/{email}/{username}
+    defaults:
+        _controller: AppBundle:Patients:verify
+    methods:  [GET]
+        
+patients_checkfacebook:
+    path: /checkfacebook
+    defaults:
+        _controller: AppBundle:Patients:checkfacebook
+    methods:  [GET]
+    
+patients_register:
+    path: /registro/pacientes
+    defaults: {_controller: AppBundle:Patients:newfront}
+    
+patients_edit_front_fb:
+    path: /actualizar/pacientes/{id}
+    defaults: {_controller: AppBundle:Patients:editfront}
+    methods:  [GET]
+
+patient_view_front:
+    path: /paciente
+    defaults: {_controller: AppBundle:Patients:showfront}
+    
+patient_edit_profile:
+    path: /paciente/editar
+    defaults: {_controller: AppBundle:Patients:editprofile}
+    methods:  [GET]
+    
+physicians_view_front:
+    path: /medico/{id}
+    defaults: {_controller: AppBundle:Physicians:showfront}
+
+physicians_verify:
+    path: /verify/{email}/{username}
+    defaults:
+        _controller: AppBundle:Physicians:verify
+    methods:  [GET]
+
+physicians_get:
+    path: /physicians/get/{id}
+    defaults:
+        _controller: AppBundle:Physicians:getdata
+    methods:  [GET]
+    
+physicians_get_public:
+    path: /physicians/info/{id}
+    defaults:
+        _controller: AppBundle:Physicians:getdataInfo
+    methods:  [GET]
+
+physicians_get_list:
+    path: /physicians/get/list/{sp}
+    defaults:
+        _controller: AppBundle:Physicians:getlist
+    methods:  [GET]
+    
+physicians_disable_date:
+    path: /physicians/disable/date/{date}
+    defaults:
+        _controller: AppBundle:Physicians:disabledate
+    methods:  [GET]
+
+physicians_enable_date:
+    path: /physicians/enable/date/{date}
+    defaults:
+        _controller: AppBundle:Physicians:enabledate
+    methods:  [GET]
+    
+physicians_register:
+    path: /registro/medicos/{t}
+    defaults: {_controller: AppBundle:Physicians:newfront}
+
+physicians_list_physicians:
+    path: /medicos
+    defaults: {_controller: AppBundle:Physicians:list}
+
+admin_page:
+    path: /contents
+    defaults: {_controller: AppBundle:Contents:index}
+    
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+app_user:
+    resource: "@AppUserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_user_group:
+    resource: "@FOSUserBundle/Resources/config/routing/group.xml"
+    prefix: /group
+    
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+    
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:  /auth/login
+    
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix:  /auth/login
+
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /auth/login
+    
+facebook_login:
+    path: /auth/login/check-facebook
+    
+medical_forms_fields_loadsettings:
+    path: /field/loadsettings/{field}/{name}
+    defaults:
+        _controller: AppBundle:MedicalFormsFields:loadsettings
+    methods:  [GET]
+
+medical_forms_fields_delete_med:
+    path: /field/deletemed/{id}
+    defaults:
+        _controller: AppBundle:MedicalFormsFields:deleteMed
+    methods:  [GET]   
+    
+medical_forms_fields_order_med:
+    path: /field/ordermed/{id}/{idw}
+    defaults:
+        _controller: AppBundle:MedicalFormsFields:orderMed
+    methods:  [GET]    
+
+medical_forms_fieldsets_delete_med:
+    path: /fieldset/deletemed/{id}
+    defaults:
+        _controller: AppBundle:MedicalFormsFieldsets:deleteMed
+    methods:  [GET]
+
+contact_send:
+    path: /contacto
+    defaults: {_controller: AppBundle:Contacts:new}
+
+contact_res:
+    path: /contacto/resultado
+    defaults: {_controller: AppBundle:Contacts:result}
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+comur_image:
+    resource: "@ComurImageBundle/Resources/config/routing.yml"
+    prefix:   /
+
+payum_capture:
+    resource: "@PayumBundle/Resources/config/routing/capture.xml"
+
+payum_authorize:
+    resource: "@PayumBundle/Resources/config/routing/authorize.xml"
+
+payum_notify:
+    resource: "@PayumBundle/Resources/config/routing/notify.xml"

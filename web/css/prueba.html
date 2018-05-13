@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        .barrafooter p { margin:0; margin-left:-45%;  padding:0; font-size:0.75em; text-align:center; width:90%; height:20px; display:block; position:absolute; bottom:0; left:50%;  }
+        .barrafooter ul { margin:0 auto; padding:0; width:94%; height: 120px; display:block; position:relative; top:0px;list-style: none; z-index:1; }
+        .barrafooter ul li { padding-top:50px; text-align:center; width:25%;  height: 100px; display:inline; float:left; position:relative; }
+        .barrafooter ul li:before, .barrafooter ul li:after {
+        content: ' '; width: 0; height: 0;position: absolute;
+        border: 15px solid transparent; /* arrow size */}
+        /* top-stacked, smaller arrow */
+        .barrafooter ul li:before {/* positioning */position: absolute;top: -28px;left: 45%;z-index: 2;}
+        
+        
+        
+        
+        
+        .barrafooter ul li.comofunc:before {border-bottom-color: #5d7d83;  /* arrow color */}
+        .barrafooter ul li.registro:before {border-bottom-color: #bb1f39;  /* arrow color */}
+        .barrafooter ul li.acercade:before {border-bottom-color: #485b83;  /* arrow color */}
+        
+        
+        
+        
+        .barrafooter ul li a:hover .arrow {
+    display:block;
+}
+    </body>
+</html>

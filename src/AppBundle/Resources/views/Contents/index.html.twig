@@ -1,0 +1,46 @@
+{% extends '::baseadm.html.twig' %}
+
+{% block body -%}
+    <h5>Lista de contenidos</h5>
+
+    <table cellpadding="0" cellspacing="0" border="0" width="90%" class="table-striped tablaAdm ">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Tag</th>
+                
+                <th>Created</th>
+                <th>Changed</th>      
+                <th>Order</th>
+                <th class=" col-lg-1 col-md-1 col-sm-1" colspan="2">OPERACIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td ><a href="{{ path('contents_show', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
+                    <td >{% if entity.status == 0 %}no publicado{% else %}publicado{% endif %}</td>
+                    <td >{{ entity.tag }}</td>
+                    
+                    <td >{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td >{% if entity.changed %}{{ entity.changed|date('Y-m-d H:i:s') }}{% endif %}</td>    
+                    <td >{{ entity.weight }}</td>
+                    <td >
+                        <a href="{{ path('contents_show', { 'id': entity.id }) }}">ver</a>
+                    </td>
+                    <td >
+                        <a href="{{ path('contents_edit', { 'id': entity.id }) }}" >editar</a>
+                    </td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('contents_new') }}" class="submit submitAdm lilaOscuro">Crear</a>
+        </li>
+    </ul>
+{% endblock %}

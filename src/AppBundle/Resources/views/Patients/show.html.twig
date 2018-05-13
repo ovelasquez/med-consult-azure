@@ -1,0 +1,98 @@
+{% extends '::baseadm.html.twig' %}
+
+{% block body -%}
+    <h5>Patients</h5>
+
+     <table  cellpadding="0" cellspacing="0" border="0" width="90%"  class="tablaAdm tableShow">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td >{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Usuario</th>
+                <td >{{ entity.user.username }}</td>
+            </tr>
+            <tr>
+                <th>Nombres</th>
+                 <td >{{ entity.user.name }}</td>
+            </tr>
+            <tr>
+                <th>Apellidos</th>
+                 <td >{{ entity.user.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Correo</th>
+                 <td >{{ entity.user.email }}</td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                 <td >{% if (entity.user.enabled) %}Activo{%else%}Inactivo{%endif%}</td>
+            </tr>
+            
+            <tr>
+                <th>Address1</th>
+                 <td >{{ entity.address1 }}</td>
+            </tr>
+            <tr>
+                <th>Address2</th>
+                 <td >{{ entity.address2 }}</td>
+            </tr>
+            <tr>
+                <th>Locality</th>
+                 <td >{{ entity.locality }}</td>
+            </tr>
+            <tr>
+                <th>Province</th>
+                 <td >{{ entity.province }}</td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                 <td >{{ entity.country }}</td>
+            </tr>
+            <tr>
+                <th>Postalcode</th>
+                 <td >{{ entity.postalcode }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                 <td >{{ entity.phone }}</td>
+            </tr>
+            <tr>
+                <th>Website</th>
+                 <td >{{ entity.website }}</td>
+            </tr>
+            <tr>
+                <th>Birthdate</th>
+                 <td >{{ entity.birthdate|date('Y-m-d') }}</td>
+            </tr>
+            
+            <tr>
+                <th>Último acceso</th>
+                 <td >{{ entity.user.lastLogin|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('patients') }}" class="submit btnAdm lilaOscuro">
+                Volver
+            </a>
+    </li>
+    
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#form_submit").html("{% if (entity.user.enabled) %}Desactivar{%else%}Activar{%endif%}");
+
+        });
+    </script>
+
+    
+
+{% endblock %}

@@ -1,0 +1,82 @@
+# Patients
+patients:
+    edit:
+        submit: Actualizar grupo
+        title_fieldset1: Actualizar sus datos
+        title_fieldset2: Actualizar sus datos
+    show:
+        name: Nombre de grupo
+    new:
+        title_fieldset1: Registro de usuario
+        title_fieldset2: Perfil de usuario
+        msj_instruction1: Todos los campos con el asterisco ('*') son obligatorios.
+        msj_instruction2: POR FAVOR LLENA LOS CAMPOS OBLIGATORIOS
+        msj_instruction3: INICIAR SESIÓN CON FACEBOOK
+        msj_instruction4: Connect with facebook
+        submit: Crear grupo
+        
+    flash:
+        updated: El grupo ha sido actualizado
+        created: El grupo ha sido creado
+        deleted: El grupo ha sido borrado
+
+# Patients
+physicians:    
+    new:
+        title_fieldset1: Regístrate y conoce
+        title_fieldset2: sobre MedEconsult
+# Global strings
+layout:
+    forgot_password: ¿Has olvidado la contraseña?
+    login_facebook: Login con Facebook
+    logout: Salir
+    login: Entrar
+    registration: Registro
+    logged_in_as: Identificado como %username%
+    msj_login_ini1: No tienes cuenta
+    msj_login_ini2: Crea tu usuario
+    create:
+        account: Crea tu cuenta
+        msj_bottom1: Esta información no estará en el perfil público
+        msj_bottom2: Todos los campos con el asterisco ('*') son obligatorios.
+        btn_submit: Crear Cuenta
+    
+# Menu strings
+menu:
+    sitename: MedEConsult
+    item_how: cómo funciona
+    item_registration1: entrar
+    item_registration2: registro
+    item_consult1: consultas
+    item_consult2: y servicios
+    item_about1: acerca 
+    item_about2: de medeconsult
+    item_contact: contacto
+    item_config: Configurar cuenta
+
+# Form field labels
+form:
+    address1: Dirección 1
+    address2: Dirección 2 
+    locality: Localidad
+    province: Provincia
+    country: País
+    postalcode: Codigo Postal
+    phone: Teléfono
+    website: Sitio Web
+    birthdate: Fecha de nacimiento
+    emailexist: El correo ya esta registrado
+    userexist: El usuario ya esta registrado
+    goback: Volver
+    pushon: Continuar
+    jobtitle: Título actual
+    education: Educación
+    abms: Certificaciones (ABMS)
+    university: Universidades / Hospitales
+    specialty: Especialidad
+    subspecialty: Sub-especialidad
+    research: Intereses de investigación    
+    languages: Idiomas
+    photo: foto         
+
+    

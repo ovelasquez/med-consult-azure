@@ -1,0 +1,423 @@
+{% extends '::base_shared.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/md-assets/css/plugins/forms/wizard.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/md-assets/css/plugins/pickers/daterange/daterange.css')}}">
+{% endblock %}
+
+{% block body %}
+
+    {% set nextpage=0 %}           
+
+    {% for  key, entitypage in entities %} 
+        {%if nextpage==page%}
+            {% set nextpage=entitypage['field'].id %}                                 
+        {%endif%}
+        {%if entitypage['field'].id==page%}
+            {% set nextpage=page %}                                 
+        {%endif%}  
+
+    {%endfor%} 
+
+
+    <section id="vertical-tabs">
+        <div class="row">
+            <div class="col-xs-12">
+
+                <div class="pacientesDoctorResumen card ">
+                    
+                    <div class="card-header">
+                        <h4 class="card-title">Paciente</h4>
+                        <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                        <div class="heading-elements bg-white">
+                            <ul class="list-inline mb-0">
+                                <li><div class="btn-menu-shared" >
+                                {% if token is null %}
+                                    <a  href="{{  path('medicalforms_view_shared', {'id': form_hs,'pat': patient.id}) }}" class="btn mr-1 btn-outline-primary btn-sm {%if entity.formName==form_hs%}active{%endif%}"><i class="icon-paper"></i>Historial de salud</a>
+                                    <a  href="{{ path('patients_view_shared_form', { 'form': form_hm,'id': patient.id }) }}" class="btn mr-1 btn-outline-primary btn-sm {%if entity.formName==form_hm%}active{%endif%}"><i class="icon-paper-stack"></i>Archivo médico</a>
+                                    <a  href="{{ path('consultations_list_shared_patient',{'id': patient.id}) }}" class="btn mr-1 btn-outline-primary btn-sm {%if entity.formName!=form_hm and  entity.formName!=form_hs%}active{%endif%}"><i class="icon-speech-bubble"></i>Consultas</a>
+                                {% else %}
+                                    <a  href="{{  path('medicalforms_view_shared', {'id': form_hs,'pat': token}) }}"  class="btn mr-1 btn-outline-primary btn-sm {%if entity.formName==form_hs%}active{%endif%}"><i class="icon-paper"></i>Historial de salud</a>
+                                    <a  href="{{ path('patients_view_shared_form', { 'form': form_hm,'id': token }) }}" class="btn mr-1 btn-outline-primary btn-sm  {%if entity.formName==form_hm%}active{%endif%}"><i class="icon-paper-stack"></i>Archivo médico</a>
+                                    <a  href="{{ path('consultations_list_shared_patient',{'id': token}) }}" class="btn mr-1 btn-outline-primary btn-sm {%if entity.formName!=form_hm and  entity.formName!=form_hs%}active{%endif%}"><i class="icon-speech-bubble"></i>Consultas</a>
+                                {% endif%}
+                            </div></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-block p-2">
+                            <div class="col-xs-12 col-md-8 col-lg-8 text-left mb-1">
+                                <h4 class=" " id="name">{{patient.user.name}} {{patient.user.lastname}}</h4>
+                                <p id="spe"  class="card-text mb-0"><span>Edad:</span>{% if patient.yearsold is defined %}{{ patient.yearsold }}{% endif %}</p>
+                                <p id="spe"  class="card-text mb-0"><span>Genero:</span> {% if patient.gender is defined and patient.gender=='female' %}Femenino{%else%}Masculino{% endif %}</p>                        
+                            </div>
+                            <div class="col-xs-12 col-md-4 col-lg-4 text-xs-center">
+                                {% if patient.photo is defined and patient.photo!='' %}
+                                    <img width='100px' src="{{ asset('uploads/documents/' ~ patient.photo) }}" />
+                                {%endif%}                                             
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+
+                    <div class="card-body collapse in">
+                        <div class="card-block">
+                            {% set classes=["azulOscuro blancoColor", "celeste", "rojo", "gris", "lila", "celeste", "rojoFuerte", "azulNormal"] %}
+
+                            <form name="appbundle_medicalforms_view" method="get" action="{{  path('medicalforms_view_shared', {'id': form_hs,'pat': patient.id,'page': nextpage}) }}" class="vertical-tab-steps wizard-notification cuestionarioForm wizard clearfix vertical formFillConsView" id="formFillCons" enctype="multipart/form-data" role="application" >
+                                {% set indT=0 %}
+
+                                {% for  key, entitypage in entities %} 
+                                    {% if entitypage['field'].type=="page" %}
+
+                                    <!-- Step {{key}} {{loop.index}} {{indIni}} -->
+                                        {%if entitypage['field'].id==page%}
+                                            {% set indIni=loop.index %}                                 
+                                        {%endif%}
+                                        <h6 data-link="" data-pagekey="page{{key}}" class="page {%if entitypage['field'].id==page%}currentpage{%endif%}" data-id="{{entitypage['field'].id}}">{{entitypage['field'].label}}</h6>
+                                        <fieldset data-id="f{{loop.index-1}}">
+
+
+                                            <div id="page{{key}}" class="pageCont"> 
+
+                                                <div class="cuestionario">
+                                                    <!--div class="disponibleDos planAlm"><div class="dispInf"><p>Almacenamiento</p></div><div class="dispSup"><div class="recuadroUno"></div><p>Disponible <span class="stD">{% if patient.storageplan.space is defined %}{{((patient.storageplan.space-patient.stored)/1048576)|round(2)}}{% endif %}</span> MB</p></div><div class="dispInf"><div class="recuadroDos"></div><p>Usados {% if patient.stored is defined %}{{(patient.stored/1048576)|round(2) }}{% endif %} MB</p></div></div-->
+                                                    <div class="docHomeIntScroll mCustomScrollbar">                    
+
+                                                        {% for  keyf, entityfieldset in entitypage %} 
+
+
+                                                            {% if keyf!='field' %}
+                                                                <h2 class='{% if entityfieldset.fieldset.classname is defined %}{{entityfieldset.fieldset.classname}}{% endif%} form-section'>{{entityfieldset.fieldset.label}}</h2>
+                                                                <div class="cuestionarioDivision ">
+
+                                                                    {% set gr='' %}
+                                                                    {% set tb='' %}
+                                                                    {% set indT=0 %}
+                                                                    {% set indTab=1 %} 
+                                                                    {% set grOp = [] %} 
+                                                                    {% for keyfs, field in entityfieldset.fields %}  
+                                                                        <!--ITERADO_{{loop.index}} ID_{% if entityfieldset.fields[loop.index] is defined %} {{entityfieldset.fields[loop.index].id}} {%endif%} DATA::{{field.valuetemp}}::-->   
+
+                                                                        {% if field.field=='grid'%}                        
+
+                                                                            <!--ABRIENDO T_{{field.id}}--> 
+                                                                            {% if field.configjson.class is defined and 'break' in field.configjson.class %}<br />{% endif%}
+                                                                            {% if field.showlabel is defined and field.showlabel==1 %}
+                                                                                <div   class="col-md-9 title" >{{field.label}}:</div>
+                                                                            {% endif%}  
+                                                                            <div class="cuesationarioCampo form-group "><table  class="col-md-9 table table-xs mb-0 {% if field.configjson.class is defined and field.configjson.class!='' %}{{field.configjson.class}}{% else%}cuestionarioTabla{% endif%} grid" data-name-field="{{field.name}}" data-cardinality="{% if field.configjson.cardinality>1 %}{{field.configjson.cardinality}}{% endif%}"  border="0" cellpadding="0" cellspacing="0" width="75%" >
+                                                                                    {% set tb=field.id %}    
+                                                                                    {{field.input|raw}} 
+
+                                                                                {% elseif field.field=='group'  %}
+                                                                                    {% set grOp = grOp|merge([field.id]) %}   
+                                                                                    {% set indTab=grOp|length +1 %}
+
+                                                                                    <!--ABRIENDO G_{{field.id}}-->  
+                                                                                    {% if field.configjson.class is defined and 'break' in field.configjson.class %}<br />{% endif%}
+                                                                                    <div id="{{field.name}}" data-field="{{field.field}}" class="cuesationarioCampo form-group  form-group-inputs groupInputs marginTab_{{indTab-1}} {% if field.configjson.condx is defined and field.configjson.condx!=''%}condx{% endif%}" {% if field.configjson.condx is defined and field.configjson.condx!='' %}data-condx="{{field.configjson.condx}}"{% endif%}>
+                                                                                        {% if field.showlabel is defined and field.showlabel==1 %}
+                                                                                            <div   class="col-md-9 title" >{{field.label}}:</div>
+                                                                                        {% endif%}   
+                                                                                        {% set gr=field.id %}     
+                                                                                    {% else %}
+
+                                                                                        {% if (gr=='' and tb=='')%}
+                                                                                            {% if field.configjson.class is defined and 'break' in field.configjson.class %}<br />{% endif%}
+                                                                                            <div class="cuesationarioCampo form-group  marginTab_{{indTab}} {% if field.configjson.class is defined and field.configjson.class!='' %}{{field.configjson.class}}{% endif%}">
+                                                                                                {% if field.showlabel is defined and field.showlabel==1 %}
+                                                                                                    <label  class="etiquetaCuestionario col-md-3 label-control" for="{{field.name}}0">{% if field.required==1%}*{% else%}&nbsp;{% endif%}{{field.label}}:</label>
+                                                                                                {% endif%}    
+                                                                                                <div class="col-md-9">
+
+                                                                                                    {% if field.configjson.cardinality is defined and field.configjson.cardinality!=1 and (field.field!='grid' ) %}
+                                                                                                        <div >
+                                                                                                            <a class="a-mas btn btn-info mb-1" href="#" rel="{{field.configjson.cardinality}}"> <i class="icon-plus4"></i> Añadir más</a>
+
+                                                                                                        </div>
+                                                                                                        <div class="f-mas" >{{field.valuehtml|raw}}</div>
+                                                                                                    {% else%}
+                                                                                                        {{field.valuehtml|raw}}
+                                                                                                    {% endif%}
+
+                                                                                                </div>   
+                                                                                            </div>    
+                                                                                        {% elseif (tb!='')%}
+                                                                                            {% if field.valuetemp!='' or indTab<=2%}
+                                                                                                {{field.input|raw}} 
+                                                                                            {% endif %}
+
+                                                                                        {% else %}
+                                                                                            {% if field.configjson.class is defined and 'break' in field.configjson.class %}<br />{% endif%}
+                                                                                            <div  class=" form-group {% if field.configjson.class is defined and field.configjson.class!='' %}{{field.configjson.class}}{% endif%}">
+                                                                                                {% if field.showlabel is defined and field.showlabel==1 %}
+                                                                                                    <label  class="etiquetaCuestionario col-md-3 label-control" for="{{field.name}}0" {% if field.configjson.condx is defined and field.configjson.condx!='' and field.valuetemp=='' %}{% endif%} >{% if field.required==1%}*{% else%}&nbsp;{% endif%}{{field.label}}:</label><!--+-->
+                                                                                                {% endif%} 
+                                                                                                <div class="col-md-9">
+
+                                                                                                    {% if field.configjson.cardinality is defined and field.configjson.cardinality!=1 and (field.field!='grid' ) %}
+                                                                                                        <div ><a class="a-mas azulOscuro" href="#" rel="{{field.configjson.cardinality}}">Añadir más</a></div>
+                                                                                                        <div class="f-mas" >{{field.valuehtml|raw}}</div>
+                                                                                                    {% else%}
+                                                                                                        {{field.valuehtml|raw}}
+                                                                                                    {% endif%}
+
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        {% endif %}
+
+
+                                                                                    {% endif %}
+
+
+<!--CERRANDO TABLAS ID_{{field.id}} IDG_{%if field.subgroup.id is defined %}{{field.subgroup.id}}{%endif%} T_{{tb}} G_{{gr}} NEXT_G_{%if entityfieldset.fields[loop.index] is defined and entityfieldset.fields[loop.index].subgroup is not null%}{{entityfieldset.fields[loop.index].subgroup.id}}{%endif%} GROUPS {{ grOp|join('|') }} -->   
+                                                                                    {% if (tb!='' )%}
+                                                                                        {% if ( entityfieldset.fields[loop.index] is defined and (entityfieldset.fields[loop.index].subgroup.id is defined and entityfieldset.fields[loop.index].subgroup.id!=tb) or (entityfieldset.fields[loop.index].subgroup.id is not defined))
+                                or entityfieldset.fields[loop.index] is not defined %}                                
+                                                                                        <td>&nbsp;</td></tr>
+                                                                                </table></div><!--CERRANDO2 T_{{tb}}-->   
+                                                                                {% set tb='' %}
+                                                                            {% endif %}
+                                                                            {% endif %}
+
+                    <!--CERRANDO GRUPOS ID_{{field.id}} IDG_{%if field.subgroup.id is defined %}{{field.subgroup.id}}{%endif%} T_{{tb}} G_{{gr}} NEXT_G_{%if entityfieldset.fields[loop.index] is defined and entityfieldset.fields[loop.index].subgroup is not null%}{{entityfieldset.fields[loop.index].subgroup.id}}{%endif%}  GROUPS {{ grOp|join('|') }} -->   
+                                                                            {% if (grOp|length>0 and loop.index < entityfieldset.fields|length) and tb==''%}
+                                                                            {% set bk=0 %}
+                                                                            {% set indS=loop.index %}
+                                                                            {% for grO in grOp|reverse %}                                     
+
+                                                                                {% if ( bk==0 and (entityfieldset.fields[indS].subgroup is null or entityfieldset.fields[indS].subgroup.id!=grO) )   %}                                
+                                                                                    </div><!--CERRANDO2 G_{{grO}} GRUPOS_{{ grOp|join('|') }}  {%if entityfieldset.fields[indS].subgroup is not null%}{{entityfieldset.fields[indS].subgroup.id}}{%endif%}-->                                                                            
+                                                                            {% set grOp=grOp|slice(0, (grOp|length) -1)  %}
+                                                                            {% elseif(bk==0 and  entityfieldset.fields[indS].subgroup.id==grO) %}                                        
+                                                                            {% set bk=1 %}
+                                                                            {% endif %}   
+
+                                                                                {% endfor %}
+                                                                                    <!-- GROUPS {{ grOp|join('|') }} -->
+                                                                                    {% if (grOp|length==0) %}                                    
+                                                                                        {% set gr='' %}  
+                                                                                    {%else%}
+                                                                                        {% set gr=grOp|last %}
+                                                                                    {% endif %}    
+                                                                                    <!-- GR {{ gr }} -->
+                                                                                    {%elseif (grOp|length>0 and loop.index == entityfieldset.fields|length)%}
+                                                                                    {% set bk=0 %}
+                                                                                    {% set indS=loop.index %}
+                                                                                    {% for grO in grOp|reverse %}                                     
+
+                            </div><!--CERRANDO3 G_{{grO}} GRUPOS_{{ grOp|join('|') }}  -->                                                                            
+
+                                                                                {% endfor %}
+                                                                                {% endif %}
+
+
+                                                                                    {% set indTab=grOp|length + 1%}
+                                                                                    {% endfor %}
+                                                                                    </div>
+                                                                                    <div class='clearFix'></div>
+                                                                                    {% endif %}
+
+
+                                                                                        {% endfor %}
+                                                                                        </div><!--docHomeIntScroll-->
+                                                                                        </div><!--cuestionario-->
+                                                                                        </div><!--pageCont-->
+
+
+                                                                                    </fieldset>
+
+
+<!--li class="{%if classes[indT] is defined%}{{classes[indT]}}{% endif%} {% if key==0%}current{% endif%}"><a href="{{  path('medicalforms_fill_consultations', {'id': form_hs,'idc': 0,'filter': 0,'page': entitypage['field'].id}) }}" rel="_page{{key}}" class="page {%if entitypage['field'].id==page%}currentpage{%endif%}" data-id="{{entitypage['field'].id}}">{{entitypage['field'].label}}<div class="hover"></div></a></li-->                        
+                                                                                    {% endif%}
+
+                                                                                        {% if (indT < classes|length)%}
+                                                                                            {% set indT=indT+1 %} 
+                                                                                        {% else%}
+                                                                                            {% set indT=0 %} 
+                                                                                        {% endif%} 
+
+                                                                                        {% endfor %}
+
+
+
+                                                                                            <!--div  class="row-after-form">
+                                                                            <div class="col-xs-12 cuestionarioEncabezado lila" style="height: 10%;"><h3>Para continuar debe actualizar la siguiente información</h3></div>
+                                                                            <div style="height: 80%;">
+                                                                            <div class="col-xs-2 barramenu dos barramenuform">
+                                                                                            {% set classes=["azulOscuro blancoColor", "celeste", "rojo", "gris", "lila", "celeste", "rojoFuerte", "azulNormal"] %}
+                                                                                            <ul class="menuform">
+                                                                                            {% set indT=0 %}
+                                                                                            {% for  key, entitypage in entities %} 
+                                                                                                {% if entitypage['field'].type=="page" %}
+                                                                                                    <li class="{%if classes[indT] is defined%}{{classes[indT]}}{% endif%} {% if key==0%}current{% endif%}"><a href="{{  path('medicalforms_fill_consultations', {'id': form_hs,'idc': 0,'filter': 0,'page': entitypage['field'].id}) }}" rel="_page{{key}}" class="page {%if entitypage['field'].id==page%}currentpage{%endif%}" data-id="{{entitypage['field'].id}}">{{entitypage['field'].label}}<div class="hover"></div></a></li>                        
+                                                                                                {% endif%}
+                                                                                                
+                                                                                                {% if (indT < classes|length)%}
+                                                                                                    {% set indT=indT+1 %} 
+                                                                                                {% else%}
+                                                                                                    {% set indT=0 %} 
+                                                                                                {% endif%} 
+                                                                                                
+                                                                                            {% endfor %}
+                                                                                        </ul>
+                                                                                    </div-->
+
+                                                                                        </form>
+
+
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+
+                                                                </section>
+
+
+
+
+                                                                {% endblock %}
+                                                                    {% block javascripts %}
+                                                                        <!-- BEGIN PAGE LEVEL JS-->
+                                                                        <script>
+                                                                            {% for  key, entitypage in entities %} 
+                                                                                {%if entitypage['field'].id==page%}
+                                                                                    {% set indIni=loop.index-1 %}                                 
+                                                                                {%endif%}  
+                                                                            {%endfor%} 
+                                                                                    $(document).ready(function () {
+                                                                                    // Vertical tabs form wizard setup
+                                                                                    $(".vertical-tab-steps").steps({
+                                                                                    headerTag: "h6",
+                                                                                            bodyTag: "fieldset",
+                                                                                            transitionEffect: "fade",
+                                                                                            enableAllSteps: true,
+                                                                                            stepsOrientation: "vertical",
+                                                                                            showFinishButtonAlways: "true",
+                                                                                            titleTemplate: '<span class="step">#index#</span> #title#',
+                                                                                            startIndex:{{indIni}},
+                                                                                            labels: {
+                                                                                            finish: 'Continuar'
+                                                                                            },
+                                                                                            onFinishing: function (event, currentIndex) {
+                                                                                            var str = $("#formFillCons").attr("action");
+                                                                                                    var n = str.lastIndexOf("/");
+                                                                                                    str = str.substring(0, n) + "/" + $("#formFillCons-h-" + (currentIndex + 1)).data("id");
+                                                                                                    $("#formFillCons").attr("action", str);
+                                                                                                    /*** FUC **/
+                                                                                                    $("#appbundle_medicalforms_submit").submit();
+                                                                                            },
+                                                                                            onStepChanging:function (event, currentIndex, newIndex) {
+                                                                                            var str = $("#formFillCons").attr("action");
+                                                                                                    var n = str.lastIndexOf("/");
+                                                                                                    str = str.substring(0, n) + "/" + $("#formFillCons-h-" + (newIndex)).data("id");
+                                                                                                    $("#formFillCons").attr("action", str).submit();
+                                                                                                    return false;
+                                                                                            }
+                                                                                    });
+                                                                                            $('ul[role="menu"] a[role="menuitem"]').each(function(){
+                                                                                    /*if (!$(this).parent().is( ":last-child" )){
+                                                                                     $(this).addClass("hidden")
+                                                                                     }*/
+                                                                                    $(this).addClass("hidden")
+
+                                                                                    });
+                                                                                    });</script>
+
+
+                                                                        <script src="{{ asset('js/formhelpers/bootstrap-formhelpers-selectbox.js')}}"></script>
+                                                                        <script src="{{ asset('js/formhelpers/bootstrap-formhelpers-countries.en_US.js')}}"></script>
+                                                                        <script src="{{ asset('js/formhelpers/bootstrap-formhelpers-countries.js')}}"></script>
+                                                                        <!-- END PAGE LEVEL JS-->
+                                                                        <script>
+                                                                            {% if patient.stored is defined and patient.stored is not null %}
+                                                                                        var _51 ={{patient.stored}} ;{% else %}
+                                                                                        var _51 = 0;{% endif %}
+                                                                                        var _52 ={{patient.storageplan.space-patient.stored}} ;
+                                                                                        $(document).ready(function () {
+                                                                                $(".form-input").prop('disabled', true);
+                                                                                        //CONTROL DE AGREGAR MAS
+                                                                                        $(".a-mas").remove();
+                                                                                        $(".a-mas-f").remove();
+                                                                                        $(".tr-a-mas-f").remove();
+                                                                                        $(".table tr td:last-child").remove();
+                                                                                        //REESCRIBIR GRID
+                                                                                        $(".grid").each(function () {
+                                                                                id = "#tr_" + $(this).attr("data-name-field");
+                                                                                        numInp = $(id + " td").first().children(".inp").length - 1;
+                                                                                        numCol = $(id).children("td").length;
+                                                                                        if (numInp + 1 > 1){
+
+                                                                                for (var i = 1; i <= numInp; i++) {
+                                                                                var row = document.createElement('tr');
+                                                                                        row.className = 'groupInputs';
+                                                                                        for (var j = 0; j < numCol; j++) {
+                                                                                inp = $(id).children("td").eq(j).children(".inp").eq(i);
+                                                                                        var cell = row.insertCell(j);
+                                                                                        cell.className = 'colorTablaUno borderBlanco';
+                                                                                        $(cell).append(inp.clone());
+                                                                                }
+                                                                                $(row).children("td").last().html("<a class='elim a-mas-el' href='#' rel='tr'>x</a>");
+                                                                                        $(this).append(row);
+                                                                                        $(".elim").click(function () {
+                                                                                $(this).parents($(this).attr("rel")).remove();
+                                                                                        return false;
+                                                                                });
+                                                                                        //$(row).find('.form-file').bind('change',{}, sizeFiles);
+                                                                                        //$(row).find(':input').on( "change", validGroup ).change();
+                                                                                }
+
+
+                                                                                for (var j = 0; j < numCol; j++) {
+                                                                                while ($(id).children("td").eq(j).children().length > 1){
+                                                                                inp = $(id).children("td").eq(j).children().last();
+                                                                                        inp.remove();
+                                                                                }
+                                                                                }
+
+
+                                                                                } /* */
+
+                                                                                });
+                                                                                        //ACTIVAR ELIM 
+                                                                                        $(".elim").remove();
+                                                                                        $(".tdelim").remove();
+                                                                                        $(".groupInputs").each(function(){
+
+                                                                                if ($(this).children().length <= 0){
+                                                                                $(this).remove();
+                                                                                } else{
+                                                                                var wCont = true;
+                                                                                        var id = $(this).prop("id");
+                                                                                        $(this).children().each(function(){
+
+                                                                                if (!$(this).hasClass('titleG') && !$(this).hasClass('groupInputs'))
+                                                                                        wCont = false;
+                                                                                });
+                                                                                        if (wCont) $(this).remove();
+                                                                                }
+
+                                                                                });
+                                                                                        //FIle HREF            
+                                                                                        $(".medicalFormFile").each(function () {
+                                                                                var path = '{{ path("medicalforms_view_file", {'medicalforms': '_e', 'filename': '_u', 'id': '_i'}) }}';
+                                                                                        path = path.replace("_e", $(this).data("f1"));
+                                                                                        path = path.replace("_u", $(this).data("f2"));
+                                                                                        path = path.replace("_i", '{{patient.id}}');
+                                                                                        $(this).prop("href", path);
+                                                                                });
+                                                                                });
+
+
+
+                                                                            </script>
+                                                                            {% endblock %}

@@ -1,0 +1,31 @@
+{% extends '::baseadm.html.twig' %}
+
+{% block body -%}
+    <h1>MedicalFormsFieldsets creation</h1>
+
+    {{ form(form,{ 'attr': {'class': 'formAmd'} }) }}
+
+        <ul class="record_actions supe">
+    <li>
+        <a href="{{ path('medicalforms_show',{'id':idf}) }}">        Volver</a>
+        </li>
+</ul>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        
+        $(document).ready(function () {
+            
+           $("#appbundle_medicalformsfieldsets_type").change(function () {
+                var valF = $(this).val();
+                if (valF==="page"){
+                    $("#appbundle_medicalformsfieldsets_page").attr("disabled","disabled");
+                }else{
+                    $("#appbundle_medicalformsfieldsets_page").removeAttr("disabled","disabled");
+                }
+            });
+            
+        });
+
+    </script>
+{% endblock %}

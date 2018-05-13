@@ -1,0 +1,375 @@
+
+
+{% if is_granted('ROLE_PHYSICIANS') %}
+
+
+<li class="dropdown dropdown-notification nav-item">
+
+                            <a href="#" data-toggle="dropdown" class="nav-link nav-link-label"><i class="ficon fa fa-bell-o"></i>
+
+                                <!-- VALOR DEL GLOBO DE MENSAJE -->
+                              
+                                           
+                                {% if countNew > 0   %}
+                                <span class="tag tag-pill tag-default tag-danger tag-default tag-up">{{countNew}}</span> <!--AQUI-->
+                                {% endif %}
+                               
+                                <!-- VALOR DEL GLOBO DE MENSAJE -->
+
+                            </a>
+                           <!-- COMIENZO DE DROPDOWN LISTA DE NOTIFICACIONES AQUI -->
+                                <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
+                                    <li class="dropdown-menu-header">
+                                <h6 class="dropdown-header m-0">
+                                    <span class="grey darken-2">Notificaciones</span>
+
+                                    <!-- VALOR DE NEW NOTIFICACIONES -->
+                                    {% if countNew > 0   %}
+                                    <span class="notification-tag tag tag-default tag-danger float-xs-right m-0">
+                                      {{countNew}}  Nueva</span>
+                                    {% endif %}
+                            
+                                     <!-- /////////////////VALOR DE NEW NOTIFICACIONES -->
+                                </h6>
+                                    </li>
+                                    <li class="list-group scrollable-container">
+
+                                {% if alertas %}
+
+                                        {% for entity in alertas %}
+
+                                            {% if app.user == entity.user and entity.tipo == 'Nueva Consulta'%}
+
+                                      <a href="{{ path('alertas_update', { 'id': entity.id }) }}" class="list-group-item">
+                                            <div class="media">
+                                                <div class="media-left valign-middle"><i class="fa fa-bell-o icon-bg-circle bg-cyan"></i></div>
+
+                                          
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">{{entity.tipo}}</h6>
+
+                                                    <p class="notification-text font-small-3 text-muted">{{entity.tipo}}  </p>
+                                                    <small>
+                                                        <time datetime="2015-06-11T18:29:20+08:00" class="media-meta text-muted">Fecha: {{entity.createdate |date('d-m-Y') }}</time></small>
+                                                </div>
+
+                                          
+
+                                            </div>
+                                        </a>  
+                                             {#% else %}
+
+                                               {% if app.user == entity.user and entity.tipo == 'Nuevo Mensaje'%#}
+
+                                               <!--  <a href="javascript:void(0)" class="list-group-item">
+                                            <div class="media">
+                                                <div class="media-left valign-middle"><i class="icon-bell-slash icon-bg-circle bg-red bg-accent-3"></i></div>
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">NO TIENE NOTIFICACIONES</h6><small>
+                                                        <time datetime="2015-06-11T18:29:20+08:00" class="media-meta text-muted">{{ "now"|date("d/m/Y") }}</time></small>
+                                                </div>
+                                            </div></a> 
+
+                                        </li>-->
+                                            {% endif %}
+
+
+                                    
+
+                                         {% endfor %}
+
+                                {% else %}
+
+                                <a href="javascript:void(0)" class="list-group-item">
+                                            <div class="media">
+                                                <div class="media-left valign-middle"><i class="fa fa-bell-slash-o icon-bg-circle bg-red bg-accent-3"></i></div>
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">NO TIENE NOTIFICACIONES</h6><small>
+                                                        <time datetime="2015-06-11T18:29:20+08:00" class="media-meta text-muted">{{ "now"|date("d/m/Y") }}</time></small>
+                                                </div>
+                                            </div></a>
+
+                                        </li>
+                                   
+
+                                 {% endif %} 
+                                          
+                                </ul>
+
+                                <!-- FIN MENU DE NOTIFICACIONES -->
+                            </li>
+
+ 
+
+
+
+<!--MENSAJES ////////////////////////////////////////// -->
+
+
+
+<li class="dropdown dropdown-notification nav-item">
+
+    <a href="#" data-toggle="dropdown" class="nav-link nav-link-label"><i class="ficon fa fa-envelope-o"></i>
+
+                 
+                                           
+                                {% if countMsg > 0  %}
+
+                         <span class="tag tag-pill tag-default tag-info tag-default tag-up">{{countMsg}}</span>
+                                {% endif %}<!--AQUI-->
+                    </a>
+                                <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
+                                    <li class="dropdown-menu-header">
+                                        <h6 class="dropdown-header m-0"><span class="grey darken-2">Mensajes</span>
+
+                               
+                          {% if countMsg > 0  %}
+                                            <span class="notification-tag tag tag-default tag-info float-xs-right m-0">{{countMsg}} Nuevo</span>
+                                            {% endif %}
+                                        </h6>
+                                    </li>
+                                   
+
+
+                                    <li class="list-group scrollable-container">
+
+                                 {% if alertas %}
+
+                                        {% for entity in alertas %}
+
+                                             {% if app.user == entity.user and entity.tipo == 'Nuevo Mensaje'%}
+
+                                        <a href="{{ path('alertas_update', { 'id': entity.id }) }}" class="list-group-item">
+                                            <div class="media">
+                                                <div class="media-left"><span class="avatar avatar-sm avatar-online rounded-circle"><img src="{{ asset('images/sobreAzulado.png')}}" alt="avatar"><i></i></span></div>
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">Nuevo Mensaje</h6>
+                                                    <p class="notification-text font-small-3 text-muted">Tienes un nuevo Mensaje</p><small>
+                                                        <time datetime="2015-06-11T18:29:20+08:00" class="media-meta text-muted">Fecha: {{entity.createdate |date('d-m-Y') }}</time></small>
+                                                </div>
+                                            </div>
+                                        </a> 
+                                   
+
+                                    {#% else %}
+
+                                         {% if app.user == entity.user and entity.tipo == 'Respuesta de Consulta'%#}
+
+                                       <!-- <a href="javascript:void(0)" class="list-group-item" style="
+    background-color: white;
+">
+                                            <div class="media">
+                                                <div class="media-left"><span class="avatar avatar-sm avatar-away rounded-circle"><img src="{{ asset('images/sobreAzulado.png')}}" alt="avatar"><i></i></span></div>
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">No tienes Mensajes</h6>
+                                                    <p class="notification-text font-small-3 text-muted">Cero Mensajes.este es</p><small>
+                                                        <time datetime="2015-06-11T18:29:20+08:00" class="media-meta text-muted">{{ "now"|date("d/m/Y") }}</time></small>
+                                                </div>
+                                            </div></a>{#% endif %#}-->
+                                                                             
+                                            {% endif %}
+
+                                      {% endfor %}
+
+                                  {% else %}
+ <a href="javascript:void(0)" class="list-group-item" style="
+    background-color: white;
+">
+                                            <div class="media">
+                                                <div class="media-left"><span class="avatar avatar-sm avatar-away rounded-circle"><img src="{{ asset('images/sobreAzulado.png')}}" alt="avatar"><i></i></span></div>
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">No tienes Mensajes</h6>
+                                                    <p class="notification-text font-small-3 text-muted">Cero Mensajes.</p><small>
+                                                        <time datetime="2015-06-11T18:29:20+08:00" class="media-meta text-muted">{{ "now"|date("m/d/Y") }}</time></small>
+                                                </div>
+                                            </div></a>
+                              
+                                    {% endif %}
+                                        </li>
+                                     </ul>
+                            </li>
+
+    {% elseif is_granted('ROLE_PATIENT') %}
+
+
+
+<li class="dropdown dropdown-notification nav-item">
+
+                            <a href="#" data-toggle="dropdown" class="nav-link nav-link-label"><i class="ficon fa fa-bell-o"></i>
+
+                                <!-- VALOR DEL GLOBO DE MENSAJE -->
+                                  {% if countResp > 0 %}
+                                <span class="tag tag-pill tag-default tag-danger tag-default tag-up">{{countResp}}</span> <!--AQUI-->
+                                   {% endif %}  
+                                <!-- VALOR DEL GLOBO DE MENSAJE -->
+
+                            </a>
+                           <!-- COMIENZO DE DROPDOWN LISTA DE NOTIFICACIONES AQUI -->
+                                <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
+                                    <li class="dropdown-menu-header">
+                                <h6 class="dropdown-header m-0">
+                                    <span class="grey darken-2">Notificaciones</span>
+
+                                    <!-- VALOR DE NEW NOTIFICACIONES -->
+                           {% if countResp > 0 %}
+                                    <span class="notification-tag tag tag-default tag-danger float-xs-right m-0">
+                                      {{countResp}}  Nueva</span>
+                                    {% endif %}  
+                                     <!-- /////////////////VALOR DE NEW NOTIFICACIONES -->
+                                  
+                                </h6>
+                                    </li>
+                                    <li class="list-group scrollable-container">
+
+                                {% if alertas %}
+
+                                        {% for entity in alertas %}
+
+                                            {% if app.user == entity.user and entity.tipo == 'Respuesta de Consulta'%}
+
+                                      <a href="{{ path('alertas_update', { 'id': entity.id }) }}" class="list-group-item">
+                                            <div class="media">
+                                                <div class="media-left valign-middle"><i class="fa fa-bell-o icon-bg-circle bg-cyan"></i></div>
+
+                                          
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">{{entity.tipo}}</h6>
+
+                                                    <p class="notification-text font-small-3 text-muted">{{entity.tipo}}  </p>
+                                                    <small>
+                                                        <time datetime="2015-06-11T18:29:20+08:00" class="media-meta text-muted">Fecha: {{entity.createdate |date('d-m-Y') }}</time></small>
+                                                </div>
+
+                                          
+
+                                            </div>
+                                        </a>  
+                                             {#% else %#}
+
+                                              <!--  <a href="javascript:void(0)" class="list-group-item">
+                                            <div class="media">
+                                                <div class="media-left valign-middle"><i class="icon-bell-slash icon-bg-circle bg-red bg-accent-3"></i></div>
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">NO TIENE NOTIFICACIONES</h6><small>
+                                                        <time datetime="2015-06-11T18:29:20+08:00" class="media-meta text-muted">{{ "now"|date("d/m/Y") }}</time></small>
+                                                </div>
+                                            </div></a> 
+
+                                        </li>-->
+                                            {% endif %}
+
+
+                               
+
+                                         {% endfor %}
+
+                                {% else %}
+
+                                <a href="javascript:void(0)" class="list-group-item">
+                                            <div class="media">
+                                                <div class="media-left valign-middle"><i class="fa fa-bell-slash-o icon-bg-circle bg-red bg-accent-3"></i></div>
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">NO TIENE NOTIFICACIONES</h6><small>
+                                                        <time datetime="2015-06-11T18:29:20+08:00" class="media-meta text-muted">{{ "now"|date("d/m/Y") }}</time></small>
+                                                </div>
+                                            </div></a>
+
+                                        </li>
+                                   
+
+                                 {% endif %} 
+                                          
+                                </ul>
+
+                                <!-- FIN MENU DE NOTIFICACIONES -->
+                            </li>
+
+ 
+
+
+
+<!--MENSAJES ////////////////////////////////////////// -->
+
+
+
+
+<li class="dropdown dropdown-notification nav-item">
+
+    <a href="#" data-toggle="dropdown" class="nav-link nav-link-label"><i class="ficon fa fa-envelope-o"></i>
+
+                                {% if countMsg > 0 %} 
+                         <span class="tag tag-pill tag-default tag-info tag-default tag-up">{{countMsg}}</span>
+                               <!--AQUI-->  {% endif %}
+                    </a>
+                                <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
+                                    <li class="dropdown-menu-header">
+                                        <h6 class="dropdown-header m-0"><span class="grey darken-2">Mensajes</span>
+
+                               
+                            {% if countMsg > 0 %} 
+                                            <span class="notification-tag tag tag-default tag-info float-xs-right m-0">{{countMsg}} Nuevo</span>
+                                     {% endif %}      
+                                        </h6>
+                                    </li>
+                                   
+
+
+                                    <li class="list-group scrollable-container">
+
+                                 {% if alertas %}
+
+                                        {% for entity in alertas %}
+
+                                             {% if app.user == entity.user and entity.tipo == 'Nuevo Mensaje'%}
+
+                                        <a href="{{ path('alertas_update', { 'id': entity.id }) }}" class="list-group-item">
+                                            <div class="media">
+                                                <div class="media-left"><span class="avatar avatar-sm avatar-online rounded-circle"><img src="{{ asset('images/sobreAzulado.png')}}" alt="avatar"><i></i></span></div>
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">Nuevo Mensaje</h6>
+                                                    <p class="notification-text font-small-3 text-muted">Tienes un nuevo Mensaje</p><small>
+                                                        <time datetime="2015-06-11T18:29:20+08:00" class="media-meta text-muted">Fecha: {{entity.createdate |date('d-m-Y') }}</time></small>
+                                                </div>
+                                            </div>
+                                        </a> 
+                                        
+                                        <!-- {#% else %#}
+
+                                         
+                                        <a href="javascript:void(0)" class="list-group-item" style="
+    background-color: white;
+">
+                                            <div class="media">
+                                                <div class="media-left"><span class="avatar avatar-sm avatar-away rounded-circle"><img src="{{ asset('images/sobreAzulado.png')}}" alt="avatar"><i></i></span></div>
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">No tienes Mensajes</h6>
+                                                    <p class="notification-text font-small-3 text-muted">Cero Mensajes.este es</p><small>
+                                                        <time datetime="2015-06-11T18:29:20+08:00" class="media-meta text-muted">{{ "now"|date("m/d/Y") }}</time></small>
+                                                </div>
+                                            </div></a>-->
+
+                                          {% endif %}
+                                                                             
+                                           
+
+                                      {% endfor %}
+
+                                  {% else %}
+ <a href="javascript:void(0)" class="list-group-item" style="
+    background-color: white;
+">
+                                            <div class="media">
+                                                <div class="media-left"><span class="avatar avatar-sm avatar-away rounded-circle"><img src="{{ asset('images/sobreAzulado.png')}}" alt="avatar"><i></i></span></div>
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">No tienes Mensajes</h6>
+                                                    <p class="notification-text font-small-3 text-muted">Cero Mensajes.este sale</p><small>
+                                                        <time datetime="2015-06-11T18:29:20+08:00" class="media-meta text-muted">{{ "now"|date("m/d/Y") }}</time></small>
+                                                </div>
+                                            </div></a>
+                              
+                                        {% endif %}
+                                        </li>
+                                     </ul>
+                            </li>
+    {% endif %}
+

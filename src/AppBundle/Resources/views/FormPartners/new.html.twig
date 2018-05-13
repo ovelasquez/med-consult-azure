@@ -1,0 +1,164 @@
+
+
+
+{% extends '::base.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block body -%}
+
+    <section id="basic-form-layouts">
+        <div class="row ">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header no-border">
+                        <h3 class="card-title mt-1 text-xs-center">CONTÁCTANOS</h3>
+
+                    </div>
+                    <div class="card-body collapse in">
+
+                        <div class="card-block mt-0">
+                            {% if name is defined and name !=''%}
+                                <div class="card-text res">        
+                                    <form class="form form-horizontal">
+                                        <div class="form-body ">
+                                            <div class="regMedTop">
+                                                <div class="imagenCarpetaRegMed"></div><!--imagenCarpetaRegMed-->
+                                            </div><!--regMedTop-->
+                                            <div class="regMedMiddle">
+                                                <div class="regMedMiddleSup text-xs-center">
+                                                    <h5 class="colorLilaOscuro">Hola, <span class="name_prep">{{name}}</span></h5>
+                                                    <p>Hemos recibido tu solicitud, uno de nuestros asociados se estará contactando en las próximas 48 hrs.</p>
+                                                </div><!--regMedMiddleSup-->
+                                                <p class="colorLilaOscuro claseDos">Gracias por considerar unirse a nuestro equipo de trabajo. Esperamos que juntos podamos llevar el regalo de la salud a más y más personas.</p>
+                                            </div><!--regMedMiddle-->
+                                            <div class="regMedBottom text-xs-center">
+                                                <p>ATENTAMENTE EL EQUIPO DE MEDECONSULT</p>
+                                            </div><!--regMedBottom-->
+
+                                        </div>
+                                        <div class="form-actions center">                                                
+                                            <a href="https://www.medeconsult.com/" class="btn btn-primary">
+                                                <i class="icon-thumbs-o-up position-right"></i> Continuar
+                                            </a>                                          
+                                        </div>   
+                                    </form>
+                                </div>
+                            {%else%}
+                                <div class="">
+                                    <form method="POST" id="ajaxForm_prep" class="ajaxForm_prep" action="{{path('formpartners_create')}}" >
+
+                                        <div class=" form-body ">
+
+                                            {% if messages is defined %}
+                                                <div class="rowError" {% if messages is defined and messages|length %}style="display: block"{% else %}style="display: none"{% endif %}>
+                                                    <div class="alert bg-warning alert-icon-right alert-arrow-right alert-dismissible fade in" role="alert">
+                                                        <button type="button" class="close" data-dismiss="" id="btnError" aria-label="Close">
+                                                            <span aria-hidden="true" class=" warning ">×</span>
+                                                        </button>
+                                                        <span id="itemError">
+                                                            {% for message in messages %}                                                    
+                                                                <strong> {{ message }}<br></strong> 
+                                                                {% endfor %}
+                                                            <strong>{{ form_errors(form) }}</strong> 
+                                                        </span>
+                                                    </div>
+                                                </div><!--row-->
+                                            {% endif %}
+                                            <div class="form-group">
+                                                <div class="col-md-6">
+                                                    {{ form_row(form.name,{'attr':{'class':"form-control input-lg",'placeholder':'Nombre'} }) }}
+                                                </div><!--col-md-6-->
+                                                <div class="col-md-6">
+                                                    {{ form_row(form.nameContact,{'attr':{'class':"form-control input-lg",'placeholder':'Contácto'} }) }}
+                                                </div><!--col-md-6-->
+
+                                            </div><!--campoPrefesionales-->
+
+                                            <div class="form-group">
+                                                <div class="col-md-6">
+                                                    {{ form_row(form.typeCompany,{'attr':{'class':"form-control input-lg",'placeholder':'Compañia'} }) }}
+                                                </div><!--col-md-6-->
+                                                <div class="col-md-6">
+                                                    {{ form_row(form.address,{'attr':{'class':"form-control input-lg",'placeholder':'Dirección'} }) }}
+                                                </div><!--col-md-6-->
+
+                                            </div><!--campoPrefesionales-->
+
+                                            <div class="form-group">
+                                                <div class="col-md-6">
+                                                    {{ form_row(form.phoneNumbers,{'attr':{'class':"form-control input-lg",'placeholder':'Número de teléfono'} }) }}
+                                                </div><!--col-md-6-->
+                                                <div class="col-md-6">
+                                                    {{ form_row(form.email,{'attr':{'class':"form-control input-lg",'placeholder':'Correo'} }) }}
+                                                </div><!--col-md-6-->
+                                            </div><!--campoPrefesionales-->
+
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    {{ form_row(form.hearAboutUs,{'attr':{'class':"form-control input-lg",'placeholder':'Cómo te enteraste de medeconsult/nombre de persona que te refirió'} }) }}
+                                                </div>
+                                            </div><!--campoPrefesionales-->
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    {{ form_row(form.message,{'attr':{'class':"form-control input-lg",'placeholder':'Mensaje'} }) }}
+                                                </div>
+                                            </div><!--campoPrefesionales-->
+
+                                            <div class="form-group">
+                                                <div class="col-md-12 text-xs-center">
+                                                    {% form_theme form 'EWZRecaptchaBundle:Form:ewz_recaptcha_widget.html.twig' %}
+
+                                                    {{ form_widget(form.recaptcha, { 'attr': {
+                                                    'options' : {
+                                                        'theme': 'light',
+                                                        'type': 'image',
+                                                        'size': 'normal'
+                                                    },
+                                                } }) }}
+                                                </div>
+                                            </div><!--campoPrefesionales-->
+
+                                            <div class="p-1">
+                                                <p class="small color-verdeg">{{'patients.new.msj_instruction1'|trans({}, 'AppBundle')}}</p><!--letraPequena-->
+                                                <p class="small color-verdeg">{{'patients.new.msj_instruction2'|trans({}, 'AppBundle')}}</p><!--letraMediana-->
+                                            </div>
+
+                                            {{form_rest(form)}}
+
+                                        </div>
+                                        <div class="form-actions right">
+                                            <a href="https://www.medeconsult.com/" class="btn btn-warning mr-1 back">
+                                                <i class="icon-cross2"></i> Cancelar
+                                            </a>
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="icon-check2"></i> Enviar
+                                            </button>                                          
+                                        </div>    
+                                    </form>
+                                </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+        });
+    </script>
+
+
+{% endblock %}

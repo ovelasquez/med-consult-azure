@@ -1,0 +1,49 @@
+{% set qP = app.request.query.all %}
+
+{% extends qP.layout is not defined
+    ? 'AppUserBundle::layout-login.html.twig' 
+    : 'FOSUserBundle::layout-simple.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+
+{% if qP.layout is not defined%}
+<h2 class="tituloAzulado">Inicia sesión para acceder </h2><!--tituloAzulado-->
+{% if error %}
+    <div class="cuadro uno cuadroError"><p>{{ error.messageKey|trans(error.messageData, 'security') }}</p></div>
+{% endif %}
+{% endif%}
+<form action="{{ path("fos_user_security_check") }}" method="post" {% if qP.layout is not defined%}class="formularioRestablecer"{% endif%}>
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />    
+    {% if qP.guess is defined%}<input type="hidden" name="_guess_token" value="{{ qP.tkG }}" />{%endif%}
+    <input type="hidden" name="_target_path" value="{% if qP.r is defined%}{{qP.r}}{% endif%}" />
+    <div class="campo">
+        <label for="usuario">{{ 'security.login.username'|trans }}</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+    </div><!--campo-->
+    <div class="campo">
+        <label for="password">{{ 'security.login.password'|trans }}</label>
+        <input type="password" id="password" name="_password" required="required" />
+        <!--div class="ContOlvContr {% if qP.layout is not defined%}ContOlvContrInLine{% endif%}"><p><a href="{{ path('fos_user_resetting_request') }}" class="olvContr">{{ 'layout.forgot_password'|trans({}, 'AppBundle') }}</a></p></div-->
+    </div><!--campo-->
+    <div class="campo">
+        <ul class="UlBtnLogin">
+            <li><input type="submit" id="_submit" name="_submit" class="submit lilaOscuro btnLogin" value="{{ 'security.login.submit'|trans }}" /></li>
+            {% if qP.layout is defined%}
+            <li class="loginFac"><input type="button" onclick="fb_login(); return false;" id="_submit_f" name="_submit_f" class="submit btnLoginF lilaOscuro" value="{{ 'layout.login_facebook'|trans({}, 'AppBundle') }}" /></li>
+            {% endif%}
+        </ul>
+        
+        
+    </div><!--campo-->
+    <div class="campo last loginReg {% if qP.layout is not defined%}loginNaccount{% endif%}">
+        <p>{{'layout.msj_login_ini1'|trans({}, 'AppBundle')}} <a href="{% if qP.guess is defined%} {{ url('patientssharemedicalhistory_view_guess',{'token':qP.tkG}) }} {%else%} {{ url('patients_register') }} {%endif%}">{{'layout.msj_login_ini2'|trans({}, 'AppBundle')}}</a>&nbsp;</p>
+        <div class="ContOlvContr {% if qP.layout is not defined%}ContOlvContrInLine{% endif%}"><p><a href="{{ path('fos_user_resetting_request') }}" class="olvContr">{{ 'layout.forgot_password'|trans({}, 'AppBundle') }}</a></p></div>    
+    </div><!--campo-->
+    
+    <!--input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label-->
+
+</form>
+{% endblock fos_user_content %}

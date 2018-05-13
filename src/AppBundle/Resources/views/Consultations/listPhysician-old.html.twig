@@ -1,0 +1,181 @@
+{% extends '::basemedphysicians.html.twig' %}
+
+{% block body -%}
+
+
+    <div class="col-lg-12">
+
+        <div class="card">
+            <div class="card-body">
+                <div class="card-block" style="padding: 3.4rem;">
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-6 col-sm-12 ">
+                            <div class="media px-1"><a href="{{  
+                                path('consultations_list_physician', {'type': 1 }) }}">
+                                    <div class="media-left media-middle">
+                                        <i class="fa fa-commenting-o color-celeste font-large-2 "></i>
+
+                                    </div>
+                                    <div class="media-body text-xs-right">
+                                        <span class="font-large-2 text-bold-300 info">{{countCon.consice}}</span>
+                                    </div>
+                                    <p class="text-muted">Preguntas Concisas </p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-6 col-sm-12 ">
+                            <div class="media px-1"><a href="{{  
+                                path('consultations_list_physician', {'type': 2 }) }}">
+                                    <div class="media-left media-middle">
+                                        <i class="fa fa-wpforms color-celeste font-large-2 "></i>
+                                    </div>
+                                    <div class="media-body text-xs-right">
+                                        <span class="font-large-2 text-bold-300 info">{{countCon.electronic}}</span>
+                                    </div>
+                                    <p class="text-muted">Consultas Electrónicas</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-6 col-sm-12">
+                            <div class="media px-1"><a href="{{  
+                                path('consultations_list_physician', {'type': 3 }) }}">
+                                    <div class="media-left media-middle">
+                                        <i class="fa fa-video-camera font-large-2 color-celeste"></i>
+                                    </div>
+                                    <div class="media-body text-xs-right">
+                                        <span class="font-large-2 text-bold-300 info">{{countCon.inlive}}</span>
+                                    </div>
+                                    <p class="text-muted">Consultas En Vivo</p>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card overflow-hidden">
+            <div class="card-body">
+                <div class="media overlay-warning white">
+                    <div class="media-left overlay-warning bg-darken-2 p-2 media-middle">
+
+                        <span class="font-large-2 text-bold-300 "  style="padding: 8px;">{{ porconfirm }}</span>
+
+                    </div>
+                    <div class="media-body p-2">
+                        <h4>Consultas por Confirmar</h4>
+                        <span>RECUERDA DAR UNA RESPUESTA LO MAS ACERTADA Y CONCISA POSIBLE</span>
+                    </div>
+
+                    <div class="media-right overlay-warning bg-darken-2 p-2 media-middle">
+                        <i class="icon-warning font-large-2 white " ></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-header">
+                <h4 class="card-title"> Consultas ({% if type==0 %}Todas                              
+                                    {% elseif type==1 %}Concisas                               
+                                    {% elseif type==2 %}Electrónicas                     
+                                    {% elseif type==3 %}En vivo{% endif %})     
+                </h4>
+                <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                <div class="heading-elements">
+                    <ul class="list-inline mb-0">
+                        <li>  <div class="btn-group">
+                                <button type="button" class="btn btn-secondary btn-sm">                                   
+                                    Filtrar Consultas                              
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{{  
+                                path('consultations_list_physician', {'type': 1 }) }}">Concisa</a>
+                                    <a class="dropdown-item" href="{{  
+                                path('consultations_list_physician', {'type': 2 }) }}">Electrónica</a>
+                                    <a class="dropdown-item" href="{{  
+                                path('consultations_list_physician', {'type': 3 }) }}">En vivo</a>
+                                <div class="dropdown-divider"></div>
+                                <a href="{{  
+                                path('consultations_list_physician', {'type': 0 }) }}"  class="dropdown-item" >Todas</a>
+
+                                </div>
+                                
+                            </div></li>
+
+                    </ul>
+                </div>
+            </div>
+
+
+
+            <div class="card-body collapse in">
+                <div class="card-block p-0">
+                    <div class="table-responsive">
+
+                        
+                        <table id="recent-orders" class="table mb-0 ">
+                            <thead>
+
+                                <tr>
+
+                                    <th>CONSULTA</th>
+                                    <th>PACIENTE</th>
+                                    <th>STATUS</th>
+                                    <th>FECHA</th>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+
+
+                                {% for entiti in entities %} 
+
+                                    {% if entiti.con.status>=0%}
+                                        <tr>
+
+
+                                            <td class="text-truncate"><a href="{{  path('consultations_edit', {'id': entiti.con.id}) }}">{{entiti.con.modalityConsultation.name}}</a></td>
+                                            <td class="text-truncate">{{entiti.con.patient.user.name}} {{entiti.con.patient.user.lastname}}</td>
+                                            <td class="text-truncate">{% if entiti.con.status==2%}<span class="tag tag-default tag-success">Completada{%elseif entiti.con.status==1 and entiti.con.modalityConsultation.tag=='inlive' %}<span class="tag tag-default tag-primary">Por Completar{%elseif entiti.con.status==1 %}<span class="tag tag-default tag-primary">Por Completar{%elseif entiti.con.status==0 %}<span class="tag tag-default tag-warning">Por Confirmar{%elseif entiti.con.status==-1 %}Cancelada{% endif %}</span>
+
+                                                            <br>
+                                                            <a href="{{  path('consultations_edit', {'id': entiti.con.id}) }}" class="linkCompletar">
+                                                                {% if entiti.con.status==2%}(Ver){%elseif entiti.con.status==1 %}(Completar){%elseif entiti.con.status==0 %}(Confirmar){%elseif entiti.con.status==-1 %}(Ver){% endif %}
+                                                            </a>
+
+
+                                                            </td>
+                                                            <td class="text-truncate">{% if entiti.con.creationDate is defined%}{{entiti.con.creationDate|date('d-m-Y H:i')}}{% endif %}</td>
+                                                            </tr>
+
+                                                        {% endif %}
+                                                    {% endfor %} 
+
+
+                                                    </tbody>
+                                                    </table>
+                        
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+{% endblock %}

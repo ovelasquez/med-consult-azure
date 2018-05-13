@@ -1,0 +1,39 @@
+{% extends "AppUserBundle::layout-front.html.twig" %}
+
+{% block fos_user_content %}
+{% include "AppUserBundle:Registration:register_content_patient.html.twig" %}
+
+{% endblock fos_user_content %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $(".register-profile").hide();
+        var form = document.getElementById('registerPatient');
+        var btncont=false;
+        form.addEventListener('submit', function(event) {
+            if (this.checkValidity() && btncont) {
+                event.preventDefault();     
+                $(".register-profile").show();
+                $(".register-user").hide();
+                $("#fieldsPatient").removeAttr("disabled");
+                btncont = false;
+            }
+            
+        }, false);
+        $("#fieldsPatient").attr("disabled","disabled");
+                
+        $('#continuar-reg').click(function (e) {
+            btncont=true;
+           
+        });
+        
+        $('.back').click(function () {
+            $(".register-profile").hide();
+            $(".register-user").show();
+            btncont=false;
+            $("#fieldsPatient").attr("disabled","disabled");
+        });
+    });
+    </script>
+{% endblock %}

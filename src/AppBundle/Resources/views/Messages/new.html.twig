@@ -1,0 +1,131 @@
+{% extends app.user == entity.consultation.physician.user
+? '::basemedphysicians.html.twig'
+: '::base.html.twig' %}
+
+
+{% block body %}
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title" id="horz-layout-basic">Mensajes</h4>
+
+                </div>
+                <div class="card-body collapse in">
+                    <div class="card-block">
+
+                        <div class="">
+
+                            {% if dias is not empty and dias > 14 %}
+                                <div class="alert bg-success alert-dismissible fade in mb-2" role="alert">
+                                    Esta <strong>Mensajeria</strong> esta cerrada para comunicarse con el especialista  {{ entity.tomsg }}  haga uso de cualquiera de nuestros tipos de consulta
+                                </div>
+                            {% endif %}    
+                            {% if dias is not empty and  dias <=14 %}
+                                <div class="card">                                    
+                                    <div class="card-body">
+                                        <div class="card-block">
+                                            <div class="card-text">					
+                                                {% if app.user == entity.consultation.physician.user  %}
+                                                    <p> A través de esta <span class="rojoTxt">Mensajeria</span> podrá comunicarse con el paciente  {{ entity.tomsg }}, la cual estará disponible hasta dos semanas después de la culminación de la consulta, cumplido este tiempo podrá volver a comunicarse haciendo uso de cualquiera de nuestros tipos de consulta.</p>
+
+                                                {% elseif app.user == entity.consultation.patient.user  %}
+
+                                                    <p> A través de esta <span class="rojoTxt">Mensajeria</span> podrá comunicarse con el especialista {{ entity.tomsg }}, la cual estará disponible hasta dos semanas después de la culminación de la consulta, cumplido este tiempo podrá volver a comunicarse haciendo uso de cualquiera de nuestros tipos de consulta.</p>
+                                                {% endif %}
+                                            </div>
+
+                                            <form class="well" id="mensajes" action="{{  path('messages_create',{ 'consul': entity.consultation.id }) }}" method="post" {{ form_enctype(form) }}>
+                                                <div class="form-body">
+                                                    <div style="display: none">{{ form_widget(form.tomsg ) }}</div>
+                                                    {#{ form_widget(form) }#}
+                                                    <div class="form-group" >
+                                                        {{ form_widget(form.message,{'attr': {'class': 'form-control textarea-maxlength', 'id' : "maxlength-textarea", 'placeholder':"Introduzca hasta 200 caracteres...",'maxlength':"200"} } ) }}
+                                                    </div>
+                                                    {{ form_rest(form) }}
+                                                </div>
+                                                <div class="form-actions right">
+                                                    <button  class="btn btn-primary mr-1" type ="submit">
+                                                        <i class="icon-check2"></i> Enviar
+                                                    </button>
+
+                                                </div>
+                                            </form>                                         
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            {% endif %} 
+
+                            <ul class="list-group list">
+                                {% for msg in mensaje %}
+                                    <li class="list-group-item">
+                                        <div class="media">
+                                            <div class="media-left"><span class="avatar avatar-sm avatar-online rounded-circle">
+                                                    {% if msg.frommsg == msg.consultation.physician.user  %}
+                                                        {% if file_exists(web_path~('uploads/documents/' ~ msg.consultation.physician.photo)) %}
+                                                            <img  src="{{ asset('uploads/documents/' ~ msg.consultation.physician.photo) }}" />
+                                                        {% else %}
+                                                            <img  src="{{ asset('images/contacto.png') }}" />
+                                                        {% endif %}
+                                                    {% elseif msg.frommsg == msg.consultation.patient.user  %}
+                                                        {% if file_exists(web_path~('uploads/documents/' ~ msg.consultation.patient.photo)) %}
+                                                            <img  src="{{ asset('uploads/documents/' ~ msg.consultation.patient.photo) }}" />
+                                                        {% else %}
+                                                            <img  src="{{ asset('images/contacto.png') }}" />
+                                                        {% endif %}
+                                                    {% endif %}
+                                                    <i></i></span></div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading">{{ msg.frommsg }}</h6>
+                                                <p class="notification-text font-small-3 text-muted">{{ msg.message }}</p><small>
+                                                    <time datetime="2015-06-11T18:29:20+08:00" class="media-meta text-muted">{{msg.createdate | date("d/m/Y")}}</time></small>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+
+                        <div class="form-actions right border-top-grey">                         
+                            {% if app.user == entity.consultation.physician.user  %}
+                                <a  class="btn btn-warning mr-1" href="{{  path('consultations_edit', {'id': entity.consultation.id}) }}" ><i class="icon-cross2"></i>Volver</a>
+                            {% elseif app.user == entity.consultation.patient.user  %}
+                                <a  class="btn btn-warning mr-1" href="{{  path('consultations_show', {'id': entity.consultation.id}) }}" ><i class="icon-cross2"></i>Volver</a>                                    
+                            {% endif %}                                                                            
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script type="text/javascript">
+
+
+        $("#appbundle_messages_message").prop("maxlength", "200");
+
+
+    </script>
+
+
+{% endblock %}

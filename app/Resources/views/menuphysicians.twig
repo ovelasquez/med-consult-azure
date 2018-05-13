@@ -1,0 +1,8 @@
+{# empty Twig template #}
+<h5>Mi perfil,<br> {% if physician.user.name is defined  %}{{physician.user.name}}{%endif%}</h5>
+<div class="docHomeIntLeftImg">{% if physician.photo is defined and physician.photo!='' %}<img width='100px' src="{{ asset('uploads/documents/' ~ physician.photo) }}" />{%endif%}</div><!--docHomeIntLeftImg-->
+<br>
+<div class="docSeccion">
+    <a href="{{path('consultations_list_physician')}}" class="docSecciones">Consultas</a><!--docSecciones-->
+    <a href="{{path('physicians_calendar')}}" class="docSecciones">Mi calendario</a><!--docSecciones-->
+</div><!--docSeccion-->

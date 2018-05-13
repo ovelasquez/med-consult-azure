@@ -1,0 +1,40 @@
+{% extends '::baseadm.html.twig' %}
+
+{% block body -%}
+    <h5>Lista de codigos promocionales</h5>
+
+    <table cellpadding="0" cellspacing="0" border="0" width="90%" class="table-striped tablaAdm ">
+        <thead>
+            <tr>
+                <th>code</th>
+                <th>usageAmount</th>                
+            </tr>
+        </thead>
+        <tbody>
+            {% for key, entity in entities %}
+                <tr>
+                    <td >{{ entity.code }}</td>
+                    <td >{{ entity.usageAmount }}</td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" > 
+                        <table cellpadding="0" cellspacing="0" border="0" width="90%" class=" ">
+                            {% for usesi in uses[key] %}
+                                <tr>
+                                    <td >{{usesi.patient.user.name}} {{usesi.patient.user.lastname}}</td>
+                                    <td >{{usesi.dateTimeCreation|date('d-m-Y H:i:s')}}</td>
+                                    <td >{{usesi.consultation.id}}</td>
+                                </tr>
+                                
+                                {% endfor %}
+                        </table>
+                    </td>
+                </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

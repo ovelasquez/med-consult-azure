@@ -1,0 +1,183 @@
+{% extends '::baseadm.html.twig' %}
+
+{% block stylesheets %}
+    <style>
+        #myInput {
+            background-image: url('/consultas-medicas/web/images/searchicon.png'); /* Add a search icon to input */
+            background-position: 10px 12px; /* Position the search icon */
+            background-repeat: no-repeat; /* Do not repeat the icon image */
+            width: 100%; /* Full-width */
+            font-size: 14px; /* Increase font-size */
+            padding: 12px 20px 12px 40px; /* Add some padding */
+            border: 1px solid #ddd; /* Add a grey border */
+            margin-bottom: 12px; /* Add some space below the input */
+        }
+        #mySelect {
+            width: 100%; /* Full-width */
+            font-size: 14px; /* Increase font-size */
+            padding: 12px 20px 12px 20px; /* Add some padding */
+            border: 1px solid #ddd; /* Add a grey border */
+            margin-bottom: 12px; /* Add some space below the input */
+        }
+
+        #myTable {
+            border-collapse: collapse; /* Collapse borders */
+            width: 100%; /* Full-width */
+            border: 1px solid #ddd; /* Add a grey border */
+            font-size: 14px; /* Increase font-size */
+        }
+        #myTableSel {
+            border-collapse: collapse; /* Collapse borders */
+            width: 100%; /* Full-width */
+            font-size: 14px; /* Increase font-size */
+        }
+
+        #myTable th, #myTable td {
+            text-align: left; /* Left-align text */
+            padding: 12px; /* Add padding */
+        }
+        #myTable th{
+            cursor: pointer;
+        }
+
+        #myTable tr {
+            /* Add a bottom border to all table rows */
+            border-bottom: 1px solid #ddd; 
+        }
+
+        #myTable tr.header, #myTable tr:hover {
+            /* Add a grey background color to the table header and on hover */
+            background-color: #f1f1f1;
+        }
+    </style>   
+{% endblock %}
+{% block body -%}
+    <h1>Consultations list</h1>
+    <table class="" id="myTableSel">
+        <thead>
+                <tr class="">
+                    <th ><input type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar"></th>
+                    <th><select id="mySelect" onchange="myFunction()">
+                        <option value="0">Id</option>
+                        <option value="1">Fecha</option>
+                        <option value="2">Medico</option>
+                        <option value="3">Paciente</option>
+                        <option value="4">Tipo</option>
+                        <option value="5">Estatus</option>
+                    </select></th>
+                </tr>
+        </thead>
+        
+    </table>
+
+    <table class="table-striped tablaAdm " id="myTable">
+        <thead>
+            <tr class="header">
+                <th onclick="sortTable(0)">Id</th>
+                <th onclick="sortTable(1)">Fecha</th>
+                <th onclick="sortTable(2)">Medico</th>
+                <th onclick="sortTable(3)">Paciente</th>
+                <th onclick="sortTable(4)">Tipo</th>
+                <th onclick="sortTable(5)">Estatus</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td>{% if entity.status>=0%}<a href="{{  path('consultations_show_admin', {'id': entity.id}) }}" target="_blank" class="linkCompletar">{% endif %}{{ entity.id }}{% if entity.status>=0%}</a>{% endif %}</td>
+                    <td >{% if entity.creationDate %}{{ entity.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{{ entity.physician.user.name }} {{ entity.physician.user.lastname }}</td>
+                    <td>{{ entity.patient.user.name }} {{ entity.patient.user.lastname }}</td>
+                    <td>{{ entity.modalityConsultation.tag }} </td>
+                    <td> {% if entity.status==2%}<span class="float-xs-right tag tag-success">Completada</span> {%elseif entity.status==1 and entity.modalityConsultation.tag=='inlive' %}<span class="float-xs-right tag tag-primary">Por Completar{%elseif entity.status==1 %}<span class="float-xs-right tag tag-primary">Por Completar{%elseif entity.status==0 %}<span class="tag tag-default tag-warning">Por Confirmar{%elseif entity.status==-1 %}Cancelada{%else%}<span class="float-xs-right tag tag-warning">Sin terminar</span>{% endif %} ({{ entity.status }}) </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+    </table>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        function myFunction() {
+            // Declare variables 
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            var ltd= document.getElementById("mySelect").selectedIndex;; 
+            for (i = 0; i < tr.length; i++) {                
+                //for (j = 0; j < ltd; j++) {
+                    td = tr[i].getElementsByTagName("td")[ltd];
+                    if (td) {
+                        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                //}
+                
+            }
+        }
+        
+        function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("myTable");
+        switching = true;
+        // Set the sorting direction to ascending:
+        dir = "asc"; 
+        /* Make a loop that will continue until
+        no switching has been done: */
+        while (switching) {
+          // Start by saying: no switching is done:
+          switching = false;
+          rows = table.getElementsByTagName("TR");
+          /* Loop through all table rows (except the
+          first, which contains table headers): */
+          for (i = 1; i < (rows.length - 1); i++) {
+            // Start by saying there should be no switching:
+            shouldSwitch = false;
+            /* Get the two elements you want to compare,
+            one from current row and one from the next: */
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+            /* Check if the two rows should switch place,
+            based on the direction, asc or desc: */
+            if (dir == "asc") {
+              if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                // If so, mark as a switch and break the loop:
+                shouldSwitch= true;
+                break;
+              }
+            } else if (dir == "desc") {
+              if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                // If so, mark as a switch and break the loop:
+                shouldSwitch= true;
+                break;
+              }
+            }
+          }
+          if (shouldSwitch) {
+            /* If a switch has been marked, make the switch
+            and mark that a switch has been done: */
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            // Each time a switch is done, increase this count by 1:
+            switchcount ++; 
+          } else {
+            /* If no switching has been done AND the direction is "asc",
+            set the direction to "desc" and run the while loop again. */
+            if (switchcount == 0 && dir == "asc") {
+              dir = "desc";
+              switching = true;
+            }
+          }
+        }
+      }
+    </script>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title" id="horz-layout-basic"> Consulta registrada con exito </h4>
+
+                </div>
+                <div class="card-body collapse in">
+                    <div class="card-block">
+
+
+                        <div class="confirmacionPagoAcciones">
+                            <div class="confirmacionPagoAccion">                            
+                                <div class="confrPagoImagen descargar">
+
+                                    {% if cons.modalityConsultation.tag=='inlive' %}
+                                        <p>Tu consulta <strong>directa en vivo</strong> con el doctor <strong>{{cons.physician.user.name}} {{cons.physician.user.lastname}}</strong>, {{ cons.physician.jobtitle }} ha sido realizada satisfactoriamente. </p>
+                                        <p>Su consulta directa en vivo ha sido solicitada para el dia {{dateConsPt |lower }}.</p>
+                                        <p>Nuestro médico especializado confirmará la fecha de la cita y Ud. recibirá una notificación en su correo electrónico. </p>
+                                    {% endif%}
+                                    {% if cons.modalityConsultation.tag=='electronic' %}
+                                        <p>Tu consulta <strong>electrónica</strong> con el doctor <strong>{{cons.physician.user.name}} {{cons.physician.user.lastname}}</strong>, {{ cons.physician.jobtitle }} ha sido realizada satisfactoriamente. </p>
+                                        <p>Nuestro médico especializado, revisará el expediente y tendrá un informe en los próximos 5 días confirmará, Ud. recibirá una notificación su correo electrónico. Este atento en caso de que el doctor requiera un archivo adicional para finalizar con éxito su consulta.</p>
+                                    {% endif%}
+                                    {% if cons.modalityConsultation.tag=='consice' %}
+                                        <p>Tu pregunta <strong>concisa</strong> al doctor <strong>{{cons.physician.user.name}} {{cons.physician.user.lastname}}</strong>, {{ cons.physician.jobtitle }} ha sido enviada satisfactoriamente. </p>
+                                        <p>Nuestro médico especializado responderá a la brevedad y Ud. recibirá una notificación en su correo electrónico.</p>
+                                    {% endif%}
+
+                                </div><!--confrPagoImagen descarga-->
+
+                                <a target="_blank" href="{{  path('consultation_invoice_pdf', {'id': idc } ) }}" class="btn btn-outline-primary m-3"><span class="ladda-label"><i class="icon-cloud-download3 font-large-2 display-block"></i><span>DESCARGAR CONFIRMACIÓN</span></span><span class="ladda-spinner"></span></a>
+
+<!--div class="confrPagoTxt"><a target="_blank" href="{{  path('consultation_invoice_pdf', {'id': idc } ) }}">DERCARGAR CONFIRMACIÓN</a></div><!--confrPagoTxt-->                            
+                            </div><!--confirmacionPagoAccion-->
+                            <!--<div class="confirmacionPagoAccion">
+                                <a href="#">
+                                    <div class="confrPagoImagen mail"></div>
+                                    <div class="confrPagoTxt dos">ENVIAR POR EMAIL</div>
+                                </a>
+                            </div>confirmacionPagoAccion-->                        
+                        </div><!--confirmacionPagoAcciones-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('js/placeholders.jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/select2.full.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+        });
+
+    </script>
+
+
+{% endblock %}
+

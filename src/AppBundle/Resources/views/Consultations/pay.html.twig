@@ -1,0 +1,317 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+        <div class="col-md-12">
+            
+            <div class="alert alert-icon-right alert-info alert-dismissible fade in mb-2" role="alert" style="  background-color: rgb(200, 216, 251)!important;   color: white !important;">
+                    
+                    <strong>Consultas sin costos si estas en Venenezuela,</strong> usando el código promocional: <span class="alert-link">telesalvavidas</span>
+            </div>
+            
+            
+        </div>
+    </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title" id="horz-layout-basic"> Datos de pago </h4>
+                    
+                </div>
+                <div class="card-body collapse in">
+                    <div class="card-block">
+                        
+                        <form  id="checkout" method="post"  autocomplete="off" class='configurarCuentaFormulario formularioPago' action="{{ path('consultations_pay_completed', { 'idc': idc }) }}">
+
+                            <div class="row rowError" {% if msg|length %}style="display: block"{% else %} style="display: none" {% endif %}>
+                                <div class="alert bg-warning alert-icon-right alert-arrow-right alert-dismissible fade in" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+
+                                    <strong class="msgBox"> {{ msg }}<br></strong> 
+
+                                </div>
+                            </div><!--row-->
+
+                            <div class="form-body">
+
+                                <div class='col-xs-12 col-md-6 col-lg-6 pr-2 pl-2'> 
+
+                                    <div class=" row h-90">
+                                        <label>Concepto</label>
+                                        <div class="form-group">
+
+                                            <label class="custom-control custom-checkbox block">
+
+                                                <span class="custom-control-description ">{{cons.modalityConsultation.name}} ${{cons.modalityConsultation.price}}</span>
+                                            </label>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row" >
+                                        <div class="form-group" >
+                                            <label for="firstName">Nombre</label>
+                                            <input required id="firstName" name="firstName" class="form-control"  value="{{ patient.user.name }}" autocomplete="off" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="row" >
+                                        <div class="form-group" >
+                                            <label for="firstName">Apellido</label>
+                                            <input required id="firstName" name="lastName" class="form-control" value="{{ patient.user.lastname }}" autocomplete="off" type="text">
+                                        </div>
+                                    </div>    
+
+                                    <div class="row" >
+                                        <div class="form-group" >
+                                            <label for="firstName">Dirección</label>
+                                            <input required id="streetAddress" name="streetAddress" class="form-control" value="{{ patient.address1 }}" autocomplete="off" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="row" >
+                                        <div class="form-group" >
+                                            <label for="firstName">Dirección</label>
+                                            <input  id="extendedAddress" name="extendedAddress" class="form-control"  value="{{ patient.address2 }}" autocomplete="off" type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="row" >
+                                        <div class="form-group" >
+                                            <label for="firstName">Localidad</label>
+                                            <input required id="locality" name="locality" class="form-control" value="{{ patient.locality }}" autocomplete="off" type="text">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class='col-xs-12 col-md-6 col-lg-6 pr-2 pl-2' >
+
+                                    {% if promotion==1 %}                                                                               
+                                        <div class=" row h-90">
+                                            <label>¿Tiene un código promocional?</label>
+                                            <div class=" form-group">
+                                                <label class="custom-control custom-checkbox block">
+                                                    <span class='col-xs-4 col-md-2 col-lg-2' >
+                                                        <input type="checkbox" id="hasCod" class="custom-control-input">
+                                                        <span class="custom-control-indicator"></span>
+                                                        <span class="custom-control-description">Si</span>
+                                                    </span>
+                                                    <span class='col-xs-8 col-md-10 col-lg-10 p-0' id="codePromotionSpan"  >
+                                                        <input id="codePromotion" name="codePromotion" placeholder="Ingrese el código" class="form-control" value="telesalvavidas" autocomplete="off" type="text">
+                                                    </span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                    {% endif%}
+
+                                    <div class="row" >
+                                        <div class="form-group" >
+                                            <label for="firstName">Región</label>
+                                            <input required id="region" name="region" class="form-control" value="{{ patient.province }}" autocomplete="off" type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="row" >
+                                        <div class="form-group" >
+                                            <label for="firstName">Código Postal</label>
+                                            <input required id="postalCode" name="postalCode" class="form-control" value="{{ patient.postalcode }}" autocomplete="off" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="row" >
+                                        <div class="form-group" >
+                                            <label for="firstName">País</label>
+                                            <select class="form-control bfh-countries confgError" id="form-control" name="countryCode" data-country="{{ patient.country }}"></select>
+
+                                        </div>
+                                    </div>
+                                    {% if payment==1 %}                                        
+                                        <div class="row divPay" style="display: none;" >
+                                            <div class="form-group confgCuentFormCampo"  >
+                                                <label for="card-number-field">Número de la tarjeta</label>
+                                                <div id="card-number-field" class="form-control inputBT inputBTCard "  ></div>
+                                                <div class="tdc-img "></div>
+                                            </div>
+                                        </div>
+                                        <div class="row divPay" style="display: none;" >
+                                            <div class="form-group confgCuentFormCampo">
+                                                <label for="expiration-mothh">Fecha de Vencimiento</label>
+                                                <div>
+                                                    <div class="col-xs-2" >
+                                                        <label for="expiration-month" class="" style="">Mes</label></div>
+                                                    <div class="col-xs-3" >
+                                                        <div id="expiration-month" class="inputBT form-control"  ></div>
+                                                    </div>
+                                                    <div class="col-xs-2" >    
+                                                        <label for="expiration-year" class=""  style=" ">Año</label>
+                                                    </div>
+                                                    <div class="col-xs-5" >
+                                                        <div id="expiration-year" class="inputBT form-control"  ></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif%}
+
+
+                                    <input id="consultation" name="consultation" type='hidden' value="{{ idc }}">
+                                </div><!--row-->
+
+                            </div><!--row-->
+
+                            <div class="form-actions right">
+                                <a  href="{{ path('consultations_list_patient') }}" class="btn btn-warning mr-1">
+                                    <i class="icon-cross2"></i> Cancelar
+                                </a>
+                                <button type="submit" class="btn btn-primary btn-submit">
+                                    <i class="icon-check2"></i> Finalizar
+                                </button>
+                            </div>
+                        </form><!--formularioPago-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/formhelpers/bootstrap-formhelpers-selectbox.js')}}"></script>
+    <script src="{{ asset('js/formhelpers/bootstrap-formhelpers-countries.en_US.js')}}"></script>
+    <script src="{{ asset('js/formhelpers/bootstrap-formhelpers-countries.js')}}"></script>
+
+    <script src="https://js.braintreegateway.com/js/braintree-2.20.0.min.js"></script>
+    {% if payment==1 %}      
+        <script>
+            $(document).ready(function () {
+                $("#codePromotionSpan").show();
+                $(".divPay").hide();                
+            });
+            // We generated a client token for you so you can test out this code
+            // immediately. In a production-ready integration, you will need to
+            // generate a client token on your server (see section below).
+            var clientToken = "{{cToken}}";
+            var colorTransition = 'color 100ms ease-out';
+            braintree.setup(clientToken, "custom", {
+                id: "checkout",
+                onError: function (obj) {
+                    //alert($("#codePromotion").val());
+                    if ($("#codePromotion").val() !== '') {
+                        var form = document.getElementById('checkout');
+                        HTMLFormElement.prototype.submit.call(form);
+                    } else {
+                        $(".rowError").show();
+
+                        switch (obj.message) {
+                            case "Some payment method input fields are invalid":
+                                $(".msgBox").html("Algunos campos de entrada del método de pago no son válidos");
+                                break;
+                            case "User did not enter a payment method":
+                                $(".msgBox").html("No introdujo un método de pago");
+                                break;
+                            default:
+                                $(".msgBox").html("En este momento no podemos procesar su petición intente más tarde");
+                        }
+                        $(".rowError .close").focus();
+                        //alert(obj.message);
+                    }
+                },
+                onReady: function (obj) {
+
+                },
+                hostedFields: {
+                    styles: {
+                        'input': {
+                            'border': '1px solid #d4d4d4',
+                            'color': '#5a5a5a',
+                            'display': 'block',
+                            'width': '100%',
+                            'padding': '0.5rem 0.75rem',
+                            'font-size': '1rem',
+                            'line-height': '1.25',
+                            'background-color': '#fff',
+                            'background-image': 'none',
+                            'background-clip': 'padding-box',
+                            'border-radius': '0.18rem'
+                        },
+                        'input:focus': {
+                            'color': '#5a5a5a'
+                        },
+                        '::-webkit-input-placeholder': {
+                            'color': '#5a5a5a'
+                        },
+                        ':-moz-placeholder': {
+                            'color': '#5a5a5a'
+                        },
+                        '::-moz-placeholder': {
+                            'color': '#5a5a5a'
+                        },
+                        ':-ms-input-placeholder': {
+                            'color': '#5a5a5a'
+                        }
+                    },
+                    number: {
+                        selector: "#card-number-field"
+
+                    },
+                    expirationMonth: {
+                        selector: "#expiration-month"
+                    },
+                    expirationYear: {
+                        selector: "#expiration-year"
+                    },
+                    onFieldEvent: function (event) {
+                        //alert(event.type);
+                        if (event.type === "focus") {
+                            // Handle focus
+                        } else if (event.type === "blur") {
+                            // Handle blur
+                        } else if (event.type === "fieldStateChange") {
+                            if (!event.isValid) {
+
+                            }
+                            if (event.card) {
+                                console.log(event.card.type);
+                                $(".tdc-img").removeClass("visa master-card american-express diners-club discover jcb unionpay maestro");
+                                $(".tdc-img").addClass(event.card.type);
+                                // visa|master-card|american-express|diners-club|discover|jcb|unionpay|maestro
+                            } else if (!event.isValid) {
+                                $(".tdc-img").removeClass("visa master-card american-express diners-club discover jcb unionpay maestro");
+                            }
+                        }
+                    }
+
+                },
+            });
+            $(document).ready(function () {
+                /*$("#codePromotionSpan").hide();*/
+               
+                $("#hasCod").click(function () {                    
+                    if ($(this).is(':checked')) {
+                         $("#codePromotionSpan").show();
+                        $("#codePromotion").prop("required", "required").focus();
+                        $(".divPay").hide();
+                    } else {
+                         $("#codePromotionSpan").hide()
+                        $("#codePromotion").prop("required", "").val("");
+                        $(".divPay").show();
+                    }
+                }).click();
+                
+                $(".btn-submit").click(function () {
+                    $(".rowError").hide();
+                    $(".msgBox").html("");
+                });
+            });
+
+
+
+        </script>
+    {% endif%}
+
+{% endblock %}

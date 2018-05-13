@@ -1,0 +1,41 @@
+{% extends '::baseadm.html.twig' %}
+
+{% block body -%}
+    <h1>MedicalFormsFieldsets list</h1>
+
+    <table cellpadding="0" cellspacing="0" border="0" width="90%" class="table-striped tablaAdm ">
+        <thead>
+            <tr>
+                <th>Label</th>
+                <th>Position</th>
+                <th>Id</th>
+                <th class=" col-lg-1 col-md-1 col-sm-1" colspan="2">OPERACIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td class="{% if entity.type=='page' %}td-group{% else %}td-field{% endif %}"><a href="{{ path('medicalformsfieldsets_show', { 'id': entity.id }) }}">{{ entity.label }}</a></td>
+                    <td>{{ entity.position }}</td>
+                    <td>{{ entity.id }}</td>
+
+                    <td>
+                        <a href="{{ path('medicalformsfieldsets_show', { 'id': entity.id }) }}">ver</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('medicalformsfieldsets_edit', { 'id': entity.id }) }}">editar</a>
+                    </td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('medicalformsfieldsets_new') }}">
+                Crear una entrada
+            </a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,776 @@
+{% extends '::basemedphysicians.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/md-assets/css/plugins/forms/extended/form-extended.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/md-assets/css/plugins/calendars/clndr.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/md-assets/vendors/css/forms/selects/select2.min.css') }}">
+
+{% endblock %}
+
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title" id="horz-layout-basic">{{ entity.modalityConsultation.name }}</h4>
+                    {{ form_start(edit_form) }}
+                    <div class="heading-elements">
+
+                        {% if entity.status==2%}<span class="float-xs-right tag tag-success">Completada</span> {%elseif entity.status==1 and entity.modalityConsultation.tag=='inlive' %}<span class="float-xs-right tag tag-primary">Por Completar{%elseif entity.status==1 %}<span class="float-xs-right tag tag-primary">Por Completar{%elseif entity.status==0 %}<span class="tag tag-default tag-warning">Por Confirmar{%elseif entity.status==-1 %}Cancelada{%else%}<span class="float-xs-right tag tag-warning">Sin terminar</span>{% endif %}
+                    </div>
+
+
+                </div>
+                <div class="card-body collapse in">
+                    <div class="card-block">
+
+                        <form>
+                            <div class="form-body">
+
+                                <!-- Recent Orders -->
+                                <div class="row">
+                                    <div class="col-xl-6 col-lg-12">
+                                        <div class="card " style="height: 500px;">
+                                            <div class="card-body">
+                                                <div class="card-block pt-2">
+                     
+                        <div class="vertical-scroll scroll-example height-300" style="height: 455px !important;">
+                             <div class="col-xs-12 col-md-12 col-lg-12">
+                                    {% if entity.patient.photo!='' %}
+
+                                         <img src="{{ asset('uploads/documents/' ~ entity.patient.photo) }}" alt="element 01" width="140" class="float-xs-left mr-1">
+                                     {%endif%}
+                                     <h4 class="card-title mt-3"><a href="{{  path('medicalforms_view_shared', {'id': form_hs,'pat': entity.patient.id}) }}" target="blank">{{entity.patient.user.name}} {{entity.patient.user.lastname}}<br>(Ver Historia)<i class="icon-new-tab"></i></a></h4>
+            <div class="docHomeIntScroll mCustomScrollbar">
+                <div class="modalPrincipalRightBody">
+                    <div class="pacientesLeftAzul">
+                        <div class="col-xs-6 col-md-6 col-lg-6">
+                         
+                            <p><span>Edad:</span>{% if entity.patient.yearsold is defined %}{{ entity.patient.yearsold }}{% endif %}</p>
+                            <p><span>Genero:</span> {% if entity.patient.gender is defined and entity.patient.gender=='female' %}Femenino{%else%}Masculino{% endif %}</p>
+                        </div>
+                        <div class="col-xs-6 col-md-6 col-lg-6"><div class="pacientesUsuarioImg" style="margin: 0px 0px 10% auto;"></div><!--pacientesUsuarioImg--></div>
+                        <div class="clearFix"></div>
+                    </div><br>
+                    {% if entity.modalityConsultation.tag!='consice' %}
+                    <div class="formularioPopup">
+                        {% for  key, entitypage in fieldsForms %}
+                        <div class="tablilla"><br>
+
+                            {% if entitypage['field'].type=="page" and entityform.formName!=form_hm %} <h4 class="card-title mt-3" style="position: absolute;">{{entitypage['field'].label}}</h4><br><br><br>{% endif%}
+                            {% for  keyf, entityfieldset in entitypage %}
+                            {% if keyf!='field' %}
+                            <h5 class='{% if entityfieldset.fieldset.classname is defined %}{{entityfieldset.fieldset.classname}}{% endif%}'><br>{{entityfieldset.fieldset.label}}</h5>
+                            <div class="tablillaDy">
+                                {% set gr='' %}
+                                {% set tb='' %}
+                                {% set indT=0 %}
+                                {% set indTab=1 %}
+                                {% set grOp = [] %}
+                                {% for keyfs, field in entityfieldset.fields %}
+                                <!--ITERADO_{{loop.index}} ID_{% if entityfieldset.fields[loop.index] is defined %} {{entityfieldset.fields[loop.index].id}} {%endif%} DATA::{{field.valuetemp}}::-->
+
+                                {% if field.field=='grid'%}
+
+                                <!--ABRIENDO T_{{field.id}}-->
+                                {% if field.configjson.class is defined and 'break' in field.configjson.class %}<br />{% endif%}
+                                {% if field.showlabel is defined and field.showlabel==1 %}
+                                <label  class="" >{{field.label}}:</label>
+                                {% endif%}
+                                <div class="cuesationarioCampo"><table  class="{% if field.configjson.class is defined and field.configjson.class!='' %}{{field.configjson.class}}{% else%}cuestionarioTabla{% endif%} grid" data-name-field="{{field.name}}" data-cardinality="{% if field.configjson.cardinality>1 %}{{field.configjson.cardinality}}{% endif%}"  border="0" cellpadding="0" cellspacing="0" width="90%">
+                                        {% set tb=field.id %}
+                                        {{field.input|raw}}
+
+                                        {% elseif field.field=='group'  %}
+                                        {% set grOp = grOp|merge([field.id]) %}
+                                        {% set indTab=grOp|length +1 %}
+
+                                        <!--ABRIENDO G_{{field.id}}-->
+                                        {% if field.configjson.class is defined and 'break' in field.configjson.class %}<br />{% endif%}
+                                        <div id="{{field.name}}" data-field="{{field.field}}" class="cuesationarioCampo groupInputs mmarginTab_{{indTab-1}} {% if field.configjson.condx is defined and field.configjson.condx!=''%}condx{% endif%}" {% if field.configjson.condx is defined and field.configjson.condx!='' %}data-condx="{{field.configjson.condx}}"{% endif%}>
+                                            {% if field.showlabel is defined and field.showlabel==1 %}
+                                                <label  class="titleG" >{{field.label}}:</label>
+                                            {% endif%}
+                                            {% set gr=field.id %}
+                                            {% else %}
+
+                                                {% if (gr=='' and tb=='')%}
+                                                    {% if field.valuetemp!='' %}
+                                                        {% if field.configjson.class is defined and 'break' in field.configjson.class %}<br />{% endif%}
+                                                        <div class="cuesationarioCampo mmarginTab_{{indTab}}">
+                                                            {% if field.showlabel is defined and field.showlabel==1 and field.valuetemp!=''%}
+                                                                <label for="" class="etiquetaCuestionario">{% if field.required==1%}*{% else%}&nbsp;{% endif%}{{field.label}}:</label>
+                                                            {% endif%}
+
+                                                            {{field.valuehtml|raw}}
+
+
+                                                        </div>
+                                                    {% endif %}
+                                                {% elseif (tb!='')%}
+                                                    {% if field.valuetemp!='' %}
+                                                        {{field.input|raw}}
+                                                    {% endif %}
+                                                {% else %}
+                                                    {% if field.valuetemp!='' %}
+                                                        {% if field.configjson.class is defined and 'break' in field.configjson.class %}<br />{% endif%}
+                                                        <div  class="{% if field.configjson.class is defined and field.configjson.class!='' %}{{field.configjson.class}}{% endif%}">
+                                                            {% if field.showlabel is defined and field.showlabel==1 and field.valuetemp!='' %}
+                                                                <label for="" class="etiquetaCuestionario">{% if field.required==1%}*{% else%}&nbsp;{% endif%}{{field.label}}:</label>
+                                                            {% endif%}
+                                                            {{field.valuehtml|raw}}
+                                                        </div>
+                                                    {% endif %}
+                                                {% endif %}
+
+
+
+                                            {% endif %}
+
+
+                                            <!--CERRANDO TABLAS ID_{{field.id}} IDG_{%if field.subgroup.id is defined %}{{field.subgroup.id}}{%endif%} T_{{tb}} G_{{gr}} NEXT_G_{%if entityfieldset.fields[loop.index] is defined and entityfieldset.fields[loop.index].subgroup is not null%}{{entityfieldset.fields[loop.index].subgroup.id}}{%endif%} GROUPS {{ grOp|join('|') }} -->
+                                            {% if (tb!='' )%}
+                                            {% if ( entityfieldset.fields[loop.index] is defined and (entityfieldset.fields[loop.index].subgroup.id is defined and entityfieldset.fields[loop.index].subgroup.id!=tb) or (entityfieldset.fields[loop.index].subgroup.id is not defined))
+                                            or entityfieldset.fields[loop.index] is not defined or loop.index == entityfieldset.fields|length %}
+                                            </tr>
+                                    </table></div><!--CERRANDO2 T_{{tb}}-->
+                                {% set tb='' %}
+                                {% endif %}
+                                {% endif %}
+
+                                <!--CERRANDO GRUPOS ID_{{field.id}} IDG_{%if field.subgroup.id is defined %}{{field.subgroup.id}}{%endif%} T_{{tb}} G_{{gr}} NEXT_G_{%if entityfieldset.fields[loop.index] is defined and entityfieldset.fields[loop.index].subgroup is not null%}{{entityfieldset.fields[loop.index].subgroup.id}}{%endif%}  GROUPS {{ grOp|join('|') }} -->
+                                {% if (grOp|length>0 and loop.index < entityfieldset.fields|length) and tb==''%}
+                                {% set bk=0 %}
+                                {% set indS=loop.index %}
+                                {% for grO in grOp|reverse %}
+
+                                {% if ( bk==0 and (entityfieldset.fields[indS].subgroup is null or entityfieldset.fields[indS].subgroup.id!=grO) )   %}
+                            </div><!--CERRANDO2 G_{{grO}} GRUPOS_{{ grOp|join('|') }}  {%if entityfieldset.fields[indS].subgroup is not null%}{{entityfieldset.fields[indS].subgroup.id}}{%endif%}-->
+                            {% set grOp=grOp|slice(0, (grOp|length) -1)  %}
+                            {% elseif(bk==0 and  entityfieldset.fields[indS].subgroup.id==grO) %}
+                                {% set bk=1 %}
+                            {% endif %}
+
+                            {% endfor %}
+                            <!-- GROUPS {{ grOp|join('|') }} -->
+                            {% if (grOp|length==0) %}
+                                {% set gr='' %}
+                            {%else%}
+                                {% set gr=grOp|last %}
+                            {% endif %}
+                            <!-- GR {{ gr }} -->
+                            {%elseif (grOp|length>0 and loop.index == entityfieldset.fields|length)%}
+                            {% set bk=0 %}
+                            {% set indS=loop.index %}
+                            {% for grO in grOp|reverse %}
+
+                        </div><!--CERRANDO3 G_{{grO}} GRUPOS_{{ grOp|join('|') }}  -->
+
+                        {% endfor %}
+                        {% endif %}
+
+
+
+
+                        {% set indTab=grOp|length + 1%}
+
+                        {% endfor %}
+
+
+
+
+                    </div><!--CERRANDOFIELDSET GRUPOS_{{ grOp|join('|') }}  -->
+                    <div class='clearFix'></div>
+                    {% endif %}
+                    {% endfor %}
+                </div><!--tablilla-->
+
+                {% endfor %}
+            </div><!--formularioPopup-->
+            {% endif %}
+        </div><!--modalPrincipalRightBody-->
+
+    </div><!--docHomeIntScroll dos-->
+    </div> </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                               
+
+
+
+                                    </div>
+
+
+                                    <div class="col-xl-6 col-lg-12">
+                                              <div class="card card-inverse card-primary ">
+
+                                    <div class="card-body">
+
+                                                <div class="card-block">
+
+                                        <ul class="list-group list-group-flush">
+                       
+                       <li class="list-group-item bg-primary" style="border-color: #c6e4ec;">
+                            <span class="tag  tag-pill float-xs-right">{{ entity.creationDate|date('d-m-Y') }}</span>
+                            Fecha de solicitud:
+                        </li>
+                        <li class="list-group-item bg-primary" style="border-color: #c6e4ec;">
+                            <span class="tag  tag-pill  float-xs-right">{{ entity.specialty.name }}</span>
+                            Especialidad de consulta solicitada:
+                        </li>
+                        {% if  entityCal.datetimeConsultation is defined%}
+                      <li class="list-group-item bg-primary" style="border-color: #c6e4ec;">
+                            <span class="tag  tag-pill  float-xs-right">{{ entityCal.datetimeConsultation|date('d-m-Y H:i') }}</span>
+                            Fecha de consulta:
+                        </li>
+                        {% endif %}
+
+                        {% if entity.modalityConsultation.tag=='inlive' and url_meeting!='' %}
+                        
+                        <li class="list-group-item bg-primary" style="border-color: #c6e4ec;">
+                             {% if  entity.tlf  %}
+                            <span class="tag  tag-pill float-xs-right">{{ entity.tlf }}</span>
+                            {% else %}
+                             <span class="tag tag-default tag-pill bg-danger float-xs-right">No Disponible</span>
+                            {% endif %}
+                            Telefono fijo del Paciente:
+                        </li>
+                        {% endif %}
+                       
+                    </ul>
+                </div>
+            </div>
+       </div>
+                                      
+                           
+
+        {% if (entity.modalityConsultation.tag=='inlive' and url_meeting!='') or (entity.modalityConsultation.tag=='electronic' or entity.modalityConsultation.tag=='inlive') %}
+
+                                            {% if entity.modalityConsultation.tag=='inlive' and url_meeting!='' %}
+
+                                                <div class="card bg-primary">
+                                                    <div class="card-body">
+                                                        <div class="card-block">
+                                                            <div class="media">
+                                                                <div class="media-left media-middle">
+                                                                    <i class="fa fa-video-camera white font-large-2 float-xs-left"></i>
+                                                                </div>
+                                                                <div class="media-body white text-xs-right">
+                                                                    <h3>Videoconferencia</h3>
+                                                                    <span><a style="color:#fff; " href="{{ url_meeting }}" target="_blank">Acceder <i class="fa fa-external-link fa-1x fa-fw margin-bottom"></i></a></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            {% endif %}
+                                            {% if entity.modalityConsultation.tag=='electronic' or entity.modalityConsultation.tag=='inlive' %}
+
+                                                <div class="card bg-primary">
+                                                    <div class="card-body">
+                                                        <div class="card-block">
+                                                            <div class="media">
+                                                                <div class="media-left media-middle">
+                                                                    <i class="fa fa-envelope-o white font-large-2 float-xs-left"></i>
+                                                                </div>
+                                                                <div class="media-body white text-xs-right">
+                                                                    <h3>Contacto</h3>
+                                                                    <span><a style="color:#fff; " href="{{ path('messages_new',{'usr': entity.patient.user.id,'id':entity.id}) }}" target="_blank">Ir a mensajes <i class="fa fa-external-link fa-1x fa-fw margin-bottom"></i></a></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!--formComplCampo-->
+                                            {% endif %}
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
+                                                    {% if entity.status==2 %}
+                                                        {% if entity.modalityConsultation.tag=='electronic' or entity.modalityConsultation.tag=='inlive' %}
+                                                    <div class="card">
+                                                    <div class="card-body">
+                                                            <div class="card-block">
+                                                                <p><span class="float-xs-right"><a href="{{  path('consultation_pdf', {'id': entity.id}) }}" target="_blank">Descargar como PDF  <i class="icon-arrow-right2"></i></a></span></p>
+                                                            </div>
+                                                             </div> </div>
+                                                        {% endif %}
+                                                    {% endif %}
+                                        {% endif %}  
+
+
+
+                          <!--entity.status==2-->
+              {% if entity.modalityConsultation.tag=='consice' %}
+                           <div class="card">
+
+                     {% if entity.modalityConsultation.tag=='consice' %}
+
+                                 <div class="card-header">
+                        <h4 class="card-title">Pregunta</h4>
+                     <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                       <div class="heading-elements">
+                            <span class="tag tag-default tag-info">{{ entity.creationDate|date('d-m-Y') }}</span>
+                                 </div>
+                             </div>
+                                            
+                                                     
+                             {% endif %}
+
+                                            
+
+
+                                                <div class="card-body">
+
+                                                    {#% if entity.status==2 %}
+                                                        {% if entity.modalityConsultation.tag=='electronic' or entity.modalityConsultation.tag=='inlive' %}
+
+                                                            <div class="card-block">
+                                                                <p><span class="float-xs-right"><a href="{{  path('consultation_pdf', {'id': entity.id}) }}" target="_blank">Descargar como PDF  <i class="icon-arrow-right2"></i></a></span></p>
+                                                            </div>
+
+                                                        {% endif %}
+                                                    {% endif %#}
+
+
+                                                    {% if entity.modalityConsultation.tag=='consice' %}
+
+                                                        <div class="card-block">
+                                                            {{ entity.question }}
+
+                                                             <div style="display:none" >{{ form_row(edit_form.resume,{'attr': {'style': 'height: 10em' } }) }}</div>
+                                                        </div>
+                                                    {% endif %}
+
+                                                </div>
+
+                                            </div>
+                                           {% endif %}
+{% if entity.modalityConsultation.tag=='consice' and entity.status==2%}
+                                              <div class="card">
+
+                                            <div class="card-header">
+                                                <h4 class="card-title">
+                                                    {% if entity.modalityConsultation.tag=='consice' %}
+                                                        Respuesta 
+                                                    {% endif%}</h4>
+                                                <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                                                <div class="heading-elements">
+                                                    <span class="tag tag-success">{{ entity.updateDate|date('d-m-Y') }}</span>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="card-body">
+
+                                                <div class="card-block">
+                                                    {{ entity.answer|raw }}
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        {% endif%}
+
+
+            {% if entity.modalityConsultation.tag=='consice' and entity.status!=2 %}
+
+                                                   <!-- <div class="card" style="margin-top: -218px;width: 518px;">-->
+                                                   <div class="card" {% if entity.status==0%}style="display:none;" {% endif %} >
+
+                                                    <div class="card-header">
+                                                       <h4 class="card-title">Respuesta </h4>
+
+                                                       <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                                                <div class="heading-elements">
+                                                    <span class="tag tag-success">{{ entity.updateDate|date('d-m-Y') }}</span>
+                                                </div>
+                                                 </div>
+                                                                                                                                                               
+                                                    
+                                                  <div class="card-body">
+                                                    <div class="card-block" {% if entity.status==0%}style="display:none"{% endif%}>{{ form_row(edit_form.answer,{'attr': {'style': 'height: 10em' } }) }}
+                                                    </div>
+
+
+                                            </div>
+                                        </div>
+                                                    {% endif %}
+                                   </div><!-- fin col?? -->
+                                </div><!-- fin row?? -->
+
+
+
+
+
+<div class="row">
+    <div class="col-lg-12">
+ <div class="col-xl-6 col-lg-12">
+
+
+
+
+                                                
+
+                                                   
+
+                                                 {% if entity.modalityConsultation.tag=='inlive'%}
+
+                                        <div class="card" {% if entity.status==0 %}style="display:none" {% endif %}>
+                                            <div class="card-header">
+                                                     <h4 class="card-title" >
+                                                       Resumen del Caso</h4>
+                                            <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                                                <div class="heading-elements">
+                                                    <span class="tag tag-success">{{ entity.updateDate|date('d-m-Y') }}</span>
+                                                </div>
+                                            </div>
+                                                    <div class="card-body">
+
+                                            {% elseif entity.modalityConsultation.tag=='inlive' and entity.status!=2 %}
+                                                        
+                                                        <h4 class="card-title">Resumen del Caso </h4>
+
+                                                    
+                                                     {% endif %}
+                                                    <!-- inlive recomendaciones entity.status==0 display none -->
+                                            
+                                                      
+
+                                           
+                                                {% if entity.modalityConsultation.tag=='inlive' %}
+                                                        {% if entity.status==0%}
+                                                       
+                                                        <div style="display:none" >{{ form_row(edit_form.resume,{'attr': {'style': 'height: 10em' } }) }}</div>
+                                                        
+                                                        {% elseif entity.status!=2%}
+
+                                                        <div class="card-block">
+                                                            {{ form_row(edit_form.resume,{'attr': {'style': 'height: 10em' } }) }}
+                                                        </div>
+
+
+                                                        {% else %}
+                                                         
+                                                        <div style="display: none;">{{ form_row(edit_form.resume,{'attr': {'style': 'height: 10em', 'readonly':'readonly' } }) }}</div>
+                                                        
+
+                                                        <div class="card-block">
+                                                            <!-- entity.answer-->
+                                                          {{ entity.resume|raw }}
+                                                         </div>
+                                                        {% endif %}
+                                            </div>
+                                        </div>
+                                
+                                      
+
+                                              {% else %} 
+                                                {% if entity.modalityConsultation.tag=='electronic' or entity.modalityConsultation.tag=='inlive' %}
+                                                <div class="card">
+                                                <div class="card-header">
+                                                <h4 class="card-title" >
+                                                       Resumen del Caso
+                                                   </h4>
+                                                   <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                                                <div class="heading-elements">
+                                                    <span class="tag tag-success">{{ entity.updateDate|date('d-m-Y') }}</span>
+                                                </div>
+                                               </div>
+                                               <div class="card-body">
+                                                {% endif %}
+                                                
+                                                {% if entity.status!=2%}
+                                                <div class="card-block">
+                                                 <div >{{ form_row(edit_form.resume,{'attr': {'style': 'height: 10em' } }) }}</div>
+                                               </div></div>
+                                            
+                                                {% else %} 
+                                               
+                                                    <div style="display: none;">{{ form_row(edit_form.resume,{'attr': {'style': 'height: 10em', 'readonly':'readonly' } }) }}</div>
+                                                
+
+                                                <div class="card-block">
+                                                  {{ entity.resume|raw }}
+                                                </div> </div></div>
+                                                  {% endif %}
+                                                 {% endif %}
+
+                                             </div>
+
+                                              <!-- nuevo div -->
+
+                                            <!-- <div class="card">
+                                            <div class="card-header">
+                                                      {% if entity.modalityConsultation.tag=='consice' %}
+                                                       <h4 class="card-title"> Respuesta 
+
+                                                        {% elseif entity.modalityConsultation.tag=='electronic' %}
+                                                       <h4 class="card-title">Recomendaciones Diagnosticas y Terapéuticas 
+                                                    
+                                                        {% elseif entity.modalityConsultation.tag=='inlive'%}
+                                                     <h4 class="card-title" {% if entity.status==0 %}style="display:none" {% endif %}>
+                                                       XResumen del CasoX Recomendaciones diagnodti terapeuticas
+                                                        {% endif %}</h4>-->
+                                                  
+                                                <!--<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                                                <div class="heading-elements">
+                                                    <span class="tag tag-success">estetiemp{{ entity.updateDate|date('d-m-Y') }}</span>
+                                                </div>-->
+                                       <!-- </div></div></div> aqui electro-->
+                                         {% if entity.status==1 and entity.modalityConsultation.tag=='electronic'%}</div>{%endif%}
+   <div class="col-xl-6 col-lg-12">
+                                                 {% if entity.status!=2%}
+                                                   
+                                                 
+                                                    <!-- if entity ==0 display none endif recomendacione t. -->
+
+                                                    {% if entity.modalityConsultation.tag=='electronic' or entity.modalityConsultation.tag=='inlive' %}
+                                                        <div class="card" {% if entity.status==0%}style="display:none;"{% endif %} >
+                                                  <div class="card-header">
+                                                     <h4 class="card-title" >
+
+                                                       Recomendaciones Diagnosticas y Terapéuticas
+                                                   </h4>
+                                                   <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                                                <div class="heading-elements">
+                                                    <span class="tag tag-success">{{ entity.updateDate|date('d-m-Y') }}</span>
+                                                </div>
+                                                 </div>{%endif%}
+
+                                                  {#% if entity.modalityConsultation.tag=='consice' %}
+
+                                                   <!-- <div class="card" style="margin-top: -218px;width: 518px;">-->
+                                                   <div class="card" {% if entity.status==0%}style="display:none;" {% endif %} >
+
+                                                    <div class="card-header">
+                                                       <h4 class="card-title"> estaRespuesta </h4>
+
+                                                       <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                                                <div class="heading-elements">
+                                                    <span class="tag tag-success">{{ entity.updateDate|date('d-m-Y') }}</span>
+                                                </div>
+                                                 </div>
+                                                       <!--{#% elseif entity.modalityConsultation.tag=='electronic' %#}
+                                                      <!-- <h4 class="card-title">Recomendaciones Diagnosticas y Terapéuticas esta -->
+                                                                                                        
+                                                    {#% endif %#}
+                                                  <div class="card-body">
+                                                    <div class="card-block" {% if entity.status==0%}style="display:none"{% endif%}>{{ form_row(edit_form.answer,{'attr': {'style': 'height: 10em' } }) }}
+                                                    </div>
+
+                                                </div></div></div></div></div>
+
+                                                   <!-- </div>-->
+                                                {% else %}
+                                         <div style="display: none;">{{ form_row(edit_form.answer,{'attr': {'style': 'height: 10em', 'readonly':'readonly' } }) }}</div>
+
+
+                                         {% if entity.modalityConsultation.tag=='consice' %}
+                                         </div></div></div>
+
+                                             <div style="display:none;"class="card">
+                                                    <div class="card-header">
+                                                   <h4 class="card-title"> atravesada? Respuesta </h4>
+
+                                                       <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                                                <div class="heading-elements">
+                                                    <span class="tag tag-success">{{ entity.updateDate|date('d-m-Y') }}</span>
+                                                </div>
+                                                 </div>
+                                               <div class="card-body">
+                                                       <!--{#% elseif entity.modalityConsultation.tag=='electronic' %#}
+                                                       <h4 class="card-title">Recomendaciones Diagnosticas y Terapéuticas esta -->
+                                                                                                        
+                                                    {% endif %}
+
+                                                      {% if entity.modalityConsultation.tag=='electronic' or entity.modalityConsultation.tag=='inlive' %}
+                                      
+
+                                             <div class="card">
+                                                    <div class="card-header">
+                                                       <h4 class="card-title"> Recomendaciones Diagnosticas y Terapéuticas</h4>
+
+                                                       <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                                                <div class="heading-elements">
+                                                    <span class="tag tag-success">{{ entity.updateDate|date('d-m-Y') }}</span>
+                                                </div>
+                                                 </div>
+                                               <div class="card-body">
+                                                       <!--{#% elseif entity.modalityConsultation.tag=='electronic' %#}
+                                                       <h4 class="card-title">Recomendaciones Diagnosticas y Terapéuticas esta -->
+                                                                                                        
+                                                    {% endif %}
+                            
+                                            <div  class="card-block">
+                                                {{ entity.answer|raw }}
+                                            </div>
+                                                {% endif %}
+
+                                    {% if entity.status==0%}
+                                             <div class="card">
+                                                <div class="card-block">
+                                                     <div class="card-body">
+                                            <p class="card-text">
+                                            <a href="{{  
+                                path('consultations_list_physician', {'type': 0 }) }}" class="btn btn-warning mr-1"><i class="icon-cross2"></i>Volver</a></p
+
+                                         {% if "now"|date('Y-m-d') < entityCal.datetimeConsultation|date('Y-m-d') %}
+
+                                 <div class="buttons-group">
+					<div  class="buttons-group" style="text-align: center;">
+                                   
+                                     <input type="submit" id="confirm" name="confirm" value="Confirmar"  class="btn btn-primary mr-1" />
+
+                                      
+                                      <input type="submit" id="cancel"  name="cancel" class="btn btn-danger mr-1" value="Cancelar"  />
+                                      
+                                  </div></div>
+
+                                                {% else %}
+                                           
+                                             <p class="card-text">Ya no es posible confirmar esta consulta</p>
+                                            </div>
+                                                 {% endif %}
+
+
+                                                </div>
+                                        </div> </div></div></div></div>
+                                                
+
+                                    {% elseif entity.status==1%}
+                                    <div class="row">
+                                        <div class="col-lg-12">
+
+                                <div class="form-actions right" style="text-align: center;">
+                                     <a  href="{{  
+                                path('consultations_list_physician', {'type': 0 }) }}" class="btn btn-warning mr-1">
+                                    <i class="icon-cross2"></i> Volver
+                                </a>
+                        
+                                <button type="submit" id="save" name="save" class="btn btn-secondary mr-1">
+                                    <i class="icon-save"></i> Guardar
+                                </button>
+
+                                <li style="text-align: center; display: inline-block;">
+                                <button type="submit" id="send" name="send" class="btn btn-primary">
+                                    <i class="icon-check2"></i> Enviar
+                                </button>
+                                </li>
+                                 </div>
+                                    </div></div> 
+
+                                    {% endif %}
+
+                                     {{ form_end(edit_form) }}
+                                    </div>
+                                </div>
+                                <!--/ Recent Orders -->
+
+
+                            </div>
+
+                            
+
+                        </form>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+ {% block javascripts %}
+
+
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $(".formularioPopup .form-input").prop('disabled', true);
+                        $("#appbundle_consultations_resume").prop("required", false);
+                        $("#confirm").click(function () {
+                            $("#appbundle_consultations_answer").prop("required", false);
+
+                        });
+                        $("#cancel").click(function () {
+                            $("#appbundle_consultations_answer").prop("required", false);
+                        });
+                        //FIle HREF            
+                        $(".medicalFormFile").each(function () {
+                            var path = '{{ path("medicalforms_view_file", {'medicalforms': '_e', 'filename': '_u', 'id': '_i'}) }}';
+                            path = path.replace("_e", $(this).data("f1"));
+                            path = path.replace("_u", $(this).data("f2"));
+                            path = path.replace("_i", '{{entity.patient.id}}');
+
+                            $(this).prop("href", path);
+                        });
+                        //CONTROL DE AGREGAR MAS
+                        $(".a-mas").remove();
+                        $(".a-mas-f").remove();
+
+                        //REESCRIBIR GRID
+                        $(".grid").each(function () {
+                            id = "#tr_" + $(this).attr("data-name-field");
+                            numInp = $(id+" td").first().children(".inp").length-1;
+                            numCol = $(id).children("td").length;
+
+                            if (numInp+1 >1){
+
+                                for (var i = 1; i <= numInp; i++) {
+                                    var row = document.createElement('tr');
+                                    row.className = 'groupInputs';
+                                    for (var j = 0; j < numCol; j++) {
+                                        inp = $(id).children("td").eq(j).children(".inp").eq(i);
+                                        var cell = row.insertCell(j);
+                                        cell.className = 'colorTablaUno borderBlanco';
+                                        $(cell).append( inp.clone());
+
+                                    }
+                                    $(row).children("td").last().html("<a class='elim a-mas-el' href='#' rel='tr'>x</a>");
+
+                                    $(this).append( row);
+                                    $(".elim").click(function () {
+                                        $(this).parents($(this).attr("rel")).remove();
+                                        return false;
+                                    });
+
+                                    $(row).find('.form-file').bind('change',{}, sizeFiles);
+                                    $(row).find(':input').on( "change", validGroup ).change();
+                                }
+
+
+                                for (var j = 0; j < numCol; j++) {
+                                    while($(id).children("td").eq(j).children().length>1){
+                                        inp = $(id).children("td").eq(j).children().last();
+                                        inp.remove();
+                                    }
+                                }
+
+
+                            } /* */
+
+                        });
+
+                        //ACTIVAR ELIM 
+                        $(".elim").remove();
+                    });
+
+
+                </script>
+
+
+            {% endblock %}
+
+
+

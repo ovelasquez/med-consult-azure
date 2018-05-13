@@ -1,0 +1,137 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% set qP = app.request.query.all %}
+
+
+<section id="basic-form-layouts">
+    <div class="row ">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header no-border">
+                    <h3 class="card-title mt-1 text-xs-center">Ingresa tus datos para registrarte</h3>
+
+                </div>
+                <div class="card-body collapse in">
+
+                    <div class="card-block mt-0">
+                        <div class="card-text">                                
+
+                        </div>
+
+                        <div>
+                            {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register  formAmd'}}) }}
+
+                            <div class=" ">
+
+                                <div class=" form-body registroFormulario dos register-user">
+
+                                    {% if messages is defined %}
+                                        <div class="rowError" {% if messages is defined and messages|length %}style="display: block"{% else %}style="display: none"{% endif %}>
+                                            <div class="alert bg-warning alert-icon-right alert-arrow-right alert-dismissible fade in" role="alert">
+                                                <button type="button" class="close" data-dismiss="" id="btnError" aria-label="Close">
+                                                    <span aria-hidden="true" class=" warning ">×</span>
+                                                </button>
+                                                <span id="itemError">
+                                                    {% for message in messages %}                                                    
+                                                        <strong> {{ message }}<br></strong> 
+                                                        {% endfor %}
+                                                    <strong>{{ form_errors(form) }}</strong> 
+                                                </span>
+                                            </div>
+                                        </div><!--row-->
+                                    {% endif %}
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                {{ form_row(form.name,{'attr': {'class': 'form-control','placeholder':"Nombre"}}) }}
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                {{ form_row(form.lastname,{'attr': {'class': 'form-control','placeholder':"Apellido"}}) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                {{ form_row(form.email,{'attr': {'class': 'form-control','placeholder':"Correo"}}) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                {{ form_row(form.username,{'attr': {'class': 'form-control','placeholder':"Usuario"}}) }}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class=" col-md-6 mb-2"><div class="form-group "> 
+                                                <label for="projectinput1">Contraseña*</label>
+                                                {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control','pattern':"(?=.*\\d)(?=.*[a-z]).{6,}",'title':"La contraseña debe contener al menos 6 caracteres, incluyendo solo minúscula y números"} }) }}
+                                                {% for errorItem in form.plainPassword.first.vars.errors %}
+                                                    <label class="control-label has-error" for="{{ form.plainPassword.vars.id }}">{{ errorItem.message }}</label>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-2"><div class="form-group ">     
+                                                <label class="">Repita la contraseña*:</label>                                    
+                                                <div>
+                                                    {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control','pattern':"(?=.*\\d)(?=.*[a-z]).{6,}",'title':"La contraseña debe contener al menos 6 caracteres, incluyendo solo minúscula y números"} }) }}
+                                                </div>
+                                            </div><!--confgCuentFormCampo-->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">                                               
+                                        <p class="tag-default tag-warning block-tag text-xs-left p-1px">
+                                            <small class="block-area white">La contraseña debe contener al menos 6 caracteres, incluyendo solo letras minúsculas y números</small>
+                                        </p>                                                
+                                    </div>     
+
+                                    <div class="">
+
+                                        <div class="input-group">
+                                            <label class="display-inline-block custom-control custom-checkbox ml-1">
+                                                <input type="checkbox" name="customer1" required="required" class="checker  custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0"><sup>*</sup>Acepto los <a target="_blank" href="{{ url('terminos') }}">Términos del servicio</a></span>
+                                            </label>
+
+                                        </div>
+
+                                    </div><!--registroCampo-->   
+                                    <div class="p-1">
+                                        <p class="small color-verdeg">{{'patients.new.msj_instruction1'|trans({}, 'AppBundle')}}</p><!--letraPequena-->
+                                        <p class="small color-verdeg">{{'patients.new.msj_instruction2'|trans({}, 'AppBundle')}}</p><!--letraMediana-->        
+                                    </div>
+
+                                    <div class="form-actions right">
+                                        <a href="https://www.medeconsult.com/" class="btn btn-warning mr-1">Cancelar</a>
+                                        <button type="submit" class="btn btn-primary submit">
+                                            <i class="icon-check2"></i> {{ 'registration.submit'|trans }}
+                                        </button>
+
+                                    </div>
+
+                                </div><!--registroFormulario dos-->    
+
+
+                            </div>
+
+                            {{ form_widget(form._5, {'value' : qP.tkG}) }}
+                            {{ form_widget(form._2, {'value' : qP.tokenSh}) }}
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</section>    
+
+
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="AppBundle\Entity\PromotionLog" table="promotion_log">
+        <id name="id" type="bigint" column="id">
+            <generator strategy="IDENTITY"/>
+        </id>
+        <many-to-one field="patient" target-entity="\AppBundle\Entity\Patients" fetch="LAZY">            
+            <join-columns>
+                <join-column name="patient_id" referenced-column-name="id"/>
+            </join-columns>
+        </many-to-one>
+        <many-to-one field="consultation" target-entity="\AppBundle\Entity\Consultations" fetch="LAZY">            
+            <join-columns>
+                <join-column name="consultation_id" referenced-column-name="id"/>
+            </join-columns>
+        </many-to-one> 
+        <many-to-one field="promotion" target-entity="\AppBundle\Entity\Promotion" fetch="LAZY">            
+            <join-columns>
+                <join-column name="promotion_id" referenced-column-name="id"/>
+            </join-columns>
+        </many-to-one> 
+        <field name="dateTimeCreation" type="datetime" column="date_time_creation" nullable="true"/>       
+    </entity>
+</doctrine-mapping>

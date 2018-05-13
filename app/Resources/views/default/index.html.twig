@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if banners%}
+
+        <div class="row" style="height:90%; ">
+            <div class="col-xs-12 modbg_inicio" >
+                <div class="carousel" data-ride="carousel" data-interval="1200">
+                    <div class="slider_index">
+                        <div class="your-class">
+                            {% for banner in banners %}
+                                <div>
+                                    <div class="carouselItem" >
+                                        <img src="{{ asset('uploads/documents/' ~ banner.image) }}" />
+                                        <div class="textItem">
+                                            <div class="cuadro uno">
+                                                    <div class="descBnn">{{ banner.body | raw }}</div>
+                                                    <a href="como-funciona">Descubra cómo funciona</a>
+                                                </div><!--cuadro uno-->
+                                                {{ cuadros.body | raw }}
+                                        </div>
+                                    </div>                                    
+                                </div>
+
+                            {% endfor %}  
+                        </div><!--your-class-->
+                    </div><!--slider_index-->
+                    
+
+                </div><!--carousel-->
+                {{ footer.body | raw }}
+            </div><!--modbg_inicio-->
+        </div>
+
+
+    {% endif %}    
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

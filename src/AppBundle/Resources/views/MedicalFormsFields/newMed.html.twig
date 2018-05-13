@@ -1,0 +1,40 @@
+{% extends '::basemedphysicians.html.twig' %}
+
+{% block body -%}
+    
+    
+    <div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-block" style="">
+                Para crear su formulario use la estructura base que ofrece la heramienta seleccionando campos ya creados o creando los campos que necesite en la opción crear campo. 
+                Adicionalmente puede indicar si el campo es requerido o no.
+            </div> 
+        </div>               
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title" id="horz-layout-basic">Categoría </h4>
+
+        </div>
+        <div class="card-body">
+            <div class="card-block" style="padding: 3.4rem;">
+                <div class="row">
+
+                    {{ form(form,{ 'attr': {'class': 'formAmd'} }) }}
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+    
+    
+    
+    
+    
+{% endblock %}

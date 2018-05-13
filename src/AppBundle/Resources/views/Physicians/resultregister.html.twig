@@ -1,0 +1,31 @@
+{# empty Twig template #}
+{% extends '::base.html.twig' %}
+{% block body -%}
+    <div class="row" style="height:80%; ">
+        <div class="col-xs-7 col-lg-8 modbg_izq" >
+            <div class="imagenRegistroMedico"></div><!--imagenRegistroMedico-->
+        </div><!--modbg_izq-->
+        <div class="col-xs-5 col-lg-4 modpq_der modpq_acercade" >
+            <div class="regMedTop">
+                <div class="imagenCarpetaRegMed"></div><!--imagenCarpetaRegMed-->
+            </div><!--regMedTop-->
+            <div class="regMedMiddle">
+                <div class="regMedMiddleSup">
+                    <h5 class="colorLilaOscuro">Hola, {{name}}</h5>
+                    <p>Hemos recibido tu aplicación,uno de nuestros asociados se estará contactando en las próximas 48 hrs.</p>
+                </div><!--regMedMiddleSup-->
+                <p class="colorLilaOscuro claseDos">Gracias por considerar unirse a nuestro equipo de trabajo. Esperamos que juntos podamos llevar el regalo de la salud a más y más personas.</p>
+            </div><!--regMedMiddle-->
+            <div class="regMedBottom">
+                <p>ATENTAMENTE EL EQUIPO DE MEDECONSULT</p>
+            </div><!--regMedBottom-->
+        </div><!--modpq_der modpq_acercade-->
+    </div>
+    <div class="row" style="height:10%; ">
+        <div class="col-xs-12 barrafooter barraf_acercade">
+            <ul>
+                <li class="current"><a href="#">Registro</a><div class="arrow acercaNosotros"></div></li>
+            </ul>
+        </div><!--barrafooter barraf_acercade-->
+    </div><!--row-->
+{% endblock %}

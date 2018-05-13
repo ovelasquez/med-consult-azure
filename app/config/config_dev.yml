@@ -1,0 +1,86 @@
+imports:
+    - { resource: config.yml }
+
+framework:
+    router:
+        resource: "%kernel.root_dir%/config/routing_dev.yml"
+        strict_requirements: true
+    profiler: { only_exceptions: false }
+
+web_profiler:
+    toolbar: true
+    intercept_redirects: false
+
+monolog:
+    handlers:
+        main:
+            type:   stream
+            path:   "%kernel.logs_dir%/%kernel.environment%.log"
+            level:  debug
+        console:
+            type:   console
+            bubble: false
+            verbosity_levels:
+                VERBOSITY_VERBOSE: INFO
+                VERBOSITY_VERY_VERBOSE: DEBUG
+            channels: ["!doctrine"]
+        console_very_verbose:
+            type:   console
+            bubble: false
+            verbosity_levels:
+                VERBOSITY_VERBOSE: NOTICE
+                VERBOSITY_VERY_VERBOSE: NOTICE
+                VERBOSITY_DEBUG: DEBUG
+            channels: ["doctrine"]
+        # uncomment to get logging in your browser
+        # you may have to allow bigger header sizes in your Web server configuration
+        #firephp:
+        #    type:   firephp
+        #    level:  info
+        #chromephp:
+        #    type:   chromephp
+        #    level:  info
+
+# Twig Configuration
+twig:    
+    globals:
+        fb_appId: 999410876789624       
+assetic:
+    use_controller: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    port: "%mailer_port%"
+    encryption: ~
+    spool:     { type: memory }
+    
+hwi_oauth:    
+    firewall_name: main
+    connect:
+        account_connector: medeconsult_user_provider
+    fosub:
+#        username_iterations: 30
+        properties:
+            # these properties will be used/redefined later in the custom FOSUBUserProvider service.
+            facebook: facebook_id            
+    resource_owners:
+        facebook:
+            type:          facebook
+            client_id:     999410876789624
+            client_secret: 2fe60b87a7639018f048b4f5f161a02c
+            scope:         "email, public_profile"
+            options:
+                display: popup 
+    http_client:
+        verify_peer: false
+        
+ewz_recaptcha:
+    public_key:  6LejbCgUAAAAAG6YmMATGj9YnBLfOt9P9EqUzQ1_
+    private_key: 6LejbCgUAAAAABq87FN7NqHF8jWG_hXFWw0HKV8Z
+    # Not needed as "%kernel.default_locale%" is the default value for the locale key
+    locale_key:  %kernel.default_locale%
+    locale_from_request: true

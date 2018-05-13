@@ -1,0 +1,48 @@
+{% extends '::baseadm.html.twig' %}
+
+{% block body -%}
+    <h5>FORM: {{ entity.name }}<a href="{{ path('medicalforms_edit', { 'id': entity.id }) }}" > [Edit] </a></h5>
+
+
+    <table cellpadding="0" cellspacing="0" border="0" width="90%" class="table-striped tablaAdm ">
+        <thead>
+            <tr>
+                <th>Fieldset</th>
+                <th>Position</th>
+                <th class=" col-lg-1 col-md-1 col-sm-1" colspan="3">OPERACIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entitys in entitiesSets %}
+                <tr>
+                    <td  class="{% if entitys.type=='page' %}td-group{% else %}td-field{% endif %}"><a href="{{ path('medicalformsfieldsets_show', { 'id': entitys.id }) }}">{{ entitys.label }}</a></td>
+                    <td>{{ entitys.position }}</td>                
+                    <td>
+                        <a href="{{ path('medicalformsfieldsets_show', { 'id': entitys.id }) }}">ver</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('medicalformsfieldsets_edit', { 'id': entitys.id }) }}">editar</a>
+                    </td>                    
+                    <td>
+                        {% if entitys.type!='page' %}<a href="{{ path('medicalformsfields_list_set', { 'ids': entitys.id }) }}">fields</a>{% endif %}
+                    </td>
+                    
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('medicalformsfieldsets_new', { 'idf': entity.id }) }}" class="submit btnAdm lilaOscuro">
+                Create Fieldset 
+            </a>
+        </li>  
+        <li>{{ form(delete_form) }}</li>
+        <li>
+            <a href="{{ path('medicalforms') }}" class="submit btnAdm lilaOscuro">
+                Back 
+            </a>
+        </li>     
+    </ul>
+{% endblock %}

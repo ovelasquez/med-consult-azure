@@ -1,0 +1,124 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title" id="horz-layout-basic"> Compartir historial </h4>
+
+                </div>
+                <div class="card-body collapse in">
+                    <div class="card-block ">
+                        {{ form_start(form,{'attr': {'class': 'configurarCuentaFormulario','id': 'editprofilePatient'}}) }}
+                        <div class="form-body">
+                            {% if messages is not defined  %}
+                                {% set messages = [] %}
+                            {%endif %}
+                            {% for child in form.children %}
+                                {% for error in child.vars.errors %}
+                                    {% set messages = messages|merge([child.vars.label  ~ ' ' ~ error.message]) %}
+                                {% endfor %}
+                            {% endfor %}
+
+
+                            <div class="row rowError" {% if messages|length %}style="display: block"{% else %}style="display: none"{% endif %}>
+                                <div class="col-xs-12" >
+                                    <div class="alert alert-icon-right alert-warning alert-dismissible fade in mb-2" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        {% for message in messages %}                                                    
+                                            <strong> {{ message }}<br></strong> 
+                                            {% endfor %}
+
+                                    </div>
+                                </div><!--col-xs-12-->
+                            </div><!--row-->
+
+                            <div class="col-md-6 col-sm-12 p-1">
+
+                                <fieldset class="form-group position-relative has-icon-left mb-1">
+                                    <label for="inputName1" class="col-sm-3 form-control-label">Nombre</label>
+                                    <div class="col-sm-9">
+                                        {{ form_widget(form.name,{'attr': {'class': 'form-control', 'placeholder':"Nombre"} } ) }}
+                                        <div class="form-control-position"><i class="icon-head"></i></div>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="form-group position-relative has-icon-left mb-1">
+                                    <label for="inputEmail1" class="col-sm-3 form-control-label">Correo</label>
+                                    <div class="col-sm-9">
+                                        {{ form_widget(form.email,{'attr': {'class': 'form-control', 'placeholder':"Correo"} } ) }}
+                                        <div class="form-control-position"><i class="icon-mail6"></i></div>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="form-group position-relative has-icon-left mb-1">
+                                    <label for="inputMessage1" class="col-sm-3 form-control-label">Mensaje</label>
+                                    <div class="col-sm-9">
+                                        {{ form_widget(form.message,{'attr': {'class': 'form-control', 'placeholder':"Mensaje",'rows':"2"} } ) }}
+                                        <div class="form-control-position"><i class="icon-file-text"></i></div>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="form-group position-relative has-icon-left mb-1">
+                                    <label for="inputMessage1" class="col-sm-3 form-control-label">Días disponibles</label>
+                                    <div class="col-sm-9">
+                                        {{ form_widget(form.available,{'attr': {'class': 'form-control', 'placeholder':"Días disponibles"} } ) }}
+                                        <div class="form-control-position"><i class="icon-enter"></i></div>
+                                    </div>
+                                </fieldset>  
+
+                            </div>
+
+
+                            <div class="col-md-6  col-sm-12 mb-0 p-1">
+                                <div class="doctoresHomeIntRight guessHomeInt registroFormulario dos register-user">    
+                                    <div class="card no-border box-shadow-0 collapse-icon accordion-icon-rotate mb-0 authorization">
+                                        <div  class="card-header p-0 pb-1 no-border"> Authorization for the Release and/or Discussion of Protected Health Information </div>
+                                        <div class="card-body">
+                                            <p class=" font-small-1">I hereby authorize www.medeconsult.com  (MedEConsult. LLC)  to release and share my complete health information contained in my user’s account under the sections of: Historial de Salud, Archivo Medico, e historial de Consultas, to the person or organization identified above. This information release is at my request for the purpose of healthcare coordination.</p><!--letraPequena-->
+                                            <p class=" font-small-1">I have carefully read and understand the above information, and do herein consent to its disclosure. I am aware that my health information will be shared and released to those persons or agencies named above. I understand that, if the person(s) or organization(s) that I authorize to receive my protected health information are not subject to federal and state health information privacy laws, subsequent disclosure by such person(s) or organization(s) may not be protected by those laws. I understand that this consent is subject to revocation, in writing, at any time, unless action based on it has already begun. This permission to share my information is good until the indicated period above, or if I do not specify, this permission will last for one month from the date it is signed. </p><!--letraPequena-->
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="registroCampo ">
+                                        <div class="dobleLeft font-small-1">
+                                            <div style=" display: inline-block"><input type="checkbox" class="checker" name="terGuess" required="required"></div>
+                                            <div class="aceptoTerminosP " style=" display: inline-block"><sup>*</sup>Acepto los <a target="_blank" href="{{ url('terminos') }}">Términos del servicio</a></div><!--aceptoTerminos-->           
+
+                                        </div><!--dobleRight-->
+                                    </div><!--registroCampo-->   
+
+                                </div><!--registroFormulario dos-->  
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-actions right">
+                            <a  href="{{ path('patientssharemedicalhistory') }}" class="btn btn-warning mr-1">
+                                <i class="icon-cross2"></i> Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="icon-check2"></i> Compartir
+                            </button>
+                        </div>
+
+                        {{ form_end(form) }}<!--configurarCuentaFormulario--> 
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+{% endblock %}

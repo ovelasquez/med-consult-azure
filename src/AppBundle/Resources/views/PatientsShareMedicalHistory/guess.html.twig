@@ -1,0 +1,41 @@
+{% extends '::base_shared.html.twig' %}
+{% block body -%}
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title" id="horz-layout-basic"> Historiales de salud compartidos </h4>
+
+                </div>
+                <div class="card-body collapse in">
+                    <div class="card-block ">
+                    <table class="table table-responsive mb-0" border="0" cellpadding="0" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th class="">Paciente</th>
+                                <th class="">Fecha</th>  
+                                <th class="">Estado</th>  
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for entity in entities %}
+                                <tr>
+                                    <td class="">{% if entity.token!='' %}<a href="{{  path('patients_medical_history_shared', {'token': entity.token}) }}">{{ entity.patient.user.name }} {{ entity.patient.user.lastname }}</a>{% else %}{{ entity.patient.user.name }} {{ entity.patient.user.lastname }}{% endif %}</td>
+                                    <td class="">{% if entity.dateTime %}{{ entity.dateTime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    <td class=" {% if entity.token!='' %}celeste{% else %}rojo{% endif %}">{% if entity.token!='' %}Activo{% else %}Inactivo{% endif %}</td>
+                                    
+                                    
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+               
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+{% endblock %}

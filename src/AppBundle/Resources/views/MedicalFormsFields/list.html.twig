@@ -1,0 +1,70 @@
+{% extends '::baseadmcms.html.twig' %}
+
+{% block body -%}
+    <h5>List: <span>{{ nameset }}</span>  </h5>
+
+    <table cellpadding="0" cellspacing="0" border="0" width="90%" class="table-striped tablaAdm ">
+        <thead>
+            <tr>
+                <th class=" col-lg-8 col-md-8 col-sm-8">Label</th>
+                <th class=" col-lg-3 col-md-3 col-sm-3">Field</th>  
+                <th class=" col-lg-3 col-md-3 col-sm-3">Order</th>  
+                <th class=" col-lg-1 col-md-1 col-sm-1" colspan="2">OPERACIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set indT=0 %}
+            {% set ant=0 %}
+            {% set antG=0 %}
+            {% set grOp = [] %} 
+            {% for entity in entities %}    
+                {% if entity.field=='group' or entity.field=='grid'%}                    
+                    {% set grOp = grOp|merge([entity.id]) %}                     
+                {% endif %}
+                {% set indT=grOp|length %}  
+                <tr >     
+                    <td class=" {% if entity.field=='group'  %}td-group td-group-{{indT-1}}{% elseif entity.field=='grid' %}td-group td-group-{{indT-1}}{% else %}td-field td-field-{{indT}}{% endif %}"><a href="{{ path('medicalformsfields_show', { 'id': entity.id }) }}">{{ entity.label |slice(0, 30)}}{%if entity.label |length>30%}...{%endif%}</a></td>
+                    <td class="">
+                        {% if entity.subgroup is not null%}
+                            <!--[{{ grOp|join('|') }}]--ACT:{{entity.subgroup.id}}---ANT:{{antG}}                        -->
+                        {% endif%}   
+                        
+                        {{ entity.field }} </td>       
+                    <td class="">{{ entity.orderid }}</td>          
+                    <td class="">
+                        <a href="{{ path('medicalformsfields_show', { 'id': entity.id }) }}">ver</a>
+                    </td>
+                    <td class="">
+                        <a href="{{ path('medicalformsfields_edit', { 'id': entity.id }) }}" >editar</a>
+                    </td>
+                </tr>
+                {% if loop.index < entities|length  %}
+                    {% set bk=0 %}
+                    {% set indS=loop.index %}
+                    {% for grO in grOp|reverse %}                                      
+                        {% if ( bk==0 and (entities[indS].subgroup is null or entities[indS].subgroup.id!=grO) )   %}                                                                          
+                            {% set grOp=grOp|slice(0, (grOp|length) -1)  %}
+                        {% elseif(bk==0 and  entities[indS].subgroup.id==grO) %}
+                            {% set antG=grO %}                            
+                            {% set bk=1 %}
+                        {% endif %}                                    
+                    {% endfor %}                        
+                {% endif %}  
+          
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <ul class="record_actions ">
+        <li>
+            <a href="{{ path('medicalforms_show',{'id':idf}) }}" class="submit btnAdm lilaOscuro">
+                Volver
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('medicalformsfields_new_f',{'idf':idf,'ids':ids}) }}" class="submit btnAdm rojoFuerte">
+                Crear campo
+            </a>
+        </li>
+    </ul>
+{% endblock %}

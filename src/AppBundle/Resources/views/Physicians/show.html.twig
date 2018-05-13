@@ -1,0 +1,125 @@
+{% extends '::baseadm.html.twig' %}
+
+{% block body -%}
+    <h5>Médicos</h5>
+
+    <div class="col-md-8 "> <table  cellpadding="0" cellspacing="0" border="0" width="90%"  class="tablaAdm tableShow">
+            <tbody>
+
+                <tr>
+                    <th>Id</th>
+                    <td >{{ entity.id }}</td>
+                </tr>
+                <tr>
+                    <th>Usuario</th>
+                    <td >{{ entity.user.username }}</td>
+                </tr>
+                <tr>
+                    <th>Nombres</th>
+                    <td >{{ entity.user.name }}</td>
+                </tr>
+                <tr>
+                    <th>Apellidos</th>
+                    <td >{{ entity.user.lastname }}</td>
+                </tr>
+                <tr>
+                    <th>Correo</th>
+                    <td >{{ entity.user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Estado</th>
+                    <td >{% if (entity.user.enabled) %}Activo{%else%}Inactivo{%endif%}</td>
+                </tr>
+                <tr>
+                    <th>Título</th>
+                    <td >{{ entity.jobtitle }}</td>
+                </tr>
+                <tr>
+                    <th>Educación</th>
+                    <td >{{ entity.education }}</td>
+                </tr>
+                <tr>
+                    <th>Abms</th>
+                    <td >{{ entity.abms }}</td>
+                </tr>
+                <tr>
+                    <th>Universidad/Hospitales</th>
+                    <td >{{ entity.university }}</td>
+                </tr>
+                <tr>
+                    <th>Espacialidad</th>
+                    <td >{{ entity.specialty.name }}</td>
+                </tr>
+                <tr>
+                    <th>Subespecialidad</th>
+                    <td >{{ entity.subspecialty }}</td>
+                </tr>
+                <tr>
+                    <th>Investigación</th>
+                    <td >{{ entity.research }}</td>
+                </tr>
+                <tr>
+                    <th>Idiomas</th>
+                    <td >{{ entity.languages }}</td>
+                </tr>
+                <tr>
+                    <th>Postalcode</th>
+                    <td >{{ entity.postalcode }}</td>
+                </tr>
+                <tr>
+                    <th>Phone</th>
+                    <td >{{ entity.phone }}</td>
+                </tr>
+                <tr>
+                    <th>Biografía</th>
+                    <td >{{ entity.biography}}</td></tr>
+                <tr>
+                    <th>Sitio web</th>
+                    <td >{{ entity.webSite}}</td></tr>
+                <tr>
+                    <th>Perfil LinkedIn</th>
+                    <td >{{ entity.linkedinProfile}} </td>
+                </tr>            
+                <tr>
+                    <th>Último acceso</th>
+                    <td >{{ entity.user.lastLogin|date('Y-m-d H:i:s') }}</td>
+                </tr>
+
+
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-4 "><div style="   text-align: center;">
+            <img width="90%" src="{{ asset('uploads/documents/' ~ entity.photo) }}" />
+        
+    <div style=" margin: 20px;">
+        <ul class="record_actions">
+            <li>
+                <a href="{{ path('physicians') }}" class="submit btnAdm lilaOscuro ">
+                    volver
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('physicians_edit_profile', {'id': entity.user.id}) }}" target="_blank" class="submit btnAdm lilaOscuro ">
+                    editar
+                </a>
+            </li>
+            <li>{{ form(delete_form) }}</li>
+        </ul>
+    </div>    
+        
+    </div><!--imagenDoctorDetalle--></div>
+    
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#form_submit").html("{% if (entity.user.enabled) %}Desactivar{%else%}Activar{%endif%}");
+
+        });
+    </script>
+
+
+
+{% endblock %}

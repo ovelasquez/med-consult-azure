@@ -1,0 +1,28 @@
+{% extends '::baseadm.html.twig' %}
+
+{% block body -%}
+    <h1>MedicalFormsFieldsets edit</h1>
+
+    {{ form(edit_form,{ 'attr': {'class': 'formAmd'} }) }}
+
+    <ul class="record_actions supe">
+        <li>
+            <a href="{{ path('medicalforms_show',{'id':idf}) }}" class="submit btnAdm lilaOscuro">
+                Volver 
+            </a>
+        </li>
+        <li>{{ form(delete_form) }}</li>
+    </ul>
+{% endblock %}
+{% block javascripts %}
+    <script>
+
+        $(document).ready(function () {
+            var valF = '{{entity.type}}';
+            if (valF === "page") {
+                $("#appbundle_medicalformsfieldsets_page").attr("disabled", "disabled");
+            } 
+        });
+
+    </script>
+{% endblock %}

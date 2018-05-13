@@ -1,0 +1,17 @@
+{% extends "FOSUserBundle::layout-login.html.twig" %}
+
+{% block fos_user_content %}
+{% include "FOSUserBundle:Resetting:reset_content.html.twig" %}
+{% endblock fos_user_content %}
+{% block javascripts %}
+<script>
+    $(function () {
+        //alert("status")
+        $("#fos_user_resetting_form_plainPassword_second").addClass('form-control');
+        $("#fos_user_resetting_form_plainPassword_first").addClass('form-control');    
+
+        
+    });
+
+</script>
+{% endblock %}

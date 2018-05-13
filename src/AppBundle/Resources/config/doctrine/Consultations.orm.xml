@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="AppBundle\Entity\Consultations" table="consultations" repository-class="AppBundle\Entity\ConsultationsRepository">
+        <indexes>
+            <index name="modality_consultation_id" columns="modality_consultation_id"/>
+            <index name="specialtie_id" columns="specialtie_id"/>
+            <index name="physician_id" columns="physician_id"/>
+            <index name="patient_id" columns="patient_id"/>
+        </indexes>
+        <id name="id" type="integer" column="id">
+            <generator strategy="IDENTITY"/>
+        </id>
+        <field name="question" type="text" length="200" column="question"  nullable="false">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="resume" type="text" column="resume"  nullable="true">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="status" type="integer" column="status"  nullable="true">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="creationDate" type="datetime" column="creation_date" nullable="true"/>
+        <field name="updateDate" type="datetime" column="update_date" nullable="true"/>
+        <field name="answer" type="text" column="answer" length="65535" nullable="true">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+         <field name="tlf" type="text" column="tlf" length="14" nullable="true">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <many-to-one field="modalityConsultation" target-entity="ModalityConsultations" fetch="LAZY">
+            <join-columns>
+                <join-column name="modality_consultation_id" referenced-column-name="id"/>
+            </join-columns>
+        </many-to-one>
+        <many-to-one field="specialty" target-entity="Specialties" fetch="LAZY" >
+            <join-columns>
+                <join-column name="specialtie_id" referenced-column-name="id"/>
+            </join-columns>
+        </many-to-one> 
+        <many-to-one field="physician" target-entity="Physicians" fetch="LAZY">
+            <join-columns>
+                <join-column name="physician_id" referenced-column-name="id" />
+            </join-columns>
+        </many-to-one> 
+        <many-to-one field="patient" target-entity="Patients" fetch="LAZY">
+            <join-columns>
+                <join-column name="patient_id" referenced-column-name="id"/>
+            </join-columns>
+        </many-to-one> 
+    </entity>
+</doctrine-mapping>

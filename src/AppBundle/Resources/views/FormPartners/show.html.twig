@@ -1,0 +1,64 @@
+{% extends '::baseadm.html.twig' %}
+
+{% block body -%}
+    <h5>FormPartners</h5>
+
+    <table  cellpadding="0" cellspacing="0" border="0" width="90%"  class="tablaAdm tableShow">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ entity.name }}</td>
+            </tr>
+            <tr>
+                <th>Namecontact</th>
+                <td>{{ entity.nameContact }}</td>
+            </tr>
+            <tr>
+                <th>Typecompany</th>
+                <td>{{ entity.typeCompany }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ entity.address }}</td>
+            </tr>
+            <tr>
+                <th>Phonenumbers</th>
+                <td>{{ entity.phoneNumbers }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ entity.email }}</td>
+            </tr>
+            <tr>
+                <th>Hearaboutus</th>
+                <td>{{ entity.hearAboutUs }}</td>
+            </tr>
+            <tr>
+                <th>Message</th>
+                <td><div class="admFieldBody">{{ entity.message }}</div></td>
+            </tr>
+            <tr>
+                <th>Datetime</th>
+                <td>{{ entity.dateTime|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Ip</th>
+                <td>{{ entity.ip }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('formpartners') }}" class="submit btnAdm lilaOscuro">
+            Back 
+        </a>
+    </li>
+    
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

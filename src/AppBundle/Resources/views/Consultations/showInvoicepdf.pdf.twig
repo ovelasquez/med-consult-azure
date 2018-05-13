@@ -1,0 +1,67 @@
+<pdf>
+    <dynamic-page>        
+
+        <placeholders>
+            <header>                
+                <table border.type="none" height="52px" width="100%"> 
+                    <tr border.type="none"> 
+                        <td border.type="none"  width="200px"><img style=" margin: 5px 41px; " src="{{ pdf_image('AppBundle:logoPrincipalDos.png') }}" /></td> 
+                        <td border.type="none"  color="gray" style=" padding: 5px 10px; " background.color="#C6E4EC"><p style=" margin: 0px 0px;text-align:right;"><strong>{{ entityCon.modalityConsultation.name|upper }}</strong> | <span>{{'Especialidad'|upper}}:</span> <span >{{ entityCon.specialty.name }}</span> </p></td> 
+                    </tr>      
+                </table>
+            </header>
+
+            <footer>
+                <table border.type="none" height="70px" width="100%" color="#ffffff" background.color="#485B83"> 
+                    <tr border.type="none"> 
+                        <td border.type="none" text-align="left" width="70%">
+                            <p  style=" margin: 0px 10px;">{{ entityCon.modalityConsultation.name }} de {{ entityCon.patient.user.name}} {{ entityCon.patient.user.lastname}} realizada el {{ dateR|date('d-m-Y') }} </p>
+                        </td> 
+                        <td border.type="none" text-align="right" width="30%">
+                            <p  style=" margin: 0px 10px;">http://www.medeconsult.com</p>
+                        </td> 
+                    </tr>  
+                    <tr border.type="none"> 
+                        <td  border.type="none" colspan="2" text-align="center">
+                    <page-info format="Página %s de %s" />
+                    </td> 
+                    </tr>  
+                </table>
+            </footer>
+        </placeholders>
+        <div width="100%" height="100%">
+           
+            <table border.type="none"> 
+                <tr border.type="none"> 
+                    <td border.type="none" colspan="2" ><p  style=" margin: 20px 0px 0px 0px; color: #485B83; font-size: 20px;"><span style="color:#9A9898;"></span>{{ entityCon.patient.user.name|upper}} {{ entityCon.patient.user.lastname|upper}}</p></td> 
+                </tr>             
+                <tr border.type="none"> 
+                    <td border.type="none" colspan="2" ><p style="color: #9A9898; font-size: 11px; "><span>{{'Fecha'|upper}}:</span> <span style="color:#485B83;">{{ entity.date|date('d-m-Y H:i a') }}</span></p></td> 
+                </tr> 
+                <tr border.type="none"> 
+                    <td border.type="none" colspan="2" >
+                        <p  style=" margin: 20px 0 5px 0; color: #000000;">
+                            <strong>{{'Servicio'|upper}}</strong>
+                        </p>
+                    </td> 
+                </tr> 
+                <tr border.type="none"> 
+                    <td border.type="none" >
+                        <p  style=" margin: 0px 0 5px 0;  color: #333333; text-align: justify;">
+                            {{ entityCon.modalityConsultation.name }}
+                        </p>
+                    </td> 
+                    <td border.type="none" >
+                        <p  style=" margin: 0px 0 5px 0;  color: #333333; text-align: justify;">
+                            {{ entityCon.modalityConsultation.price }}
+                        </p>
+                    </td> 
+                </tr> 
+                
+                
+
+
+            </table>
+        </div>
+    </dynamic-page>
+</pdf>

@@ -1,0 +1,13 @@
+{# empty Twig template #}
+<div class="row" style="height:10%; ">
+    <div class="col-lg-12 col-md-12 barratope doctoresConfgUser">
+        <div class="docConfgContent">
+            {% if app.user %}
+                <ul>
+                    <li class="configuracion"><a href="pacientes_configurar_perfil.html"><div class="imagenConfg"></div><div class="confgTxt">Configurar cuenta</div></a></li><!--configuracion-->
+                    <li class="bienvenido last"><i class="fa fa-home fa-1x textGray fa-fw margin-bottom"></i><a href="#" class="userTxt"><div class="fotoUsuario"></div>Hola Beatriz</a></li>
+                </ul>
+            {% endif %}
+        </div><!--docConfgContent doctoresConfgUser-->
+    </div><!--barratope-->
+</div><!--row-->

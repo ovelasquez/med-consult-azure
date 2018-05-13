@@ -1,0 +1,15 @@
+{% extends '::baseadm.html.twig' %}
+
+{% block body -%}
+    <h5>PrePhysicians edit</h5>
+
+    {{ form(edit_form,{ 'attr': {'class': 'formAmd'} })}}
+
+        <ul class="record_actions supe" >
+    <li>
+        <a href="{{ path('prephysicians') }}"  class="submit btnAdm lilaOscuro">
+            volver
+        </a>
+    </li>
+</ul>
+{% endblock %}

@@ -1,0 +1,90 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+    medeconsult_user_provider.class: AppUserBundle\Security\Core\User\FOSUBUserProvider
+
+services:
+    fos_user.doctrine_registry:
+        alias: doctrine
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    app.twig_extension:
+            class: AppBundle\Twig\Extension\FileExtension
+            public: false
+            tags:
+              - { name: twig.extension }
+
+    app.form.registration:
+        class: AppUserBundle\Form\RegistrationType
+        tags:
+            - { name: form.type, alias: app_user_registration }
+    app.form.registration.update:
+        class: AppUserBundle\Form\RegistrationUpdateType
+        tags:
+            - { name: form.type, alias: app_user_registration_update }
+    app.form.registration.edit:
+        class: AppUserBundle\Form\RegistrationEditType
+        tags:
+            - { name: form.type, alias: app_user_registration_edit }
+    hwi_oauth.user.provider.entity:
+        class: HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider    
+    
+    medeconsult_user_provider:
+        class: AppUserBundle\Security\Core\User\FOSUBUserProvider
+        #this is the place where the properties are passed to the UserProvider - see config.yml
+        arguments: [@fos_user.user_manager,{facebook: facebook_id}]
+        
+    authentication.handler.login_success_handler:
+        class:  AppUserBundle\Security\Authentication\Handler\LoginSuccessHandler
+        arguments:  [@router, @security.context,@doctrine.orm.entity_manager]
+    
+    register.handler.register_success_handler:
+        class:  AppUserBundle\Security\Registration\Handler\RegistrationSuccessHandler
+        arguments:  [@fos_user.user_manager,@doctrine.orm.entity_manager]
+        
+    resetting.handler.password_resetting_handler:
+        class:  AppUserBundle\Security\Resetting\Handler\PasswordResettingHandler
+        arguments:  [@router, @security.context,@doctrine.orm.entity_manager]
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    fos_user.listener.email_confirmation:
+        class:        "AppUserBundle\EventListener\EmailConfirmationListener"
+        arguments:    [@fos_user.user_manager,"@fos_user.mailer", "@fos_user.util.token_generator", "@router", "@session","@doctrine.orm.entity_manager"]
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    appbundle.form.type.entity_id:
+        class: AppBundle\Form\Type\EntityIdType
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            - { name: form.type, alias: entity_id }
+    
+    app.basefields:
+        class: AppBundle\Utils\BaseFields
+        
+    app.errorsform:
+        class: AppBundle\Utils\ErrorsForm
+        
+    app.stringprocessing:
+        class: AppBundle\Utils\StringProcessing
+        
+    app.form.formpartners:
+        class: AppBundle\Form\FormPartnersType
+        tags:
+            - { name: form.type, alias: appbundle_formpartners }
+            
+    app.form.prephysicians:
+        class: AppBundle\Form\PrePhysiciansType
+        tags:
+            - { name: form.type, alias: appbundle_prephysicians }
+    
+    router.ent:
+        class: AppBundle\Utils\RouterEnt
+        arguments: [@router]
+        
+    app.user.act:
+        class:     AppBundle\Utils\UserAct
+        arguments: [@security.token_storage]

@@ -1,0 +1,60 @@
+{% extends '::baseadm.html.twig' %}
+
+{% block body -%}
+    <h5>MedicalFormsFields</h5>
+
+     <table  cellpadding="0" cellspacing="0" border="0" width="90%"  class="tablaAdm tableShow">
+        <tbody>
+            <tr>
+                <th>Field</th>
+                <td >{{ entity.field }}</td>
+            </tr>
+            <tr>
+                <th>Label</th>
+                <td >{{ entity.label }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td >{{ entity.description }}</td>
+            </tr>
+            <tr>
+                <th>Help</th>
+                <td >{{ entity.help }}</td>
+            </tr>
+            <tr>
+                <th>Data</th>
+                <td ><pre>{{ entity.data }}</pre></td>
+            </tr>
+            <tr>
+                <th>Config</th>
+                <td ><pre>{{ entity.config }}</pre></td>
+            </tr>
+            <tr>
+                <th>Order</th>
+                <td >{{ entity.orderid }}</td>
+            </tr>
+            <tr>
+                <th>Show label</th>
+                <td >{% if entity.showlabel==1 %} Show Label {% else %} Not Show Label {% endif %}</td>
+            </tr>
+            <tr>
+                <th>Required</th>
+                <td >{% if entity.required==1 %} Required {% else %} Not Required {% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+            <li>
+                <a href="{{ path('medicalformsfields_list_set',{ 'ids': entity.medicalformsfieldset.id }) }}" class="submit btnAdm lilaOscuro">
+                    Volver 
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('medicalformsfields_edit', { 'id': entity.id }) }}" class="submit btnAdm rojoFuerte">
+                    Editar
+                </a>
+            </li>
+            <li>{{ form(delete_form) }}</li>
+        </ul>
+{% endblock %}

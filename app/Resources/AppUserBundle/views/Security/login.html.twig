@@ -1,0 +1,75 @@
+{% set qP = app.request.query.all %}
+
+{% extends 'AppUserBundle::layout-login.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+
+    <div class="col-md-4 offset-md-4 col-xs-8 offset-xs-2 box-shadow-2 p-0 clearfix mb-3">
+        <div class="card border-grey border-lighten-3 px-2 py-2 row mb-0">
+            <div class="card-header no-border">
+                <h3 class="card-title mt-1 text-xs-center">INGRESAR </h3>
+                <p class="card-subtitle line-on-side text-muted text-xs-center font-small-3 pt-2"><span>Inicia sesión con</span></p>
+            </div>
+            <div class="card-body collapse in">
+
+                <div class="text-xs-center">
+                    <!--a href="#" class="btn btn-social-icon mr-1 mb-1 btn-outline-facebook"  onclick="fb_login();
+                            return false;" id="_submit_f" name="_submit_f"  ><span class="icon-facebook3"></span></a-->
+                    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+
+                </div>
+                <p class="card-subtitle line-on-side text-muted text-xs-center font-small-3 mx-2 my-2"><span>o usa los detalles de la cuenta</span></p>
+                <div class="card-block pt-0">
+                    <form class="form-horizontal" action="{{ path("fos_user_security_check") }}" method="post" {% if qP.layout is not defined%}class="formularioRestablecer"{% endif%}>
+
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />    
+                        {% if qP.guess is defined%}<input type="hidden" name="_guess_token" value="{{ qP.tkG }}" />{%endif%}
+                        <input type="hidden" name="_target_path" value="{% if qP.r is defined%}{{qP.r}}{% endif%}" />
+
+                        {% if error %}
+
+                            <div class="rowError" >
+                                <div class="alert bg-warning alert-icon-right alert-arrow-right alert-dismissible fade in" role="alert">
+
+                                    <span id="itemError">
+
+                                        <strong> {{ error.messageKey|trans(error.messageData, 'security') }}<br></strong> 
+
+                                    </span>
+                                </div>
+                            </div><!--row-->
+
+                        {% endif %}
+                        <fieldset class="form-group position-relative has-icon-left">
+                            <input type="text" class="form-control input-lg" id="username" name="_username" placeholder="{{ 'security.login.username'|trans }}" required>
+                            <div class="form-control-position">
+                                <i class="icon-head"></i>
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group position-relative has-icon-left">
+                            <input type="password" class="form-control input-lg" id="password" name="_password" required="required" placeholder="{{ 'security.login.password'|trans }}" required>
+                            <div class="form-control-position">
+                                <i class="icon-key3"></i>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="form-group row">
+
+                            <div class="col-md-12 col-xs-12 text-xs-center text-md-right"><a href="{{ path('fos_user_resetting_request') }}" class="card-link">{{ 'layout.forgot_password'|trans({}, 'AppBundle') }}</a></div>
+                        </fieldset>    
+                        <button type="submit" id="_submit" name="_submit" class="btn btn-primary btn-lg btn-block"><i class="icon-unlock2"></i> {{ 'security.login.submit'|trans }}</button>
+                    </form>
+                </div>             
+
+            </div>
+
+            <div class="card-footer no-border">
+                <p class="card-subtitle line-on-side text-muted text-xs-center font-small-3 mx-2 my-1"><span>{{'layout.msj_login_ini1'|trans({}, 'AppBundle')}}</span></p>
+                <a href="{% if qP.guess is defined%} {{ url('patientssharemedicalhistory_view_guess',{'token':qP.tkG}) }} {%else%} {{ url('patients_register') }}?r={% if qP.r is defined%}{{qP.r}}{% endif%} {%endif%}" class="btn btn-primary btn-block btn-lg mt-3 bg-lila white" ><i class="icon-head"></i> &nbsp;{{'layout.msj_login_ini2'|trans({}, 'AppBundle')}}</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock fos_user_content %}

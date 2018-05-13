@@ -1,0 +1,86 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{{ form_start(form,{'attr': {'class': 'fos_user_registration_register formAmd','id': 'registerGuess','action':path('fos_user_registration_register')}}) }}
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title" id="basic-layout-form">Registro</h4>
+
+    </div>
+    <div class="card-body collapse in">
+        <div class="card-block">
+            <div class="card-text">
+                <p>Ingrese sus datos.</p>
+            </div>
+            <form class="form">
+                <div class="form-body">
+                    <h4 class="form-section"><i class="icon-head"></i>Información personal</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.name,{'attr': {'class': 'form-control','placeholder':"Nombre"}}) }}
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.lastname,{'attr': {'class': 'form-control','placeholder':"Apellido"}}) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.email,{'attr': {'class': 'form-control','placeholder':"Correo"}}) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.username,{'attr': {'class': 'form-control','placeholder':"Usuario"}}) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">                            
+                            <div class="form-group">
+                                {{ form_row(form.plainPassword,{'attr': {'class': 'form-control','placeholder':"Contraseña"} } ) }}         
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-md-12">                            
+                            <div class="form-group">
+
+                                <div class="input-group">
+                                    <label class="display-inline-block custom-control custom-checkbox ml-1">
+                                        <input type="checkbox" name="customer1" class="custom-control-input">
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description ml-0"><sup>*</sup>Acepto los <a target="_blank" href="{{ url('terminos') }}">Términos del servicio</a></span>
+                                    </label>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div><!--registroCampo-->   
+                    <p class="small">Todos los campos con el asterisco ('*') son obligatorios.</p><!--letraPequena-->
+                    <p class="">POR FAVOR LLENA LOS CAMPOS OBLIGATORIOS</p><!--letraMediana-->       
+
+
+                </div>
+
+
+                <div class="form-actions right">                    
+                    <button type="submit" class="btn btn-primary" >
+                        <i class="icon-check2"></i> {{ 'registration.submit'|trans }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+{{ form_end(form) }}

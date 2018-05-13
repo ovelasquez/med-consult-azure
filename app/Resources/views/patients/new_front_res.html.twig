@@ -1,0 +1,47 @@
+{% extends '::base.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block body -%}
+
+    <section id="basic-form-layouts">
+        <div class="row ">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header no-border">
+                        <h3 class="card-title mt-1 text-xs-center uppercase">{{'patients.new.title_fieldset1'|trans({}, 'AppBundle')}}</h3>
+
+                    </div>
+                    <div class="card-body collapse in">
+
+                        <div class="card-block">
+                            <div class="card-text">                                
+                                <div class="regMedMiddle">
+                                    <div class="regMedMiddleSup">
+                                        <h5 class="text-xs-center color-lila">Hola, {%if name is defined%}{{name}}{%endif%}</h5>
+                                        <p>Hemos recibido tu aplicación, para confirmar tu cuenta comprueba tu bandeja de entrada para encontrar el email de confirmación que te hemos enviado.</p>
+                                    </div><!--regMedMiddleSup-->
+                                    <p class=" claseDos">Gracias por considerar unirse a nuestra plataforma.</p>
+                                </div><!--regMedMiddle-->
+                                <div class="regMedBottom">
+                                    <p class="text-xs-center color-lila">ATENTAMENTE EL EQUIPO DE MEDECONSULT</p>
+                                </div><!--regMedBottom-->
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}
+

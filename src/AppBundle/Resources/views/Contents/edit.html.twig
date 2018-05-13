@@ -1,0 +1,16 @@
+{% extends '::baseadm.html.twig' %}
+
+{% block body -%}
+    <h5>Contents edit</h5>
+
+    {{ form(edit_form,{ 'attr': {'class': 'formAmd  formfieldTa'} }) }}
+
+    <ul class="record_actions supe">
+    <li>
+        <a href="{{ path('contents') }}" class="submit btnAdm lilaOscuro">
+            volver
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

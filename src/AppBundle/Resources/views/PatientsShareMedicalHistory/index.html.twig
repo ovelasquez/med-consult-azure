@@ -1,0 +1,61 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title" id="horz-layout-basic"> Historial compartidos </h4>
+                    <div class="heading-elements">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a href="{{ path('patientssharemedicalhistory_new') }}"  class="btn btn-primary" >Compartir historial</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body collapse in">
+                    <div class="card-block p-0">
+                        <div class="table-responsive">
+                            <table id="recent-orders" class="table mb-0">
+
+
+                                <thead>
+                                    <tr>
+                                        <th class="tablillaEncabezado">Correo</th>
+                                        <th class="tablillaEncabezado">Nombre</th>
+                                        <th class="tablillaEncabezado">Disponibilidad</th>
+                                        <th class="tablillaEncabezado">Fecha</th>                                
+                                        <th class="tablillaEncabezado" colspan="2">Operaciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for entity in entities %}
+                                        <tr>
+                                            <td class="masAlto"><a href="{{ path('patientssharemedicalhistory_show', { 'id': entity.id }) }}">{{ entity.email }}</a></td>
+                                            <td class="masAlto">{{ entity.name }}</td>
+                                            <td class="masAlto">{{ entity.available }}</td>
+                                            <td class="masAlto">{% if entity.dateTime %}{{ entity.dateTime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                            <td class="masAlto">
+                                                <a href="{{ path('patientssharemedicalhistory_show', { 'id': entity.id }) }}">ver</a>
+                                            </td>
+                                            <td class="masAlto">
+                                                <a href="{{ path('patientssharemedicalhistory_edit', { 'id': entity.id }) }}">editar</a>
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+
+
+                            </table><!--tablaTablilla-->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

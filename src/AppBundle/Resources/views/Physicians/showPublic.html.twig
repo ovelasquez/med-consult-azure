@@ -1,0 +1,51 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <div class="row" style="height:80%; ">
+        <div style="width: 100%; height:100%; ">
+            <div class="modpq_der_ext modpq_acercade  medCont" id="med_">
+                <div class="doctorDetalle">
+                    <div class="imagenDoctorDetalle"><img src="{{ asset('uploads/documents/' ~ entity.photo) }}" /></div><!--imagenDoctorDetalle-->
+                    <div  class="row">
+                        <h5 class="colorLila">{{entity.user.name}}<br><span>{{entity.jobtitle}}</span></h5>
+                        <p>Especialidad: {{entity.specialty.name}}</p>
+                        <p>Sub-Especialidad: {{entity.subspecialty}}</p>
+                        <p>Areas de Especialidad:{{entity.research}}</p>     
+                        <p>Certificación: {{entity.abms}}</p>
+                    </div>
+                    <div class="row">
+                        <a href="{{ path('physicians_list') }}" class="submit lilaOscuro">Solicitar consulta</a> 
+                        <!-- Your share button code -->
+                        <div class="fb-share-button" 
+                             data-href="{{ path('physicians_show_public', { 'id': entity.id }) }}" 
+                             data-layout="button">
+                        </div>
+                    </div>
+                </div><!--doctorDetalle-->        
+            </div><!--modpq_der modpq_acercade-->
+        </div>
+        {{submenu.body|raw}}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            //CONTROL DE MENU
+            $(".med").click(function () {
+                $(".medCont").addClass("hidden");
+                $("#" + $(this).attr("rel")).removeClass("hidden");
+                //$(".barramenuform li").removeClass("current");
+                //$(this).parent().addClass("current");
+                return false;
+            });
+
+            $(".barraf_acercade a").each(function () {
+                if ($(this).attr("rel") == '{{subtag}}') {
+                    $(this).parents("li").addClass("current");
+                }
+            });
+        });
+
+    </script>
+{% endblock %}

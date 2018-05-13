@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="AppBundle\Entity\MedicalFormsFields" table="medical_forms_fields">
+        <indexes>
+            <index name="medical_forms_fieldset_id" columns="medical_forms_fieldset_id"/>
+        </indexes>
+        <id name="id" type="bigint" column="id">
+            <generator strategy="IDENTITY"/>
+        </id>
+        <unique-constraints>
+            <unique-constraint name="name" columns="name"/>
+        </unique-constraints>
+        <field name="name" type="string" column="name" length="20" nullable="false">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="field" type="string" column="field" length="255" nullable="false">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="label" type="string" column="label" length="255" nullable="false">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>    
+        <field name="description" type="string" column="description" nullable="true">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="help" type="string" column="help"  nullable="true">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="data" type="text" column="data" nullable="true">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="config" type="text" column="config" nullable="true">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="orderid" type="integer" column="orderid" nullable="false">
+            <options>
+                <option name="unsigned"/>
+            </options>
+        </field>        
+        <one-to-one  field="subgroup" target-entity="MedicalFormsFields" >
+            <join-columns>
+                <join-column name="subgroup" referenced-column-name="id"/>
+            </join-columns>
+        </one-to-one>
+        <many-to-one field="physician" target-entity="Physicians" fetch="LAZY">
+            <join-columns>
+                <join-column name="physician_id" referenced-column-name="id"/>
+            </join-columns>
+        </many-to-one>
+        <many-to-one field="medicalFormsFieldset" target-entity="MedicalFormsFieldsets" fetch="LAZY">
+            <join-columns>
+                <join-column name="medical_forms_fieldset_id" referenced-column-name="id"/>
+            </join-columns>
+        </many-to-one>
+        <field name="required" type="boolean" column="required" nullable="false"/>
+        <field name="showlabel" type="boolean" column="showlabel" nullable="false"/>
+        <field name="valueTemp" type="text" column="value_temp" nullable="true"/>      
+        <field name="keyEnc" type="text" column="key_enc" nullable="true"/>          
+    </entity>
+</doctrine-mapping>

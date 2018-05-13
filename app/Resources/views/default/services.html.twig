@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="col-xs-7 col-lg-8 modbg_izq" >
+        <div class="imagenConsultas">
+            <div class="secciontope">
+                <div class="seccion uno"><a href="#" class="serv" rel="cons-serv-item_1"><div class="opacidad"></div><div class="secciontexto uno">Pregunta<br>Concisa</div></a></div><!--seccion uno-->
+                <div class="seccion dos"><a href="#" class="serv" rel="cons-serv-item_2"><div class="opacidad"></div><div class="secciontexto dos">Consulta<br>Electrónica</div></a></div><!--seccion dos-->
+            </div><!--secciontope-->
+            <div class="seccionbottom">
+                <div class="seccion tres"><a href="#" class="serv"  rel="cons-serv-item_3"><div class="opacidad"></div><div class="secciontexto tres">consulta directa<br>en vivo</div></a></div><!--seccion tres-->
+                <div class="seccion cuatro"><a href="#" class="serv"  rel="cons-serv-item_4"><div class="opacidad"></div><div class="secciontexto cuatro">Historia Médica<br>Virtual</div></a></div><!--seccion cuatro-->
+            </div><!--seccionbottom-->
+        </div><!--imagenConsultas-->
+    </div><!--modbg_izq-->
+    {% set iniPage = 0 %}
+    {% for  content in contents%} 
+        <div class="col-xs-5 col-lg-4 modpq_der modpq_consultas servCont hidden" id="{{content.tag}}_{{content.weight}}" >
+            <h3 class="uppercase">{{content.title}}</h3>
+            {{content.body|raw}}            
+            <a href="{{ url('patients_register') }}" class="submit grisOscuro" style="display:block; margin-top: 10px; text-align: center">COMENZAR CONSULTA</a>
+        </div><!--modpq_der modpq_consultas-->
+    {% endfor %}
+    
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            //CONTROL DE MENU
+            $(".serv").click(function () {
+                $(".servCont").addClass("hidden");
+                $("#" + $(this).attr("rel")).removeClass("hidden");
+                //$(".barramenuform li").removeClass("current");
+                //$(this).parent().addClass("current");
+                return false;
+            });
+            $(".serv:first").click();       
+        });
+
+    </script>
+{% endblock %}

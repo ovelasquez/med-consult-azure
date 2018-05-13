@@ -1,0 +1,169 @@
+{% extends '::base_calendarmed.html.twig' %}
+
+{% block body -%}
+
+    <div class="row">
+        {%if (physician.datetimeAvailable is null or physician.datetimeAvailable =='' or physician.datetimeAvailable =='null')%}
+        <div class="col-xl-12 col-lg-12">
+            <div class="alert alert-warning no-border mb-2" role="alert">
+                <strong>¡Importante!</strong> este paso es obligatorio para activación de su perfil.
+            </div>            
+        </div>
+        {%endif%}
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title" id="horz-layout-basic">Configurar mi horario de disponibilidad</h4>
+                    <span class="small" >Marque los días y las horas de la semana en los cuales tendrá disponibilidad para realizar la consulta</span>
+                </div>
+                <div class="card-body collapse in">
+                    <div class="card-block">
+                        <div class="row" style="">
+
+
+                            <div class="col-xs-12 col-md-12 col-lg-12 comentariosDos" style="width: 95%; height: 70% ! important;">
+
+                                <div  style="height: 100% ! important;">
+                                    <div class="comentariosContentDos mCustomScrollbar">
+                                        {{ form_start(form,{'attr': {'id': 'editAvailability'} })  }}
+
+                                        <div class="form-body">
+                                            <table cellpadding="0" cellspacing="0" border="0" class="tablaComUno">
+                                                <tr class="wb">
+                                                    <td valign="top"></td>
+                                                </tr>
+                                                {% for i in 7..12 %}
+                                                    <tr>
+                                                        <td valign="top">{{ i }} AM</td>
+                                                    </tr> 
+                                                {% endfor %}
+                                                {% for i in 1..10 %}
+                                                    <tr>
+                                                        <td valign="top">{{ i }} PM</td>
+                                                    </tr> 
+                                                {% endfor %}
+
+                                            </table>
+                                            <table cellpadding="0" cellspacing="0" border="0" class="tablaComDos ">
+
+                                                <tr>
+                                                    <td valign="top">
+                                                        <table cellpadding="0" cellspacing="0" border="0" class="tablaComTres">
+                                                            <tr class="wb dias-sem">
+                                                                <td width="10%" class="lun">L</td>
+                                                                <td valign="top" width="5%"></td>
+                                                                <td width="10%" class="mar">M</td>
+                                                                <td valign="top" width="5%"></td>
+                                                                <td width="10%" class="mie">M</td>
+                                                                <td valign="top" width="5%"></td>
+                                                                <td width="10%" class="jue">J</td>
+                                                                <td valign="top" width="5%"></td>
+                                                                <td width="10%" class="vie">V</td>
+                                                                <td valign="top" width="5%"></td>
+                                                                <td width="10%" class="sab">S</td>
+                                                                <td valign="top" width="5%"></td>
+                                                                <td width="10%" class="dom">D</td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                {% for i in 7..22 %}
+                                                    <tr>
+                                                        <td valign="top">
+                                                            <table cellpadding="0" cellspacing="0" border="0" class="tablaComTres">
+                                                                <tr>
+                                                                    <td width="10%" class=""><input type="checkbox" name="availability[]" {% if 'L'~i in availabilitys %}checked="checked" {% endif %}value="L{{ i }}"></td>
+                                                                    <td valign="top" width="5%"></td>
+                                                                    <td width="10%" class=""><input type="checkbox" name="availability[]" {% if 'M'~i in availabilitys %}checked="checked" {% endif %} value="M{{ i }}"></td>
+                                                                    <td valign="top" width="5%"></td>
+                                                                    <td width="10%" class=""><input type="checkbox" name="availability[]" {% if 'X'~i in availabilitys %}checked="checked" {% endif %} value="X{{ i }}"></td>
+                                                                    <td valign="top" width="5%"></td>
+                                                                    <td width="10%" class=""><input type="checkbox" name="availability[]" {% if 'J'~i in availabilitys %}checked="checked" {% endif %} value="J{{ i }}"></td>
+                                                                    <td valign="top" width="5%"></td>
+                                                                    <td width="10%" class=""><input type="checkbox" name="availability[]" {% if 'V'~i in availabilitys %}checked="checked" {% endif %} value="V{{ i }}"></td>
+                                                                    <td valign="top" width="5%"></td>
+                                                                    <td width="10%" class=""><input type="checkbox" name="availability[]" {% if 'S'~i in availabilitys %}checked="checked" {% endif %} value="S{{ i }}"></td>
+                                                                    <td valign="top" width="5%"></td>
+                                                                    <td width="10%" class=""><input type="checkbox" name="availability[]" {% if 'D'~i in availabilitys %}checked="checked" {% endif %} value="D{{ i }}"></td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+
+
+                                            </table>
+                                            <div class="hidden">
+                                                {{ form_row(form.datetimeAvailable) }}              
+                                            </div><!--campoLeft-->
+                                        </div>
+                                        <div class="form-actions right">
+                                            <a  href="{{ path('physicians_calendar') }}" class="btn btn-warning mr-1">
+                                                <i class="icon-cross2"></i> Cancelar
+                                            </a>
+                                            <button type="submit" id="btnEditar" onclick="$('#editAvailability').submit()" class="btn btn-primary submit">
+                                                <i class="icon-check2"></i> Guardar
+                                            </button>
+                                        </div>
+
+                                        {{ form_end(form) }}
+                                    </div><!--comentariosContent-->
+                                </div>
+
+                            </div><!--col-xs-12 col-md-6 col-lg-6-->
+                        </div><!--row-->
+
+                    </div><!--row-->  
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('js/placeholders.jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/select2.full.js') }}"></script>
+    <script src="{{ asset('js/underscore-min.js') }}"></script>
+    <script src="{{ asset('js/moment.min.js') }}"></script>
+    <script src="{{ asset('js/clndr.js') }}"></script>
+    <script type="text/javascript">
+                                                var optionsHours = [];
+                                                var mCalendar;
+                                                var daySelected;
+                                                var ajustarDias = function () {
+                                                    if ($(window).width() < 769)                                           {    // It’s a tablet.
+                                                        $(".lun").html("L");
+                                                        $(".mar").html("M");
+                                                        $(".mie").html("M");
+                                                        $(".jue").html("J");
+                                                        $(".vie").html("V");
+                                                        $(".sab").html("S");
+                                                        $(".dom").html("D");
+                                                    } else { // It’s a desktop/laptop.
+                                                        $(".lun").html("Lunes");
+                                                        $(".mar").html("Martes");
+                                                        $(".mie").html("Miércoles");
+                                                        $(".jue").html("Jueves");
+                                                        $(".vie").html("Viernes");
+                                                        $(".sab").html("Sábado");
+                                                        $(".dom").html("Domingo");
+                                                    }
+
+
+                                                };
+                                                $(document).ready(function () {
+
+                                                    $(window).resize(ajustarDias);
+                                                    ajustarDias();
+
+                                                });
+
+    </script>
+
+
+{% endblock %}

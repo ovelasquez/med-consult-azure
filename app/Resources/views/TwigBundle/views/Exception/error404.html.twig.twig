@@ -1,0 +1,33 @@
+{# app/Resources/TwigBundle/views/Exception/error404.html.twig #}
+{% extends "FOSUserBundle::layout-login.html.twig" %}
+
+{% block body %}
+
+
+
+    <div class="col-md-4 offset-md-4 col-xs-8 offset-xs-2 box-shadow-2 p-0 clearfix mb-3">
+        <div class="card border-grey border-lighten-3 px-2 py-2 row mb-0">
+            <div class="card-header no-border">
+                <h3 class="card-title mt-1 text-xs-center">Este recurso no esta disponible</h3>
+
+            </div>
+            <div class="card-body collapse in">
+                <div class="card-block pt-0 text-xs-center">                    
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        {# ... #}
+                    {% endif %}
+
+                    <p>
+                        Checkout for any URL misspelling or <a href="{{ path('homepage') }}">return to the homepage</a>.
+                    </p>
+                </div> 
+
+                <div class="px-2 py-0" >
+                    <a href="{{ path('fos_user_security_login') }}" class="btn btn-primary btn-block btn-lg"><i class="icon-unlock2"></i> Iniciar</a>                  
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

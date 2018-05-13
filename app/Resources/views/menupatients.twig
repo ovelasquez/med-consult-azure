@@ -1,0 +1,14 @@
+{# empty Twig template #}
+{%if patient is not defined%}
+    {% set patient = entity%}
+    
+{%endif%}
+<h5>Perfíl del usuario</h5>
+<div class="pacientesUsuarioImg">{% if patient.photo is defined and patient.photo!='' %}<img width='100px' src="{{ asset('uploads/documents/' ~ patient.photo) }}" />{%endif%}</div><!--pacientesUsuarioImg-->
+<br>
+<p><span>Nombre:</span> {% if patient.user.name is defined %}{{ patient.user.name }}{% endif %}</p>
+<p><span>Edad:</span>{% if patient.yearsold is defined and patient.yearsold>0 %}{{ patient.yearsold }}{% endif %}</p>
+<p><span>Genero:</span> {% if patient.gender is defined and patient.gender=='female' %}Femenino{%else%}{% if patient.gender is defined and patient.gender=='male' %}Masculino{% endif %}{% endif %}</p>
+<p><span>Fecha de nacimiento:</span> {% if patient.birthdate is defined %}{{ patient.birthdate|date('d-m-Y') }}{% endif %}</p>
+<p><span>Correo:</span> {% if  patient.user.email is defined %}{{ patient.user.email }}{% endif %}</p>
+<p><span>Plan:</span> {% if patient.storageplan.name is defined %}{{ patient.storageplan.name }}{% endif %}</p>

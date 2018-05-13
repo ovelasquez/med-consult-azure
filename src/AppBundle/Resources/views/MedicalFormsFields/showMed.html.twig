@@ -1,0 +1,105 @@
+{% extends '::basemedphysicians.html.twig' %}
+
+{% block body -%}
+
+
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-block" style="">
+                    Para crear su formulario use la estructura base que ofrece la heramienta seleccionando campos ya creados o creando los campos que necesite en la opción crear campo. 
+                    Adicionalmente puede indicar si el campo es requerido o no.
+                </div> 
+            </div>               
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title" id="horz-layout-basic">Ver pregunta </h4>
+
+            </div>
+            <div class="card-body">
+                <div class="card-block" style="padding: 3.4rem;">
+                    <div class="row">
+
+                        <div class="form-body">
+
+
+                            <table  cellpadding="0" cellspacing="0" border="0" width="90%"  class="table mb-0 ">
+                                <tbody>
+                                    <tr>
+                                        <th>Tipo de campo</th>
+                                        <td >{{ entity.field }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Etiqueta</th>
+                                        <td >{{ entity.label }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Descripción</th>
+                                        <td>{{ entity.description }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Mensaje de ayuda</th>
+                                        <td >{{ entity.help }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Datos de lista</th>
+                                        <td ><pre>{{ entity.data }}</pre></td>
+                                    </tr>
+                                    <!--tr>
+                                        <th>Config</th>
+                                        <td ><pre>{{ entity.config }}</pre></td>
+                                    </tr-->
+                                    <tr>
+                                        <th>Orden</th>
+                                        <td >{{ entity.orderid }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Etiqueta</th>
+                                        <td >{% if entity.showlabel==1 %} Mostrar {% else %} No Mostrar {% endif %}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Requerido</th>
+                                        <td >{% if entity.required==1 %} Requerido {% else %} No Requerido {% endif %}</td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                            
+                            
+                            <div class="form-actions right">   
+                                {% if entity.physician is not null and entity.physician.id==phy.id %}
+                                {{ form_start(delete_form,{ 'attr': {'class': 'formAmd'} }) }}    
+                                <a  href="{{ path('medical_forms_views_edit_med',{'id':idfv}) }}" class="btn btn-warning mr-1">
+                                    <i class="icon-cross2"></i> Cancelar
+                                </a>
+                                <a href="{{ path('medicalformsfields_edit_med', { 'id': entity.id,'idv':idfv }) }}" class="btn btn-primary mr-1">
+                                    Editar
+                                </a>                                
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="icon-cross2"></i> Eliminar
+                                </button>
+                                {{ form_end(delete_form) }}
+                                {% else %}
+                                <a  href="{{ path('medical_forms_views_edit_med',{'id':idfv}) }}" class="btn btn-warning mr-1">
+                                    <i class="icon-cross2"></i> Cancelar
+                                </a>
+                                {% endif %}
+                                    
+                            </div>
+
+                        </div><!--formbody-->       
+                        
+
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+             
+
+        
+{% endblock %}

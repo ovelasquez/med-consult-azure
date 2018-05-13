@@ -1,0 +1,107 @@
+{% extends '::basemedphysicians.html.twig' %}
+
+{% block body -%}
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-block" style="">
+                Para crear su formulario use la estructura base que ofrece la heramienta seleccionando campos ya creados o creando los campos que necesite en la opción crear campo. 
+                Adicionalmente puede indicar si el campo es requerido o no.
+            </div> 
+        </div>               
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title" id="horz-layout-basic">Categoría </h4>
+
+        </div>
+        <div class="card-body">
+            <div class="card-block" style="padding: 3.4rem;">
+                <div class="row">
+
+                    {{ form_start(form,{'attr': {'class': 'formAmd','id': ''}}) }}
+                    <div class="form-body">
+                    {% if messages is not defined  %}
+                                {% set messages = [] %}
+                            {%endif %}
+                            {% for child in form.children %}
+                                {% for error in child.vars.errors %}
+                                    {% set messages = messages|merge([child.vars.label  ~ ' ' ~ error.message]) %}
+                                {% endfor %}
+                            {% endfor %}
+
+
+                            <div class="row rowError" {% if messages|length %}style="display: block"{% else %}style="display: none"{% endif %}>
+                                <div class="col-xs-12" >
+                                    <div class="alert alert-icon-right alert-warning alert-dismissible fade in mb-2" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        {% for message in messages %}                                                    
+                                            <strong> {{ message }}<br></strong> 
+                                            {% endfor %}
+
+                                    </div>
+                                </div><!--col-xs-12-->
+                            </div><!--row-->
+                            
+                    <div class="p-1">
+                        <div class="row">
+                            <fieldset class="form-group position-relative has-icon-left mb-1">
+                                <label for="inputName1" class="col-sm-3 form-control-label">Nombre</label>
+                                <div class="col-sm-9">
+                                    {{ form_widget(form.label,{'attr': {'class': 'form-control', 'placeholder':"Nombre"} } ) }}
+
+                                </div>
+                            </fieldset>
+                                    
+                            <fieldset class="form-group position-relative has-icon-left mb-1">
+                                <label for="inputName1" class="col-sm-3 form-control-label">Posición</label>
+                                <div class="col-sm-9">
+                                    {{ form_widget(form.position,{'attr': {'class': 'form-control', 'placeholder':"Nombre"} } ) }}
+
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                    <div class="form-actions right">
+                        <a  href="{{ path('medical_forms_views_edit_med',{'id':idfv}) }}" class="btn btn-warning mr-1">
+                            <i class="icon-cross2"></i> Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-primary"><i class="icon-check2"></i> Guardar</button>
+                    </div>
+                            
+                     </div><!--formbody-->       
+                    {{ form_end(form) }}<!--configurarCuentaFormulario--> 
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+
+        $(document).ready(function () {
+
+            $("#appbundle_medicalformsfieldsets_type").change(function () {
+                var valF = $(this).val();
+                if (valF === "page") {
+                    $("#appbundle_medicalformsfieldsets_page").attr("disabled", "disabled");
+                } else {
+                    $("#appbundle_medicalformsfieldsets_page").removeAttr("disabled", "disabled");
+                }
+            });
+
+        });
+
+    </script>
+{% endblock %}

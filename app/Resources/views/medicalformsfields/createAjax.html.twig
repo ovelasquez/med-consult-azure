@@ -1,0 +1,105 @@
+
+
+    <div class="col-lg-12">
+        
+        <div class="card" style=" border: 0px; box-shadow: none;">
+            <div class="card-header" style="   border: 0px;">
+                <h4 class="card-title" id="horz-layout-basic">Crear pregunta </h4>
+
+            </div>
+            <div class="card-body">
+                <div class="card-block" style="padding: 1rem;">
+                    <div class="row">
+
+                        {{ form_start(form,{'attr': {'class': 'formAmd','id': ''}}) }}
+                        <div class="form-body">
+                            {% if messages is not defined  %}
+                                {% set messages = [] %}
+                            {%endif %}
+                            
+
+
+                            <div class="row rowError" {% if (messages|length or not form.vars.valid) %}style="display: block"{% else %}style="display: none"{% endif %}>
+                                <div class="col-xs-12" >
+                                    <div class="alert  alert-warning alert-dismissible fade in mb-2" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        {% for message in messages %}                                                    
+                                            <strong> {{ message }}<br></strong> 
+                                            {% endfor %}
+                                        {% if not form.vars.valid %}
+                                            {# Loop through every form item #}
+                                            {% for child in form.children %}
+                                                {# Display the errors of the form item #}
+                                                {%for error in child.vars.errors%}
+                                                     <strong>{{error.message}}<br></strong> 
+                                                {%endfor%}
+                                            {%endfor%}
+
+                                        {%endif%}
+
+                                    </div>
+                                </div><!--col-xs-12-->
+                            </div><!--row-->
+
+                            <div class="p-1">
+                                <div class="row row-f">
+                                    
+                                    {{ form_widget(form.medicalFormsFieldset,{'attr': {'class': 'form-control', 'placeholder':"Tipo de Campo"} } ) }}
+
+                                    <fieldset class="form-group position-relative  mb-1">
+                                        <label for="inputName1" class="col-sm-3 form-control-label">Tipo de pregunta</label>
+                                        <div class="col-sm-9">{{ form_widget(form.field,{'attr': {'class': 'form-control', 'placeholder':"Tipo de Campo"} } ) }}</div>
+                                    </fieldset>
+
+                                    <fieldset class="form-group position-relative  mb-1">
+                                        <label for="inputName1" class="col-sm-3 form-control-label">Pregunta</label>
+                                        <div class="col-sm-9">{{ form_widget(form.label,{'attr': {'class': 'form-control', 'placeholder':"Etiqueta"} } ) }}</div>
+                                    </fieldset>
+                                    
+                                    {{ form_widget(form.subgroup,{'attr': {'class': 'form-control', 'placeholder':"Grupo o Rejilla"} } ) }}
+
+                                   
+                                    <fieldset class="form-group position-relative  mb-1 hidden datainput formfieldTa">
+
+                                        <div class="label-data">
+                                            <label for="inputName1" class="col-sm-3 form-control-label">{{ form_label(form.data) }}</label>
+                                            <div class="col-sm-9"><p class="help-data">
+                                                    Escriba un valor por línea, en el formato clave|etiqueta. La clave es el valor guardado. La etiqueta será usada en los valores mostrados y en formularios de edición. La etiqueta es opcional: si una línea contiene un solo texto, se usará como clave y etiqueta.
+                                                </p>
+                                            <div class="input-data">{{ form_widget(form.data,{'attr': {'class': 'form-control', 'placeholder':"clave|etiqueta"} } ) }}</div>
+                                            </div>
+                                        </div>
+                                        
+
+                                    </fieldset>
+                                    
+                                    
+                                    <fieldset class="form-group position-relative  mb-1">
+                                        <label for="inputName1" class="col-sm-3 form-control-label">Requerido</label>
+                                        <div class="col-sm-9">{{ form_widget(form.required,{'attr': {'class': 'form-control', 'style':'width: auto', 'placeholder':"Requerido"} } ) }}</div>
+                                    </fieldset>
+                                    {{ form_widget(form.orderid,{'attr': {'class': 'form-control', 'placeholder':"Requerido"} } ) }}
+
+                                </div>
+                            </div>
+
+                            <div class="form-actions right">  
+                                <a  href="#" class="btn mr-1  btn-warning btn-sm cancelar">
+                                                                                    <i class="icon-cross2"></i> Cancelar
+                                                                                </a>
+                                <button type="submit" class="btn mr-1 btn-secondary btn-sm btn-submit-field" style=" width: auto!important;"> Crear</button>
+                            </div>
+
+                        </div><!--formbody-->       
+                        {{ form_end(form) }}<!--configurarCuentaFormulario--> 
+
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,51 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}  
+
+    {% if status_code == 500 %}
+        <h2 class="tituloAzulado">ERROR 500</h2><!--tituloAzulado-->
+        <div class="cuadro cuadroError lila">
+            <p>
+                Error {{ status_text }} La Página no puede ser localizada
+            </p>
+            <p> 
+                Error {{ status_code }} {{ status_text }}.
+                Hubo un Error al intentar ejecutar la acción, por favor intente mas tarde o consulte a la unidad de Tecnología:
+            </p>
+            <a href="{{ path('homepage') }}" class="" title="Ir a la Página Principal">Ir a la Página Principal</a>
+
+        </div>
+
+
+    {% endif %}
+    {% if status_code == 404 %}
+        <h2 class="tituloAzulado">ERROR 404</h2><!--tituloAzulado-->
+        <div class="cuadro cuadroError lila">
+            <p>
+                Error {{ status_text }} La Página no puede ser localizada
+            </p>
+            <p> 
+                Error {{ status_code }} {{ status_text }}
+                La Página no puede ser localizada, presione el siguiente botón para ir a la página de principal:
+            </p>
+            <a href="{{ path('homepage') }}" class="" title="Ir a la Página Principal">Ir a la Página Principal</a>
+
+        </div>        
+    {% endif %}
+    {% if status_code == 412 %}
+        <h2 class="tituloAzulado">ERROR 412</h2><!--tituloAzulado-->
+        <div class="cuadro cuadroError lila">
+            <p>
+                Error {{ status_text }} La Página no puede ser localizada
+            </p>
+            <p> 
+                Error {{ status_code }} {{ status_text }}
+                La Página no puede ser localizada, presione el siguiente botón para ir a la página de principal:
+            </p>
+            <a href="{{ path('homepage') }}" class="" title="Ir a la Página Principal">Ir a la Página Principal</a>
+
+        </div>       
+        
+    {% endif %}
+
+{% endblock %}

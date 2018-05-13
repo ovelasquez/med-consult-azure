@@ -1,0 +1,56 @@
+{% extends '::baseadm.html.twig' %}
+
+{% block body -%}
+    <h5>Contents</h5>
+
+    <table  cellpadding="0" cellspacing="0" border="0" width="90%"  class="tablaAdm tableShow">
+        <tbody>
+            <tr>
+                <th>Title</th>
+                <td>{{ entity.title }}</td>
+            </tr>
+            <tr>
+                <th>Body</th>
+                <td ><div class="admFieldBody">{{ entity.body | raw }}</div></td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td >{{ entity.image }}</td>
+            </tr>
+            <tr>
+                <th>Tag</th>
+                <td>{{ entity.tag }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td >{{ entity.status }}</td>
+            </tr>
+            <tr>
+                <th>Created</th>
+                <td >{{ entity.created|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Changed</th>
+                <td >{{ entity.changed|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Orden</th>
+                <td >{{ entity.weight }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('contents') }}" class="submit btnAdm lilaOscuro">
+                volver
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('contents_edit', { 'id': entity.id }) }}" class="submit btnAdm rojoFuerte">
+                editar
+            </a>
+        </li>
+        <li>{{ form(delete_form) }}</li>
+    </ul>
+{% endblock %}

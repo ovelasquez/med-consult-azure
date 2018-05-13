@@ -1,0 +1,33 @@
+{% extends "AppUserBundle::layout-simple.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+{% if error %}
+    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
+<form action="{{ path("fos_user_security_check") }}" method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+    <div class="campo last"><p>No tienes cuenta <a href="registro/pacientes">Crea tu usuario</a></p></div><!--campo-->
+    <div class="campo">
+        <input type="submit" id="_submit" name="_submit" class="submit lilaOscuro" value="{{ 'security.login.submit'|trans }}" />
+    </div><!--campo-->
+    <div class="campo">
+        <label for="password">{{ 'security.login.password'|trans }}</label>
+        <input type="password" id="password" name="_password" required="required" />
+    </div><!--campo-->
+    <div class="campo">
+        <label for="usuario">{{ 'security.login.username'|trans }}</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+    </div><!--campo-->
+    
+    
+    
+    <!--input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label-->
+
+    
+</form>
+{% endblock fos_user_content %}

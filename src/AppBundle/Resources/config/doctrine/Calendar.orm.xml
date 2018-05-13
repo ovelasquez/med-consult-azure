@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="AppBundle\Entity\Calendar" table="calendar" repository-class="AppBundle\Entity\CalendarRepository">
+        <indexes>
+            <index name="physician_id" columns="physician_id"/>
+            <index name="patient_id" columns="patient_id"/>
+        </indexes>
+        <id name="id" type="integer" column="id">
+            <generator strategy="IDENTITY"/>
+        </id>
+        <field name="datetimeConsultation" type="datetime" column="datetime_consultation" nullable="false"/>        
+        <field name="datetimePatient" type="datetime" column="datetime_patient" nullable="false"/>    
+        <field name="timezonePhysician" type="text" length="255" column="timezone_physician"  nullable="false">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="timezonePatient" type="text" length="255" column="timezone_patient"  nullable="false">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="status" type="integer" column="status"  nullable="true">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <many-to-one field="physician" target-entity="Physicians" fetch="LAZY">
+            <join-columns>
+                <join-column name="physician_id" referenced-column-name="id" />
+            </join-columns>
+        </many-to-one> 
+        <many-to-one field="patient" target-entity="Patients" fetch="LAZY">
+            <join-columns>
+                <join-column name="patient_id" referenced-column-name="id"/>
+            </join-columns>
+        </many-to-one> 
+        <many-to-one field="consultation" target-entity="Consultations" fetch="LAZY">
+            <join-columns>
+                <join-column name="consultation_id" referenced-column-name="id"/>
+            </join-columns>
+        </many-to-one> 
+    </entity>
+</doctrine-mapping>

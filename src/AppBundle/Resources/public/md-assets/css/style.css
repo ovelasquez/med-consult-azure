@@ -1,0 +1,258 @@
+/*================================================================================
+        Item Name: Robust - Responsive Admin Theme
+        Version: 1.0
+        Author: PIXINVENT
+        Author URL: http://www.themeforest.net/user/pixinvent
+================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+/*.med-navbar-nav{ padding: 0.75rem 0;}*/
+
+
+a {
+    color: #5d7d83;
+    text-decoration: none; }
+a:focus {
+    color: #4d666b;
+    text-decoration: none; }
+a:hover {
+    color: #4d666b;
+    text-decoration: none; }
+a:focus {
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px; }
+
+.btn-link { color: #5d7d83;}
+
+.page-link {  color: #5d7d83; }
+
+.btn-primary {
+    color: #666;
+    background-color: #c6e4ec;
+    border-color: #c6e4ec; }
+.btn-primary:hover {
+    color: #666;
+    background-color: #E6F3F7;
+    border-color: #E6F3F7; }
+.btn-primary:focus, .btn-primary.focus {
+    color: #666;
+    background-color: #E6F3F7;
+    border-color: #E6F3F7; }
+.btn-primary:active, .btn-primary.active,
+.open > .btn-primary.dropdown-toggle {
+    color: #666;
+    background-color: #E6F3F7;
+    border-color: #E6F3F7;
+    background-image: none; }
+.btn-primary:active:hover, .btn-primary:active:focus, .btn-primary:active.focus, .btn-primary.active:hover, .btn-primary.active:focus, .btn-primary.active.focus,
+.open > .btn-primary.dropdown-toggle:hover,
+.open > .btn-primary.dropdown-toggle:focus,
+.open > .btn-primary.dropdown-toggle.focus {
+    color: #666;
+    background-color: #E6F3F7;
+    border-color: #E6F3F7; }
+.btn-primary.disabled:focus, .btn-primary.disabled.focus, .btn-primary:disabled:focus, .btn-primary:disabled.focus {
+    background-color: #E6F3F7;
+    border-color: #E6F3F7; }
+.btn-primary.disabled:hover, .btn-primary:disabled:hover {
+    background-color: #E6F3F7;
+    border-color: #E6F3F7; }
+
+.tag-primary {
+    background-color: #c6e4ec; }
+.tag-primary[href]:focus {
+    background-color: #E6F3F7; }
+.tag-primary[href]:hover {
+    background-color: #E6F3F7; }
+
+a.bg-primary:focus {
+    background-color: #E6F3F7 !important; }
+
+a.bg-primary:hover {
+    background-color: #E6F3F7 !important; }  
+
+a.text-primary:focus {
+    color: #E6F3F7 !important; }
+
+a.text-primary:hover {
+    color: #E6F3F7 !important; }
+
+.card-primary {
+    background-color: #c6e4ec;
+    border-color: #c6e4ec; }
+.card-primary .card-header,
+.card-primary .card-footer {
+    background-color: transparent; }
+
+
+/******************************/
+.header-navbar .navbar-header {
+    height: 6rem!important;
+}
+
+.main-menu.menu-fixed {
+    position: fixed;
+    height: 100%;
+    padding-top: 6rem;
+    height: calc(100% - 4rem);
+    top: 0;
+}
+.main-menu-content{
+    margin-top: -10px;
+    box-shadow: 2px 8px 4px rgba(0, 0, 0, 0.1)!important;
+}
+
+body.vertical-layout.vertical-menu.menu-expanded .main-menu .main-menu-footer {
+    width: 240px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.08);
+}
+.menu-box-shadow{ box-shadow: 2px -2px 4px rgba(0, 0, 0, 0.1); }
+.menu-rrss{   }
+
+.md-bg-light { background: #c6e4ec!important; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.08); }
+.md-bg-trans {background: transparent!important; box-shadow: none!important ;}
+
+.md-bg-blue { background-color: #c6e4ec!important;  }
+.md-bg-blue-light { background-color: #C6E4EC!important;  }
+.md-bg-blue-dark { background-color: #384664!important;  }
+.md-bg-blue-sky { background-color: #aebfe3!important;  }
+.md-bg-red { background-color: #ed253b!important;}
+.md-bg-red-dark { background-color: #9F2439!important;}
+.md-bg-gray { background-color: #858B8B!important;}
+.md-bg-gray-light {background-color: #e7e7e8!important;}
+
+.md-bg-red-dark a,.md-bg-red a,.md-bg-blue-sky  a,.md-bg-blue-dark a { color: #fff!important;  }
+.md-bg-gray a, .md-bg-blue-light a,.md-bg-blue a { color: #666!important;  }
+
+.nav-item.md-bg-red-dark a,.nav-item.md-bg-red a,.nav-item.md-bg-blue-sky  a,.nav-item.md-bg-blue-dark a,
+.main-menu.menu-light .navigation > li.nav-item.open.md-bg-red-dark a,
+.main-menu.menu-light .navigation > li.nav-item.open.md-bg-red a,.main-menu.menu-light .navigation > li.nav-item.open.md-bg-blue-sky  a,.main-menu.menu-light .navigation > li.nav-item.open.md-bg-blue-dark a { color: #fff!important;  }
+
+.md-color-blue {color: #c6e4ec!important;  }
+.md-color-blue-light {color: #C6E4EC!important;  }
+.md-color-blue-dark {color: #384664!important;  }
+.md-color-blue-sky {color: #aebfe3!important;  }
+.md-color-red {color: #ed253b!important;}
+.md-color-red-dark {color: #9F2439!important;}
+.md-color-gray {color: #858B8B!important;}
+.md-color-gray-light,.md-color-gray:hover {color: #e7e7e8!important;}
+
+.md-text-center { text-align: center; }
+.md-menu-p .nav-item{ padding: 1rem 0px!important; text-align: center}
+
+.main-menu.menu-dark .navigation.md-menu-p  > li.open > ul {
+    background:inherit!important; }
+.main-menu.menu-dark .navigation.md-menu-p  > li.open > a {
+    color: inherit!important;
+    background: inherit!important; }
+
+.main-menu.menu-dark .navigation.md-menu-p > li.hover > a, .main-menu.menu-dark .navigation.md-menu-p > li:hover > a, .main-menu.menu-dark .navigation > li.active > a {
+    color: inherit!important;
+    background-color: inherit!important; }
+.main-menu.menu-dark .navigation.md-menu-p > li.hover > a.mm-next, .main-menu.menu-dark .navigation.md-menu-p > li:hover > a.mm-next, .main-menu.menu-dark .navigation > li.active > a.mm-next {
+    background-color: inherit!important; }
+.main-menu.menu-dark .navigation.md-menu-p > li.active > a {
+    background-color: inherit!important; }
+.main-menu.menu-dark .navigation.md-menu-p > li .active {
+    background: inherit!important; }
+.main-menu.menu-dark .navigation.md-menu-p > li .active > a {
+    color: inherit!important;
+    background: inherit!important; }
+.main-menu.menu-dark .navigation.md-menu-p > li .active .hover > a {
+    background: inherit!important; }
+
+/*APP**********************************/
+.main-menu.menu-light .navigation > li > a {
+    padding: 1rem;
+    text-transform: uppercase;    
+}
+.main-menu.menu-light .navigation > li.open > a {
+    text-transform: uppercase;    
+}
+.main-menu.menu-light .navigation > li.open .hover > a ,
+.main-menu.menu-light .navigation > li.hover > a, .main-menu.menu-light .navigation > li:hover > a, .main-menu.menu-light .navigation > li.active > a {
+    color:inherit;
+    text-decoration: underline!important;
+    background-color: inherit; }
+.main-menu.menu-light .navigation > li.hover > a > span, 
+.main-menu.menu-light .navigation > li:hover > a > span, 
+.main-menu.menu-light .navigation > li.active > a  > span{
+    text-decoration: underline!important;
+}
+
+.main-menu.menu-light .navigation > li.hover.md-bg-blue, 
+.main-menu.menu-light .navigation > li.md-bg-blue:hover , 
+.main-menu.menu-light .navigation > li.active.md-bg-blue {
+    background-color: #E6F3F7!important; 
+}
+.main-menu.menu-light .navigation > li.hover.md-bg-red, 
+.main-menu.menu-light .navigation > li.md-bg-red:hover , 
+.main-menu.menu-light .navigation > li.active.md-bg-red {
+    background-color: #F05161!important; 
+}
+.main-menu.menu-light .navigation > li.hover.md-bg-gray-light, 
+.main-menu.menu-light .navigation > li.md-bg-gray-light:hover , 
+.main-menu.menu-light .navigation > li.active.md-bg-gray-light {
+    background-color: #f8f8f8!important; 
+}
+.main-menu.menu-light .navigation > li.hover.md-bg-blue-sky, 
+.main-menu.menu-light .navigation > li.md-bg-blue-sky:hover , 
+.main-menu.menu-light .navigation > li.active.md-bg-blue-sky {
+    background-color: #CBD6ED!important; 
+}
+.main-menu.menu-light .navigation > li.open > a {
+    color: inherit!important;
+    background: inherit!important;
+}
+.main-menu.menu-light .navigation > li.open .hover > a {
+    background: inherit!important }
+.main-menu.menu-light .navigation > li.open > ul {
+    background: inherit!important;
+}
+
+@media (max-width: 992px) {
+    .menu-rrss{ display: none; } 
+}
+.m-15{
+    margin-right: 14px;
+    margin-left: 14px;
+}
+
+.dropdown-toggle::after {
+    top: -14px;
+
+}
+
+body.vertical-layout.vertical-menu.menu-collapsed .main-menu .menu-rrss{
+    display: none;
+}
+
+.header-navbar .navbar-header .navbar-brand {
+    padding: 6px;
+}
+
+.vertical-overlay-menu .content {
+    margin-left: 0;
+    margin-top: 2rem;
+}
+
+.c-list li { position: relative }
+.c-list li a:after {
+    position: absolute;
+    right: 20px;
+    font-family: 'icomoon';
+    content: "\eecb";
+    transition: all 300ms linear 0s; }
+
+.collapse-icon a[data-toggle="collapse"]:after {
+    top: 0;
+    margin-top: 0px;
+}
+
+.collapse-icon a[data-toggle="collapse"]:before {
+    top: 0;
+    margin-top: 0px; }

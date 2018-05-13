@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="AppBundle\Entity\Physicians" table="physicians" repository-class="AppBundle\Entity\PhysiciansRepository">
+        <unique-constraints>
+            <unique-constraint name="UNIQ_2CCC2E2CA76ED395" columns="user_id"/>
+        </unique-constraints>
+        <id name="id" type="integer" column="id">
+            <generator strategy="IDENTITY"/>
+        </id>
+        <field name="jobtitle" type="string" column="jobtitle" length="255" nullable="false">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="education" type="string" column="education" length="255" nullable="false">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="abms" type="string" column="abms" length="255" nullable="false">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="university" type="string" column="university" length="255" nullable="false">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>        
+        <field name="subspecialty" type="string" column="subspecialty" length="255" nullable="true">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="research" type="string" column="research" length="255" nullable="true">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="languages" type="string" column="languages" length="255" nullable="false">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="postalcode" type="string" column="postalcode" length="255" nullable="false">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="phone" type="string" column="phone" length="255" nullable="false">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="photo" type="string" column="photo" length="255" nullable="false">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="timezone" type="string" column="timezone" length="255" nullable="true">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="datetimeAvailable" type="string" column="date_time_available" nullable="true"></field>
+        <field name="volunteeringVzla" type="boolean" column="volunteering_vzla" nullable="true"/>
+        <field name="biography" type="text" column="biography" length="1500" nullable="true">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="linkedinProfile" type="string" column="linkedin_profile" length="255" nullable="false">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="webSite" type="string" column="web_site" length="255" nullable="false">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <many-to-one field="user" target-entity="\AppUserBundle\Entity\User" fetch="LAZY">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+            <join-columns>
+                <join-column name="user_id" referenced-column-name="id"/>
+            </join-columns>
+        </many-to-one>
+        <many-to-one field="specialty" target-entity="Specialties" fetch="LAZY">
+            <join-columns>
+                <join-column name="specialty" referenced-column-name="id"/>
+            </join-columns>
+        </many-to-one>
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="preUpload"/>
+            <lifecycle-callback type="preUpdate" method="preUpload"/>
+            <lifecycle-callback type="postPersist" method="upload"/>
+            <lifecycle-callback type="postUpdate" method="upload"/>
+            <lifecycle-callback type="postRemove" method="removeUpload"/>
+        </lifecycle-callbacks>
+    </entity>
+</doctrine-mapping>

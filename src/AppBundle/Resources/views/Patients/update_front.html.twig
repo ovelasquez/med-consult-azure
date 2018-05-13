@@ -1,0 +1,247 @@
+{% extends '::base_complete_profile.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block body -%}
+
+    <section id="basic-form-layouts">
+        <div class="row ">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header no-border">
+                        <h3 class="card-title mt-1 text-xs-center">{{'patients.edit.title_fieldset1'|trans({}, 'AppBundle')}}</h3>
+
+                    </div>
+                    <div class="card-body collapse in">
+
+                        <div class="card-block mt-0">
+                            <div class="card-text">                                
+
+                            </div>
+
+                            <div>
+                                {{ form_start(form,{'attr': {'class': 'registerFront','id': 'registerPatient'}}) }}                                
+                                <div class=" ">
+
+                                    <div class=" form-body registroFormulario dos register-user">
+
+                                        {% if messages is not defined  %}
+                                {% set messages = [] %}
+                            {%endif %}
+                                        {% if messages is not defined  %}
+                                            {% for child in form.children %}
+                                                {% for error in child.vars.errors %}
+                                                    {% set messages = messages|merge([child.vars.label  ~ ' ' ~ error.message]) %}
+                                                {% endfor %}
+                                            {% endfor %}
+                                        {% endif %}
+
+                                        <div class="rowError" {% if messages is defined and messages|length %}style="display: block"{% else %}style="display: none"{% endif %}>
+                                            <div class="alert bg-warning alert-icon-right alert-arrow-right alert-dismissible fade in" role="alert">
+                                                <button type="button" class="close" data-dismiss="" id="btnError" aria-label="Close">
+                                                    <span aria-hidden="true" class=" warning ">×</span>
+                                                </button>
+                                                <span id="itemError">
+                                                    {% for message in messages %}                                                    
+                                                        <strong> {{ message }}<br></strong> 
+                                                        {% endfor %}
+                                                    <strong>{{ form_errors(form) }}</strong> 
+                                                </span>
+                                            </div>
+                                        </div><!--row-->
+
+                                        <fieldset class="form-group position-relative">
+                                            <div class="col-md-12">
+                                                {{ form_row(form.nameact,{ 'attr': {'class':"form-control input-lg",'placeholder':'Nombre'} }) }}
+                                            </div>
+
+                                        </fieldset>
+                                        <fieldset class="form-group position-relative">
+                                            <div class="col-md-12">
+                                                {{ form_row(form.lastnameact,{ 'attr': {'class':"form-control input-lg",'placeholder':'Apellido'} }) }}
+                                            </div>
+
+                                        </fieldset>
+                                        <fieldset class="form-group position-relative">
+                                            <div class="col-md-12">                                            
+                                                {{ form_row(form.emailact,{'attr':{'class':"form-control input-lg",'placeholder':'Correo'} }) }}
+                                            </div>
+                                        </fieldset>
+
+                                        <div class="">
+
+                                            <div class="input-group">
+                                                <label class="display-inline-block custom-control custom-checkbox ml-1">
+                                                    <input type="checkbox" name="customer1" required="required" class="checker  custom-control-input">
+                                                    <span class="custom-control-indicator"></span>
+                                                    <span class="custom-control-description ml-0"><sup>*</sup>Acepto los <a target="_blank" href="{{ url('terminos') }}">Términos del servicio</a></span>
+                                                </label>
+
+                                            </div>
+
+                                        </div><!--registroCampo-->   
+                                        <div class="p-1">
+                                            <p class="small color-verdeg">{{'patients.new.msj_instruction1'|trans({}, 'AppBundle')}}</p><!--letraPequena-->
+                                            <p class="small color-verdeg">{{'patients.new.msj_instruction2'|trans({}, 'AppBundle')}}</p><!--letraMediana-->        
+                                        </div>
+                                        <div class="form-actions right">
+                                            <a href="https://www.medeconsult.com/blog/homepages/home/" class="btn btn-warning mr-1"><i class="icon-cross2"></i>Cancelar</a>
+                                            <button type="submit" id="continuar-reg"   class="btn btn-primary">
+                                                <i class="icon-check2"></i> {{'form.pushon'|trans({}, 'AppBundle')}}
+                                            </button>
+
+                                        </div>
+
+                                    </div><!--registroFormulario dos-->    
+
+                                    <div class="registroFormulario tres register-profile" style="display: none">
+
+                                        <div class=" form-body">
+                                            <fieldset id="fieldsPatient" >
+
+                                                <fieldset class="form-group position-relative">
+                                                    <div class="col-md-6">
+                                                        {{ form_row(form.address1,{'attr':{'class':"form-control input-lg",'placeholder':'Dirección'} }) }}
+                                                    </div><div class="col-md-6">
+                                                        {{ form_row(form.address2,{'attr':{'class':"form-control input-lg",'placeholder':'Dirección'} }) }}
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset class="form-group position-relative">
+                                                    <div class="col-md-6">
+                                                        {{ form_row(form.country,{'attr':{'class':"form-control input-lg",'placeholder':'País'} }) }}
+                                                    </div><div class="col-md-6">
+                                                        {{ form_row(form.province,{'attr':{'class':"form-control input-lg",'placeholder':'Provincia'} }) }}
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset class="form-group position-relative">
+                                                    <div class="col-md-6">
+                                                        {{ form_row(form.locality,{'attr':{'class':"form-control input-lg",'placeholder':'Localidad'} }) }}
+                                                    </div><div class="col-md-6">
+                                                        {{ form_row(form.postalcode,{'attr':{'class':"form-control input-lg",'placeholder':'Código postal'} }) }}
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset class="form-group position-relative">
+                                                    <div class="col-md-6">
+                                                        {{ form_row(form.timezone,{'attr':{'class':"form-control input-lg",'placeholder':'Zona Postal'} }) }}
+                                                    </div><div class="col-md-6">
+                                                        {{ form_row(form.phone,{'attr':{'class':"form-control input-lg",'placeholder':'Teléfono'} }) }}
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset class="form-group position-relative">
+                                                    <div class="col-md-6">
+                                                        {{ form_row(form.website,{'attr':{'class':"form-control input-lg",'placeholder':'Sitio Web'} }) }}
+                                                    </div><div class="col-md-6">
+                                                        {{ form_row(form.birthdate,{'attr':{'class':"form-control input-lg",'placeholder':'Fecha Nacimiento'} }) }}
+                                                    </div>
+                                                </fieldset>
+
+                                                <div class="form-group">
+                                                    <div class="col-md-12 text-xs-center">
+                                                        {% form_theme form 'EWZRecaptchaBundle:Form:ewz_recaptcha_widget.html.twig' %}
+
+                                                        {{ form_widget(form.recaptcha, { 'attr': {
+                                                    'options' : {
+                                                        'theme': 'light',
+                                                        'type': 'image',
+                                                        'size': 'normal'
+                                                    },
+                                                } }) }}
+                                                    </div>
+                                                </div><!--campoPrefesionales-->
+
+                                            </fieldset>
+                                            <div class="p-1">
+                                                <p class="small color-verdeg">{{'patients.new.msj_instruction1'|trans({}, 'AppBundle')}}</p><!--letraPequena-->
+                                                <p class="small color-verdeg">{{'patients.new.msj_instruction2'|trans({}, 'AppBundle')}}</p><!--letraMediana-->
+                                            </div>
+                                        </div>
+                                        <div class="form-actions right">
+                                            <button type="button" class="btn btn-warning mr-1 back">
+                                                <i class="icon-cross2"></i> {{'form.goback'|trans({}, 'AppBundle')}}
+                                            </button>
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="icon-check2"></i> {{ 'registration.submit'|trans }}
+                                            </button>
+
+                                        </div>
+                                    </div><!--registroFormulario dos-->
+                                </div>
+
+
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </section>    
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".register-profile").hide();
+            $("label.required").each(function () {
+                $(this).html($(this).html() + "*");
+            });
+            $("form input,select").change(function () {
+                $("#itemError").html("");
+                $(".rowError").hide();
+            });
+
+            var form = document.getElementById('registerPatient');
+            var btncont = false;
+            form.addEventListener('submit', function (event) {
+                if (this.checkValidity() && btncont) {
+                    event.preventDefault();
+
+                    var path = '{{ path("patients_verify", {'email': '_e', 'username': '_u'}) }}';
+                    path = path.replace("_e", $("#appbundle_patients_act_emailact").val());
+                    $.getJSON(path, function (data) {
+
+                        if (data.email === true) {
+                            if (data.email === true)
+                                $("#itemError").html("<strong> {{'form.emailexist'|trans({}, 'AppBundle')}}<br></strong> ");
+                            $(".rowError").show();
+                            $("#btnError").focus();
+
+                        } else {
+                            $(".register-profile").show();
+                            $(".register-user").hide();
+                            $("#fieldsPatient").removeAttr("disabled");
+                            btncont = false;
+                        }
+                    });
+
+
+
+                }
+
+            }, false);
+            $("#fieldsPatient").attr("disabled", "disabled");
+
+            $('#continuar-reg').click(function (e) {
+                btncont = true;
+            });
+
+            $('.back').click(function () {
+                $(".register-profile").hide();
+                $(".register-user").show();
+                btncont = false;
+                $("#fieldsPatient").attr("disabled", "disabled");
+            });
+            $('#btn-cal').click(function () {
+                $("#appbundle_patients_act_birthdate").datepicker().focus();
+            });
+        });
+    </script>
+
+
+
+{% endblock %}
+

@@ -1,0 +1,93 @@
+{% extends '::baseadm.html.twig' %}
+
+{% block body -%}
+    {{ form_start(form,{ 'attr': {'class': 'formAmd','id':'createview'} }) }}
+    <h5>FORM: {{ entityf.name }}<a href="{{ path('medicalforms_edit', { 'id': entityf.id }) }}" > [Edit] </a></h5>
+    <div>{{ form_row(form.name)}}</div>
+    <div>{{ form_row(form.specialty)}}</div>
+    <table cellpadding="0" cellspacing="0" border="0" width="90%" class="table-striped tablaAdm table-createView">
+        <thead>
+            <tr>
+                <th>Campos</th>                
+                <th class=" col-lg-1 col-md-1 col-sm-1">SELECCIONAR</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entitypage in entities %}
+                {% if entitypage['field'].type=="page" %}
+                    <tr class="trPage">
+                        <td  class="td-page"><a class="page-label masBtn" rel="page_{{entitypage['field'].id}}" href="#"></a>{{entitypage['field'].label}}</td>
+                        <td class="text-center">
+                            <input type="checkbox" class="pageField" name="fieldsets[]" value="{{entitypage['field'].id}}" id="page_{{entitypage['field'].id}}"/>
+                        </td>  
+                    </tr>    
+                {% endif%}
+                {% for  keyf,entityfieldset in entitypage %} 
+                    {% if keyf!='field' %}
+                        <tr>
+                            <td  class="td-fieldset">{{ entityfieldset.fieldset.label }}</td>
+                            <td class="text-center">
+                                <input type="checkbox" class="page_{{entitypage['field'].id}}" name="fieldsets[]" value="{{entityfieldset.fieldset.id}}" id="fieldset_{{entityfieldset.fieldset.id}}"/>
+                            </td>  
+                        </tr>
+                        {% for field in entityfieldset.fields %}     
+                            {% if field.subgroup.id is defined and field.subgroup.id!=field.id%}
+                            <tr>
+                                <td  class="td-subgroup">{{ field.label }}</td>
+                                <td class="text-center">
+                                    <input type="checkbox" disabled="disabled"   class="page_{{entitypage['field'].id}} fieldset_{{entityfieldset.fieldset.id}} {% if field.subgroup.id is defined%}group_{{field.subgroup.id}}{% endif %}" name="fields[]" value="{{field.name}}" />
+                                </td>  
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td  class="td-field">{{ field.label }}</td>
+                                <td class="text-center">
+                                    <input type="checkbox"  data-idsubfields="group_{{field.id}}"  class="page_{{entitypage['field'].id}} fieldset_{{entityfieldset.fieldset.id}}" name="fields[]" value="{{field.name}}" />
+                                </td>  
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <ul class="record_actions">
+        <li>
+            <input type="submit" value="Guardar" class="submit btnAdm lilaOscuro" />
+        </li>  
+    </ul>
+    {{ form_end(form) }}
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $(':checkbox').change(function () {
+                $('.' + $(this).attr("id")).prop("checked", $(this).is(':checked'));
+                if ($(this).is(':checked')) {
+                    var className = $(this).attr('class');
+                    className = className.split(' ');
+                    for (var i = 0; i < className.length; i++) {
+                        $('#' + className[i]).prop("checked", $(this).is(':checked'));
+                    }
+                }
+                $('.' + $(this).attr("data-idsubfields")).prop("checked", $(this).is(':checked'));
+            });
+            $(".page-label").click(function () {
+                $('.' + $(this).attr("rel")).parents('tr').toggle('display');
+                $(this).toggleClass('opened');
+                return false;
+            });
+            
+            var form = document.getElementById('createview');
+            form.addEventListener('submit', function(event) {
+                $(':checkbox').removeAttr('disabled');
+            });
+
+        });
+
+    </script>
+{% endblock %}
